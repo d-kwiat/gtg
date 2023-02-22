@@ -1,6 +1,6 @@
 # Genomic transmission graph
 
-## Introduction
+#### Introduction
 
 Here are some introductory remarks.
 
