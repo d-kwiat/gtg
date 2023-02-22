@@ -1,4 +1,4 @@
-#   coalestr version 2.71
+#   coalestr version 0.2.71
 #   1 Nov 2022
 #   With minor changes from version of 11 October 2021
 
