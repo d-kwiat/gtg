@@ -4,6 +4,7 @@
 format: jb-book
 root: README
 chapters:
+  - file: introduction
   - file: a-framework-for-analysing-the-coalescent-process
     sections:
       - file: coalescence_time_basic
