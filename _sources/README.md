@@ -1,4 +1,8 @@
-# GTG
+# Genomic transmission graph
+
+## Introduction
+
+Here are some introductory remarks.
 
 ## A framework for analysing the coalescent process
 
