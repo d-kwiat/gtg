@@ -6,7 +6,7 @@ root: README
 chapters:
   - file: introduction
     sections:
-      - file: how to use this book
+      - file: how-to-use-this-book
   - file: a-framework-for-analysing-the-coalescent-process
     sections:
       - file: coalescence_time_basic
