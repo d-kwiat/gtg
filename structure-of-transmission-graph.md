@@ -2,7 +2,7 @@
 
 ![idealised-tg](idealised-tg.png)
 
-We imagine that transmission occurs in non-overlapping generations.  In each generation there are $N_h$ hosts.  Each vector transmits $Q$ alleles to the recipient host.  $\chi$ is the proportion of hosts that are superinfected, denoted in the figure by red nodes.
+In our idealised model, transmission occurs in non-overlapping generations.  In each generation there are $N_h$ hosts.  Each vector transmits $Q$ alleles to the recipient host.  $\chi$ is the proportion of hosts that are superinfected, denoted in the figure by red nodes.
 
 We call $N_h$ the **effective number of hosts**.  We can think of this as the number of hosts that are in effect responsible for transmitting parasites from one generation to the next, which is likely to be much less than the total number of infected individuals, and represents a major population bottleneck.
 
