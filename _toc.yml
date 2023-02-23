@@ -8,6 +8,9 @@ chapters:
     sections:
       - file: using-google-colab
       - file: glossary
+  - file: underlying-concepts
+  - file: coalestr-module
+  - file: epidemiological-scenarios
   - file: a-framework-for-analysing-the-coalescent-process
     sections:
       - file: coalescence_time_basic
