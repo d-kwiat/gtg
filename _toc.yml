@@ -9,6 +9,12 @@ chapters:
       - file: using-google-colab
       - file: glossary
   - file: underlying-concepts
+    sections:
+      - file: structure-of-transmission-graph
   - file: coalestr-module
   - file: epidemiological-scenarios
+    sections:
+     - file: species_history
+     - file: scenario_1
+     - file: local_outbreak
   - file: todo-list
