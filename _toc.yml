@@ -4,9 +4,9 @@
 format: jb-book
 root: README
 chapters:
-  - file: New introduction
+  - file: how-to-use-this-book
     sections:
-      - file: how-to-use-this-book
+      - file: using-google-colab
       - file: glossary
   - file: a-framework-for-analysing-the-coalescent-process
     sections:
