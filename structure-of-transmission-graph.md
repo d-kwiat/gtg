@@ -1,4 +1,4 @@
-# Structure of the genomic transmission graph
+### Structure of the genomic transmission graph
 
 ![idealised-tg](idealised-tg.png)
 
