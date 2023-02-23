@@ -1,4 +1,6 @@
-# Genomic transmission graph
+# Introduction
+
+Welcome!  This website introduces the concept of a *genomic transmission graph* for modelling of parasite transmission dynamics and population genetics.
 
 #### Introduction
 
