@@ -1,3 +1,2 @@
-#### How to use this book with Google Colab
+# How to use this book
 
-This tells you how to use this book with Google Colab.
