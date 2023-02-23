@@ -4,7 +4,7 @@
 format: jb-book
 root: README
 chapters:
-  - file: README
+  - file: New introduction
     sections:
       - file: how-to-use-this-book
       - file: glossary
