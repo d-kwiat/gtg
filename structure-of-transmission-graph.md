@@ -3,7 +3,7 @@
 Our idealised model imagines non-overlapping cycles of host to host transmission, and we refer to each cycle as a generation of the transmission graph. 
 
 ![idealised-tg](idealised-tg.png)
-[See figure caption](idealised_tg.md)
+[See figure caption](idealised-tg.md)
 
 - There are $N_h$ hosts in each generation of the transmission graph: we refer to this as the \textbf{effective number of hosts}.  We can think of $N_h$ as the number of hosts that are in effect responsible for transmitting parasites from one generation to the next, which is likely to be much less than the total number of infected individuals, and represents a major population bottleneck.  The source of infection of a host is determined by random sampling with replacement from the $N_h$ hosts in the previous generation.
 
