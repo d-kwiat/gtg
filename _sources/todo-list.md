@@ -28,7 +28,7 @@
 - [Hw versus Hs](hw_vs_hs.ipynb)
 - [Fws compare methods](fws_compare_methods.ipynb)
 
-## Time series epidemiological scenarios
+## Epidemiological scenarios
 
 - [Species history](species_history.ipynb)
 - [Scenarios #1](scenario_1.ipynb)
