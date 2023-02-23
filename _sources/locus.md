@@ -1,5 +1,7 @@
-**One cycle of host-to-host transmission corresponds to one generation of sexual reproduction by the parasite** 
+**Heterozygosity is measured by comparing alleles at a locus** 
 
 ![locus](locus.png).
 
-*Plasmodium falciparum* parasites reproduce asexually and prolifically within the red blood cells of their human  host.  Gametocytes (sexual forms of the parasite) mate after being taken up by a blood-sucking *Anopheles* mosquito.  Their progeny then go through a series of developmental stages to produce sporozoites (asexual forms of the parasite that are inoculated by the mosquito into a new host).  In our model, we define the start of a new generation of transmission as the inoculation of sporozoites into a new host, noting that this occurs shortly after sexual reproduction within the vector.
+An allele is an instance of the parasite genome and a locus is a specific location in the genome.  Here we see three alleles at two loci: locus A is a single nucleotide position (we call this a point locus) and locus B extends over multiple nucleotide positions (we call this a haplotype locus).  Both loci have been affected by mutation, and locus B has also been affected by recombination.
+
+[Return to glossary](glossary.md)

@@ -18,9 +18,9 @@ This glossary explains the terminology used on this website, which sometimes dif
 
 **Haplotype.**  A specific DNA sequence observed at a haplotype locus.  At a large haplotype locus there will typically be many different haplotypes.
 
-**Haplotype locus.** A locus that extends over multiple nucleotide positions and that can therefore undergo recombination 
+**Haplotype locus.** A locus that extends over multiple nucleotide positions and that can therefore undergo recombination. 
 
-![locus](locus.png).
+![locus](locus.png)
 [See figure caption](locus.md)
 
 **Heterozygosity (*H*).** The probability that two alleles sampled randomly from some population are heterozygous, i.e. that they have different DNA sequences. 
@@ -35,7 +35,10 @@ This glossary explains the terminology used on this website, which sometimes dif
 
 **Nucleotide diversity (*pi*).** The probability that two alleles are heterozygous at a random nucleotide position in the genome.
 
-**Parasite.**  A malaria parasite of the species *Plasmodium falciparum* that is transmitted from host to host by a mosquito vector.  It is a single-celled organism that is haploid for most of its lifecycle.  It reproduces asexually apart from a brief phase of sexual reproduction within the vector. ![generation](generation.png)
+**Parasite.**  A malaria parasite of the species *Plasmodium falciparum* that is transmitted from host to host by a mosquito vector.  It is a single-celled organism that is haploid for most of its lifecycle.  It reproduces asexually apart from a brief phase of sexual reproduction within the vector. 
+
+![generation](generation.png)
+[See figure caption](generation.md)
 
 **Point locus.** A specific single nucleotide position in the genome. 
 
