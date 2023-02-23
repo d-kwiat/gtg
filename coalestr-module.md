@@ -1,4 +1,4 @@
 ## `coalestr` module
 
-- [View the code](coalestr.py)
+- [View the code](https://github.com/d-kwiat/gtg/blob/main/coalestr.py)
 
