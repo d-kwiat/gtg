@@ -2,7 +2,7 @@
 
 This website introduces the concept of a **genomic transmission graph** for modelling parasite transmission dynamics and population genetics.  It accompanies the paper on this topic that is published in [Wellcome Open Research](https://wellcomeopenresearch.org/articles/8-22).
 
-We will use [the 'coalestr' module] to examine specific examples of the genomic transmission graph.  You may want to look at the [glossary](glossary.md).
+We will use the ['coalestr' module](coalestr-module.md) to examine specific examples of the genomic transmission graph.  You may want to look at the [glossary](glossary.md).
 
 There are four main parts to this book.
 
