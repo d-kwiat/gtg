@@ -13,6 +13,9 @@ chapters:
       - file: structure-of-transmission-graph
       - file: coalescence_time_basic
   - file: coalestr-module
+    sections:
+      - file: coalescence_time
+      - file: diversity_global
   - file: epidemiological-scenarios
     sections:
      - file: species_history
