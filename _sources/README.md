@@ -1,10 +1,14 @@
 # Introduction
 
-Welcome!  This website introduces the concept of a **genomic transmission graph** for modelling parasite transmission dynamics and population genetics.  It accompanies the paper on this topic that is published in [Wellcome Open Research](https://wellcomeopenresearch.org/articles/8-22)
+Welcome!  This website introduces the concept of a **genomic transmission graph** for modelling parasite transmission dynamics and population genetics.  It accompanies the paper on this topic that is published in [Wellcome Open Research](https://wellcomeopenresearch.org/articles/8-22).
 
-#### Introduction
+We will use code to examine specific examples of the genomic transmission graph.  You may want to look at the [glossary](glossary.md).
 
-Here are some introductory remarks.
+# What is a genomic transmission graph
+
+
+
+
 
 ## A framework for analysing the coalescent process
 
