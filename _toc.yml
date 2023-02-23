@@ -11,6 +11,7 @@ chapters:
   - file: underlying-concepts
     sections:
       - file: structure-of-transmission-graph
+      - file: coalescence_time_basic
   - file: coalestr-module
   - file: epidemiological-scenarios
     sections:
