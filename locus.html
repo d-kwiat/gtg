@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Glossary &#8212; Genomic transmission graph</title>
+    <title>&lt;no title&gt; &#8212; Genomic transmission graph</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -50,12 +50,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="A framework for analysing the coalescent process" href="a-framework-for-analysing-the-coalescent-process.html" />
-    <link rel="prev" title="How to use this book with Google Colab" href="how-to-use-this-book.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -115,24 +111,24 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active has-children">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="introduction.html">
    Introduction
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul class="current">
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="how-to-use-this-book.html">
      How to use this book with Google Colab
     </a>
    </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
+   <li class="toctree-l2">
+    <a class="reference internal" href="glossary.html">
      Glossary
     </a>
    </li>
@@ -382,7 +378,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/d-kwiat/gtg/issues/new?title=Issue%20on%20page%20%2Fglossary.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/d-kwiat/gtg/issues/new?title=Issue%20on%20page%20%2Flocus.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -410,7 +406,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="_sources/glossary.md"
+        <a href="_sources/locus.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -447,23 +443,50 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Glossary</h1>
+                <h1><no title></h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -471,36 +494,9 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="glossary">
-<h1>Glossary<a class="headerlink" href="#glossary" title="Permalink to this headline">#</a></h1>
-<p>This glossary explains the terminology used on this website, which sometimes differs from common usage, or is a specific interpretation of it.</p>
-<p><strong>Allele.</strong>  An instance of the parasite genome.  For example, <span class="math notranslate nohighlight">\(n\)</span> haploid individuals correspond to <em>n</em> alleles.  We often speak of an allele with reference to a particular locus, in which case it means the DNA sequence of that locus in an individual parasite genome.</p>
-<p><strong>Coalescence.</strong>  If two lineages are traced back in time, coalescence occurs when they meet in the same ancestral allele.</p>
-<p><strong>Cotransmission.</strong>  Transmission from one host to another of a mixture of parasite alleles with different ancestral histories.</p>
-<p><strong>Crossing rate of transmission chains (<em>chi</em>).</strong> The proportion of hosts that acquire parasites from more than one transmission chain, i.e. from more than one host in the previous generation.  This is equivalent to proportion of hosts that are superinfected.</p>
-<p><strong>Effective number of hosts (<em>$N_h</em>).</strong>  The number of hosts that effectively transmit parasites in each generation of the transmission graph.  This is a form of population bottleneck.</p>
-<p><strong>Effective recombination.</strong>  Recombination between genetically distinct alleles that acts to change the DNA sequence of a haplotype locus.</p>
-<p><strong>Effective recombination parameter (<em>phi_t</em>.)</strong>  The probability that, if recombination occurs at a locus at time <em>t</em>, this will change the DNA sequence of the locus.</p>
-<p><strong>Haplotype.</strong>  A specific DNA sequence observed at a haplotype locus.  At a large haplotype locus there will typically be many different haplotypes.</p>
-<p><strong>Haplotype locus.</strong> A locus that extends over multiple nucleotide positions and that can therefore undergo recombination</p>
-<p><img alt="locus" src="_images/locus.png" />.
-<a class="reference internal" href="locus.html"><span class="doc std std-doc">See figure caption</span></a></p>
-<p><strong>Heterozygosity (<em>H</em>).</strong> The probability that two alleles sampled randomly from some population are heterozygous, i.e. that they have different DNA sequences.</p>
-<p><strong>Homozygosity (<em>G</em>).</strong> The probability that two alleles sampled randomly from some population are homozygous, i.e. that they have the same DNA sequence.</p>
-<p><strong>Host.</strong>  A person that is carrying parasites and capable of transmitting them to others.  Each host exists for a single generation of the genomic transmission graph.</p>
-<p><strong>Lineage.</strong> A path that traces the ancestry of an allele at a point locus, going backwards in time through the transmission graph.  A point locus is not affected by recombination, so a lineage can be traced back over many generations despite frequent recombination events.</p>
-<p><strong>Locus.</strong>  A specific location in the genome.  This can be either a single nucleotide position (a point locus) or a sequence extending over multiple nucleotide positions (a haplotype locus).</p>
-<p><strong>Nucleotide diversity (<em>pi</em>).</strong> The probability that two alleles are heterozygous at a random nucleotide position in the genome.</p>
-<p><strong>Parasite.</strong>  A malaria parasite of the species <em>Plasmodium falciparum</em> that is transmitted from host to host by a mosquito vector.  It is a single-celled organism that is haploid for most of its lifecycle.  It reproduces asexually apart from a brief phase of sexual reproduction within the vector. <img alt="generation" src="_images/generation.png" /></p>
-<p><strong>Point locus.</strong> A specific single nucleotide position in the genome.</p>
-<p><strong>Polymorphism.</strong> Variation in the DNA sequence at some specified locus.</p>
-<p><strong>Quantum of transmission (<em>Q</em>).</strong> The number of parasite alleles transmitted from one host to the next via a vector.  <span class="math notranslate nohighlight">\(Q\)</span> summarises a complex series of bottlenecks in host-vector and vector-host transmission occuring during one generation of the parasite life-cycle.</p>
-<p><strong>Single nucleotide polymorphism (SNP).</strong>  A polymorphism that involves only a single nucleotide position.  It usually arises from a type of mutation called a single nucleotide substitution.</p>
-<p><strong>Superinfection.</strong> Infection of a host with parasites from more than one source in the previous generation.  In the genomic transmission graph this is equivalent to crossing of transmission chains.</p>
-<p><strong>Transmission bottleneck.</strong>  A population bottleneck that affects the number of alleles that are passed from one generation of the genomic transmission graph to the next.  From the perspective of the parasite population as a whole, the quantum of transmission <em>Q</em> and the effective number of hosts <em>Nh</em> can both be considered as transmission bottlenecks.</p>
-<p><strong>Transmission chain.</strong> A sequence of host-to-host transmission events.   If we pick any node in the transmission graph, and trace a path forward in time along the edges to another node, that is a transmission chain.</p>
-<p><strong>Vector.</strong>  An <em>Anopheles</em> mosquito that transmits malaria parasites from one host to another.</p>
-</section>
+  <p><strong>One cycle of host-to-host transmission corresponds to one generation of sexual reproduction by the parasite</strong></p>
+<p><span class="xref myst">locus</span>.</p>
+<p><em>Plasmodium falciparum</em> parasites reproduce asexually and prolifically within the red blood cells of their human  host.  Gametocytes (sexual forms of the parasite) mate after being taken up by a blood-sucking <em>Anopheles</em> mosquito.  Their progeny then go through a series of developmental stages to produce sporozoites (asexual forms of the parasite that are inoculated by the mosquito into a new host).  In our model, we define the start of a new generation of transmission as the inoculation of sporozoites into a new host, noting that this occurs shortly after sexual reproduction within the vector.</p>
 
     <script type="text/x-thebe-config">
     {
@@ -529,20 +525,6 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="how-to-use-this-book.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">How to use this book with Google Colab</p>
-        </div>
-    </a>
-    <a class='right-next' id="next-link" href="a-framework-for-analysing-the-coalescent-process.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">A framework for analysing the coalescent process</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
 </div>
             </footer>
         </div>
