@@ -18,7 +18,7 @@ This glossary explains the terminology used on this website, which sometimes dif
 
 **Haplotype.**  A specific DNA sequence observed at a haplotype locus.  At a large haplotype locus there will typically be many different haplotypes.
 
-**Haplotype locus.** A locus that extends over multiple nucleotide positions and that can therefore undergo recombination (figure supp_graph_17).
+**Haplotype locus.** A locus that extends over multiple nucleotide positions and that can therefore undergo recombination ![locus](locus.png).
 
 **Heterozygosity (*H*).** The probability that two alleles sampled randomly from some population are heterozygous, i.e. that they have different DNA sequences. 
 
@@ -26,13 +26,13 @@ This glossary explains the terminology used on this website, which sometimes dif
 
 **Host.**  A person that is carrying parasites and capable of transmitting them to others.  Each host exists for a single generation of the genomic transmission graph.  
 
-** Lineage.** A path that traces the ancestry of an allele at a point locus, going backwards in time through the transmission graph.  A point locus is not affected by recombination, so a lineage can be traced back over many generations despite frequent recombination events.
+**Lineage.** A path that traces the ancestry of an allele at a point locus, going backwards in time through the transmission graph.  A point locus is not affected by recombination, so a lineage can be traced back over many generations despite frequent recombination events.
 
 **Locus.**  A specific location in the genome.  This can be either a single nucleotide position (a point locus) or a sequence extending over multiple nucleotide positions (a haplotype locus).
 
 **Nucleotide diversity (*pi*).** The probability that two alleles are heterozygous at a random nucleotide position in the genome.
 
-**Parasite.**  A malaria parasite of the species *Plasmodium falciparum* that is transmitted from host to host by a mosquito vector.  It is a single-celled organism that is haploid for most of its lifecycle.  It reproduces asexually apart from a brief phase of sexual reproduction within the vector (see figure fig:one_generation).
+**Parasite.**  A malaria parasite of the species *Plasmodium falciparum* that is transmitted from host to host by a mosquito vector.  It is a single-celled organism that is haploid for most of its lifecycle.  It reproduces asexually apart from a brief phase of sexual reproduction within the vector. ![generation](generation.png)
 
 **Point locus.** A specific single nucleotide position in the genome. 
 
