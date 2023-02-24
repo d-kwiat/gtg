@@ -11,7 +11,11 @@ chapters:
   - file: underlying-concepts
     sections:
       - file: basic-model
-      - file: coalescence_time_basic
+      - file: coalescence-time-basic
+      - file: nucleotide-diversity
+      - file: haplotype-homozygosity-2cM
+      - file: migration-simple
+      - file: fws-compare-methods
   - file: coalestr-features
     sections:
       - file: coalescence_time
@@ -21,4 +25,4 @@ chapters:
      - file: species_history
      - file: scenario_1
      - file: local_outbreak
-  - file: todo-list
+  - file: draft-ms
