@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Features of coalestr &#8212; Genomic transmission graph</title>
+    <title>get_diversity &#8212; Genomic transmission graph</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,8 +52,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Population class" href="population-class.html" />
-    <link rel="prev" title="Rates of superinfection" href="fws-compare-methods.html" />
+    <link rel="next" title="Time series analysis" href="time-series.html" />
+    <link rel="prev" title="get_coalescent" href="get-coalescent.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -179,7 +179,7 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
  <li class="toctree-l1 current active has-children">
-  <a class="current reference internal" href="#">
+  <a class="reference internal" href="coalestr-features.html">
    Features of
    <code class="docutils literal notranslate">
     <span class="pre">
@@ -192,7 +192,7 @@ const thebe_selector_output = ".output, .cell_output"
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
+  <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="population-class.html">
      <code class="docutils literal notranslate">
@@ -212,8 +212,8 @@ const thebe_selector_output = ".output, .cell_output"
      </code>
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="get-diversity.html">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      <code class="docutils literal notranslate">
       <span class="pre">
        get_diversity
@@ -311,6 +311,53 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/d-kwiat/gtg/main?urlpath=tree/get-diversity.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/d-kwiat/gtg/blob/main/get-diversity.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -350,7 +397,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/d-kwiat/gtg/issues/new?title=Issue%20on%20page%20%2Fcoalestr-features.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/d-kwiat/gtg/issues/new?title=Issue%20on%20page%20%2Fget-diversity.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -378,7 +425,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="_sources/coalestr-features.md"
+        <a href="_sources/get-diversity.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -389,7 +436,7 @@ title="Download source file"
 <span class="headerbtn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.md</span>
+<span class="headerbtn__text-container">.ipynb</span>
 </a>
 
       </li>
@@ -427,7 +474,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Features of coalestr</h1>
+                <h1>get_diversity</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -439,18 +486,138 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="features-of-coalestr">
-<h1>Features of <code class="docutils literal notranslate"><span class="pre">coalestr</span></code><a class="headerlink" href="#features-of-coalestr" title="Permalink to this headline">#</a></h1>
-<p>Have sections about</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="get-diversity">
+<h1><code class="docutils literal notranslate"><span class="pre">get_diversity</span></code><a class="headerlink" href="#get-diversity" title="Permalink to this headline">#</a></h1>
 <ul class="simple">
-<li><p>Create a population</p></li>
-<li><p>Simulate coalescence time</p></li>
-<li><p>Simulate genetic variation</p></li>
-<li><p>Simulate migration</p></li>
-<li><p>Time series analysis</p></li>
-<li><p><a class="reference external" href="https://github.com/d-kwiat/gtg/blob/main/coalestr.py">View the code</a></p></li>
+<li><p>My Drive/GitHub/transmission_ms/diversity_global.ipynb</p></li>
+<li><p>checked that it is working 6 Nov 2022</p></li>
+<li><p>from 211012_diversity_global_population.ipynb</p></li>
 </ul>
-<div class="toctree-wrapper compound">
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">coalestr</span> <span class="k">as</span> <span class="nn">cs</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">constant_population</span> <span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+    <span class="n">pop</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">Population</span><span class="p">(</span><span class="n">history</span> <span class="o">=</span> <span class="p">[[</span><span class="n">duration</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+    <span class="n">pop</span><span class="o">.</span><span class="n">get_coalescent</span><span class="p">()</span>
+    <span class="n">pop</span><span class="o">.</span><span class="n">get_diversity</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">duration</span> <span class="o">=</span> <span class="mi">100000</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">constant_population</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="mi">18764</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    Events captured.   Mean coalescence time
+                      beho      wiho        beho     wiho
+        0              99.5     100.0     18188.4      1.0
+Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb locus
+                      beho       wiho           beho       wiho
+        0           4.00e-04   2.20e-08       4.09e-03   9.87e-01
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">constant_population</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="mi">18754</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    Events captured.   Mean coalescence time
+                      beho      wiho        beho     wiho
+        0              99.5     100.0     18188.8     10.0
+Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb locus
+                      beho       wiho           beho       wiho
+        0           4.00e-04   2.20e-07       3.67e-03   8.85e-01
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">constant_population</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="mi">18754</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    Events captured.   Mean coalescence time
+                      beho      wiho        beho     wiho
+        0              99.5      99.8     18180.0   9091.0
+Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb locus
+                      beho       wiho           beho       wiho
+        0           4.00e-04   2.00e-04       4.09e-03   4.96e-01
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">constant_population</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="mi">5568</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    Events captured.   Mean coalescence time
+                      beho      wiho        beho     wiho
+        0              99.5      99.6     18188.9  14213.0
+Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb locus
+                      beho       wiho           beho       wiho
+        0           4.00e-04   3.13e-04       3.99e-03   2.14e-01
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">constant_population</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="mi">18764</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    Events captured.   Mean coalescence time
+                      beho      wiho        beho     wiho
+        0              99.5      99.5     18188.4  18189.3
+Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb locus
+                      beho       wiho           beho       wiho
+        0           4.00e-04   4.00e-04       4.09e-03   4.04e-03
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">constant_population</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="mi">3269</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    Events captured.   Mean coalescence time
+                      beho      wiho        beho     wiho
+        0              99.5      99.6     18187.4  16687.4
+Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb locus
+                      beho       wiho           beho       wiho
+        0           4.00e-04   3.67e-04       4.05e-03   8.44e-02
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 
@@ -481,17 +648,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="fws-compare-methods.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="get-coalescent.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Rates of superinfection</p>
+            <p class="prev-next-title"><code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code></p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="population-class.html" title="next page">
+    <a class='right-next' id="next-link" href="time-series.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><code class="docutils literal notranslate"><span class="pre">Population</span></code> class</p>
+        <p class="prev-next-title">Time series analysis</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

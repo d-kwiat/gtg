@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>get_coalescent &#8212; Genomic transmission graph</title>
+    <title>Population class &#8212; Genomic transmission graph</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,8 +52,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="get_diversity" href="get-diversity.html" />
-    <link rel="prev" title="Population class" href="population-class.html" />
+    <link rel="next" title="get_coalescent" href="get-coalescent.html" />
+    <link rel="prev" title="Features of coalestr" href="coalestr-features.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -193,8 +193,8 @@ const thebe_selector_output = ".output, .cell_output"
    </i>
   </label>
   <ul class="current">
-   <li class="toctree-l2">
-    <a class="reference internal" href="population-class.html">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      <code class="docutils literal notranslate">
       <span class="pre">
        Population
@@ -203,8 +203,8 @@ const thebe_selector_output = ".output, .cell_output"
      class
     </a>
    </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
+   <li class="toctree-l2">
+    <a class="reference internal" href="get-coalescent.html">
      <code class="docutils literal notranslate">
       <span class="pre">
        get_coalescent
@@ -319,7 +319,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/d-kwiat/gtg/main?urlpath=tree/get-coalescent.ipynb"
+        <a href="https://mybinder.org/v2/gh/d-kwiat/gtg/main?urlpath=tree/population-class.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -337,7 +337,7 @@ title="Launch on Binder"
       </li>
       
       <li>
-        <a href="https://colab.research.google.com/github/d-kwiat/gtg/blob/main/get-coalescent.ipynb"
+        <a href="https://colab.research.google.com/github/d-kwiat/gtg/blob/main/population-class.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -397,7 +397,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/d-kwiat/gtg/issues/new?title=Issue%20on%20page%20%2Fget-coalescent.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/d-kwiat/gtg/issues/new?title=Issue%20on%20page%20%2Fpopulation-class.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -425,7 +425,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="_sources/get-coalescent.ipynb"
+        <a href="_sources/population-class.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -474,7 +474,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>get_coalescent</h1>
+                <h1>Population class</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -486,8 +486,8 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="get-coalescent">
-<h1><code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code><a class="headerlink" href="#get-coalescent" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="population-class">
+<h1><code class="docutils literal notranslate"><span class="pre">Population</span></code> class<a class="headerlink" href="#population-class" title="Permalink to this headline">#</a></h1>
 <ul class="simple">
 <li><p>My Drive/GitHub/transmission_ms/coalescence_time.ipynb</p></li>
 <li><p>Checked in working order 6 Nov 2022</p></li>
@@ -578,7 +578,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/get-coalescent_5_0.png" src="_images/get-coalescent_5_0.png" />
+<img alt="_images/population-class_5_0.png" src="_images/population-class_5_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -663,7 +663,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/get-coalescent_9_0.png" src="_images/get-coalescent_9_0.png" />
+<img alt="_images/population-class_9_0.png" src="_images/population-class_9_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -765,17 +765,17 @@ back in time   Separated   Cotransmitted   Coalesced
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="population-class.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="coalestr-features.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><code class="docutils literal notranslate"><span class="pre">Population</span></code> class</p>
+            <p class="prev-next-title">Features of <code class="docutils literal notranslate"><span class="pre">coalestr</span></code></p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="get-diversity.html" title="next page">
+    <a class='right-next' id="next-link" href="get-coalescent.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><code class="docutils literal notranslate"><span class="pre">get_diversity</span></code></p>
+        <p class="prev-next-title"><code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code></p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
