@@ -1,6 +1,6 @@
 # Using Google Colab
 
-In the worked examples we will use Google Colab, a cloud computing service provided for free by Google. In order to use Colab you will need to have a Google user account. If you do not already have one please [follow this link to create a Google account](https://accounts.google.com/signup).
+In the worked examples we will use Google Colab, a cloud computing service provided for free by Google. In order to use Colab you will need to have a Google user account. If you do not have one already please [follow this link to create a Google account](https://accounts.google.com/signup).
 
 If you are on a web page that contains Python code there should be a rocket displayed at the top right of the page, like this
 
