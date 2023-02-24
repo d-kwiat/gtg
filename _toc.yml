@@ -18,8 +18,10 @@ chapters:
       - file: fws-compare-methods
   - file: coalestr-features
     sections:
+      - file: population-class
       - file: get-coalescent
-      - file: diversity_global
+      - file: get-diversity
+      - file: time-series
   - file: epidemiological-scenarios
     sections:
      - file: species_history
