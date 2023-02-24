@@ -1,4 +1,4 @@
-# Features of `coalestr`
+# How to use `coalestr`
 
 Have sections about
 
