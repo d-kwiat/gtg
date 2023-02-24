@@ -1,6 +1,6 @@
 # How to use this book
 
-You can browse this book just like any other website. Be warned that we use some population genetic terminology in a very specific way that differs from common usage, so it may help to start by [looking through the glossary of terminology](glossary.md)
+You can browse this book just like any other website. Be warned that we use some population genetic terminology in a very specific way that differs from common usage, so it may help to start by [looking through the glossary](glossary.md).
 
 Many of the pages are [Jupyter notebooks](https://jupyter-notebook.readthedocs.io/en/stable/notebook.html) containing Python code plus some explanatory text, e.g. to explain how we obtained the results shown in the accompanying paper in [Wellcome Open Research](https://wellcomeopenresearch.org/articles/8-22).
 
