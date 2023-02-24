@@ -10,7 +10,7 @@ chapters:
       - file: glossary
   - file: underlying-concepts
     sections:
-      - file: structure-of-transmission-graph
+      - file: basic-model
       - file: coalescence_time_basic
   - file: coalestr-features
     sections:

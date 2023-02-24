@@ -1,6 +1,6 @@
 # Welcome
 
-This website introduces the concept of a *genomic transmission graph* for modelling parasite transmission dynamics and population genetics.  It accompanies the paper on this topic that is published in [Wellcome Open Research](https://wellcomeopenresearch.org/articles/8-22).
+This website introduces the concept of a *genomic transmission graph* for modelling parasite transmission dynamics and population genetics.  It accompanies the paper on this topic in [Wellcome Open Research](https://wellcomeopenresearch.org/articles/8-22).
 
 There are four main parts to this book.
 
