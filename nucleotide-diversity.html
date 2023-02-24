@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>&lt;no title&gt; &#8212; Genomic transmission graph</title>
+    <title>Nucleotide diversity &#8212; Genomic transmission graph</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -266,6 +266,53 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/d-kwiat/gtg/main?urlpath=tree/nucleotide-diversity.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/d-kwiat/gtg/blob/main/nucleotide-diversity.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -305,7 +352,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/d-kwiat/gtg/issues/new?title=Issue%20on%20page%20%2FREADME.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/d-kwiat/gtg/issues/new?title=Issue%20on%20page%20%2Fnucleotide-diversity.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -333,7 +380,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="_sources/README.md"
+        <a href="_sources/nucleotide-diversity.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -344,7 +391,7 @@ title="Download source file"
 <span class="headerbtn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.md</span>
+<span class="headerbtn__text-container">.ipynb</span>
 </a>
 
       </li>
@@ -370,50 +417,23 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1><no title></h1>
+                <h1>Nucleotide diversity</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-                        </nav>
                     </div>
                 </div>
             </div>
@@ -421,9 +441,140 @@ title="Print to PDF"
                 
               <div>
                 
-  <p>This repo contains Jupyter notebooks and markdown files for the website <a class="reference external" href="https://d-kwiat.github.io/gtg">d-kwiat.github.io/gtg</a>.</p>
-<p>It accompanies a paper on <strong>A genomic transmission graph for modelling parasite transmission dynamics and population genetics</strong> that is published in <a class="reference external" href="https://wellcomeopenresearch.org/articles/8-22">Wellcome Open Research</a>.</p>
-<p>It utilises the <a class="reference external" href="https://github.com/d-kwiat/gtg/blob/main/coalestr.py">Python module <code class="docutils literal notranslate"><span class="pre">coalestr</span></code></a>.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="nucleotide-diversity">
+<h1>Nucleotide diversity<a class="headerlink" href="#nucleotide-diversity" title="Permalink to this headline">#</a></h1>
+<ul class="simple">
+<li><p>My Drive/GitHub/transmission_ms/diversity_global.ipynb</p></li>
+<li><p>checked that it is working 6 Nov 2022</p></li>
+<li><p>from 211012_diversity_global_population.ipynb</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">coalestr</span> <span class="k">as</span> <span class="nn">cs</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">constant_population</span> <span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+    <span class="n">pop</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">Population</span><span class="p">(</span><span class="n">history</span> <span class="o">=</span> <span class="p">[[</span><span class="n">duration</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+    <span class="n">pop</span><span class="o">.</span><span class="n">get_coalescent</span><span class="p">()</span>
+    <span class="n">pop</span><span class="o">.</span><span class="n">get_diversity</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">duration</span> <span class="o">=</span> <span class="mi">100000</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">constant_population</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="mi">18764</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    Events captured.   Mean coalescence time
+                      beho      wiho        beho     wiho
+        0              99.5     100.0     18188.4      1.0
+Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb locus
+                      beho       wiho           beho       wiho
+        0           4.00e-04   2.20e-08       4.09e-03   9.87e-01
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">constant_population</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="mi">18754</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    Events captured.   Mean coalescence time
+                      beho      wiho        beho     wiho
+        0              99.5     100.0     18188.8     10.0
+Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb locus
+                      beho       wiho           beho       wiho
+        0           4.00e-04   2.20e-07       3.67e-03   8.85e-01
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">constant_population</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="mi">18754</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    Events captured.   Mean coalescence time
+                      beho      wiho        beho     wiho
+        0              99.5      99.8     18180.0   9091.0
+Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb locus
+                      beho       wiho           beho       wiho
+        0           4.00e-04   2.00e-04       4.09e-03   4.96e-01
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">constant_population</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="mi">5568</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    Events captured.   Mean coalescence time
+                      beho      wiho        beho     wiho
+        0              99.5      99.6     18188.9  14213.0
+Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb locus
+                      beho       wiho           beho       wiho
+        0           4.00e-04   3.13e-04       3.99e-03   2.14e-01
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">constant_population</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="mi">18764</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    Events captured.   Mean coalescence time
+                      beho      wiho        beho     wiho
+        0              99.5      99.5     18188.4  18189.3
+Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb locus
+                      beho       wiho           beho       wiho
+        0           4.00e-04   4.00e-04       4.09e-03   4.04e-03
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">constant_population</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="mi">3269</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    Events captured.   Mean coalescence time
+                      beho      wiho        beho     wiho
+        0              99.5      99.6     18187.4  16687.4
+Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb locus
+                      beho       wiho           beho       wiho
+        0           4.00e-04   3.67e-04       4.05e-03   8.44e-02
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 
     <script type="text/x-thebe-config">
     {
