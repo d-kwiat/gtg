@@ -3,6 +3,7 @@
 
 format: jb-book
 root: index
+   - file:using-google-colab
 chapters:
   - file: how-to-use-this-book
     sections:
