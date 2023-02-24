@@ -8,7 +8,9 @@ If you are on a web page that contains Python code there should be a rocket disp
 
 Click on the rocket and you should get a dropdown menu that offers you a choice of Binder and Colab.  Click on Colab and this will launch a new page that allows you to edit and run the code.
 
-The page will be organised into cells each containing a piece of code.  To run the code you start at the top cell and work down the page. At the top left of each cell is an empty square bracket.  If you hover over the cell, the empty square bracket will be replaced by round start icon like this
+The page will be organised into cells each containing a piece of code.  To run the code you start at the top cell and work down the page. 
+
+At the top left of each cell is an empty square bracket.  If you hover over the cell, the empty square bracket will turn into a round start icon like this
 
 ![colab2](colab2.png)
 
