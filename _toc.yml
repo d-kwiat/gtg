@@ -18,7 +18,7 @@ chapters:
       - file: fws-compare-methods
   - file: coalestr-features
     sections:
-      - file: coalescence_time
+      - file: get-coalescent
       - file: diversity_global
   - file: epidemiological-scenarios
     sections:
