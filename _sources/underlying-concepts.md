@@ -1,15 +1,14 @@
 # Underlying concepts
 
-The genetic structure of a parasite population is shaped by its transmission dynamics but superinfection and recombination make this relationship complex and hard to analyse.  Superinfection means that a host acquires infection from multiple independent sources, and therefore carries a mixture of parasite genotypes with different ancestral histories, which may then be cotransmitted to other hosts.  Recombination within genetically mixed infections causes different regions of the genome to have different genealogies, as shown in the figure below, and this presents an extremely complex problem for genetic inference.
+The genetic structure of a parasite population is shaped by its transmission dynamics but superinfection and recombination make this relationship complex and hard to analyse.  Superinfection means that a host acquires infection from multiple independent sources, and therefore carries a mixture of parasite genotypes with different ancestral histories, which may then be cotransmitted to other hosts.  Recombination within genetically mixed infections causes different regions of the genome to have different genealogies, as shown in the figure below, and this presents an extremely complex problem for genetic inference of parasite transmission dynamics.
 
 ![superinfection](superinfection.png).
 [See figure caption](superinfection.md)
 
-Imagine a directed acyclic graph in which the nodes represent hosts and edges represent vectors, as illustrated below. The graph is plotted on an axis of time and we make the simplifying assumption that a host exists at a discrete point in time. We call this the genomic transmission graph.
+The **genomic transmission graph** aims to simplify the problem.  It is a directed acyclic graph in which the nodes represent hosts and edges represent vectors, as illustrated below. The graph is plotted on an axis of time and we make the simplifying assumption that a host exists at a discrete point in time. 
 
 ![transmission-graph](transmission-graph.png)
-
-When thinking about the transmission of parasites from host to host, we are moving forward in time so we follow the edges of the graph from left to right.  When thinking about the ancestry of a parasite, we are going back in time and therefore we follow the edges from right to left. 
+[See figure caption](transmission-graph.md)
 
 If we pick any node and trace a path forward in time along the edges to some other node, that is a *transmission chain*. Transmission chains can *branch* when a host is the source of parasites for multiple other hosts.  Transmission chains can also *cross* when a host acquires parasites from multiple sources, i.e when there is superinfection.
 

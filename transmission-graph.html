@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Underlying concepts &#8212; Genomic transmission graph</title>
+    <title>&lt;no title&gt; &#8212; Genomic transmission graph</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,8 +52,6 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="The basic model" href="basic-model.html" />
-    <link rel="prev" title="Glossary" href="glossary.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -113,7 +111,7 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
+        <ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="how-to-use-this-book.html">
    How to use this book
@@ -136,11 +134,11 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
   </ul>
  </li>
- <li class="toctree-l1 current active has-children">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="underlying-concepts.html">
    Underlying concepts
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
   <label for="toctree-checkbox-2">
    <i class="fas fa-chevron-down">
    </i>
@@ -352,7 +350,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/d-kwiat/gtg/issues/new?title=Issue%20on%20page%20%2Funderlying-concepts.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/d-kwiat/gtg/issues/new?title=Issue%20on%20page%20%2Ftransmission-graph.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -380,7 +378,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="_sources/underlying-concepts.md"
+        <a href="_sources/transmission-graph.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -417,23 +415,50 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Underlying concepts</h1>
+                <h1><no title></h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -441,31 +466,8 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="underlying-concepts">
-<h1>Underlying concepts<a class="headerlink" href="#underlying-concepts" title="Permalink to this headline">#</a></h1>
-<p>The genetic structure of a parasite population is shaped by its transmission dynamics but superinfection and recombination make this relationship complex and hard to analyse.  Superinfection means that a host acquires infection from multiple independent sources, and therefore carries a mixture of parasite genotypes with different ancestral histories, which may then be cotransmitted to other hosts.  Recombination within genetically mixed infections causes different regions of the genome to have different genealogies, as shown in the figure below, and this presents an extremely complex problem for genetic inference of parasite transmission dynamics.</p>
-<p><img alt="superinfection" src="_images/superinfection.png" />.
-<a class="reference internal" href="superinfection.html"><span class="doc std std-doc">See figure caption</span></a></p>
-<p>The <strong>genomic transmission graph</strong> aims to simplify the problem.  It is a directed acyclic graph in which the nodes represent hosts and edges represent vectors, as illustrated below. The graph is plotted on an axis of time and we make the simplifying assumption that a host exists at a discrete point in time.</p>
-<p><img alt="transmission-graph" src="_images/transmission-graph.png" />
-<a class="reference internal" href="transmission-graph.html"><span class="doc std std-doc">See figure caption</span></a></p>
-<p>If we pick any node and trace a path forward in time along the edges to some other node, that is a <em>transmission chain</em>. Transmission chains can <em>branch</em> when a host is the source of parasites for multiple other hosts.  Transmission chains can also <em>cross</em> when a host acquires parasites from multiple sources, i.e when there is superinfection.</p>
-<p>Parasites reproduce as they flow along transmission chains, and parasites that are flowing along the same transmission chain can genetically recombine with each other.</p>
-<p>We define a <em>lineage</em> as a path through the transmission graph that we define by taking an allele at a point locus and tracing its ancestry back in time through the generations (<a class="reference internal" href="glossary.html"><span class="doc std std-doc">see glossary</span></a>).</p>
-<p>An individual parasite could have many different lineages each following a unique path through the graph because whenever transmission chains cross, the paths of different lineages can diverge.</p>
-<p>These simple concepts suggest a logical framework for thinking about how genetic variation is related to transmission dynamics in a recombining parasite population.  Instead of attempting to construct a phylogenetic tree, we imagine a genomic transmission graph onto which we can map the lineages of different loci in the genome. This allows for superinfection and recombination because lineages at different loci can take different pathways through the graph.</p>
-<p>The challenge is then to define the essential parameters of the graph and to understand how they are related to genetic variation.  To understand the scientific concepts it is a good idea to work through the sections in this order:</p>
-<ol class="simple">
-<li><p><a class="reference internal" href="basic-model.html"><span class="doc std std-doc">The basic model</span></a></p></li>
-<li><p><a class="reference internal" href="coalescence-time-basic.html"><span class="doc std std-doc">Time to coalescence</span></a></p></li>
-<li><p><a class="reference internal" href="nucleotide-diversity.html"><span class="doc std std-doc">Nucleotide diversity</span></a></p></li>
-<li><p><a class="reference internal" href="haplotype-homozygosity-2cM.html"><span class="doc std std-doc">Haplotype homozygosity</span></a></p></li>
-<li><p><a class="reference internal" href="migration-simple.html"><span class="doc std std-doc">Effect of migration</span></a></p></li>
-<li><p><a class="reference internal" href="fws-compare-methods.html"><span class="doc std std-doc">Rate of superinfection</span></a></p></li>
-</ol>
-<div class="toctree-wrapper compound">
-</div>
-</section>
+  <p><img alt="transmission-graph" src="_images/transmission-graph.png" /></p>
+<p><strong>A genomic transmission graph</strong> representing all the transmission chains in some locality during some interval of time. Each node represents a host, i.e. a person that is carrying parasites and is capable of transmitting them to others.  Each edge represents a vector, i.e. a mosquito that transmits parasites from one host to another, and is therefore directed forwards in time. Red marks a node where transmission chains cross, representing a host that is superinfected.</p>
 
     <script type="text/x-thebe-config">
     {
@@ -494,20 +496,6 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="glossary.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Glossary</p>
-        </div>
-    </a>
-    <a class='right-next' id="next-link" href="basic-model.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">The basic model</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
 </div>
             </footer>
         </div>
