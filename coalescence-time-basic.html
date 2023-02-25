@@ -507,23 +507,22 @@ title="Print to PDF"
 </ul>
 <p>We use the transmission parameters to construct a matrix of transition probabilities</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">transition</span></code> is a 3x3 matrix with the transition probabilities</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">transition_matrix</span></code> is a 3x3 matrix with the transition probabilities</p></li>
 </ul>
 <p>We create arrays to record the state of two lineages as we progress back in time</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">beho_lineage</span></code> and <code class="docutils literal notranslate"><span class="pre">wiho_lineage</span></code> are two-dimensional arrays</p></li>
-<li><p>they record a probability vector [Pr{SEPARATED}, Pr{COTRANSMITTED}, Pr{COALESCED}] for each time point</p></li>
-<li><p>these are <em>backwards time series</em> arrays, meaning that the most recent generation appears as the first item on the time axis.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">beho_lineage</span></code> and <code class="docutils literal notranslate"><span class="pre">wiho_lineage</span></code> are two-dimensional arrays that record a probability vector [Pr{SEPARATED}, Pr{COTRANSMITTED}, Pr{COALESCED}] for each time point.</p></li>
+<li><p>These are <em>backwards time series</em> arrays, meaning that the most recent generation appears as the first item on the time axis.</p></li>
 </ul>
 <p>We specify the initial conditions of the simulation</p>
 <ul class="simple">
-<li><p>To study <em>between-host variation</em> we specify that Pr{separated} = 1 at the start of the simulation (i.e. we sample two alleles from different hosts)</p></li>
-<li><p>To study <em>within-host variation</em> we specify that Pr{cotransmitted} = 1 at the start of the simulation (i.e. we sample two alleles from the same host)</p></li>
+<li><p>To study <em>between-host variation</em> we specify that Pr{SEPARATED} = 1 at the start of the simulation (i.e. we sample two alleles from different hosts)</p></li>
+<li><p>To study <em>within-host variation</em> we specify that Pr{COTRANSMITTED} = 1 at the start of the simulation (i.e. we sample two alleles from the same host)</p></li>
 </ul>
 <p>We work out the probability vector for each successive time point by matrix multiplication then we plot the results.</p>
 <p>We work out the mean time to coalescence.</p>
 <ul class="simple">
-<li><p>For this we create an array called <code class="docutils literal notranslate"><span class="pre">tcdist</span></code> that records the probability of coalescence occurring at each time point</p></li>
+<li><p>For this we create an array called <code class="docutils literal notranslate"><span class="pre">tcdist</span></code> that records the probability of coalescence occurring at each time point.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
