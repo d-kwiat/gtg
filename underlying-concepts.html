@@ -443,16 +443,20 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="underlying-concepts">
 <h1>Underlying concepts<a class="headerlink" href="#underlying-concepts" title="Permalink to this headline">#</a></h1>
-<p>Here a general statement of the problem.  Possibly refer to <a class="reference external" href="https://nextstrain.org/ncov/gisaid/global/6m">SARS-CoV-2 on NextStrain</a></p>
-<p>At the end, reference pages about the basic model and the main things that it can do.</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="basic-model.html"><span class="doc std std-doc">The basic model</span></a></p></li>
-<li><p><a class="reference internal" href="coalescence-time-basic.html"><span class="doc std std-doc">Time to coalescence</span></a></p></li>
-<li><p><a class="reference internal" href="nucleotide-diversity.html"><span class="doc std std-doc">Nucleotide diversity</span></a></p></li>
-<li><p><a class="reference internal" href="haplotype-homozygosity-2cM.html"><span class="doc std std-doc">Haplotype homozygosity</span></a></p></li>
-<li><p><a class="reference internal" href="migration-simple.html"><span class="doc std std-doc">Effects of migration</span></a></p></li>
-<li><p><a class="reference internal" href="fws-compare-methods.html"><span class="doc std std-doc">Rates of superinfection</span></a></p></li>
-</ul>
+<p>Imagine a directed acyclic graph in which the nodes represent hosts and edges represent vectors, as illustrated below in figure \ref{fig:main_graph_1}. The graph is plotted on an axis of time and we make the simplifying assumption that a host exists at a discrete point in time. We call this the genomic transmission graph.</p>
+<p><img alt="logo" src="_images/logo.png" /></p>
+<p>If we pick any node and trace a path forward in time along the edges to some other node, that is a <em>transmission chain</em>. Transmission chains can <em>branch</em> when a host is the source of parasites for multiple other hosts.  Transmission chains can also <em>cross</em> when a host acquires parasites from multiple sources, i.e when there is superinfection.</p>
+<p>Parasites reproduce as they flow along transmission chains, and parasites that are flowing along the same transmission chain can genetically recombine with each other.</p>
+<p>An individual parasite could have many different lineages each following a unique path through the graph.  To understand how this is possible, imagine two point loci (A and B) in a parasite’s genome.  If we trace the two corresponding lineages back in time, they are obliged to follow the same transmission chain until they reach a host that is superinfected, i.e. a node in the graph at which two transmission chains cross.  At that point their paths through the graph can diverge, because in the presence of recombination it is possible for locus A to be inherited from one of the transmission chains and locus B from the other.1</p>
+<p><img alt="superinfection" src="_images/superinfection.png" />.</p>
+<p>These simple concepts suggest a logical framework for thinking about how genetic variation is related to transmission dynamics in a recombining parasite population.  Instead of attempting to construct a phylogenetic tree, we imagine a genomic transmission graph onto which we can map the lineages of different loci in the genome - we call this the genomic transmission graph.  This allows for superinfection and recombination because lineages at different loci can take different pathways through the graph.  The challenge is then to define the essential parameters of the graph and to understand how they are related to genetic variation.</p>
+<p>To understand the scientific concepts it is a good idea to work through the sections in this order:</p>
+<p>1 <a class="reference internal" href="basic-model.html"><span class="doc std std-doc">The basic model</span></a>
+1 <a class="reference internal" href="coalescence-time-basic.html"><span class="doc std std-doc">Time to coalescence</span></a>
+1 <a class="reference internal" href="nucleotide-diversity.html"><span class="doc std std-doc">Nucleotide diversity</span></a>
+1 <a class="reference internal" href="haplotype-homozygosity-2cM.html"><span class="doc std std-doc">Haplotype homozygosity</span></a>
+1 <a class="reference internal" href="migration-simple.html"><span class="doc std std-doc">Effect of migration</span></a>
+1 <a class="reference internal" href="fws-compare-methods.html"><span class="doc std std-doc">Rate of superinfection</span></a></p>
 <div class="toctree-wrapper compound">
 </div>
 </section>

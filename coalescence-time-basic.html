@@ -497,7 +497,7 @@ title="Print to PDF"
 <li><p>COALESCED</p></li>
 </ul>
 <p>With the genomic transmission graph, we can work out a <a class="reference external" href="https://d-kwiat.github.io/gtg/transition-probability.html">matrix of transition probabilities between these three states</a>.  Using this we can perform a Markov chain simulation that gives us the probability distribution of time to coalescence.</p>
-<p><code class="docutils literal notranslate"><span class="pre">coalestr</span></code> has a <a class="reference external" href="https://d-kwiat.github.io/gtg/get-coalescent.html"><code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code> function</a> that gives the probability distribution of coalescence time in a few lines of code, but here we will work it out from scratch to see the various steps involved.</p>
+<p><code class="docutils literal notranslate"><span class="pre">coalestr</span></code> has a <a class="reference external" href="https://d-kwiat.github.io/gtg/get-coalescent.html"><code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code> function</a> that gives us the probability distribution of coalescence time in a few lines of code, but here we will work it out from scratch to see the various steps involved.</p>
 <p>We start by specifying the transmission parameters and the duration of the simulation</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">N</span></code> is the effective number of hosts</p></li>
@@ -512,7 +512,7 @@ title="Print to PDF"
 <p>We create arrays to record the state of two lineages as we progress back in time</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">beho_lineage</span></code> and <code class="docutils literal notranslate"><span class="pre">wiho_lineage</span></code> are two-dimensional arrays</p></li>
-<li><p>they record a probability vector [Pr{separated}, Pr{cotransmitted}, Pr{coalesced}] for each time point</p></li>
+<li><p>they record a probability vector [Pr{SEPARATED}, Pr{COTRANSMITTED}, Pr{COALESCED}] for each time point</p></li>
 <li><p>these are <em>backwards time series</em> arrays, meaning that the most recent generation appears as the first item on the time axis.</p></li>
 </ul>
 <p>We specify the initial conditions of the simulation</p>
