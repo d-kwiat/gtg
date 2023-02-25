@@ -2,7 +2,7 @@
 
 Imagine a directed acyclic graph in which the nodes represent hosts and edges represent vectors, as illustrated below. The graph is plotted on an axis of time and we make the simplifying assumption that a host exists at a discrete point in time. We call this the genomic transmission graph.
 
-![logo](logo.png)
+![transmission-graph](transmission-graph.png)
 
 When thinking about the transmission of parasites from host to host, we are moving forward in time so we follow the edges of the graph from left to right.  When thinking about the ancestry of a parasite, we are going back in time and therefore we follow the edges from right to left. 
 
