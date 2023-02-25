@@ -50,6 +50,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Haplotype homozygosity" href="haplotype-homozygosity-2cM.html" />
@@ -490,11 +492,9 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="nucleotide-diversity">
 <h1>Nucleotide diversity<a class="headerlink" href="#nucleotide-diversity" title="Permalink to this headline">#</a></h1>
-<ul class="simple">
-<li><p>My Drive/GitHub/transmission_ms/diversity_global.ipynb</p></li>
-<li><p>checked that it is working 6 Nov 2022</p></li>
-<li><p>from 211012_diversity_global_population.ipynb</p></li>
-</ul>
+<p>We define nucleotide diversity (<span class="math notranslate nohighlight">\(\pi\)</span>) as the probability that two alleles are heterozygous at a random nucleotide position in the genome.</p>
+<p><img alt="nucleotide-diversity" src="_images/nucleotide-diversity.png" /></p>
+<p>where <strong>T</strong> is a random variable representing time to coalescence and <span class="math notranslate nohighlight">\(\mu\)</span> is the single nucleotide substitution rate. We obtain the probability distribution of <strong>T</strong> by running <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code>. From empirical observations we estimate that <span class="math notranslate nohighlight">\(\mu = 1.1 \times 10^{-8}\)</span> per generation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">coalestr</span> <span class="k">as</span> <span class="nn">cs</span>
