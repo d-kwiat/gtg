@@ -1,5 +1,7 @@
 # Underlying concepts
 
+![superinfection](superinfection.png).
+
 Imagine a directed acyclic graph in which the nodes represent hosts and edges represent vectors, as illustrated below. The graph is plotted on an axis of time and we make the simplifying assumption that a host exists at a discrete point in time. We call this the genomic transmission graph.
 
 ![transmission-graph](transmission-graph.png)
@@ -14,11 +16,9 @@ We define a *lineage* as a path through the transmission graph that we define by
 
 An individual parasite could have many different lineages each following a unique path through the graph because whenever transmission chains cross, the paths of different lineages can diverge.
 
-![superinfection](superinfection.png).
+These simple concepts suggest a logical framework for thinking about how genetic variation is related to transmission dynamics in a recombining parasite population.  Instead of attempting to construct a phylogenetic tree, we imagine a genomic transmission graph onto which we can map the lineages of different loci in the genome. This allows for superinfection and recombination because lineages at different loci can take different pathways through the graph.  
 
-These simple concepts suggest a logical framework for thinking about how genetic variation is related to transmission dynamics in a recombining parasite population.  Instead of attempting to construct a phylogenetic tree, we imagine a genomic transmission graph onto which we can map the lineages of different loci in the genome - we call this the genomic transmission graph.  This allows for superinfection and recombination because lineages at different loci can take different pathways through the graph.  The challenge is then to define the essential parameters of the graph and to understand how they are related to genetic variation.  
-
-To understand the scientific concepts it is a good idea to work through the sections in this order:
+The challenge is then to define the essential parameters of the graph and to understand how they are related to genetic variation.  To understand the scientific concepts it is a good idea to work through the sections in this order:
 
 1. [The basic model](basic-model.md)
 1. [Time to coalescence](coalescence-time-basic.ipynb)
