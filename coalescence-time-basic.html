@@ -490,12 +490,13 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="time-to-coalescence">
 <h1>Time to coalescence<a class="headerlink" href="#time-to-coalescence" title="Permalink to this headline">#</a></h1>
+<p>If we sample two alleles at a point locus and follow their lineages back in time through the transmission graph, at any point in time the system must be in one of three states</p>
 <ul class="simple">
-<li><p>My Drive/GitHub/transmission_ms/coalescence_time_basic.ipynb</p></li>
-<li><p>Checked in working order 28 Nov 2022</p></li>
-<li><p>From 221029_Tc_distribution.ipynb</p></li>
+<li><p>SEPARATED - the two lineages are in different hosts</p></li>
+<li><p>COTRANSMITTED - the two lineages are in the same host</p></li>
+<li><p>COALESCED</p></li>
 </ul>
-<p>This code computes the probability distribution time to coalescence of two alleles.</p>
+<p>We can work out a <a class="reference internal" href="transition-probability.html"><span class="doc std std-doc">matrix of transition probabilities between these three states</span></a> and from this we can perform a Markov chain simulation that gives us the probability distribution time to coalescence.</p>
 <ul class="simple">
 <li><p>We sample two alleles and follow their lineages back in time for <code class="docutils literal notranslate"><span class="pre">tsim</span></code> generations.</p></li>
 </ul>

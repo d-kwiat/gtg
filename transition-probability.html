@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>How to use this book &#8212; Genomic transmission graph</title>
+    <title>Transition probabilities for the three possible states of two lineages. &#8212; Genomic transmission graph</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,8 +52,6 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Using Google Colab" href="using-google-colab.html" />
-    <link rel="prev" title="Welcome" href="index.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -113,12 +111,12 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active has-children">
-  <a class="current reference internal" href="#">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="how-to-use-this-book.html">
    How to use this book
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
    <i class="fas fa-chevron-down">
    </i>
@@ -352,7 +350,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/d-kwiat/gtg/issues/new?title=Issue%20on%20page%20%2Fhow-to-use-this-book.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/d-kwiat/gtg/issues/new?title=Issue%20on%20page%20%2Ftransition-probability.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -380,7 +378,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="_sources/how-to-use-this-book.md"
+        <a href="_sources/transition-probability.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -429,7 +427,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>How to use this book</h1>
+                <h1>Transition probabilities for the three possible states of two lineages.</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -441,16 +439,11 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="how-to-use-this-book">
-<h1>How to use this book<a class="headerlink" href="#how-to-use-this-book" title="Permalink to this headline">#</a></h1>
-<p>You can browse this book just like any other website. Note that we occasionally use population genetic terminology in a very specific way - which sometimes differs from common usage - so it may help to start by <a class="reference internal" href="glossary.html"><span class="doc std std-doc">looking through the glossary</span></a>.</p>
-<p>Many of the pages are Jupyter notebooks containing Python code plus some explanatory text.  You can run the code yourself using the interactive cloud computing service provided by Google Colab. Follow this link to learn <a class="reference internal" href="using-google-colab.html"><span class="doc std std-doc">how to use Google Colab</span></a> - it is remarkably easy.</p>
-<p>Even if you’re new to Python you can try out small modifications to the code, e.g. to vary the parameter settings of a worked example. Don’t worry about making an error, if you get into trouble you can simply refresh the web page and start again.</p>
-<p>If you want to be more adventurous you can
-<a class="reference internal" href="coalestr-features.html"><span class="doc std std-doc">learn how to use <code class="docutils literal notranslate"><span class="pre">coalestr</span></code></span></a>, a Python module that underpins most the worked examples on this website.  This will allow you to <a class="reference internal" href="epidemiological-scenarios.html"><span class="doc std std-doc">simulate your own epidemiological scenarios</span></a>.</p>
-<p>If you want to use <code class="docutils literal notranslate"><span class="pre">coalestr</span></code> for your own applications outside this website, you can <a class="reference external" href="https://pypi.org/project/coalestr/">install it from PyPI</a> or <a class="reference external" href="https://github.com/d-kwiat/gtg/blob/main/coalestr.py">view the source code on GitHub</a>.</p>
-<div class="toctree-wrapper compound">
-</div>
+  <section id="transition-probabilities-for-the-three-possible-states-of-two-lineages">
+<h1>Transition probabilities for the three possible states of two lineages.<a class="headerlink" href="#transition-probabilities-for-the-three-possible-states-of-two-lineages" title="Permalink to this headline">#</a></h1>
+<p><img alt="transition-probability" src="_images/transition-probability.png" /></p>
+<p>At any point in time, two lineages must be (1) separated or (2) cotransmitted or (3) coalesced. Row <em>i</em> column <em>j</em> of the table gives
+the probability that lineages in state <em>i</em> will transition to state <em>j</em> if we go back a single generation. By definition, the probabilities in each row sum to 1.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -480,20 +473,6 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="index.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Welcome</p>
-        </div>
-    </a>
-    <a class='right-next' id="next-link" href="using-google-colab.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Using Google Colab</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
 </div>
             </footer>
         </div>
