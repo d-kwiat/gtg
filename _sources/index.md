@@ -1,7 +1,22 @@
 # Welcome
 
-This website introduces the concept of a *genomic transmission graph* for modelling parasite transmission dynamics and population genetics.  It accompanies the paper on this topic in [Wellcome Open Research](https://wellcomeopenresearch.org/articles/8-22).
+This website lets you explore the [concept of a genomic transmission graph](underlying-concepts.md) for modelling parasite transmission dynamics and population genetics.  It accompanies the paper on this topic in [Wellcome Open Research](https://wellcomeopenresearch.org/articles/8-22).
 
-We will [explore the underlying concepts](underlying-concepts.md) of the genomic transmission graph.  Before getting started, take a quick look at [how to use this book](how-to-use-this-book.md) as it contains worked examples with Python code that you can run in the cloud without leaving this website.
+Before getting started, take a quick look at [how to use this book](how-to-use-this-book.md) as it contains worked examples with Python code that you can run in the cloud for yourself even if you are new to programming.
 
-If you want to take a deeper dive, learn [how to use `coalestr`](coalestr-features.md), a Python module designed for rapid simulation of population genetic scenarios using the genomic transmission graph.  Once you are familiar with `coalestr` you can make your own toy models of different [epidemiological scenarios](epidemiological-scenarios.md).
+To understand the scientific concepts it is a good idea to work through the sections in this order:
+
+1. [The basic model](basic-model.md)
+1. [Time to coalescence](coalescence-time-basic.ipynb)
+1. [Nucleotide diversity](nucleotide-diversity.ipynb)
+1. [Haplotype homozygosity](haplotype-homozygosity-2cM.ipynb)
+1. [Effect of migration](migration-simple.ipynb)
+1. [Rate of superinfection](fws-compare-methods.ipynb)
+1. [Epidemiological scenarios](epidemiological-scenarios.md)
+
+Most of the worked examples use the Python package `coalestr` which works like this:
+
+1. [First you create a `Population`](population-class.ipynb)
+1. [Then you run `get_coalescent`](get-coalescent.ipynb)
+1. [Then you run `get_diversity`](get-diversity.ipynb)
+1. [To analyse a time series you specify observation times](time-series.ipynb)

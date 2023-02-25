@@ -442,9 +442,25 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="welcome">
 <h1>Welcome<a class="headerlink" href="#welcome" title="Permalink to this headline">#</a></h1>
-<p>This website introduces the concept of a <em>genomic transmission graph</em> for modelling parasite transmission dynamics and population genetics.  It accompanies the paper on this topic in <a class="reference external" href="https://wellcomeopenresearch.org/articles/8-22">Wellcome Open Research</a>.</p>
-<p>We will <a class="reference internal" href="underlying-concepts.html"><span class="doc std std-doc">explore the underlying concepts</span></a> of the genomic transmission graph.  Before getting started, take a quick look at <a class="reference internal" href="how-to-use-this-book.html"><span class="doc std std-doc">how to use this book</span></a> as it contains worked examples with Python code that you can run in the cloud without leaving this website.</p>
-<p>If you want to take a deeper dive, learn <a class="reference internal" href="coalestr-features.html"><span class="doc std std-doc">how to use <code class="docutils literal notranslate"><span class="pre">coalestr</span></code></span></a>, a Python module designed for rapid simulation of population genetic scenarios using the genomic transmission graph.  Once you are familiar with <code class="docutils literal notranslate"><span class="pre">coalestr</span></code> you can make your own toy models of different <a class="reference internal" href="epidemiological-scenarios.html"><span class="doc std std-doc">epidemiological scenarios</span></a>.</p>
+<p>This website lets you explore the <a class="reference internal" href="underlying-concepts.html"><span class="doc std std-doc">concept of a genomic transmission graph</span></a> for modelling parasite transmission dynamics and population genetics.  It accompanies the paper on this topic in <a class="reference external" href="https://wellcomeopenresearch.org/articles/8-22">Wellcome Open Research</a>.</p>
+<p>Before getting started, take a quick look at <a class="reference internal" href="how-to-use-this-book.html"><span class="doc std std-doc">how to use this book</span></a> as it contains worked examples with Python code that you can run in the cloud for yourself even if you are new to programming.</p>
+<p>To understand the scientific concepts it is a good idea to work through the sections in this order:</p>
+<ol class="simple">
+<li><p><a class="reference internal" href="basic-model.html"><span class="doc std std-doc">The basic model</span></a></p></li>
+<li><p><a class="reference internal" href="coalescence-time-basic.html"><span class="doc std std-doc">Time to coalescence</span></a></p></li>
+<li><p><a class="reference internal" href="nucleotide-diversity.html"><span class="doc std std-doc">Nucleotide diversity</span></a></p></li>
+<li><p><a class="reference internal" href="haplotype-homozygosity-2cM.html"><span class="doc std std-doc">Haplotype homozygosity</span></a></p></li>
+<li><p><a class="reference internal" href="migration-simple.html"><span class="doc std std-doc">Effect of migration</span></a></p></li>
+<li><p><a class="reference internal" href="fws-compare-methods.html"><span class="doc std std-doc">Rate of superinfection</span></a></p></li>
+<li><p><a class="reference internal" href="epidemiological-scenarios.html"><span class="doc std std-doc">Epidemiological scenarios</span></a></p></li>
+</ol>
+<p>Most of the worked examples use the Python package <code class="docutils literal notranslate"><span class="pre">coalestr</span></code> which works like this:</p>
+<ol class="simple">
+<li><p><a class="reference internal" href="population-class.html"><span class="doc std std-doc">First you create a <code class="docutils literal notranslate"><span class="pre">Population</span></code></span></a></p></li>
+<li><p><a class="reference internal" href="get-coalescent.html"><span class="doc std std-doc">Then you run <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code></span></a></p></li>
+<li><p><a class="reference internal" href="get-diversity.html"><span class="doc std std-doc">Then you run <code class="docutils literal notranslate"><span class="pre">get_diversity</span></code></span></a></p></li>
+<li><p><a class="reference internal" href="time-series.html"><span class="doc std std-doc">To analyse a time series you specify observation times</span></a></p></li>
+</ol>
 <div class="toctree-wrapper compound">
 </div>
 </section>
