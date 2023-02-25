@@ -6,6 +6,7 @@ Before getting started, take a quick look at [how to use this book](how-to-use-t
 
 To understand the scientific concepts it is a good idea to work through the sections in this order:
 
+1. [Underlying concepts](underlying-concepts.md)
 1. [The basic model](basic-model.md)
 1. [Time to coalescence](coalescence-time-basic.ipynb)
 1. [Nucleotide diversity](nucleotide-diversity.ipynb)
