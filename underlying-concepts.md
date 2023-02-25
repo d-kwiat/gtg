@@ -1,6 +1,9 @@
 # Underlying concepts
 
+The genetic structure of a parasite population is shaped by its transmission dynamics but superinfection and recombination make this relationship complex and hard to analyse.  Superinfection means that a host acquires infection from multiple independent sources, and therefore carries a mixture of parasite genotypes with different ancestral histories, which may then be cotransmitted to other hosts.  Recombination within genetically mixed infections causes different regions of the genome to have different genealogies, as shown in the figure below, and this presents an extremely complex problem for genetic inference.
+
 ![superinfection](superinfection.png).
+[See figure caption](superinfection.md)
 
 Imagine a directed acyclic graph in which the nodes represent hosts and edges represent vectors, as illustrated below. The graph is plotted on an axis of time and we make the simplifying assumption that a host exists at a discrete point in time. We call this the genomic transmission graph.
 
