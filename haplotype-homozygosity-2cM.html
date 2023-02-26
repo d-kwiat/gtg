@@ -50,6 +50,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Effects of migration" href="migration-simple.html" />
@@ -490,16 +492,85 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="haplotype-homozygosity">
 <h1>Haplotype homozygosity<a class="headerlink" href="#haplotype-homozygosity" title="Permalink to this headline">#</a></h1>
-<ul class="simple">
-<li><p>My Drive/GitHub/transmission_ms/haplotype_homozygosity_27kb.ipynb</p></li>
-<li><p>Started 7 Nov 2022</p></li>
-<li><p>From 210823_haplotype_homozygosity.ipynb</p></li>
-</ul>
-<p>We calculate and plot the variation of homozygosity for a 27kb locus for different sets of transmission parameters</p>
+<p>We define haplotype homozygosity (<span class="math notranslate nohighlight">\(G_L\)</span>) as the probability that two alleles are homozygous at a haplotype locus of length <span class="math notranslate nohighlight">\(L\)</span>.  The expectation of haplotype homozygosity is given by</p>
+<p><img alt="haplotype-homozygosity-equation" src="_images/haplotype-homozygosity-equation.png" /></p>
+<p>where <strong>T</strong> is a random variable representing time to coalescence, <span class="math notranslate nohighlight">\(v\)</span> is the locus scaled mutation rate, <span class="math notranslate nohighlight">\(r\)</span> is the locus scaled recombination rate and <span class="math notranslate nohighlight">\(\phi_t\)</span> is the effective recombination parameter. From empirical observations we estimate that <span class="math notranslate nohighlight">\(r = 7.4 \times 10^{−4}\)</span> per kilobase per generation and <span class="math notranslate nohighlight">\(v = 9 \times 10^{−5}\)</span> per kilobase per generation.</p>
+<p>We evaluate the above expression by using <code class="docutils literal notranslate"><span class="pre">coalestr</span></code> as follows:</p>
+<ol class="simple">
+<li><p>We <a class="reference external" href="https://d-kwiat.github.io/gtg/population-class.html">create a <code class="docutils literal notranslate"><span class="pre">Population</span></code></a> by specifying its transmission history.</p></li>
+<li><p>We obtain the probability distribution of <strong>T</strong> <a class="reference external" href="https://d-kwiat.github.io/gtg/get-coalescent.html">using <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code></a>.</p></li>
+<li><p>We evaluate the above summation series <a class="reference external" href="https://d-kwiat.github.io/gtg/get-diversity.html">using <code class="docutils literal notranslate"><span class="pre">get_diversity</span></code></a>.</p></li>
+</ol>
+<p>This is very similar to the <a class="reference external" href="https://d-kwiat.github.io/gtg/nucleotide-diversity.html">approach used to obtain nucleotide diversity</a> with one important difference.  We also need to evaluate <span class="math notranslate nohighlight">\(\phi_t\)</span> which is given by</p>
+<p><img alt="phi-t" src="_images/phi-t.png" /></p>
+<p>where <span class="math notranslate nohighlight">\(H_W\)</span> is the mean level of within-host heterozygosity in the population at time <span class="math notranslate nohighlight">\(t\)</span>, and <span class="math notranslate nohighlight">\(f\)</span> is a factor that we use to correct for mating bias and other causes of non-effective recombination.</p>
+<p>This means that if we wish to estimate haplotype homozygosity at the present time, we must estimate <span class="math notranslate nohighlight">\(H_W\)</span> at various times prior to the present so that we can estimate <span class="math notranslate nohighlight">\(\phi_t\)</span>.</p>
+<p>We do this by specifying multiple <em>observation times</em> prior to the present.  We proceed forwards in time through the transmission graph, pausing at each observation time point to sample two alleles and run a backwards-in-time coalescent simulation that gives us <span class="math notranslate nohighlight">\(H_W\)</span>.</p>
+<p>By default we calculate haplotype homozygosity for a locus of 27 kilobases which is equivalent to 2 centimorgans.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">coalestr</span> <span class="k">as</span> <span class="nn">cs</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>coalestr
+<span class="kn">from</span> <span class="nn">coalestr</span> <span class="kn">import</span> <span class="n">cs</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We create a history of transmission parameters </span>
+<span class="c1"># which in this case are constant over time</span>
+<span class="c1"># my_history = [[t_sim, N, Q, X, M]]</span>
+<span class="c1">#    t_sim = duration of simulation</span>
+<span class="c1">#    N = effective number of hosts (Nh)</span>
+<span class="c1">#    Q = quantum of transmission</span>
+<span class="c1">#    X = crossing rate of transmission chains (chi)</span>
+<span class="c1">#    M = number of migrant hosts (Nm)</span>
+
+<span class="n">my_history</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
+<span class="n">my_population</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">Population</span><span class="p">(</span><span class="n">my_history</span><span class="p">)</span>
+
+<span class="c1"># We specify observation times in backwards time</span>
+<span class="c1"># i.e. as the number of generations before the present</span>
+<span class="n">observation_times</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">my_population</span><span class="o">.</span><span class="n">get_coalescent</span><span class="p">(</span><span class="n">observe</span> <span class="o">=</span> <span class="n">observation_times</span><span class="p">)</span>
+<span class="n">my_population</span><span class="o">.</span><span class="n">get_diversity</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    Events captured.   Mean coalescence time
+                      beho      wiho        beho     wiho
+        0              99.9     100.0      1349.3   1057.1
+     1000              99.9      99.9      1342.9   1052.1
+     2000              99.7      99.8      1330.9   1042.7
+     3000              99.4      99.6      1308.8   1025.4
+     4000              98.8      99.1      1268.7    994.0
+     5000              97.5      98.0      1197.7    938.4
+     6000              94.8      95.9      1076.6    843.6
+     7000              89.1      91.4       880.3    689.9
+     8000              77.1      82.1       588.9    461.7
+     9000              52.1      62.5       229.1    180.0
+Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb locus
+                      beho       wiho           beho       wiho
+     9000           5.05e-06   3.97e-06       5.25e-02   2.50e-01
+     8000           1.30e-05   1.02e-05       1.90e-02   2.11e-01
+     7000           1.94e-05   1.52e-05       1.81e-02   2.10e-01
+     6000           2.37e-05   1.86e-05       1.81e-02   2.10e-01
+     5000           2.64e-05   2.06e-05       1.81e-02   2.10e-01
+     4000           2.79e-05   2.19e-05       1.81e-02   2.10e-01
+     3000           2.88e-05   2.26e-05       1.81e-02   2.10e-01
+     2000           2.93e-05   2.29e-05       1.81e-02   2.10e-01
+     1000           2.95e-05   2.31e-05       1.81e-02   2.10e-01
+        0           2.97e-05   2.33e-05       1.81e-02   2.10e-01
 </pre></div>
 </div>
 </div>
@@ -547,7 +618,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/haplotype-homozygosity-2cM_2_0.png" src="_images/haplotype-homozygosity-2cM_2_0.png" />
+<img alt="_images/haplotype-homozygosity-2cM_4_0.png" src="_images/haplotype-homozygosity-2cM_4_0.png" />
 </div>
 </div>
 </section>
