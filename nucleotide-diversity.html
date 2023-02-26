@@ -518,11 +518,13 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We create a history of [t_sim, N, Q, X] where</span>
-<span class="c1"># t_sim = duration of simulation</span>
-<span class="c1"># N = effective number of hosts (Nh)</span>
-<span class="c1"># Q = quantum of transmission</span>
-<span class="c1"># X = crossing rate of transmission chains (chi)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We create a history of transmission parameters which in this case are constant over time</span>
+<span class="c1"># myhistory = [t_sim, N, Q, X, M]</span>
+<span class="c1">#    t_sim = duration of simulation</span>
+<span class="c1">#    N = effective number of hosts (Nh)</span>
+<span class="c1">#    Q = quantum of transmission</span>
+<span class="c1">#    X = crossing rate of transmission chains (chi)</span>
+<span class="c1">#    M = number of migrant hosts (Nm)</span>
 
 <span class="n">my_history</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">100000</span><span class="p">,</span> <span class="mi">18764</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
 <span class="n">my_population</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">Population</span><span class="p">(</span><span class="n">my_history</span><span class="p">)</span>
@@ -542,6 +544,19 @@ Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb loc
 </div>
 </div>
 </div>
+<p>This tells us that for between-host (<em>beho</em>) comparisons, i.e. sampling from different hosts:</p>
+<ul class="simple">
+<li><p>Our simulation captures 99.5% of coalescent events</p></li>
+<li><p>Mean coalescence time is 18188.4 generations</p></li>
+<li><p>Nucleotide diversity (aka SNP heterozygosity) is <span class="math notranslate nohighlight">\(4 \times 10^{-4}\)</span></p></li>
+</ul>
+<p>For within-host (<em>wiho</em>) comparisons, i.e. sampling from the same host:</p>
+<ul class="simple">
+<li><p>Our simulation captures 100% of coalescent events</p></li>
+<li><p>Mean coalescence time is 1 generation</p></li>
+<li><p>Nucleotide diversity (aka SNP heterozygosity) is <span class="math notranslate nohighlight">\(2.2 \times 10^{-8}\)</span></p></li>
+</ul>
+<p>Haplotype homozygosity <a class="reference external" href="https://d-kwiat.github.io/gtg/haplotype-homozygosity.html">is discussed elsewhere</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_history</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">100000</span><span class="p">,</span> <span class="mi">18754</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
