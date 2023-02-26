@@ -2,7 +2,7 @@
 
 ![idealised-tg](idealised-tg.png)
 
-Our idealised model can be represented by a graph in which the nodes (circles) represent hosts and the edges (grey lines) represent vectors.  Parasites are transmitted from host to host in non-overlapping generations. We call this the *genomic transmission graph*.
+Our basic model is an idealised form of the [genomic transmission graph](transmission-graph.md).  We make the simplifying assumption that parasites are transmitted from host to host in non-overlapping generations. 
 
 In each generation there are $N_h$ hosts. Each vector transmits $Q$ alleles to the recipient host.  $\chi$ is the proportion of hosts that are superinfected, denoted in the figure by red nodes.
 
