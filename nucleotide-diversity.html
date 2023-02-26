@@ -511,24 +511,23 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">constant_population</span> <span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
-    <span class="n">pop</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">Population</span><span class="p">(</span><span class="n">history</span> <span class="o">=</span> <span class="p">[[</span><span class="n">duration</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
-    <span class="n">pop</span><span class="o">.</span><span class="n">get_coalescent</span><span class="p">()</span>
-    <span class="n">pop</span><span class="o">.</span><span class="n">get_diversity</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">coalestr</span> <span class="k">as</span> <span class="nn">cs</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">duration</span> <span class="o">=</span> <span class="mi">100000</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">constant_population</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="mi">18764</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We create a history of [t_sim, N, Q, X] where</span>
+<span class="c1"># t_sim = duration of simulation</span>
+<span class="c1"># N = effective number of hosts (Nh)</span>
+<span class="c1"># Q = quantum of transmission</span>
+<span class="c1"># X = crossing rate of transmission chains (chi)</span>
+
+<span class="n">my_history</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">100000</span><span class="p">,</span> <span class="mi">18764</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
+<span class="n">my_population</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">Population</span><span class="p">(</span><span class="n">my_history</span><span class="p">)</span>
+<span class="n">my_population</span><span class="o">.</span><span class="n">get_coalescent</span><span class="p">()</span>
+<span class="n">my_population</span><span class="o">.</span><span class="n">get_diversity</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -545,14 +544,17 @@ Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb loc
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">constant_population</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="mi">18754</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_history</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">100000</span><span class="p">,</span> <span class="mi">18754</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
+<span class="n">my_population</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">Population</span><span class="p">(</span><span class="n">my_history</span><span class="p">)</span>
+<span class="n">my_population</span><span class="o">.</span><span class="n">get_coalescent</span><span class="p">()</span>
+<span class="n">my_population</span><span class="o">.</span><span class="n">get_diversity</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    Events captured.   Mean coalescence time
                       beho      wiho        beho     wiho
-        0              99.5     100.0     18188.8     10.0
+        0              99.5     100.0     18197.1     10.0
 Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb locus
                       beho       wiho           beho       wiho
         0           4.00e-04   2.20e-07       3.67e-03   8.85e-01
@@ -563,6 +565,10 @@ Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb loc
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">constant_population</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="mi">18754</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">my_history</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">100000</span><span class="p">,</span> <span class="mi">18764</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
+<span class="n">my_population</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">Population</span><span class="p">(</span><span class="n">my_history</span><span class="p">)</span>
+<span class="n">my_population</span><span class="o">.</span><span class="n">get_coalescent</span><span class="p">()</span>
+<span class="n">my_population</span><span class="o">.</span><span class="n">get_diversity</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
