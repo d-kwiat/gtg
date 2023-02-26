@@ -557,19 +557,27 @@ Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb loc
 <li><p>Nucleotide diversity (aka SNP heterozygosity) is <span class="math notranslate nohighlight">\(2.2 \times 10^{-8}\)</span></p></li>
 </ul>
 <p>Haplotype homozygosity <a class="reference external" href="https://d-kwiat.github.io/gtg/haplotype-homozygosity-2cM.html">is discussed elsewhere</a>.</p>
+<p>In the following cells we will look at other combinations of transmission parameters that give us the same level of between-host nucleotide diversity, i.e. <span class="math notranslate nohighlight">\(\pi = 4 \times 10^{-4}\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_history</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">100000</span><span class="p">,</span> <span class="mi">18754</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
-<span class="n">my_population</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">Population</span><span class="p">(</span><span class="n">my_history</span><span class="p">)</span>
-<span class="n">my_population</span><span class="o">.</span><span class="n">get_coalescent</span><span class="p">()</span>
-<span class="n">my_population</span><span class="o">.</span><span class="n">get_diversity</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_pop</span> <span class="p">(</span><span class="n">t_sim</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">M</span><span class="p">):</span>
+    <span class="n">pop</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">Population</span><span class="p">(</span><span class="n">history</span> <span class="o">=</span> <span class="p">[[</span><span class="n">t_sim</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">M</span><span class="p">]])</span>
+    <span class="n">pop</span><span class="o">.</span><span class="n">get_coalescent</span><span class="p">()</span>
+    <span class="n">pop</span><span class="o">.</span><span class="n">get_diversity</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_pop</span><span class="p">(</span><span class="mi">100000</span><span class="p">,</span> <span class="mi">18754</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    Events captured.   Mean coalescence time
                       beho      wiho        beho     wiho
-        0              99.5     100.0     18197.1     10.0
+        0              99.5     100.0     18188.8     10.0
 Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb locus
                       beho       wiho           beho       wiho
         0           4.00e-04   2.20e-07       3.67e-03   8.85e-01
@@ -579,11 +587,7 @@ Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb loc
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">constant_population</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="mi">18754</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
-<span class="n">my_history</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">100000</span><span class="p">,</span> <span class="mi">18764</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
-<span class="n">my_population</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">Population</span><span class="p">(</span><span class="n">my_history</span><span class="p">)</span>
-<span class="n">my_population</span><span class="o">.</span><span class="n">get_coalescent</span><span class="p">()</span>
-<span class="n">my_population</span><span class="o">.</span><span class="n">get_diversity</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_pop</span><span class="p">(</span><span class="mi">100000</span><span class="p">,</span> <span class="mi">18754</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -600,7 +604,7 @@ Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb loc
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">constant_population</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="mi">5568</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_pop</span><span class="p">(</span><span class="mi">100000</span><span class="p">,</span> <span class="mi">5568</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -617,24 +621,7 @@ Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb loc
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">constant_population</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="mi">18764</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    Events captured.   Mean coalescence time
-                      beho      wiho        beho     wiho
-        0              99.5      99.5     18188.4  18189.3
-Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb locus
-                      beho       wiho           beho       wiho
-        0           4.00e-04   4.00e-04       4.09e-03   4.04e-03
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">constant_population</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="mi">3269</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_pop</span><span class="p">(</span><span class="mi">100000</span><span class="p">,</span> <span class="mi">3269</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
