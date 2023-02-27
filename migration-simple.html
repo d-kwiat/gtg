@@ -492,10 +492,9 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="effects-of-migration">
 <h1>Effects of migration<a class="headerlink" href="#effects-of-migration" title="Permalink to this headline">#</a></h1>
-<p>The genomic transmission graph can be broken down into many local subpopulations that are connected with each other by migration and together make up a metapopulation.  Migration from the metapopulation into a local subpopulation can have a profound effect on local population genetics. With <code class="docutils literal notranslate"><span class="pre">coalestr</span></code> it is possible to construct multiple levels of a hierarchical population structure.</p>
-<p>Let <span class="math notranslate nohighlight">\(m\)</span> be the probability that a host within the local subpopulation acquired their infection from the metapopulation, and let the number of such hosts per generation be <span class="math notranslate nohighlight">\(N_m\)</span> = <span class="math notranslate nohighlight">\(mN_h\)</span>. These migrant hosts could be either immigrants from the metapopulation or local residents who have been travelling outside the local area.</p>
-<p>Methods section ?? describes how we can work out the transmission probability matrix for the subpopulation, shown in table ??, while the transition
-probability matrix of the metapopulation is essentially as described in table ??.</p>
+<p>The genomic transmission graph can be broken down into many local subpopulations that together make up a metapopulation.  Migration from the metapopulation into a local subpopulation can have a profound effect on local population genetics.</p>
+<p>Here we examine a local subpopulation that is embedded within a much larger metapopulation.  <span class="math notranslate nohighlight">\(m\)</span> is the probability that a host within the local subpopulation acquired their infection from the metapopulation, and the number of such hosts per generation is <span class="math notranslate nohighlight">\(N_m\)</span> = <span class="math notranslate nohighlight">\(mN_h\)</span>. These could be immigrants from the metapopulation or local residents who have been travelling outside the local area.</p>
+<p>The table below shows the transmission probability matrix for the subpopulation, while the transition probability matrix of the metapopulation is <a class="reference external" href="https://d-kwiat.github.io/gtg/transition-probability.html">as described for the general population</a>.</p>
 <p><img alt="subpop-matrix" src="_images/subpop-matrix.png" /></p>
 <p><a class="reference external" href="https://d-kwiat.github.io/gtg/subpop-matrix.html">See figure caption</a></p>
 <div class="cell docutils container">
