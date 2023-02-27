@@ -572,6 +572,9 @@ Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb loc
 </div>
 </div>
 </div>
+<p><strong>In the above cell</strong> we see that haplotype homozygosity for a 2cM (27kb) locus is 0.018 between-host (beho) and 0.21 within-host (wiho) at observation time 0.  When we specify observation times for <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code>, these go back in time, so ‘observation time 0’ means the present and ‘observation time 9000’ means 9000 generations before the present.</p>
+<p>Haplotype homozygosity depends on <span class="math notranslate nohighlight">\(\phi_t\)</span>, which in turn depends on <span class="math notranslate nohighlight">\(H_W\)</span>, i.e. within-host (wiho) SNP heterozygosity. The above results for SNP heterozygosity and haplotype homozygosity are unreliable at observation time 9000 because only about half of coalescent events are captured but they subsequently stabilise and 99.9% of coalescent events are captured at observation time 0.</p>
+<p><strong>In the cell below</strong> we estimate <span class="math notranslate nohighlight">\(\gamma\)</span> (haplotype homozygosity of a 2 centimorgan locus) for different values of <code class="docutils literal notranslate"><span class="pre">N</span></code> (effective number of hosts <span class="math notranslate nohighlight">\(N_h\)</span>), <code class="docutils literal notranslate"><span class="pre">Q</span></code> (quantum of transmission <span class="math notranslate nohighlight">\(Q\)</span>) and <code class="docutils literal notranslate"><span class="pre">X</span></code> (crossing rate of transmission chains <span class="math notranslate nohighlight">\(\chi\)</span>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">401</span><span class="p">,</span> <span class="mi">50</span><span class="p">))</span> <span class="o">+</span> <span class="nb">list</span> <span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">1001</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
@@ -615,7 +618,7 @@ Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb loc
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/haplotype-homozygosity-2cM_4_0.png" src="_images/haplotype-homozygosity-2cM_4_0.png" />
+<img alt="_images/haplotype-homozygosity-2cM_5_0.png" src="_images/haplotype-homozygosity-2cM_5_0.png" />
 </div>
 </div>
 </section>
