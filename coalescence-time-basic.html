@@ -497,7 +497,7 @@ title="Print to PDF"
 <li><p>COALESCED</p></li>
 </ul>
 <p>With the genomic transmission graph, we can work out a <a class="reference external" href="https://d-kwiat.github.io/gtg/transition-probability.html">matrix of transition probabilities between these three states</a>.  Using this we can perform a Markov chain simulation that gives us the probability distribution of time to coalescence.</p>
-<p>Here we will work it out from scratch to see the various steps involved. In other worked examples we use the <a class="reference external" href="https://d-kwiat.github.io/gtg/get-coalescent.html"><code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code> function</a> in <code class="docutils literal notranslate"><span class="pre">coalestr</span></code> that gives us the probability distribution of coalescence time in a few lines of code.</p>
+<p>We can use the <a class="reference external" href="https://d-kwiat.github.io/gtg/get-coalescent.html"><code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code> function in <code class="docutils literal notranslate"><span class="pre">coalestr</span></code></a> to get the probability distribution of coalescence time by Markov chain simulation.  However here we will work through the calculations from scratch to see the various steps involved.</p>
 <p>We start by specifying the transmission parameters and the duration of the simulation</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">N</span></code> is the effective number of hosts</p></li>
@@ -509,8 +509,8 @@ title="Print to PDF"
 <p>We create arrays to record the state of two lineages as we progress back in time</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">beho_lineage</span></code> and <code class="docutils literal notranslate"><span class="pre">wiho_lineage</span></code> are two-dimensional arrays that record a probability vector [Pr{SEPARATED}, Pr{COTRANSMITTED}, Pr{COALESCED}] for each time point.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">beho_lineage</span></code> studies <em>between-host variation</em> so we specify that Pr{SEPARATED} = 1 at the start of the simulation (i.e. we sample two alleles from different hosts)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">wiho_lineage</span></code> studies <em>within-host variation</em> so we specify that Pr{COTRANSMITTED} = 1 at the start of the simulation (i.e. we sample two alleles from the same host)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">beho_lineage</span></code> studies <em>between-host variation</em> so we specify that Pr{SEPARATED} = 1 at the start of the simulation, i.e. we sample two alleles from different hosts.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">wiho_lineage</span></code> studies <em>within-host variation</em> so we specify that Pr{COTRANSMITTED} = 1 at the start of the simulation, i.e. we sample two alleles from the same host.</p></li>
 </ul>
 <p>We work out the probability vector for each successive time point by matrix multiplication then we plot the results.</p>
 <p>We create an array called <code class="docutils literal notranslate"><span class="pre">tcdist</span></code> that records the probability of coalescence occurring at each time point, and from this we can calculate the mean time to coalescence.</p>

@@ -18,9 +18,9 @@ Parasites reproduce as they flow along transmission chains, and parasites that a
 
 A *lineage* is a path through the transmission graph that we define by taking an allele at a point locus and tracing its ancestry back in time through the generations ([see glossary](glossary.md)). 
 
-An individual parasite could have many different lineages each following a unique path through the graph because, whenever transmission chains cross, the paths of different lineages can diverge. 
+An individual parasite could have many different lineages each following a unique path back in time because, whenever transmission chains cross, the paths of different lineages can diverge. 
 
-Thus the genomic transmission graph allows for superinfection and recombination because lineages at different loci can take different pathways back in time through the graph.  
+Thus the genomic transmission graph allows for superinfection and recombination because lineages at different loci can take different pathways through the graph.  
 
 Our challenge is to define the essential parameters of the genomic transmission graph and to understand how they are related to genetic variation.  To understand the scientific concepts it is a good idea to work through the sections of this book in the following order:
 
