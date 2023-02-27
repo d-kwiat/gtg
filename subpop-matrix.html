@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Effects of migration &#8212; Genomic transmission graph</title>
+    <title>Transition probabilities for the four possible states of two lineages within a subpopulation. &#8212; Genomic transmission graph</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -50,8 +50,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -313,53 +311,6 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/d-kwiat/gtg/main?urlpath=tree/migration_simple.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
-  
-
-<span class="headerbtn__icon-container">
-  
-    <img src="_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://colab.research.google.com/github/d-kwiat/gtg/blob/main/migration_simple.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Colab"
->
-  
-
-<span class="headerbtn__icon-container">
-  
-    <img src="_static/images/logo_colab.png">
-  </span>
-<span class="headerbtn__text-container">Colab</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -399,7 +350,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/d-kwiat/gtg/issues/new?title=Issue%20on%20page%20%2Fmigration_simple.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/d-kwiat/gtg/issues/new?title=Issue%20on%20page%20%2Fsubpop-matrix.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -427,7 +378,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="_sources/migration_simple.ipynb"
+        <a href="_sources/subpop-matrix.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -438,7 +389,7 @@ title="Download source file"
 <span class="headerbtn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.ipynb</span>
+<span class="headerbtn__text-container">.md</span>
 </a>
 
       </li>
@@ -476,7 +427,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Effects of migration</h1>
+                <h1>Transition probabilities for the four possible states of two lineages within a subpopulation.</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -488,81 +439,10 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="effects-of-migration">
-<h1>Effects of migration<a class="headerlink" href="#effects-of-migration" title="Permalink to this headline">#</a></h1>
-<p>The genomic transmission graph can be broken down into many local subpopulations that are connected with each other by migration and together make up a metapopulation.  Migration from the metapopulation into a local subpopulation can have a profound effect on local population genetics. With <code class="docutils literal notranslate"><span class="pre">coalestr</span></code> it is possible to construct multiple levels of a hierarchical population structure.</p>
-<p>Let <span class="math notranslate nohighlight">\(m\)</span> be the probability that a host within the local subpopulation acquired their infection from the metapopulation, and let the number of such hosts per generation be <span class="math notranslate nohighlight">\(N_m\)</span> = <span class="math notranslate nohighlight">\(mN_h\)</span>. These migrant hosts could be either immigrants from the metapopulation or local residents who have been travelling outside the local area.</p>
-<p>Methods section ?? describes how we can work out the transmission probability matrix for the subpopulation, shown in table ??, while the transition
-probability matrix of the metapopulation is essentially as described in table ??.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="transition-probabilities-for-the-four-possible-states-of-two-lineages-within-a-subpopulation">
+<h1>Transition probabilities for the four possible states of two lineages within a subpopulation.<a class="headerlink" href="#transition-probabilities-for-the-four-possible-states-of-two-lineages-within-a-subpopulation" title="Permalink to this headline">#</a></h1>
 <p><img alt="subpop-matrix" src="_images/subpop-matrix.png" /></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">coalestr</span> <span class="k">as</span> <span class="nn">cs</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define the metapopulation</span>
-
-<span class="n">metapop_history</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">100000</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
-<span class="n">metapop</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">Population</span><span class="p">(</span><span class="n">metapop_history</span><span class="p">)</span>
-<span class="n">metapop</span><span class="o">.</span><span class="n">get_coalescent</span><span class="p">()</span>
-<span class="n">metapop</span><span class="o">.</span><span class="n">get_diversity</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    Events captured.   Mean coalescence time
-                      beho      wiho        beho     wiho
-        0              99.7      99.7     16867.3  15476.3
-Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb locus
-                      beho       wiho           beho       wiho
-        0           3.71e-04   3.40e-04       4.41e-03   8.47e-02
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define the subpopulation</span>
-
-<span class="n">Nm_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span>
-
-<span class="n">duration</span> <span class="o">=</span> <span class="mi">1000</span>
-<span class="n">Nh</span> <span class="o">=</span> <span class="mi">30</span>
-<span class="n">Q</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">X</span> <span class="o">=</span> <span class="mf">0.5</span>
-
-<span class="k">for</span> <span class="n">Nm</span> <span class="ow">in</span> <span class="n">Nm_list</span><span class="p">:</span>
-    <span class="n">subpop_history</span> <span class="o">=</span> <span class="p">[[</span><span class="n">duration</span><span class="p">,</span> <span class="n">Nh</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Nm</span><span class="p">]]</span>
-
-    <span class="n">subpop</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">Population</span><span class="p">(</span><span class="n">subpop_history</span><span class="p">,</span> <span class="n">metapopulation</span> <span class="o">=</span> <span class="n">metapop</span><span class="p">)</span>
-    <span class="n">subpop</span><span class="o">.</span><span class="n">get_coalescent</span><span class="p">(</span><span class="n">show</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
-    <span class="n">subpop</span><span class="o">.</span><span class="n">get_diversity</span><span class="p">(</span><span class="n">show</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
-    <span class="n">beho_snp_het</span> <span class="o">=</span> <span class="n">subpop</span><span class="o">.</span><span class="n">diversity</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">beho_hap_hom</span> <span class="o">=</span> <span class="n">subpop</span><span class="o">.</span><span class="n">diversity</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
-    <span class="n">fst</span> <span class="o">=</span> <span class="n">subpop</span><span class="o">.</span><span class="n">diversity</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;For Nm = </span><span class="si">{0:4.2f}</span><span class="s2">: SNP het = </span><span class="si">{1:.2e}</span><span class="s2">, hap hom = </span><span class="si">{2:4.2f}</span><span class="s2">, Fst = </span><span class="si">{3:4.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-        <span class="n">Nm</span><span class="p">,</span>
-        <span class="n">beho_snp_het</span><span class="p">,</span>
-        <span class="n">beho_hap_hom</span><span class="p">,</span>
-        <span class="n">fst</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>For Nm = 0.00: SNP het = 2.42e-06, hap hom = 0.41, Fst = 0.99
-For Nm = 0.10: SNP het = 1.54e-04, hap hom = 0.32, Fst = 0.59
-For Nm = 1.00: SNP het = 3.26e-04, hap hom = 0.10, Fst = 0.12
-For Nm = 10.00: SNP het = 3.67e-04, hap hom = 0.01, Fst = 0.01
-For Nm = 30.00: SNP het = 3.70e-04, hap hom = 0.01, Fst = 0.00
-</pre></div>
-</div>
-</div>
-</div>
+<p>At any point in time, two lineages must be (1) separated within the subpopulation or (2) cotransmitted within the subpopulation or (3) coalesced within the subpopulation or (4) entered the metapopulation. If the metapopulation is much larger than the subpopulation then we can treat it as an absorbing state. Row i column j of the table gives the probability that lineages in state i will transition to state j if we go back a single generation.</p>
 </section>
 
     <script type="text/x-thebe-config">
