@@ -50,6 +50,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Rates of superinfection" href="fws-compare-methods.html" />
@@ -490,11 +492,12 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="effects-of-migration">
 <h1>Effects of migration<a class="headerlink" href="#effects-of-migration" title="Permalink to this headline">#</a></h1>
-<ul class="simple">
-<li><p>My Drive/GitHub/transmission_ms/migration_simple.ipynb</p></li>
-<li><p>Checked in working order 13 Nov 2022</p></li>
-<li><p>From 211012_migration_Fst.ipynb</p></li>
-</ul>
+<p>The genomic transmission graph can be broken down into many local subpopulations that are connected with each other by migration and together make up a metapopulation.  Migration from the metapopulation into a local subpopulation can have a profound effect on local population genetics. With <code class="docutils literal notranslate"><span class="pre">coalestr</span></code> it is possible to construct multiple levels of a hierarchical population structure.</p>
+<p>Let <span class="math notranslate nohighlight">\(m\)</span> be the probability that a host within the local subpopulation acquired their infection from the metapopulation, and let the number of such hosts per generation be <span class="math notranslate nohighlight">\(N_m\)</span> = <span class="math notranslate nohighlight">\(mN_h\)</span>. These migrant hosts could be either immigrants from the metapopulation or local residents who have been travelling outside the local area.</p>
+<p>Methods section ?? describes how we can work out the transmission probability matrix for the subpopulation, shown in table ??, while the transition
+probability matrix of the metapopulation is essentially as described in table ??.</p>
+<p><img alt="subpop-matrix" src="_images/subpop-matrix.png" /></p>
+<p><a class="reference external" href="https://d-kwiat.github.io/gtg/subpop-matrix.html">See figure caption</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">coalestr</span> <span class="k">as</span> <span class="nn">cs</span>

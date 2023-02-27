@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Effects of migration &#8212; Genomic transmission graph</title>
+    <title>&lt;no title&gt; &#8212; Genomic transmission graph</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -50,8 +50,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -464,23 +462,50 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Effects of migration</h1>
+                <h1><no title></h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -488,14 +513,7 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="effects-of-migration">
-<h1>Effects of migration<a class="headerlink" href="#effects-of-migration" title="Permalink to this headline">#</a></h1>
-<p>The genomic transmission graph can be broken down into many local subpopulations that are connected with each other by migration and together make up a metapopulation.  Migration from the metapopulation into a local subpopulation can have a profound effect on local population genetics. With <code class="docutils literal notranslate"><span class="pre">coalestr</span></code> it is possible to construct multiple levels of a hierarchical population structure.</p>
-<p>Let <span class="math notranslate nohighlight">\(m\)</span> be the probability that a host within the local subpopulation acquired their infection from the metapopulation, and let the number of such hosts per generation be <span class="math notranslate nohighlight">\(N_m\)</span> = <span class="math notranslate nohighlight">\(mN_h\)</span>. These migrant hosts could be either immigrants from the metapopulation or local residents who have been travelling outside the local area.</p>
-<p>Methods section ?? describes how we can work out the transmission probability matrix for the subpopulation, shown in table ??, while the transition
-probability matrix of the metapopulation is essentially as described in table ??.</p>
-<p><img alt="subpop-matrix" src="_images/subpop-matrix.png" /></p>
-<div class="cell docutils container">
+  <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">coalestr</span> <span class="k">as</span> <span class="nn">cs</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -563,7 +581,6 @@ For Nm = 30.00: SNP het = 3.70e-04, hap hom = 0.01, Fst = 0.00
 </div>
 </div>
 </div>
-</section>
 
     <script type="text/x-thebe-config">
     {
