@@ -557,7 +557,7 @@ title="Print to PDF"
 <li><p>COALESCED</p></li>
 </ul>
 <p>With the genomic transmission graph, we can work out a <a class="reference external" href="https://d-kwiat.github.io/gtg/transition-probability.html">matrix of transition probabilities between these three states</a>.  Using this we can perform a Markov chain simulation that gives us the probability distribution of time to coalescence.</p>
-<p>We can use the <a class="reference external" href="https://d-kwiat.github.io/gtg/get-coalescent.html"><code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code> function in <code class="docutils literal notranslate"><span class="pre">coalestr</span></code></a> to get the probability distribution of coalescence time by Markov chain simulation.  However here we will work through the calculations from scratch to see the various steps involved.</p>
+<p>We can use the <a class="reference external" href="https://d-kwiat.github.io/gtg/get-coalescent.html"><code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code> function in <code class="docutils literal notranslate"><span class="pre">coalestr</span></code></a> to get the probability distribution of coalescence time by Markov chain simulation.  We will do this below, but first we will work through the calculations from scratch to see the various steps involved.</p>
 <p>We start by specifying the transmission parameters and the duration of the simulation</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">N</span></code> is the effective number of hosts</p></li>
