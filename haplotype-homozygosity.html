@@ -564,8 +564,8 @@ title="Print to PDF"
 <p>We do this by providing a list (or range) of <em>observation times</em> when we invoke the <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code> function.  This tells <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code> to perform a <a class="reference external" href="https://d-kwiat.github.io/gtg/time-series.html">time series analysis</a> that will give us <span class="math notranslate nohighlight">\(H_W\)</span> and thus <span class="math notranslate nohighlight">\(\phi_t\)</span> at different points in time in our simulation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>coalestr
-<span class="kn">from</span> <span class="nn">coalestr</span> <span class="kn">import</span> <span class="n">cs</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#! pip install coalestr</span>
+<span class="kn">import</span> <span class="nn">coalestr</span> <span class="k">as</span> <span class="nn">cs</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 </pre></div>
 </div>
@@ -678,7 +678,7 @@ Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb loc
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/f22e0f454fac41c464b538b25ad6c0c916b62eb0f1f23edc4264f6a7b0b95b34.png" src="_images/f22e0f454fac41c464b538b25ad6c0c916b62eb0f1f23edc4264f6a7b0b95b34.png" />
+<img alt="_images/cba67151c15ba735b8dda5e7d1841506b07267cd9941465eb750e15a279d8610.png" src="_images/cba67151c15ba735b8dda5e7d1841506b07267cd9941465eb750e15a279d8610.png" />
 </div>
 </div>
 </section>
