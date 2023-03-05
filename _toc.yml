@@ -13,7 +13,7 @@ chapters:
       - file: basic-model
       - file: coalescence-time-basic
       - file: nucleotide-diversity
-      - file: haplotype-homozygosity-2cM
+      - file: haplotype-homozygosity
       - file: migration-simple
       - file: fws-compare-methods
   - file: coalestr-features

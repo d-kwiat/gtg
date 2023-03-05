@@ -27,6 +27,6 @@ Our challenge is to define the essential parameters of the genomic transmission 
 1. [The basic model](basic-model.md)
 1. [Time to coalescence](coalescence-time-basic.ipynb)
 1. [Nucleotide diversity](nucleotide-diversity.ipynb)
-1. [Haplotype homozygosity](haplotype-homozygosity-2cM.ipynb)
+1. [Haplotype homozygosity](haplotype-homozygosity.ipynb)
 1. [Effect of migration](migration-simple.ipynb)
 1. [Rate of superinfection](fws-compare-methods.ipynb)
