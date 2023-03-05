@@ -1,0 +1,785 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Haplotype homozygosity &#8212; Genomic transmission graph</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="_static/styles/bootstrap.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=4ec06e9971c5264fbd345897d5258098f11cc577" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94">
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=8bf782fb4ee92b3d3646425e50f299c4e1fd152d"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'haplotype-homozygosity';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Effects of migration" href="migration-simple.html" />
+    <link rel="prev" title="Nucleotide diversity" href="nucleotide-diversity.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image">
+    <img src="_static/logo.png" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="how-to-use-this-book.html">
+                        How to use this book
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="underlying-concepts.html">
+                        Underlying concepts
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="coalestr-features.html">
+                        How to use coalestr
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="epidemiological-scenarios.html">
+                        Epidemiological scenarios
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="draft-ms.html">
+                        Draft ms files
+                      </a>
+                    </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+        <div class="navbar-end-item navbar-persistent--container">
+          
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+        </div>
+      
+      
+      <div class="navbar-end-item">
+        <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  
+    <div class="navbar-persistent--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+    </div>
+  
+
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="how-to-use-this-book.html">
+                        How to use this book
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="underlying-concepts.html">
+                        Underlying concepts
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="coalestr-features.html">
+                        How to use coalestr
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="epidemiological-scenarios.html">
+                        Epidemiological scenarios
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="draft-ms.html">
+                        Draft ms files
+                      </a>
+                    </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+  <div class="sidebar-start-items sidebar-primary__section">
+    <div class="sidebar-start-items__item">
+  
+
+
+<a class="navbar-brand logo" href="index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image">
+    <img src="_static/logo.png" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    </div>
+    <div class="sidebar-start-items__item">
+<form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+    <div class="sidebar-start-items__item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="how-to-use-this-book.html">How to use this book</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="using-google-colab.html">Using Google Colab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="underlying-concepts.html">Underlying concepts</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="basic-model.html">The basic model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coalescence-time-basic.html">Time to coalescence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nucleotide-diversity.html">Nucleotide diversity</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Haplotype homozygosity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration-simple.html">Effects of migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fws-compare-methods.html">Rates of superinfection</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="coalestr-features.html">How to use <code class="docutils literal notranslate"><span class="pre">coalestr</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="population-class.html">Creating a <code class="docutils literal notranslate"><span class="pre">Population</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="get-coalescent.html">Running <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="get-diversity.html">Running <code class="docutils literal notranslate"><span class="pre">get_diversity</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="time-series.html">Analysing a time series</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="epidemiological-scenarios.html">Epidemiological scenarios</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="species_history.html">Species history</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scenario_1.html">Migration time series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="local_outbreak.html">Modelling a local outbreak</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="draft-ms.html">Draft ms files</a></li>
+</ul>
+
+    </div>
+</nav>
+    </div>
+  </div>
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+  
+  <div id="rtd-footer-container"></div>
+
+      </div>
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        <label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" data-toggle="tooltip" data-placement="right" title="Toggle primary sidebar">
+            <span class="fa-solid fa-bars"></span>
+        </label>
+    </div>
+    <div class="header-article__right">
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      <li><a href="https://colab.research.google.com/github/d-kwiat/gtg/blob/main/haplotype-homozygosity.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</a>
+      
+  </ul>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<div class="dropdown dropdown-repository-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      <li><a href="https://github.com/d-kwiat/gtg" target="_blank"
+   class="btn btn-sm dropdown-item"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">repository</span>
+</a>
+</a>
+      
+      <li><a href="https://github.com/d-kwiat/gtg/issues/new?title=Issue%20on%20page%20%2Fhaplotype-homozygosity.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm dropdown-item"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">open issue</span>
+</a>
+</a>
+      
+  </ul>
+</div>
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      <li><a href="_sources/haplotype-homozygosity.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</a>
+      
+      <li>
+<button onclick="printPdf(this)"
+  class="btn btn-sm dropdown-item"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</a>
+      
+  </ul>
+</div>
+
+    </div>
+</div>
+            </div>
+            
+            
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Haplotype homozygosity</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+            <article class="bd-article" role="main">
+              
+  <section class="tex2jax_ignore mathjax_ignore" id="haplotype-homozygosity">
+<h1>Haplotype homozygosity<a class="headerlink" href="#haplotype-homozygosity" title="Permalink to this heading">#</a></h1>
+<p>We define haplotype homozygosity (<span class="math notranslate nohighlight">\(G_L\)</span>) as the probability that two alleles have the same DNA sequence at a haplotype locus of length <span class="math notranslate nohighlight">\(L\)</span>.  The expectation of haplotype homozygosity is given by</p>
+<p><img alt="haplotype-homozygosity-equation" src="_images/haplotype-homozygosity-equation.png" /></p>
+<p>where <strong>T</strong> is a random variable representing time to coalescence, <span class="math notranslate nohighlight">\(v\)</span> is the locus scaled mutation rate, <span class="math notranslate nohighlight">\(r\)</span> is the locus scaled recombination rate and <span class="math notranslate nohighlight">\(\phi_t\)</span> is the effective recombination parameter. From empirical observations we estimate that <span class="math notranslate nohighlight">\(r = 7.4 \times 10^{−4}\)</span> per kilobase per generation and <span class="math notranslate nohighlight">\(v = 9 \times 10^{−5}\)</span> per kilobase per generation.</p>
+<p>We evaluate the above expression by using <code class="docutils literal notranslate"><span class="pre">coalestr</span></code> as follows:</p>
+<ol class="arabic simple">
+<li><p>We <a class="reference external" href="https://d-kwiat.github.io/gtg/population-class.html">create a <code class="docutils literal notranslate"><span class="pre">Population</span></code></a> by specifying its transmission history.</p></li>
+<li><p>We obtain the probability distribution of <strong>T</strong> <a class="reference external" href="https://d-kwiat.github.io/gtg/get-coalescent.html">using <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code></a>.</p></li>
+<li><p>We evaluate the above summation series <a class="reference external" href="https://d-kwiat.github.io/gtg/get-diversity.html">using <code class="docutils literal notranslate"><span class="pre">get_diversity</span></code></a>.</p></li>
+</ol>
+<p>Unless we specify otherwise, the <code class="docutils literal notranslate"><span class="pre">get_diversity</span></code> function assumes by default that <span class="math notranslate nohighlight">\(L = 27\)</span> kb, i.e. it models a haplotype locus of 2 centimorgans.</p>
+<p>To estimate haplotype homozygosity at a certain timepoint, we need to evaluate <span class="math notranslate nohighlight">\(\phi_t = f H_W\)</span> at various times before that.  <span class="math notranslate nohighlight">\(H_W\)</span> is the mean level of within-host heterozygosity in the population, which may vary over time, and <span class="math notranslate nohighlight">\(f\)</span> is a constant factor that we use to correct for mating bias and other causes of non-effective recombination.</p>
+<p>We do this by providing a list (or range) of <em>observation times</em> when we invoke the <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code> function.  This tells <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code> to perform a <a class="reference external" href="https://d-kwiat.github.io/gtg/time-series.html">time series analysis</a> that will give us <span class="math notranslate nohighlight">\(H_W\)</span> and thus <span class="math notranslate nohighlight">\(\phi_t\)</span> at different points in time in our simulation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>coalestr
+<span class="kn">from</span> <span class="nn">coalestr</span> <span class="kn">import</span> <span class="n">cs</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We create a history of transmission parameters </span>
+<span class="c1"># which in this case are constant over time</span>
+<span class="c1"># my_history = [[t_sim, N, Q, X, M]]</span>
+<span class="c1">#    t_sim = duration of simulation</span>
+<span class="c1">#    N = effective number of hosts (Nh)</span>
+<span class="c1">#    Q = quantum of transmission</span>
+<span class="c1">#    X = crossing rate of transmission chains (chi)</span>
+<span class="c1">#    M = number of migrant hosts (Nm)</span>
+
+<span class="n">my_history</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
+<span class="n">my_population</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">Population</span><span class="p">(</span><span class="n">my_history</span><span class="p">)</span>
+
+<span class="c1"># We specify observation times in backwards time</span>
+<span class="c1"># i.e. as the number of generations before the present</span>
+<span class="n">observation_times</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">my_population</span><span class="o">.</span><span class="n">get_coalescent</span><span class="p">(</span><span class="n">observe</span> <span class="o">=</span> <span class="n">observation_times</span><span class="p">)</span>
+<span class="n">my_population</span><span class="o">.</span><span class="n">get_diversity</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    Events captured.   Mean coalescence time
+                      beho      wiho        beho     wiho
+        0              99.9     100.0      1349.3   1057.1
+     1000              99.9      99.9      1342.9   1052.1
+     2000              99.7      99.8      1330.9   1042.7
+     3000              99.4      99.6      1308.8   1025.4
+     4000              98.8      99.1      1268.7    994.0
+     5000              97.5      98.0      1197.7    938.4
+     6000              94.8      95.9      1076.6    843.6
+     7000              89.1      91.4       880.3    689.9
+     8000              77.1      82.1       588.9    461.7
+     9000              52.1      62.5       229.1    180.0
+Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb locus
+                      beho       wiho           beho       wiho
+     9000           5.05e-06   3.97e-06       5.25e-02   2.50e-01
+     8000           1.30e-05   1.02e-05       1.90e-02   2.11e-01
+     7000           1.94e-05   1.52e-05       1.81e-02   2.10e-01
+     6000           2.37e-05   1.86e-05       1.81e-02   2.10e-01
+     5000           2.64e-05   2.06e-05       1.81e-02   2.10e-01
+     4000           2.79e-05   2.19e-05       1.81e-02   2.10e-01
+     3000           2.88e-05   2.26e-05       1.81e-02   2.10e-01
+     2000           2.93e-05   2.29e-05       1.81e-02   2.10e-01
+     1000           2.95e-05   2.31e-05       1.81e-02   2.10e-01
+        0           2.97e-05   2.33e-05       1.81e-02   2.10e-01
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>In the above cell</strong> we see that haplotype homozygosity for a 2 centimorgan (27kb) locus stabilises at a value of 0.018 in the general population (<em>beho</em> means between-host) and 0.21 in the within-host (<em>wiho</em>) population.</p>
+<p><em>Observation time 0</em> means the present and <em>observation time 9000</em> means 9000 generations before the present. Our results for SNP heterozygosity and haplotype homozygosity are unreliable at observation time 9000 because only about half of coalescent events are captured but they subsequently stabilise and at observation time 0 we capture 99.9% of coalescent events.</p>
+<p>Our estimates of haplotype homozygosity depend on the effective recombination parameter <span class="math notranslate nohighlight">\(\phi_t\)</span> which in turn depends on within-host haplotype heterozygosity at earlier time points.  Our estimates of <span class="math notranslate nohighlight">\(\phi_t\)</span> get better with time (i.e. as we proceed from observation time 9000 to observation time 0) because they are based on progressive improvements in our estimates of within-host haplotype heterozygosity.</p>
+<p><strong>In the cell below</strong> we examine the relationship of haplotype homozygosity to the length of a haplotype locus, for various combinations of the transmission parameters <code class="docutils literal notranslate"><span class="pre">Nh</span></code>(effective number of hosts <span class="math notranslate nohighlight">\(N_h\)</span>), <code class="docutils literal notranslate"><span class="pre">Q</span></code> (quantum of transmission <span class="math notranslate nohighlight">\(Q\)</span>) and <code class="docutils literal notranslate"><span class="pre">X</span></code> (crossing rate of transmission chains <span class="math notranslate nohighlight">\(\chi\)</span>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">illustrative_histories</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="mi">600</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
+
+<span class="n">centimorgans</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">101</span><span class="p">)]</span>   <span class="c1"># range of haplotype lengths to be examined</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="p">[</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">]</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">sharey</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">illustrative_histories</span><span class="p">):</span>
+    
+    <span class="n">history</span> <span class="o">=</span> <span class="p">[</span><span class="n">illustrative_histories</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">history</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">Q</span> <span class="o">=</span> <span class="n">history</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">history</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span>
+    
+    <span class="n">my_pop</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">Population</span><span class="p">(</span><span class="n">history</span><span class="p">)</span>
+
+    <span class="n">hap_length</span> <span class="o">=</span> <span class="p">[]</span>          <span class="c1"># haplotype length in centimorgans</span>
+    <span class="n">beho_hap_hom</span> <span class="o">=</span> <span class="p">[]</span>        <span class="c1"># between-host haplotype homozygosity</span>
+    <span class="n">wiho_hap_hom</span> <span class="o">=</span> <span class="p">[]</span>        <span class="c1"># within-host haplotype homozygosity</span>
+    
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">centimorgans</span><span class="p">)):</span>
+
+        <span class="n">my_pop</span><span class="o">.</span><span class="n">get_coalescent</span><span class="p">(</span><span class="n">observe</span> <span class="o">=</span> <span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">show</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="n">my_pop</span><span class="o">.</span><span class="n">locus_kb</span> <span class="o">=</span> <span class="n">centimorgans</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="mf">13.5</span>
+        <span class="n">my_pop</span><span class="o">.</span><span class="n">get_diversity</span><span class="p">(</span><span class="n">show</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+        
+        <span class="n">hap_length</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">centimorgans</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+        <span class="n">beho_hap_hom</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">my_pop</span><span class="o">.</span><span class="n">diversity</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>   
+        <span class="n">wiho_hap_hom</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">my_pop</span><span class="o">.</span><span class="n">diversity</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+
+    <span class="n">a1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hap_length</span><span class="p">,</span> <span class="n">beho_hap_hom</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Nh </span><span class="si">{0:.0f}</span><span class="s1">, Q </span><span class="si">{1:.0f}</span><span class="s1">, </span><span class="se">\u03C7</span><span class="s1"> </span><span class="si">{2:.1f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">X</span><span class="p">))</span>
+    <span class="n">a2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hap_length</span><span class="p">,</span> <span class="n">wiho_hap_hom</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Nh </span><span class="si">{0:.0f}</span><span class="s1">, Q </span><span class="si">{1:.0f}</span><span class="s1">, </span><span class="se">\u03C7</span><span class="s1"> </span><span class="si">{2:.1f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">X</span><span class="p">))</span>
+    
+<span class="n">a1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Centimorgans&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">a1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Haplotype homozygosity&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">a1</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Between hosts&#39;</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">a1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">visible</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;0.65&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+
+<span class="n">a2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Centimorgans&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">a2</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Within-host&#39;</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">a2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">visible</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;0.65&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/f22e0f454fac41c464b538b25ad6c0c916b62eb0f1f23edc4264f6a7b0b95b34.png" src="_images/f22e0f454fac41c464b538b25ad6c0c916b62eb0f1f23edc4264f6a7b0b95b34.png" />
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+            </article>
+            
+
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="nucleotide-diversity.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">Nucleotide diversity</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="migration-simple.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">Effects of migration</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+            </footer>
+            
+          </div>
+          
+          
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Dominic Kwiatkowski
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright 2022.<br>
+
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+Last updated on None.<br>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </div>
+        </footer>
+        
+
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94"></script>
+
+  </body>
+</html>
