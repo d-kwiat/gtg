@@ -16,6 +16,7 @@ We can use this model to estimate
 
 - [Time to coalescence](coalescence-time-basic.ipynb)
 - [Nucleotide diversity](nucleotide-diversity.ipynb)
-- [Haplotype homozygosity](haplotype-homozygosity-2cM.ipynb)
+- [Haplotype homozygosity](haplotype-homozygosity.ipynb)
+- [Identity by descent](ibd.ipynb)
 - [Effects of migration](migration-simple.ipynb)
 - [Rates of superinfection](fws-compare-methods.ipynb)
