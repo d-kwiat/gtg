@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Glossary &#8212; Genomic transmission graph</title>
+    <title>Identity by descent &#8212; Genomic transmission graph</title>
   
   
   
@@ -60,11 +60,11 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'glossary';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ibd';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Underlying concepts" href="underlying-concepts.html" />
-    <link rel="prev" title="Using Google Colab" href="using-google-colab.html" />
+    <link rel="next" title="Effects of migration" href="migration-simple.html" />
+    <link rel="prev" title="Haplotype homozygosity" href="haplotype-homozygosity.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="docsearch:language" content="en">
   </head>
@@ -138,14 +138,14 @@ const thebe_selector_output = ".output, .cell_output"
     </p>
     <ul id="navbar-main-elements" class="navbar-nav">
         
-                    <li class="nav-item current active">
+                    <li class="nav-item">
                       <a class="nav-link nav-internal" href="how-to-use-this-book.html">
                         How to use this book
                       </a>
                     </li>
                 
 
-                    <li class="nav-item">
+                    <li class="nav-item current active">
                       <a class="nav-link nav-internal" href="underlying-concepts.html">
                         Underlying concepts
                       </a>
@@ -238,14 +238,14 @@ const thebe_selector_output = ".output, .cell_output"
     </p>
     <ul id="navbar-main-elements" class="navbar-nav">
         
-                    <li class="nav-item current active">
+                    <li class="nav-item">
                       <a class="nav-link nav-internal" href="how-to-use-this-book.html">
                         How to use this book
                       </a>
                     </li>
                 
 
-                    <li class="nav-item">
+                    <li class="nav-item current active">
                       <a class="nav-link nav-internal" href="underlying-concepts.html">
                         Underlying concepts
                       </a>
@@ -341,17 +341,17 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="how-to-use-this-book.html">How to use this book</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="how-to-use-this-book.html">How to use this book</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="using-google-colab.html">Using Google Colab</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Glossary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="glossary.html">Glossary</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="underlying-concepts.html">Underlying concepts</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="underlying-concepts.html">Underlying concepts</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="basic-model.html">The basic model</a></li>
 <li class="toctree-l2"><a class="reference internal" href="coalescence-time-basic.html">Time to coalescence</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nucleotide-diversity.html">Nucleotide diversity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="haplotype-homozygosity.html">Haplotype homozygosity</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ibd.html">Identity by descent</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Identity by descent</a></li>
 <li class="toctree-l2"><a class="reference internal" href="migration-simple.html">Effects of migration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fws-compare-methods.html">Rates of superinfection</a></li>
 </ul>
@@ -409,6 +409,32 @@ const thebe_selector_output = ".output, .cell_output"
         </label>
     </div>
     <div class="header-article__right">
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      <li><a href="https://colab.research.google.com/github/d-kwiat/gtg/blob/main/ibd.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</a>
+      
+  </ul>
+</div>
+
 <button onclick="toggleFullScreen()"
   class="btn btn-sm"
   data-toggle="tooltip"
@@ -445,7 +471,7 @@ title="Source repository"
 </a>
 </a>
       
-      <li><a href="https://github.com/d-kwiat/gtg/issues/new?title=Issue%20on%20page%20%2Fglossary.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/d-kwiat/gtg/issues/new?title=Issue%20on%20page%20%2Fibd.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm dropdown-item"
    data-toggle="tooltip"
 data-placement="left"
@@ -470,7 +496,7 @@ title="Open an issue"
     <i class="fas fa-download"></i>
   </button>
   <ul class="dropdown-menu">
-      <li><a href="_sources/glossary.md" target="_blank"
+      <li><a href="_sources/ibd.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    data-toggle="tooltip"
 data-placement="left"
@@ -481,7 +507,7 @@ title="Download source file"
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </a>
       
@@ -511,7 +537,7 @@ title="Print to PDF"
             
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Glossary</h1>
+    <h1>Identity by descent</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -522,37 +548,72 @@ title="Print to PDF"
 
             <article class="bd-article" role="main">
               
-  <section class="tex2jax_ignore mathjax_ignore" id="glossary">
-<h1>Glossary<a class="headerlink" href="#glossary" title="Permalink to this heading">#</a></h1>
-<p>This glossary explains the terminology used on this website, which sometimes differs from common usage, or is a specific interpretation of it.</p>
-<p><strong>Allele.</strong>  An instance of the parasite genome.  For example, <em>n</em> haploid individuals correspond to <em>n</em> alleles.  We often speak of an allele with reference to a particular locus, in which case it means the DNA sequence of that locus in an individual parasite genome.</p>
-<p><strong>Coalescence.</strong>  If two lineages are traced back in time, coalescence occurs when they meet in the same ancestral allele.</p>
-<p><strong>Cotransmission.</strong>  Transmission from one host to another of a mixture of parasite alleles with different ancestral histories.</p>
-<p><strong>Crossing rate of transmission chains (<span class="math notranslate nohighlight">\(\chi\)</span>).</strong> The proportion of hosts that acquire parasites from more than one transmission chain, i.e. from more than one host in the previous generation.  This is equivalent to proportion of hosts that are superinfected.</p>
-<p><strong>Effective number of hosts (<span class="math notranslate nohighlight">\(N_h\)</span>).</strong>  The number of hosts that effectively transmit parasites in each generation of the transmission graph.  This is a form of population bottleneck.</p>
-<p><strong>Effective recombination.</strong>  Recombination between genetically distinct alleles that acts to change the DNA sequence of a haplotype locus.</p>
-<p><strong>Effective recombination parameter (<span class="math notranslate nohighlight">\(\phi_t\)</span>).</strong>  The probability that, if recombination occurs at a locus at time <em>t</em>, this will change the DNA sequence of the locus.</p>
-<p><strong>Haplotype.</strong>  A specific DNA sequence observed at a haplotype locus.  At a large haplotype locus there will typically be many different haplotypes.</p>
-<p><strong>Haplotype locus.</strong> A locus that extends over multiple nucleotide positions and that can therefore undergo recombination.</p>
-<p><img alt="locus" src="_images/locus.png" />
-<a class="reference internal" href="locus.html"><span class="doc std std-doc">See figure caption</span></a></p>
-<p><strong>Heterozygosity (<em>H</em>).</strong> The probability that two alleles sampled randomly from some population are heterozygous, i.e. that they have different DNA sequences.</p>
-<p><strong>Homozygosity (<em>G</em>).</strong> The probability that two alleles sampled randomly from some population are homozygous, i.e. that they have the same DNA sequence.</p>
-<p><strong>Host.</strong>  A person that is carrying parasites and capable of transmitting them to others.  Each host exists for a single generation of the genomic transmission graph.</p>
-<p><strong>Lineage.</strong> A path that traces the ancestry of an allele at a point locus, going backwards in time through the transmission graph.  A point locus is not affected by recombination, so a lineage can be traced back over many generations despite frequent recombination events.</p>
-<p><strong>Locus.</strong>  A specific location in the genome.  This can be either a single nucleotide position (a point locus) or a sequence extending over multiple nucleotide positions (a haplotype locus).</p>
-<p><strong>Nucleotide diversity (<span class="math notranslate nohighlight">\(\pi\)</span>).</strong> The probability that two alleles are heterozygous at a random nucleotide position in the genome.</p>
-<p><strong>Parasite.</strong>  A malaria parasite of the species <em>Plasmodium falciparum</em> that is transmitted from host to host by a mosquito vector.  It is a single-celled organism that is haploid for most of its lifecycle.  It reproduces asexually apart from a brief phase of sexual reproduction within the vector.</p>
-<p><img alt="generation" src="_images/generation.png" />
-<a class="reference internal" href="generation.html"><span class="doc std std-doc">See figure caption</span></a></p>
-<p><strong>Point locus.</strong> A specific single nucleotide position in the genome.</p>
-<p><strong>Polymorphism.</strong> Variation in the DNA sequence at some specified locus.</p>
-<p><strong>Quantum of transmission (<span class="math notranslate nohighlight">\(Q\)</span>).</strong> The number of parasite alleles transmitted from one host to the next via a vector.  <span class="math notranslate nohighlight">\(Q\)</span> summarises a complex series of bottlenecks in host-vector and vector-host transmission occuring during one generation of the parasite life-cycle.</p>
-<p><strong>Single nucleotide polymorphism (SNP).</strong>  A polymorphism that involves only a single nucleotide position.  It usually arises from a type of mutation called a single nucleotide substitution.</p>
-<p><strong>Superinfection.</strong> Infection of a host with parasites from more than one source in the previous generation.  In the genomic transmission graph this is equivalent to crossing of transmission chains.</p>
-<p><strong>Transmission bottleneck.</strong>  A population bottleneck that affects the number of alleles that are passed from one generation of the genomic transmission graph to the next.  From the perspective of the parasite population as a whole, the quantum of transmission <span class="math notranslate nohighlight">\(Q\)</span> and the effective number of hosts <span class="math notranslate nohighlight">\(N_h\)</span> can both be considered as transmission bottlenecks.</p>
-<p><strong>Transmission chain.</strong> A sequence of host-to-host transmission events.   If we pick any node in the transmission graph, and trace a path forward in time along the edges to another node, that is a transmission chain.</p>
-<p><strong>Vector.</strong>  An <em>Anopheles</em> mosquito that transmits malaria parasites from one host to another.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="identity-by-descent">
+<h1>Identity by descent<a class="headerlink" href="#identity-by-descent" title="Permalink to this heading">#</a></h1>
+<p>If we compare the genome sequences of two parasites, we can identify segments of the genome where their haplotypes are identical.  We call these <em>shared haplotype segments</em>.</p>
+<p>Identity by descent (IBD) is a population genetic term that refers to genome sequences that are identical between individuals due to recent common ancestry. There are various ways to estimate IBD from genome sequencing data, but we can make the simplifying assumption that they detect shared haplotype segments of greater than about 2 centimorgans.</p>
+<p>The proportion of the genome occupied by shared haplotype segments of &gt;<em>k</em> centimorgans can be crudely approximated by <a class="reference external" href="https://d-kwiat.github.io/gtg/haplotype-homozygosity.html">the mean haplotype homozygosity of a locus of <span class="math notranslate nohighlight">\(k\)</span> centimorgans</a>.  Thus if we define shared haplotype segments of <span class="math notranslate nohighlight">\(&gt;2\)</span> centimorgans as IBD, then the proportion of the genome that is IBD is approximated by the mean homozygosity of a haplotype locus of 2 centimorgans.</p>
+<p>Let <span class="math notranslate nohighlight">\(\gamma\)</span> be the mean haplotype homozygosity of a 2 centimorgan locus, which corresponds to 27 kilobases if we assume that 1 centimorgan is equivalent to approximately 13.5 kb on average.</p>
+<p>Below we show how <span class="math notranslate nohighlight">\(\gamma\)</span> varies with different values of <code class="docutils literal notranslate"><span class="pre">N</span></code> (effective number of hosts <span class="math notranslate nohighlight">\(N_h\)</span>), <code class="docutils literal notranslate"><span class="pre">Q</span></code> (quantum of transmission <span class="math notranslate nohighlight">\(Q\)</span>) and <code class="docutils literal notranslate"><span class="pre">X</span></code> (crossing rate of transmission chains <span class="math notranslate nohighlight">\(\chi\)</span>). This shows that:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\gamma_S\)</span> (approximating IBD in a local subpopulation) declines rapidly with increasing levels of <span class="math notranslate nohighlight">\(N_h\)</span>, <span class="math notranslate nohighlight">\(\chi\)</span> and <span class="math notranslate nohighlight">\(Q\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\gamma_W\)</span> (approximating mean within-host IBD) is high and independent of <span class="math notranslate nohighlight">\(N_h\)</span> if there is no superinfection.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>coalestr
+<span class="kn">from</span> <span class="nn">coalestr</span> <span class="kn">import</span> <span class="n">cs</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">401</span><span class="p">,</span> <span class="mi">50</span><span class="p">))</span> <span class="o">+</span> <span class="nb">list</span> <span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">1001</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+<span class="n">Q_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="n">X_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="n">duration</span> <span class="o">=</span> <span class="mi">10000</span> <span class="c1"># duration of simulation in generation</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="p">[</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">]</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">sharey</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">X</span> <span class="ow">in</span> <span class="n">X_list</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">Q</span> <span class="ow">in</span> <span class="n">Q_list</span><span class="p">:</span>
+        
+        <span class="n">beho_hap_hom</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">wiho_hap_hom</span> <span class="o">=</span> <span class="p">[]</span>
+        
+        <span class="k">for</span> <span class="n">N</span> <span class="ow">in</span> <span class="n">N_list</span><span class="p">:</span>
+            <span class="n">history</span> <span class="o">=</span> <span class="p">[[</span><span class="n">duration</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>  <span class="c1"># t_his, Nh, Q, chi, migration</span>
+            <span class="n">my_pop</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">Population</span><span class="p">(</span><span class="n">history</span><span class="p">)</span>
+            <span class="n">my_pop</span><span class="o">.</span><span class="n">get_coalescent</span><span class="p">(</span><span class="n">observe</span> <span class="o">=</span> <span class="s2">&quot;auto&quot;</span><span class="p">,</span> <span class="n">show</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+            <span class="n">my_pop</span><span class="o">.</span><span class="n">get_diversity</span><span class="p">(</span><span class="n">show</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+
+            <span class="n">beho_hap_hom</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">my_pop</span><span class="o">.</span><span class="n">diversity</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span> <span class="c1"># between-host haplotype homozygosity</span>
+            <span class="n">wiho_hap_hom</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">my_pop</span><span class="o">.</span><span class="n">diversity</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span> <span class="c1"># within-host haplotype homozygosity</span>
+
+        <span class="n">a1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">N_list</span><span class="p">,</span> <span class="n">beho_hap_hom</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\u03C7</span><span class="s1"> </span><span class="si">{0:.1f}</span><span class="s1">, Q </span><span class="si">{1:.0f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Q</span><span class="p">))</span>
+        <span class="n">a2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">N_list</span><span class="p">,</span> <span class="n">wiho_hap_hom</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\u03C7</span><span class="s1"> </span><span class="si">{0:.1f}</span><span class="s1">, Q </span><span class="si">{1:.0f}</span><span class="s1">,&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Q</span><span class="p">))</span>   
+
+
+<span class="n">a1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Nh&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">a1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Haplotype homozygosity&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">a1</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Between hosts&#39;</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">a1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">visible</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;0.65&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+
+<span class="n">a2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Nh&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">a2</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Within-host&#39;</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">a2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">visible</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;0.65&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/f22e0f454fac41c464b538b25ad6c0c916b62eb0f1f23edc4264f6a7b0b95b34.png" src="_images/f22e0f454fac41c464b538b25ad6c0c916b62eb0f1f23edc4264f6a7b0b95b34.png" />
+</div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -583,17 +644,17 @@ title="Print to PDF"
             <footer class="bd-footer-article">
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-  <a class='left-prev' id="prev-link" href="using-google-colab.html" title="previous page">
+  <a class='left-prev' id="prev-link" href="haplotype-homozygosity.html" title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
           <p class="prev-next-subtitle">previous</p>
-          <p class="prev-next-title">Using Google Colab</p>
+          <p class="prev-next-title">Haplotype homozygosity</p>
       </div>
   </a>
-  <a class='right-next' id="next-link" href="underlying-concepts.html" title="next page">
+  <a class='right-next' id="next-link" href="migration-simple.html" title="next page">
   <div class="prev-next-info">
       <p class="prev-next-subtitle">next</p>
-      <p class="prev-next-title">Underlying concepts</p>
+      <p class="prev-next-title">Effects of migration</p>
   </div>
   <i class="fa-solid fa-angle-right"></i>
   </a>
