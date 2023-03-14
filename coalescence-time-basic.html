@@ -530,10 +530,10 @@ document.write(`
 <img alt="_images/ad9cfea7212c3c3d9377e0a86cc6679eb9eff764fe5a6be8501bc7a98e97040f.png" src="_images/ad9cfea7212c3c3d9377e0a86cc6679eb9eff764fe5a6be8501bc7a98e97040f.png" />
 </div>
 </div>
-<p>Having seen how the Markov chain simulation works, in the next cell we will perform exactly the same set of calculations <a class="reference external" href="https://d-kwiat.github.io/gtg/get-coalescent.html">using the <code class="docutils literal notranslate"><span class="pre">get_coalescent()</span></code> function</a> within the <code class="docutils literal notranslate"><span class="pre">coalestr</span></code> package.  This works as follows:</p>
+<p>Having seen how the Markov chain simulation works, in the next cell we will perform exactly the same set of calculations using the <code class="docutils literal notranslate"><span class="pre">get_coalescent()</span></code> function within the <code class="docutils literal notranslate"><span class="pre">coalestr</span></code> package:</p>
 <ul class="simple">
 <li><p>We create a population by invoking <code class="docutils literal notranslate"><span class="pre">coalestr.Population()</span></code>.  We supply the history of transmission parameters as an argument. In this case the transmission parameters are constant over time so the history is a simple list.</p></li>
-<li><p>We invoke <code class="docutils literal notranslate"><span class="pre">get_coalescent()</span></code> for our population.  This runs a Markov chain simulation and gives us the mean coalescence time.  It also returns the two arrays, <code class="docutils literal notranslate"><span class="pre">beho_lineage</span></code> and <code class="docutils literal notranslate"><span class="pre">wiho_lineage</span></code> as described above.</p></li>
+<li><p>We invoke <code class="docutils literal notranslate"><span class="pre">get_coalescent()</span></code> for our population.  This runs a Markov chain simulation and gives us the mean coalescence time.  It also returns the two arrays described above, <code class="docutils literal notranslate"><span class="pre">beho_lineage</span></code> and <code class="docutils literal notranslate"><span class="pre">wiho_lineage</span></code>, as attributes of our population.</p></li>
 <li><p>We use these two arrays to plot the state of two lineages as we progress back in time</p></li>
 </ul>
 <div class="cell docutils container">

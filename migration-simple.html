@@ -418,9 +418,27 @@ document.write(`
 <h1>Effects of migration<a class="headerlink" href="#effects-of-migration" title="Permalink to this heading">#</a></h1>
 <p>The genomic transmission graph can be broken down into many local subpopulations that together make up a metapopulation.  Here we examine a local subpopulation that is embedded within a much larger metapopulation.</p>
 <p><span class="math notranslate nohighlight">\(m\)</span> is the probability that a host within the local subpopulation acquired their infection from the metapopulation, and the number of such hosts per generation is <span class="math notranslate nohighlight">\(N_m\)</span> = <span class="math notranslate nohighlight">\(mN_h\)</span>. These could be immigrants from the metapopulation or local residents who have been travelling outside the local area.</p>
-<p>We must modify our Markov chain simulation of coalescence times to account for migration.  The table below shows the transmission probability matrix for the subpopulation, while the transition probability matrix of the metapopulation is <a class="reference external" href="https://d-kwiat.github.io/gtg/transition-probability.html">as described for the general population</a>.</p>
-<p><img alt="subpop-matrix" src="_images/subpop-matrix.png" /></p>
-<p><a class="reference external" href="https://d-kwiat.github.io/gtg/subpop-matrix.html">See figure caption</a></p>
+<p>We must modify our Markov chain simulation of coalescence times to account for migration.  Within <code class="docutils literal notranslate"><span class="pre">coalestr</span></code> this is split this into two components, with one <a class="reference external" href="https://d-kwiat.github.io/gtg/subpop-matrix.html">transmission probability matrix for the subpopulation</a> and another <a class="reference external" href="https://d-kwiat.github.io/gtg/transition-probability.html">transition probability matrix for the metapopulation</a>.</p>
+<p>In <code class="docutils literal notranslate"><span class="pre">coalestr</span></code> we can examine the effects of migration within a hierarchical population structure as follows:</p>
+<ol class="arabic simple">
+<li><p>We create a metapopulation and obtain its probability distribution of coalescence times and heterozygosity estimates.</p></li>
+</ol>
+<ul class="simple">
+<li><p>specify a history of transmission parameters for the metapopulation</p></li>
+<li><p>pass this to <code class="docutils literal notranslate"><span class="pre">coalestr.Population()</span></code> and give the metapopulation a name</p></li>
+<li><p>run <code class="docutils literal notranslate"><span class="pre">get_coalescent()</span></code> for the metapopulation</p></li>
+<li><p>run <code class="docutils literal notranslate"><span class="pre">get_diversity</span></code> for the metapopulation</p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p>We create a subpopulation:</p></li>
+</ol>
+<ul class="simple">
+<li><p>specify the history of transmission parameters including the number of migrant hosts per generation, <span class="math notranslate nohighlight">\(N_m\)</span>.</p></li>
+<li><p>pass to <code class="docutils literal notranslate"><span class="pre">coalestr.Population()</span></code> both the history of transmission parameters and the name of the metapopulation</p></li>
+<li><p>run <code class="docutils literal notranslate"><span class="pre">get_coalescent()</span></code> for the subpopulation</p></li>
+<li><p>run <code class="docutils literal notranslate"><span class="pre">get_diversity</span></code> for the subpopulation</p></li>
+</ul>
+<p><span class="math notranslate nohighlight">\(F_{ST}\)</span> is automatically calculated and returned as an attribute of the subpopulation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">coalestr</span> <span class="k">as</span> <span class="nn">cs</span>
@@ -493,6 +511,60 @@ For Nm = 0.10: SNP het = 1.54e-04, hap hom = 0.32, Fst = 0.59
 For Nm = 1.00: SNP het = 3.26e-04, hap hom = 0.10, Fst = 0.12
 For Nm = 10.00: SNP het = 3.67e-04, hap hom = 0.01, Fst = 0.01
 For Nm = 30.00: SNP het = 3.70e-04, hap hom = 0.01, Fst = 0.00
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define a set of subpopulations with different values of Nh</span>
+
+<span class="n">N_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">300</span><span class="p">]</span>
+<span class="n">Q</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">chi</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">duration</span> <span class="o">=</span> <span class="mi">10000</span>
+
+<span class="n">iterations</span> <span class="o">=</span> <span class="mi">28</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="p">[</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">]</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">N_list</span><span class="p">)):</span>
+    
+    <span class="n">Nh</span> <span class="o">=</span> <span class="n">N_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">M_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">Fst</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">Fws</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iterations</span><span class="p">):</span>
+    
+        <span class="n">M</span> <span class="o">=</span> <span class="mf">1.5</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="n">j</span><span class="p">)</span>
+        <span class="n">Nm</span> <span class="o">=</span> <span class="n">Nh</span> <span class="o">*</span> <span class="n">M</span>
+        <span class="n">subpop_history</span> <span class="o">=</span> <span class="p">[[</span><span class="n">duration</span><span class="p">,</span> <span class="n">Nh</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">chi</span><span class="p">,</span> <span class="n">Nm</span><span class="p">]]</span>
+    
+        <span class="n">subpop</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">Population</span><span class="p">(</span><span class="n">subpop_history</span><span class="p">,</span> <span class="n">metapopulation</span> <span class="o">=</span> <span class="n">metapop</span><span class="p">)</span>
+        <span class="n">subpop</span><span class="o">.</span><span class="n">get_coalescent</span><span class="p">(</span><span class="n">show</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="n">subpop</span><span class="o">.</span><span class="n">get_diversity</span><span class="p">(</span><span class="n">show</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+    
+        <span class="n">M_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+        <span class="n">Fst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">subpop</span><span class="o">.</span><span class="n">diversity</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+        <span class="n">Fws</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">subpop</span><span class="o">.</span><span class="n">diversity</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+        
+    <span class="n">a1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">M_list</span><span class="p">,</span> <span class="n">Fst</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Nh </span><span class="si">{0:.0f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Nh</span><span class="p">))</span>
+    <span class="n">a2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">M_list</span><span class="p">,</span> <span class="n">Fws</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Nh </span><span class="si">{0:.0f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Nh</span><span class="p">))</span> 
+        
+<span class="n">a1</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;chi </span><span class="si">{0:.2f}</span><span class="s1">, Q </span><span class="si">{1:.0f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">chi</span><span class="p">,</span> <span class="n">Q</span><span class="p">),</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">a1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;M&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">a1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Fst&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">a1</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">,</span><span class="n">base</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">a1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">visible</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;0.65&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+
+<span class="n">a2</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;chi </span><span class="si">{0:.2f}</span><span class="s1">, Q </span><span class="si">{1:.0f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">chi</span><span class="p">,</span> <span class="n">Q</span><span class="p">),</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">a2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;M&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">a2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Fws&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">a2</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">,</span><span class="n">base</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">a2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">visible</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;0.65&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
