@@ -16,6 +16,7 @@ chapters:
       - file: haplotype-homozygosity
       - file: ibd
       - file: migration-simple
+      - file: hw-hs
       - file: fws-compare-methods
   - file: coalestr-features
     sections:
