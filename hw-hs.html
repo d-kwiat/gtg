@@ -63,9 +63,11 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'hw_vs_hs';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'hw-hs';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Rate of superinfection" href="fws-compare-methods.html" />
+    <link rel="prev" title="Effects of migration" href="migration-simple.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -156,20 +158,20 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="how-to-use-this-book.html">How to use this book</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="using-google-colab.html">Using Google Colab</a></li>
 <li class="toctree-l2"><a class="reference internal" href="glossary.html">Glossary</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="underlying-concepts.html">Underlying concepts</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="underlying-concepts.html">Underlying concepts</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="basic-model.html">The basic model</a></li>
 <li class="toctree-l2"><a class="reference internal" href="coalescence-time-basic.html">Time to coalescence</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nucleotide-diversity.html">Nucleotide diversity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="haplotype-homozygosity.html">Haplotype homozygosity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ibd.html">Identity by descent</a></li>
 <li class="toctree-l2"><a class="reference internal" href="migration-simple.html">Effects of migration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hw-hs.html">Within-host heterozygosity</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Within-host heterozygosity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fws-compare-methods.html">Rate of superinfection</a></li>
 </ul>
 </li>
@@ -241,7 +243,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://colab.research.google.com/github/d-kwiat/gtg/blob/main/hw_vs_hs.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/d-kwiat/gtg/blob/main/hw-hs.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -289,7 +291,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/d-kwiat/gtg/issues/new?title=Issue%20on%20page%20%2Fhw_vs_hs.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/d-kwiat/gtg/issues/new?title=Issue%20on%20page%20%2Fhw-hs.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -319,7 +321,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="_sources/hw_vs_hs.ipynb" target="_blank"
+      <li><a href="_sources/hw-hs.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -429,13 +431,13 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot Hw vs Hs</span>
-<span class="c1"># with current formula which uses alpha only (= beta in old terminology)</span>
 
 <span class="n">X_list</span> <span class="o">=</span>  <span class="p">[</span><span class="n">x</span> <span class="o">/</span> <span class="mi">5</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">6</span><span class="p">)]</span>
 <span class="n">Hs_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">/</span> <span class="mi">20</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">)]</span>
 <span class="n">mu</span> <span class="o">=</span> <span class="mf">1.1e-8</span> <span class="c1"># Mutation rate</span>
 <span class="n">Q</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">alpha</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="mi">1</span><span class="o">/</span><span class="n">Q</span>
+
+<span class="n">alpha</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">Q</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">mu</span><span class="p">)</span> 
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 
@@ -487,14 +489,13 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot Hw vs Hs</span>
-<span class="c1"># with current formula which uses alpha only (= beta in old terminology)</span>
-<span class="c1"># Here we include lambda in the formula</span>
 
 <span class="n">X_list</span> <span class="o">=</span>  <span class="p">[</span><span class="n">x</span> <span class="o">/</span> <span class="mi">5</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">6</span><span class="p">)]</span>
 <span class="n">Hs_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">/</span> <span class="mi">20</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">)]</span>
 <span class="n">mu</span> <span class="o">=</span> <span class="mf">1.1e-8</span> <span class="c1"># Mutation rate</span>
 <span class="n">Q</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">alpha</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="mi">1</span><span class="o">/</span><span class="n">Q</span>
+    
+<span class="n">alpha</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">Q</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">mu</span><span class="p">)</span> 
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 
@@ -546,14 +547,13 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot Hw vs Hs</span>
-<span class="c1"># with current formula which uses alpha only (= beta in old terminology)</span>
-<span class="c1"># Here we include lambda in the formula</span>
 
 <span class="n">X_list</span> <span class="o">=</span>  <span class="p">[</span><span class="n">x</span> <span class="o">/</span> <span class="mi">5</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">6</span><span class="p">)]</span>
 <span class="n">Hs_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">/</span> <span class="mi">20</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">)]</span>
 <span class="n">mu</span> <span class="o">=</span> <span class="mf">1.1e-8</span> <span class="c1"># Mutation rate</span>
 <span class="n">Q</span> <span class="o">=</span> <span class="mi">300</span>
-<span class="n">alpha</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="mi">1</span><span class="o">/</span><span class="n">Q</span>
+
+<span class="n">alpha</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">Q</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">mu</span><span class="p">)</span> 
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 
@@ -632,6 +632,24 @@ document.write(`
                 <footer class="bd-footer-article">
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="migration-simple.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Effects of migration</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="fws-compare-methods.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Rate of superinfection</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               

@@ -67,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="How to use coalestr" href="coalestr-features.html" />
-    <link rel="prev" title="Effects of migration" href="migration-simple.html" />
+    <link rel="prev" title="Within-host heterozygosity" href="hw-hs.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -171,6 +171,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="haplotype-homozygosity.html">Haplotype homozygosity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ibd.html">Identity by descent</a></li>
 <li class="toctree-l2"><a class="reference internal" href="migration-simple.html">Effects of migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hw-hs.html">Within-host heterozygosity</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Rate of superinfection</a></li>
 </ul>
 </li>
@@ -416,13 +417,13 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="rate-of-superinfection">
 <h1>Rate of superinfection<a class="headerlink" href="#rate-of-superinfection" title="Permalink to this heading">#</a></h1>
-<p>The rate of superinfection <span class="math notranslate nohighlight">\(\chi\)</span>, also known as the crossing rate of transmission chains, is one of the key parameters of the <a class="reference external" href="https://d-kwiat.github.io/gtg/basic-model.html">genomic transmission graph</a>.</p>
-<p>Here we examine the relationship between <span class="math notranslate nohighlight">\(\chi\)</span> and the inbreeding coefficient <span class="math notranslate nohighlight">\(F_{WS}\)</span>, which can be measured by deep sequencing of parasites taken from malaria-infected individuals since</p>
+<p>The rate of superinfection <span class="math notranslate nohighlight">\(\chi\)</span>, also known as the crossing rate of transmission chains, is one of the key parameters of the <a class="reference external" href="https://d-kwiat.github.io/gtg/basic-model.html">genomic transmission graph</a>. <span class="math notranslate nohighlight">\(\chi\)</span> is related to the inbreeding coefficient <span class="math notranslate nohighlight">\(F_{WS}\)</span> which can be measured by deep sequencing of parasites taken from malaria-infected individuals:</p>
 <p><img alt="fws" src="_images/fws.png" /></p>
-<p>where <span class="math notranslate nohighlight">\(\widehat{H}_W\)</span> is mean within-host heterozygosity and <span class="math notranslate nohighlight">\(H_S\)</span> is the heterozygosity of the subpopulation.  Here we examine the relationship between <span class="math notranslate nohighlight">\(\chi\)</span> and <span class="math notranslate nohighlight">\(F_{WS}\)</span> using two different  methods.  In both cases we estimate <span class="math notranslate nohighlight">\(F_{WS}\)</span> for various combinations of transmission parameters and then plot the relationship with <span class="math notranslate nohighlight">\(\chi\)</span>.</p>
-<p>Our first method is to estimate times to coalescence by Markov chain simulation and then to estimate levels of heterozygosity within-host and in the subpopulation.  We can do this using the <code class="docutils literal notranslate"><span class="pre">get_coalescent()</span></code> and <code class="docutils literal notranslate"><span class="pre">get_diversity()</span></code> functions in <code class="docutils literal notranslate"><span class="pre">coalestr</span></code>.  This automatically calculates <span class="math notranslate nohighlight">\(F_{WS}\)</span> and returns it as an attribute of the population.</p>
-<p>Our second method is to use the formula derived in the accompanying paper (link TBD)</p>
-<p><img alt="hwhs" src="_images/hwhs.png" /></p>
+<p>where <span class="math notranslate nohighlight">\(\widehat{H}_W\)</span> is mean within-host heterozygosity and <span class="math notranslate nohighlight">\(H_S\)</span> is the heterozygosity of the subpopulation.</p>
+<p>Here we examine the relationship between <span class="math notranslate nohighlight">\(\chi\)</span> and <span class="math notranslate nohighlight">\(F_{WS}\)</span> using two different  methods.  In both cases we estimate <span class="math notranslate nohighlight">\(F_{WS}\)</span> for various combinations of transmission parameters and then plot the relationship with <span class="math notranslate nohighlight">\(\chi\)</span>.</p>
+<p>The first method estimates <a class="reference external" href="https://d-kwiat.github.io/gtg/coalescence-time-basic.html">times to coalescence by Markov chain simulation</a> and then estimates levels of heterozygosity within-host and in the subpopulation.  We can do this using the <code class="docutils literal notranslate"><span class="pre">get_coalescent()</span></code> and <code class="docutils literal notranslate"><span class="pre">get_diversity()</span></code> functions in <code class="docutils literal notranslate"><span class="pre">coalestr</span></code>.  This automatically calculates <span class="math notranslate nohighlight">\(F_{WS}\)</span> and returns it as an attribute of the population.</p>
+<p>The second method uses the <a class="reference internal" href="hw-hs.html"><span class="doc std std-doc">formula for the linear relationship between <span class="math notranslate nohighlight">\(H_W\)</span> and <span class="math notranslate nohighlight">\(H_S\)</span></span></a></p>
+<p><img alt="hwhs-simple" src="_images/hwhs-simple.png" /></p>
 <p><span class="math notranslate nohighlight">\(\lambda\)</span> is very small so for most practical purposes we can say that <span class="math notranslate nohighlight">\(F_{WS} = 1 - \kappa\)</span>.</p>
 <p>We then plot the results of both methods on the same graph to compare the results. It is apparent that the two methods give essentially identical results <span class="math notranslate nohighlight">\(N_h\)</span> is large (~1000), and are fairly close when <span class="math notranslate nohighlight">\(N_h\)</span> is in the region of 100, but that they deviate significantly when <span class="math notranslate nohighlight">\(N_h\)</span> is in the region of 30 or below.</p>
 <div class="cell docutils container">
@@ -740,12 +741,12 @@ document.write(`
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="migration-simple.html"
+       href="hw-hs.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Effects of migration</p>
+        <p class="prev-next-title">Within-host heterozygosity</p>
       </div>
     </a>
     <a class="right-next"
