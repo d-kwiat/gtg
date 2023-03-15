@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Rates of superinfection &#8212; Genomic transmission graph</title>
+    <title>Rate of superinfection &#8212; Genomic transmission graph</title>
   
   
   
@@ -61,6 +61,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'fws-compare-methods';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -169,7 +171,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="haplotype-homozygosity.html">Haplotype homozygosity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ibd.html">Identity by descent</a></li>
 <li class="toctree-l2"><a class="reference internal" href="migration-simple.html">Effects of migration</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Rates of superinfection</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Rate of superinfection</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="coalestr-features.html">How to use <code class="docutils literal notranslate"><span class="pre">coalestr</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -398,7 +400,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Rates of superinfection</h1>
+    <h1>Rate of superinfection</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -412,8 +414,27 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="rates-of-superinfection">
-<h1>Rates of superinfection<a class="headerlink" href="#rates-of-superinfection" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="rate-of-superinfection">
+<h1>Rate of superinfection<a class="headerlink" href="#rate-of-superinfection" title="Permalink to this heading">#</a></h1>
+<p>The rate of superinfection <span class="math notranslate nohighlight">\(\chi\)</span>, also known as the crossing rate of transmission chains, is one of the key parameters of the <a class="reference external" href="https://d-kwiat.github.io/gtg/basic-model.html">genomic transmission graph</a>.</p>
+<p>Here we examine the relationship between <span class="math notranslate nohighlight">\(\chi\)</span> and the inbreeding coefficient <span class="math notranslate nohighlight">\(F_{WS}\)</span>, which can be measured by deep sequencing of parasites taken from malaria-infected individuals since</p>
+<p><img alt="fws" src="_images/fws.png" /></p>
+<p>where <span class="math notranslate nohighlight">\(\widehat{H}_W\)</span> is mean within-host heterozygosity and <span class="math notranslate nohighlight">\(H_S\)</span> is the heterozygosity of the subpopulation.  Here we examine the relationship between <span class="math notranslate nohighlight">\(\chi\)</span> and <span class="math notranslate nohighlight">\(F_{WS}\)</span> using two different  methods.  In both cases we estimate <span class="math notranslate nohighlight">\(F_{WS}\)</span> for various combinations of transmission parameters and then plot the relationship with <span class="math notranslate nohighlight">\(\chi\)</span>.</p>
+<p>Our first method is to estimate times to coalescence by Markov chain simulation and then to estimate levels of heterozygosity within-host and in the subpopulation.  We can do this using the <code class="docutils literal notranslate"><span class="pre">get_coalescent()</span></code> and <code class="docutils literal notranslate"><span class="pre">get_diversity()</span></code> functions in <code class="docutils literal notranslate"><span class="pre">coalestr</span></code>.  This automatically calculates <span class="math notranslate nohighlight">\(F_{WS}\)</span> and returns it as an attribute of the population.</p>
+<p>Our second method is to use the formula derived in the accompanying paper (link TBD)</p>
+<p><img alt="hwhs" src="_images/hwhs.png" /></p>
+<p><span class="math notranslate nohighlight">\(\lambda\)</span> is very small so for most practical purposes we can say that <span class="math notranslate nohighlight">\(F_{WS} = 1 - \kappa\)</span>.</p>
+<p>We then plot the results of both methods on the same graph to compare the results. It is apparent that the two methods give essentially identical results <span class="math notranslate nohighlight">\(N_h\)</span> is large (~1000), and are fairly close when <span class="math notranslate nohighlight">\(N_h\)</span> is in the region of 100, but that they deviate significantly when <span class="math notranslate nohighlight">\(N_h\)</span> is in the region of 30 or below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>coalestr
+
+<span class="kn">from</span> <span class="nn">coalestr</span> <span class="kn">import</span> <span class="n">cs</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -424,7 +445,8 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">duration</span> <span class="o">=</span> <span class="mi">10000</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mu</span> <span class="o">=</span> <span class="mf">1.1e-8</span> <span class="c1"># Mutation rate</span>
+<span class="n">duration</span> <span class="o">=</span> <span class="mi">10000</span>
 <span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span>
 
 <span class="n">X_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">/</span><span class="mi">40</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">41</span><span class="p">)]</span> <span class="c1"># values of chi to estimate</span>
@@ -434,7 +456,7 @@ document.write(`
 
 <span class="k">for</span> <span class="n">Q</span> <span class="ow">in</span> <span class="n">Q_list</span><span class="p">:</span>
     
-    <span class="n">alpha</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="mi">1</span><span class="o">/</span><span class="n">Q</span> <span class="c1"># this is beta in old terminology</span>
+    <span class="n">alpha</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">Q</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">mu</span><span class="p">)</span> 
     <span class="n">fws_formula</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">fws_simulation</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">X_plot</span> <span class="o">=</span> <span class="p">[]</span>
@@ -464,7 +486,7 @@ document.write(`
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Nh=&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\u03C7</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Fws&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">b</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;0.65&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">visible</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;0.65&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Q&quot;</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">loc</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span> 
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -472,7 +494,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/c69d4a524a58991ed4b7be90efc7640913d817f5a32db5f8cc9626c63741f411.png" src="_images/c69d4a524a58991ed4b7be90efc7640913d817f5a32db5f8cc9626c63741f411.png" />
+<img alt="_images/8c56f98889b7f9949815b147beeedec604e75078758d6aa203d8193c145dd521.png" src="_images/8c56f98889b7f9949815b147beeedec604e75078758d6aa203d8193c145dd521.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -486,8 +508,8 @@ document.write(`
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 
 <span class="k">for</span> <span class="n">Q</span> <span class="ow">in</span> <span class="n">Q_list</span><span class="p">:</span>
-    
-    <span class="n">alpha</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="mi">1</span><span class="o">/</span><span class="n">Q</span> <span class="c1"># this is beta in old terminology</span>
+       
+    <span class="n">alpha</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">Q</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">mu</span><span class="p">)</span> 
     <span class="n">fws_formula</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">fws_simulation</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">X_plot</span> <span class="o">=</span> <span class="p">[]</span>
@@ -517,7 +539,7 @@ document.write(`
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Nh=&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\u03C7</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Fws&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">b</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;0.65&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">visible</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;0.65&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Q&quot;</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">loc</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span> 
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -525,7 +547,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/3c675bea0c8af376e3ecebad5b0f2a1a108424135938958e9a2d15fe37e16227.png" src="_images/3c675bea0c8af376e3ecebad5b0f2a1a108424135938958e9a2d15fe37e16227.png" />
+<img alt="_images/ea6c7b5df0adada2ed90f29bc963ad99509c203f119f4799ce8c80718af83479.png" src="_images/ea6c7b5df0adada2ed90f29bc963ad99509c203f119f4799ce8c80718af83479.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -539,9 +561,9 @@ document.write(`
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 
 <span class="k">for</span> <span class="n">Q</span> <span class="ow">in</span> <span class="n">Q_list</span><span class="p">:</span>
-    
-    <span class="n">alpha</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="mi">1</span><span class="o">/</span><span class="n">Q</span> <span class="c1"># this is beta in old terminology</span>
-    <span class="n">fws_formula</span> <span class="o">=</span> <span class="p">[]</span>
+       
+    <span class="n">alpha</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">Q</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">mu</span><span class="p">)</span> 
+    <span class="n">fws_formula</span> <span class="o">=</span> <span class="p">[]</span> 
     <span class="n">fws_simulation</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">X_plot</span> <span class="o">=</span> <span class="p">[]</span>
 
@@ -570,7 +592,7 @@ document.write(`
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Nh=&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\u03C7</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Fws&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">b</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;0.65&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">visible</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;0.65&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Q&quot;</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">loc</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span> 
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -593,7 +615,7 @@ document.write(`
 
 <span class="k">for</span> <span class="n">Q</span> <span class="ow">in</span> <span class="n">Q_list</span><span class="p">:</span>
     
-    <span class="n">alpha</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="mi">1</span><span class="o">/</span><span class="n">Q</span> <span class="c1"># this is beta in old terminology</span>
+    <span class="n">alpha</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">Q</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">mu</span><span class="p">)</span> 
     <span class="n">fws_formula</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">fws_simulation</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">X_plot</span> <span class="o">=</span> <span class="p">[]</span>
@@ -623,7 +645,7 @@ document.write(`
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Nh=&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\u03C7</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Fws&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">b</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;0.65&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">visible</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;0.65&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Q&quot;</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">loc</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span> 
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -646,7 +668,7 @@ document.write(`
 
 <span class="k">for</span> <span class="n">Q</span> <span class="ow">in</span> <span class="n">Q_list</span><span class="p">:</span>
     
-    <span class="n">alpha</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="mi">1</span><span class="o">/</span><span class="n">Q</span> <span class="c1"># this is beta in old terminology</span>
+    <span class="n">alpha</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">Q</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">mu</span><span class="p">)</span> 
     <span class="n">fws_formula</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">fws_simulation</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">X_plot</span> <span class="o">=</span> <span class="p">[]</span>
