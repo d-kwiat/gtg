@@ -12,7 +12,7 @@ Please go ahead and browse.  The sections aren't strictly ordered but this is a 
    * [Nucleotide diversity](nucleotide-diversity.ipynb)
    * [Haplotype homozygosity](haplotype-homozygosity.ipynb)
    * [Identity by descent](ibd.ipynb)
-1. [Effect of migration](migration-simple.ipynb)
+1. [Migration and population structure](migration-simple.ipynb)
 1. [Within-host diversity](within-host.ipynb)
    * Estimating the quantum of transmission
    * [*Hw - Hs* relationship](hw-hs.ipynb)
