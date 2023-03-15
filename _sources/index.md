@@ -4,7 +4,7 @@ Here you can explore the [concept of a genomic transmission graph](underlying-co
 
 Before getting started, take a quick look at [how to use this book](how-to-use-this-book.md) as it contains worked examples with Python code that you can run in the cloud for yourself even if you are new to programming.
 
-Please go ahead and browse.  The sections aren't strictly ordered but this is a logical sequence to work through the scientific concepts:
+The sections aren't strictly ordered but this is a logical sequence to work through the scientific concepts:
 
 1. [Underlying concepts](underlying-concepts.md)
 1. [The basic model](basic-model.md)
