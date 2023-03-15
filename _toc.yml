@@ -17,7 +17,7 @@ chapters:
       - file: ibd
       - file: migration-simple
   - file: within-host
-      sections:
+    sections:
       - file: hw-hs
       - file: fws-compare-methods
   - file: coalestr-features
