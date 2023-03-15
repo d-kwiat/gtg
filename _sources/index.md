@@ -1,6 +1,6 @@
 # Welcome
 
-Here you can explore the [concept of a genomic transmission graph](underlying-concepts.md) for modelling parasite transmission dynamics and population genetics.  This website accompanies a paper on this topic in [Wellcome Open Research](https://wellcomeopenresearch.org/articles/8-22).
+Here you can explore the [concept of a genomic transmission graph](underlying-concepts.md) for modelling parasite transmission dynamics and population genetics.  This website accompanies a paper on this topic in BioRxiv (link TBD).
 
 Before getting started, take a quick look at [how to use this book](how-to-use-this-book.md) as it contains worked examples with Python code that you can run in the cloud for yourself even if you are new to programming.
 

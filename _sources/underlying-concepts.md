@@ -1,8 +1,8 @@
 # Underlying concepts
 
-The genetic structure of a parasite population is shaped by its transmission dynamics - but superinfection and recombination make this relationship complex and hard to analyse.  
+The genetic structure of a parasite population is shaped by its transmission dynamics - but superinfection, cotransmission and recombination make this relationship complex and hard to analyse.  
 
-*Superinfection* means that a host acquires infection from multiple independent sources, and therefore carries a mixture of parasite genotypes with different ancestral histories, which may then be *cotransmitted* to other hosts.  Recombination within genetically mixed infections causes different regions of the genome to have different genealogies.  This presents an extremely complex problem for genetic inference of parasite transmission dynamics.
+*Superinfection* means that a host acquires infection from multiple independent sources, and therefore carries a mixture of parasite genotypes with different ancestral histories, which may then be *cotransmitted* to other hosts.  *Recombination* within genetically mixed infections causes different regions of the genome to have different genealogies.  This presents an extremely complex problem for genetic inference of parasite transmission dynamics.
 
 ![superinfection](superinfection.png)
 [See figure caption](superinfection.md)
@@ -22,12 +22,17 @@ An individual parasite could have many different lineages each following a uniqu
 
 Thus the genomic transmission graph allows for superinfection and recombination because lineages at different loci within an individual parasite can take different pathways through the graph.  
 
-Our challenge is to define the essential parameters of the genomic transmission graph and to understand how they are related to genetic variation.  To understand the scientific concepts it is a good idea to work through the sections of this book in the following order:
+Our challenge is to define the essential parameters of the genomic transmission graph and to understand how they are related to genetic variation.  To understand the scientific concepts you could work through the sections of this book in the following order:
 
+1. [Underlying concepts](underlying-concepts.md)
 1. [The basic model](basic-model.md)
-1. [Time to coalescence](coalescence-time-basic.ipynb)
-1. [Nucleotide diversity](nucleotide-diversity.ipynb)
-1. [Haplotype homozygosity](haplotype-homozygosity.ipynb)
-1. [Identity by descent](ibd.ipynb)
-1. [Effect of migration](migration-simple.ipynb)
-1. [Rate of superinfection](fws-compare-methods.ipynb)
+   * [Time to coalescence](coalescence-time-basic.ipynb)
+   * [Nucleotide diversity](nucleotide-diversity.ipynb)
+   * [Haplotype homozygosity](haplotype-homozygosity.ipynb)
+   * [Identity by descent](ibd.ipynb)
+1. [Migration and population structure](migration-simple.ipynb)
+1. [Within-host diversity](within-host.ipynb)
+   * Estimating the quantum of transmission
+   * [*Hw - Hs* relationship](hw-hs.ipynb)
+   * [Estimating the rate of superinfection](fws-compare-methods.ipynb)
+1. [Epidemiological scenarios](epidemiological-scenarios.md)
