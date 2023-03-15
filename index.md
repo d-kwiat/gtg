@@ -13,7 +13,10 @@ To understand the scientific concepts it is a good idea to work through the sect
 1. [Haplotype homozygosity](haplotype-homozygosity.ipynb)
 1. [Identity by descent](ibd.ipynb)
 1. [Effect of migration](migration-simple.ipynb)
-1. [Rate of superinfection](fws-compare-methods.ipynb)
+1. [Within-host diversity](within-host.ipynb)
+1. Estimating the quantum of transmission
+1. [*Hw - Hs* relationship](hw-hs.ipynb)
+1. [Estimating the rate of superinfection](fws-compare-methods.ipynb)
 1. [Epidemiological scenarios](epidemiological-scenarios.md)
 
 Most of the worked examples use the Python package `coalestr` which works like this:
