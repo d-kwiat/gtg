@@ -8,15 +8,15 @@ Please go ahead and browse.  The sections aren't strictly ordered but this is a 
 
 1. [Underlying concepts](underlying-concepts.md)
 1. [The basic model](basic-model.md)
-1. [Time to coalescence](coalescence-time-basic.ipynb)
-1. [Nucleotide diversity](nucleotide-diversity.ipynb)
-1. [Haplotype homozygosity](haplotype-homozygosity.ipynb)
-1. [Identity by descent](ibd.ipynb)
+   * [Time to coalescence](coalescence-time-basic.ipynb)
+   * [Nucleotide diversity](nucleotide-diversity.ipynb)
+   * [Haplotype homozygosity](haplotype-homozygosity.ipynb)
+   * [Identity by descent](ibd.ipynb)
 1. [Effect of migration](migration-simple.ipynb)
 1. [Within-host diversity](within-host.ipynb)
-1. Estimating the quantum of transmission
-1. [*Hw - Hs* relationship](hw-hs.ipynb)
-1. [Estimating the rate of superinfection](fws-compare-methods.ipynb)
+   * Estimating the quantum of transmission
+   * [*Hw - Hs* relationship](hw-hs.ipynb)
+   * [Estimating the rate of superinfection](fws-compare-methods.ipynb)
 1. [Epidemiological scenarios](epidemiological-scenarios.md)
 
 Most of the worked examples use the Python package `coalestr` which works like this:
