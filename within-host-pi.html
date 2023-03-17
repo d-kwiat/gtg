@@ -437,7 +437,7 @@ document.write(`
 <ul class="simple">
 <li><p>If you scroll to the bottom of this page you will see that <span class="math notranslate nohighlight">\(\pi_W\)</span> has a strikingly bimodal distribution.</p></li>
 <li><p>We postulate that one of the peaks (with high <span class="math notranslate nohighlight">\(\pi_W\)</span>) represents hosts that have been superinfected, or who lie on a transmission chain where there is cotransmission following a recent episode of superinfection.</p></li>
-<li><p>We postulate that the other peak (with low <span class="math notranslate nohighlight">\(\pi_w\)</span>) represents transmission chains where there has been no recent superinfection of cotransmission.</p></li>
+<li><p>We postulate that the other peak (with low <span class="math notranslate nohighlight">\(\pi_W\)</span>) represents transmission chains where there has been no recent superinfection or cotransmission.</p></li>
 <li><p>We can use the low <span class="math notranslate nohighlight">\(\pi_W\)</span> peak to estimate the quantum of transmission with the formula <span class="math notranslate nohighlight">\(Q = \pi_W / 2 \mu\)</span>.</p></li>
 </ul>
 <section id="source-of-the-data">
@@ -471,28 +471,13 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
 
 <span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">&#39;/content/drive&#39;</span><span class="p">)</span>
+
+<span class="n">data_path</span> <span class="o">=</span> <span class="s2">&quot;/content/drive/My Drive/Colab Data/Pf6/&quot;</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mounted at /content/drive
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_path</span> <span class="o">=</span> <span class="s2">&quot;/content/drive/My Drive/Colab Data/Pf6/&quot;</span>
-
-<span class="o">!</span>ls<span class="w"> </span><span class="s2">&quot;/content/drive/My Drive/Colab Data/Pf6/&quot;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>230113_wiho_het.npy	    230316_region
-230316_het_per_sample_ESEA  230317_het_per_sample_ALL
-230316_het_per_sample_SEA   230317_het_per_sample_CAF_EAF
-230316_het_per_sample_WAF   230317_het_per_snp
 </pre></div>
 </div>
 </div>
