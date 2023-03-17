@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Pf6 heterozygous calls &#8212; Genomic transmission graph</title>
+    <title>Pf6 within-host nucleotide diversity &#8212; Genomic transmission graph</title>
   
   
   
@@ -63,7 +63,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Pf6_het_calls_230317';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Pf6_het_calls_short_230317';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -244,7 +244,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://colab.research.google.com/github/d-kwiat/gtg/blob/main/Pf6_het_calls_230317.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/d-kwiat/gtg/blob/main/Pf6_het_calls_short_230317.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -292,7 +292,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/d-kwiat/gtg/issues/new?title=Issue%20on%20page%20%2FPf6_het_calls_230317.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/d-kwiat/gtg/issues/new?title=Issue%20on%20page%20%2FPf6_het_calls_short_230317.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -322,7 +322,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="_sources/Pf6_het_calls_230317.ipynb" target="_blank"
+      <li><a href="_sources/Pf6_het_calls_short_230317.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -404,7 +404,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Pf6 heterozygous calls</h1>
+    <h1>Pf6 within-host nucleotide diversity</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -414,35 +414,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Pf6 heterozygous calls</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#run">Run</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extract-lists-of-samples-and-variant-properties-as-arrays">Extract lists of samples and variant properties as arrays</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#select-high-quality-biallelic-coding-snps">Select high-quality biallelic coding SNPs</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-allele-depths-for-selected-snps-in-allele-depth-1-npy">Save allele depths for selected SNPs in <code class="docutils literal notranslate"><span class="pre">allele_depth_1.npy</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Run</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#select-samples-and-list-region-of-each-selected-sample">Select samples and list region of each selected sample</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#copy-allele-depth-for-qc-pass-samples-from-allele-depth-1-into-allele-depth-2">Copy allele depth for QC pass samples from <code class="docutils literal notranslate"><span class="pre">allele_depth_1</span></code> into <code class="docutils literal notranslate"><span class="pre">allele_depth_2</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-within-host-heterozygosity-for-each-snp-and-save-as-wiho-het-npy">Calculate within-host heterozygosity for each SNP and save as <code class="docutils literal notranslate"><span class="pre">wiho_het.npy</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-mean-within-host-heterozygosity-for-each-snp">Calculate mean within-host heterozygosity for each SNP</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Run</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prior-to-this-notebook">Prior to this notebook</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#in-this-notebook">In this notebook</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#we-will-use-these-files">We will use these files</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-snp-filter-to-filter-out-possible-hyperhets">Create <code class="docutils literal notranslate"><span class="pre">snp_filter</span></code> to filter out possible hyperhets</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Run</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-sample-filter-to-select-a-particular-geographical-region">Create <code class="docutils literal notranslate"><span class="pre">sample_filter</span></code> to select a particular geographical region</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Run</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-mean-heterozygosity-per-sample-after-filtering-samples-and-snps">Calculate mean heterozygosity per sample after filtering samples and SNPs</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-histogram-of-within-host-nucleotide-diversity">Plot histogram of within-host nucleotide diversity</a></li>
 </ul>
-</li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -453,19 +432,31 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="pf6-heterozygous-calls">
-<h1>Pf6 heterozygous calls<a class="headerlink" href="#pf6-heterozygous-calls" title="Permalink to this heading">#</a></h1>
-<p>My Drive/GitHub/gtg/Pf6_het_calls_230317.ipynb</p>
-<p>This code examines the frequency distribution of heterozgous genotype calls in the <a class="reference external" href="https://www.malariagen.net/sites/default/files/File8_Pf_6_README_20191010_0.txt">Pf6 dataset</a>.  It uses downloaded Zarr data and sample metadata that are stored locally on ThinkPad_2022 in ‘C:\Users\dkwia\Data\Pf6'.</p>
+  <section id="pf6-within-host-nucleotide-diversity">
+<h1>Pf6 within-host nucleotide diversity<a class="headerlink" href="#pf6-within-host-nucleotide-diversity" title="Permalink to this heading">#</a></h1>
 <ul class="simple">
+<li><p>My Drive/Colab Notebooks/Pf6_het_calls_short_230317.ipynb</p></li>
+<li><p>Cut down from /Colab Notebooks/Pf6_het_calls_230317.ipynb</p></li>
+<li><p>This code examines the frequency distribution of within-host nucleotide diversity in the <a class="reference external" href="https://www.malariagen.net/sites/default/files/File8_Pf_6_README_20191010_0.txt">Pf6 dataset</a>.</p></li>
+</ul>
+<section id="prior-to-this-notebook">
+<h2>Prior to this notebook<a class="headerlink" href="#prior-to-this-notebook" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Zarr data and sample metadata were downloaded to  ThinkPad_2022 in ‘C:\Users\dkwia\Data\Pf6'.</p></li>
+<li><p>Following steps were performed using \Github\gtg\Pf6_het_calls_230317.ipynb</p></li>
 <li><p>extract lists of samples (n = 7,113) and variant properties (n = 6,051,696) as arrays</p></li>
-<li><p>select variants that are high-quality biallelic coding SNPs (n = 502,221)</p></li>
+<li><p>select variants that are high-quality biallelic coding SNPs (n = 502,221). High quality means ‘filter_pass == True’ &amp; ‘vqslod &gt; 3’</p></li>
 <li><p>extract allele depth for high-quality SNPs from Zarr into <code class="docutils literal notranslate"><span class="pre">allele_depth_1.npy</span></code>.  We do this in chunks of 10,000 variants at a time to avoid memory problems</p></li>
-<li><p>extract sample metadata from samples.txt into a dataframe</p></li>
-<li><p>read info about sample QC into an array</p></li>
+<li><p>extract sample metadata from samples.txt into a dataframe, then read info about sample QC into an array</p></li>
+<li><p>select samples that passed QC (n = 5,970) and record their geographic region in a list called ‘region’.</p></li>
 <li><p>extract allele depth for high-quality SNPs and high-quality samples (n = 5,970) into <code class="docutils literal notranslate"><span class="pre">allele_depth_2.npy</span></code></p></li>
 <li><p>calculate within-host heterozygosity for each SNP in each sample and save to <code class="docutils literal notranslate"><span class="pre">wiho_het.npy</span></code></p></li>
-<li><p>calculate mean within-host heterozygosity for each SNP across all samples and save to a list called wiho_het_per_snp</p></li>
+<li><p>calculate mean within-host heterozygosity for each SNP across all samples and save to a list called ‘wiho_het_per_snp’</p></li>
+</ul>
+</section>
+<section id="in-this-notebook">
+<h2>In this notebook<a class="headerlink" href="#in-this-notebook" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
 <li><p>using wiho_het_per_snp, create <code class="docutils literal notranslate"><span class="pre">snp_filter</span></code> to filter out potential hyperhet SNPs</p></li>
 <li><p>create <code class="docutils literal notranslate"><span class="pre">sample_filter</span></code> to select samples from a particular geographical region</p></li>
 <li><p>calculate <span class="math notranslate nohighlight">\(\pi_W\)</span> for each sample, using mean within-host heterozygosity per sample, and allowing for the number of SNPs ascertained and the size of coding regions</p></li>
@@ -474,290 +465,52 @@ document.write(`
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">zarr</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
+
+<span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">&#39;/content/drive&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_path</span> <span class="o">=</span> <span class="s2">&quot;/content/drive/My Drive/Colab Data/Pf6&quot;</span>
+
+<span class="o">!</span>ls<span class="w"> </span><span class="s2">&quot;/content/drive/My Drive/Colab Data/Pf6&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">statistics</span> <span class="k">as</span> <span class="nn">stat</span>
 </pre></div>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;C:</span><span class="se">\\</span><span class="s1">Users</span><span class="se">\\</span><span class="s1">dkwia</span><span class="se">\\</span><span class="s1">Data</span><span class="se">\\</span><span class="s1">Pf6</span><span class="se">\\</span><span class="s1">&#39;</span>
-
-<span class="n">callset</span> <span class="o">=</span> <span class="n">zarr</span><span class="o">.</span><span class="n">open_group</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;Pf_6.zarr&#39;</span><span class="p">,</span> <span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
-<span class="n">callset</span><span class="o">.</span><span class="n">tree</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "9f52de55022f4a108612dcfc7df6d9ad", "version_major": 2, "version_minor": 0}</script></div>
-</div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="run">
-<h1>Run<a class="headerlink" href="#run" title="Permalink to this heading">#</a></h1>
-<section id="extract-lists-of-samples-and-variant-properties-as-arrays">
-<h2>Extract lists of samples and variant properties as arrays<a class="headerlink" href="#extract-lists-of-samples-and-variant-properties-as-arrays" title="Permalink to this heading">#</a></h2>
+<section id="we-will-use-these-files">
+<h2>We will use these files<a class="headerlink" href="#we-will-use-these-files" title="Permalink to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">230113_wiho_het.npy</span></code></p>
 <ul class="simple">
-<li><p>7,113 samples</p></li>
-<li><p>6,051,696 variants</p></li>
+<li><p>Gives within-host heterozygosity for each SNP (n = 502,221) and each sample (n = 5,970).</p></li>
+<li><p>As we have selected biallelic SNPs this is easy to calculate.  If ref_allele + alt_allele == 0 then we write het = 0.</p></li>
+<li><p>This file is 23.5GB because dtype=float</p></li>
 </ul>
-</section>
-<section id="select-high-quality-biallelic-coding-snps">
-<h2>Select high-quality biallelic coding SNPs<a class="headerlink" href="#select-high-quality-biallelic-coding-snps" title="Permalink to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">230316_region</span></code></p>
 <ul class="simple">
-<li><p>high quality means ‘filter_pass == True’ &amp; ‘vqslod &gt; 3’</p></li>
-<li><p>502,221 variants meet criteria</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">select</span></code> is a mask for an array of 6,051,696 variants</p></li>
+<li><p>A list of geographical regions for 5,970 selected samples</p></li>
+<li><p>‘SAM’=South America, ‘WAF’=West Africa, ‘CAF’=Central Africa, ‘EAF’=East African, ‘SAS’=South Asia, ‘WSEA’=Western SE Asia, ‘ESEA’=Eastern SE Asia, ‘OCE’=Oceania</p></li>
 </ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">samples</span> <span class="o">=</span> <span class="n">callset</span><span class="p">[</span><span class="s1">&#39;samples&#39;</span><span class="p">][:]</span>
-
-<span class="n">filter_pass</span> <span class="o">=</span> <span class="n">callset</span><span class="p">[</span><span class="s1">&#39;variants/FILTER_PASS&#39;</span><span class="p">][:]</span>
-<span class="n">vqslod</span> <span class="o">=</span> <span class="n">callset</span><span class="p">[</span><span class="s1">&#39;variants/VQSLOD&#39;</span><span class="p">][:]</span>
-<span class="n">snp</span> <span class="o">=</span> <span class="n">callset</span><span class="p">[</span><span class="s1">&#39;variants/is_snp&#39;</span><span class="p">][:]</span>
-<span class="n">coding</span> <span class="o">=</span> <span class="n">callset</span><span class="p">[</span><span class="s1">&#39;variants/CDS&#39;</span><span class="p">][:]</span>
-<span class="n">numalt</span> <span class="o">=</span> <span class="n">callset</span><span class="p">[</span><span class="s1">&#39;variants/numalt&#39;</span><span class="p">][:]</span>
-<span class="n">effect</span> <span class="o">=</span> <span class="n">callset</span><span class="p">[</span><span class="s1">&#39;variants/SNPEFF_EFFECT&#39;</span><span class="p">][:]</span>
-
-<span class="c1"># select biallelic synonymous coding SNPs and create a mask</span>
-<span class="n">select</span> <span class="o">=</span> <span class="p">(</span><span class="n">filter_pass</span> <span class="o">==</span> <span class="kc">True</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">snp</span> <span class="o">==</span> <span class="kc">True</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">numalt</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">coding</span> <span class="o">==</span> <span class="kc">True</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">vqslod</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">)</span>
-
-<span class="c1"># &amp; (effect == &#39;SYNONYMOUS_CODING&#39;) </span>
-
-<span class="n">selected_snps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">select</span> <span class="o">==</span> <span class="kc">True</span><span class="p">)</span>
-
-<span class="n">total_variants</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">snp</span><span class="p">)</span>
-<span class="n">total_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;There are </span><span class="si">{0:d}</span><span class="s1"> variants and </span><span class="si">{1:d}</span><span class="s1"> selected SNPs in </span><span class="si">{2:d}</span><span class="s1"> samples.&#39;</span><span class="o">.</span>
-      <span class="nb">format</span><span class="p">(</span><span class="n">total_variants</span><span class="p">,</span> <span class="n">selected_snps</span><span class="p">,</span> <span class="n">total_samples</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>There are 6051696 variants and 502221 selected SNPs in 7113 samples.
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="save-allele-depths-for-selected-snps-in-allele-depth-1-npy">
-<h2>Save allele depths for selected SNPs in <code class="docutils literal notranslate"><span class="pre">allele_depth_1.npy</span></code><a class="headerlink" href="#save-allele-depths-for-selected-snps-in-allele-depth-1-npy" title="Permalink to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">230317_het_per_snp</span></code></p>
 <ul class="simple">
-<li><p>Use the <code class="docutils literal notranslate"><span class="pre">select</span></code> mask created above to pull out selected SNPs</p></li>
-<li><p>Copy allele depths for selected SNPs from ‘calldata/AD’ into <code class="docutils literal notranslate"><span class="pre">allele_depth_1</span></code></p>
-<ul>
-<li><p>calldata/AD allows for multiallelic loci by containing allele depth for up to 7 variant alleles</p></li>
-<li><p>Since we focus on biallelic SNPs we include only the first two alleles from calldata/AD</p></li>
+<li><p>Mean within-host heterozygosity for each SNP, calculated from wiho_het.npy</p></li>
 </ul>
-</li>
-<li><p>This file is 14GB</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We extract allele depth data for selected SNPs into a numpy array.</span>
-<span class="c1"># We do this in chunks of 10000 variants at a time to avoid memory problems.</span>
-<span class="c1"># This step can be omitted by retrieving saved data in the next section.</span>
-
-<span class="n">ad</span> <span class="o">=</span> <span class="n">callset</span><span class="p">[</span><span class="s1">&#39;calldata/AD&#39;</span><span class="p">]</span>
-
-<span class="n">allele_depth_1</span> <span class="o">=</span> <span class="mi">9</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">selected_snps</span><span class="p">,</span> <span class="n">total_samples</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>
-
-<span class="n">selected_snp_id</span> <span class="o">=</span> <span class="mi">0</span>
-
-<span class="n">chunk_size</span> <span class="o">=</span> <span class="mi">10000</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">total_variants</span> <span class="o">/</span> <span class="n">chunk_size</span><span class="p">)):</span>
-    
-    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-    
-    <span class="n">chunk</span> <span class="o">=</span> <span class="n">ad</span><span class="p">[(</span><span class="n">i</span> <span class="o">*</span> <span class="n">chunk_size</span><span class="p">)</span> <span class="p">:</span> <span class="p">((</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">chunk_size</span><span class="p">),</span> <span class="p">:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span>
-    
-    <span class="n">chunk_snps</span> <span class="o">=</span> <span class="mi">0</span>
-
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">chunk_size</span><span class="p">):</span>
-        
-        <span class="n">variant_id</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="n">chunk_size</span> <span class="o">+</span> <span class="n">j</span>
-    
-        <span class="k">if</span> <span class="n">select</span><span class="p">[</span><span class="n">variant_id</span><span class="p">]</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
-            
-            <span class="n">allele_depth_1</span><span class="p">[</span><span class="n">selected_snp_id</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">chunk</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
-            
-            <span class="n">selected_snp_id</span> <span class="o">+=</span> <span class="mi">1</span>
-            
-            <span class="n">chunk_snps</span> <span class="o">+=</span> <span class="mi">1</span>
-               
-    <span class="n">chunk_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
-        
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;chunk </span><span class="si">{0:d}</span><span class="s1"> had </span><span class="si">{1:d}</span><span class="s1"> SNPs and took </span><span class="si">{2:.2f}</span><span class="s1"> seconds&#39;</span><span class="o">.</span>
-          <span class="nb">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">chunk_snps</span><span class="p">,</span> <span class="n">chunk_time</span><span class="p">))</span>
-
-<span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-
-<span class="n">chunk</span> <span class="o">=</span> <span class="n">ad</span><span class="p">[(</span><span class="n">i</span> <span class="o">*</span> <span class="n">chunk_size</span><span class="p">)</span> <span class="p">:,</span> <span class="p">:,</span> <span class="p">:]</span>
-
-<span class="n">chunk_snps</span> <span class="o">=</span> <span class="mi">0</span>
-
-<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">total_variants</span> <span class="o">%</span> <span class="n">chunk_size</span><span class="p">):</span>
-    
-    <span class="k">if</span> <span class="n">select</span><span class="p">[(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">chunk_size</span> <span class="o">+</span> <span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
-            
-        <span class="n">allele_depth_1</span><span class="p">[</span><span class="n">selected_snp_id</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">chunk</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
-        
-        <span class="n">selected_snp_id</span> <span class="o">+=</span> <span class="mi">1</span>
-            
-        <span class="n">chunk_snps</span> <span class="o">+=</span> <span class="mi">1</span>
-               
-    <span class="n">chunk_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
-        
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;chunk </span><span class="si">{0:d}</span><span class="s1"> had </span><span class="si">{1:d}</span><span class="s1"> SNPs and took </span><span class="si">{2:.1f}</span><span class="s1"> seconds&#39;</span><span class="o">.</span>
-     <span class="nb">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">chunk_snps</span><span class="p">,</span> <span class="n">chunk_time</span><span class="p">))</span>
-
-<span class="n">total_snps</span> <span class="o">=</span> <span class="n">selected_snp_id</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;total of </span><span class="si">{0:d}</span><span class="s1"> selected snps&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">total_snps</span><span class="p">))</span>
-
-<span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;221221_selected_gt_1&#39;</span><span class="p">,</span> <span class="n">allele_depth_1</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>Run<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
-<section id="select-samples-and-list-region-of-each-selected-sample">
-<h2>Select samples and list region of each selected sample<a class="headerlink" href="#select-samples-and-list-region-of-each-selected-sample" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p>‘Population’ in Pf6_samples.txt gives: ‘SAM’=South America, ‘WAF’=West Africa, ‘CAF’=Central Africa, ‘EAF’=East African, ‘SAS’=South Asia, ‘WSEA’=Western SE Asia, ‘ESEA’=Eastern SE Asia, ‘OCE’=Oceania</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;samples.txt&#39;</span><span class="p">)</span>
-
-<span class="n">select_sample</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;QC pass&#39;</span><span class="p">])</span>
-
-<span class="n">selected_samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">select_sample</span> <span class="o">==</span> <span class="kc">True</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;There are&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">selected_samples</span><span class="p">),</span> <span class="s1">&#39;selected samples that passed QC&#39;</span><span class="p">)</span>
-
-<span class="n">region</span> <span class="o">=</span> <span class="p">[]</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">total_samples</span><span class="p">):</span>
-    
-    <span class="k">if</span> <span class="n">select_sample</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
-        
-        <span class="n">region</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Population&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
-        
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s2">&quot;230316_region&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
-    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">region</span><span class="p">,</span> <span class="n">fp</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>There are 5970 selected samples that passed QC
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="copy-allele-depth-for-qc-pass-samples-from-allele-depth-1-into-allele-depth-2">
-<h2>Copy allele depth for QC pass samples from <code class="docutils literal notranslate"><span class="pre">allele_depth_1</span></code> into <code class="docutils literal notranslate"><span class="pre">allele_depth_2</span></code><a class="headerlink" href="#copy-allele-depth-for-qc-pass-samples-from-allele-depth-1-into-allele-depth-2" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p>‘QC pass’ field in samples.txt gives True/False</p></li>
-<li><p>Save as .npy file (~11.7GB) so that this step only has to be run once</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">allele_depth_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;221221_selected_gt_1.npy&#39;</span><span class="p">)</span>
-
-<span class="n">allele_depth_2</span> <span class="o">=</span> <span class="mi">9</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">selected_snps</span><span class="p">,</span> <span class="n">selected_samples</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">total_samples</span><span class="p">):</span>
-    
-    <span class="k">if</span> <span class="n">select_sample</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
-        
-        <span class="n">allele_depth_2</span><span class="p">[:,</span> <span class="n">selected_sample_id</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">allele_depth_1</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="p">:]</span>
-        
-<span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;221221_selected_gt_2&#39;</span><span class="p">,</span> <span class="n">allele_depth_2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>There are 5970 selected samples that passed QC
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="calculate-within-host-heterozygosity-for-each-snp-and-save-as-wiho-het-npy">
-<h2>Calculate within-host heterozygosity for each SNP and save as <code class="docutils literal notranslate"><span class="pre">wiho_het.npy</span></code><a class="headerlink" href="#calculate-within-host-heterozygosity-for-each-snp-and-save-as-wiho-het-npy" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p>if ref_allele + alt_allele == 1 then write het = 0.</p></li>
-<li><p>this file is 23.5GB because dtype=float</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">allele_depth_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;221221_selected_gt_2.npy&#39;</span><span class="p">)</span> <span class="c1">#, mmap_mode = &#39;r&#39;)</span>
-
-<span class="n">selected_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">allele_depth_2</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">])</span>
-
-<span class="n">wiho_het</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">selected_snps</span><span class="p">,</span> <span class="n">selected_samples</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">selected_snps</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">selected_samples</span><span class="p">):</span>
-        
-        <span class="n">ref_allele</span> <span class="o">=</span> <span class="n">allele_depth_2</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
-        <span class="n">alt_allele</span> <span class="o">=</span> <span class="n">allele_depth_2</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-        <span class="n">denominator</span> <span class="o">=</span> <span class="n">ref_allele</span> <span class="o">+</span> <span class="n">alt_allele</span>
-        <span class="k">if</span> <span class="n">denominator</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">allele_freq</span> <span class="o">=</span> <span class="n">alt_allele</span> <span class="o">/</span> <span class="n">denominator</span>
-            <span class="n">het</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">allele_freq</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">allele_freq</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">het</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># this is a hack</span>
-            
-        <span class="n">wiho_het</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">het</span>
-
-    <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-        
-<span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;230113_wiho_het.npy&#39;</span><span class="p">,</span> <span class="n">wiho_het</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="calculate-mean-within-host-heterozygosity-for-each-snp">
-<h2>Calculate mean within-host heterozygosity for each SNP<a class="headerlink" href="#calculate-mean-within-host-heterozygosity-for-each-snp" title="Permalink to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wiho_het</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;230113_wiho_het.npy&#39;</span><span class="p">,</span> <span class="n">mmap_mode</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
-
-<span class="n">het_per_snp</span> <span class="o">=</span> <span class="p">[]</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">selected_snps</span><span class="p">):</span>
-    
-    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">wiho_het</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:])</span>
-    
-    <span class="n">het_per_snp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s2">&quot;230317_het_per_snp&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filepath</span><span class="p">:</span>
-    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">het_per_snp</span><span class="p">,</span> <span class="n">filepath</span><span class="p">)</span>        
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="id2">
-<h1>Run<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h1>
 <section id="create-snp-filter-to-filter-out-possible-hyperhets">
 <h2>Create <code class="docutils literal notranslate"><span class="pre">snp_filter</span></code> to filter out possible hyperhets<a class="headerlink" href="#create-snp-filter-to-filter-out-possible-hyperhets" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
@@ -792,9 +545,6 @@ document.write(`
 </div>
 </div>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="id3">
-<h1>Run<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h1>
 <section id="create-sample-filter-to-select-a-particular-geographical-region">
 <h2>Create <code class="docutils literal notranslate"><span class="pre">sample_filter</span></code> to select a particular geographical region<a class="headerlink" href="#create-sample-filter-to-select-a-particular-geographical-region" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
@@ -830,9 +580,6 @@ document.write(`
 </div>
 </div>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="id4">
-<h1>Run<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h1>
 <section id="calculate-mean-heterozygosity-per-sample-after-filtering-samples-and-snps">
 <h2>Calculate mean heterozygosity per sample after filtering samples and SNPs<a class="headerlink" href="#calculate-mean-heterozygosity-per-sample-after-filtering-samples-and-snps" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
@@ -874,9 +621,6 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
 1000
 2000
-3000
-4000
-5000
 </pre></div>
 </div>
 </div>
@@ -888,7 +632,7 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># All regions - only SNPs with maf &lt; 0.01</span>
 
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s2">&quot;230317_het_per_sample_ALL&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filepath</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s2">&quot;230116_het_per_sample_02&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filepath</span><span class="p">:</span>
     <span class="n">het_per_sample</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
     
 <span class="n">selected_snps</span> <span class="o">=</span> <span class="mi">494829</span> <span class="c1"># this is &lt;0.01 maf, total is 502221</span>
@@ -907,6 +651,9 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-4.772849038534566
+</pre></div>
+</div>
 <img alt="_images/04254cf8ae8bb5815e32797e86e640b648e3556b73da32f7b1dfb0eddb9ee77c.png" src="_images/04254cf8ae8bb5815e32797e86e640b648e3556b73da32f7b1dfb0eddb9ee77c.png" />
 </div>
 </div>
@@ -932,7 +679,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/0fa3fa668871de0c68c459c0999dfd4b95fbf45462da23b06db873f82a5353ed.png" src="_images/0fa3fa668871de0c68c459c0999dfd4b95fbf45462da23b06db873f82a5353ed.png" />
+<img alt="_images/523f40463febde88f7e34635b5a1c0addf3af39e11b2593fcdc397efa4640c5f.png" src="_images/523f40463febde88f7e34635b5a1c0addf3af39e11b2593fcdc397efa4640c5f.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1031,35 +778,14 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Pf6 heterozygous calls</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#run">Run</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extract-lists-of-samples-and-variant-properties-as-arrays">Extract lists of samples and variant properties as arrays</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#select-high-quality-biallelic-coding-snps">Select high-quality biallelic coding SNPs</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-allele-depths-for-selected-snps-in-allele-depth-1-npy">Save allele depths for selected SNPs in <code class="docutils literal notranslate"><span class="pre">allele_depth_1.npy</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Run</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#select-samples-and-list-region-of-each-selected-sample">Select samples and list region of each selected sample</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#copy-allele-depth-for-qc-pass-samples-from-allele-depth-1-into-allele-depth-2">Copy allele depth for QC pass samples from <code class="docutils literal notranslate"><span class="pre">allele_depth_1</span></code> into <code class="docutils literal notranslate"><span class="pre">allele_depth_2</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-within-host-heterozygosity-for-each-snp-and-save-as-wiho-het-npy">Calculate within-host heterozygosity for each SNP and save as <code class="docutils literal notranslate"><span class="pre">wiho_het.npy</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-mean-within-host-heterozygosity-for-each-snp">Calculate mean within-host heterozygosity for each SNP</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Run</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prior-to-this-notebook">Prior to this notebook</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#in-this-notebook">In this notebook</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#we-will-use-these-files">We will use these files</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-snp-filter-to-filter-out-possible-hyperhets">Create <code class="docutils literal notranslate"><span class="pre">snp_filter</span></code> to filter out possible hyperhets</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Run</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-sample-filter-to-select-a-particular-geographical-region">Create <code class="docutils literal notranslate"><span class="pre">sample_filter</span></code> to select a particular geographical region</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Run</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-mean-heterozygosity-per-sample-after-filtering-samples-and-snps">Calculate mean heterozygosity per sample after filtering samples and SNPs</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-histogram-of-within-host-nucleotide-diversity">Plot histogram of within-host nucleotide diversity</a></li>
 </ul>
-</li>
-</ul>
-
   </nav></div>
 
 </div></div>
