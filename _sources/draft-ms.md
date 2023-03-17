@@ -26,7 +26,7 @@
 ## Estimating the quantum of transmission
 
 - [Histogram of within-host nucleotide diversity (full version)](Pf6_het_calls_230317.ipynb)
-- [Histogram of within-host nucleotide diversity (short version](Pf6_het_calls_short_230317.ipynb)
+- [Histogram of within-host nucleotide diversity (short version](within-host-pi.ipynb)
 
 ## Fws methods
 
