@@ -463,35 +463,6 @@ document.write(`
 <li><p>plot a histogram of nucleotide diversity per sample</p></li>
 <li><p>view the histogram for different filter cutoffs for hyperhet SNPs and for different regions e.g. West Africa vs Southeast Asia</p></li>
 </ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
-
-<span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">&#39;/content/drive&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_path</span> <span class="o">=</span> <span class="s2">&quot;/content/drive/My Drive/Colab Data/Pf6&quot;</span>
-
-<span class="o">!</span>ls<span class="w"> </span><span class="s2">&quot;/content/drive/My Drive/Colab Data/Pf6&quot;</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">statistics</span> <span class="k">as</span> <span class="nn">stat</span>
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 <section id="we-will-use-these-files">
 <h2>We will use these files<a class="headerlink" href="#we-will-use-these-files" title="Permalink to this heading">#</a></h2>
@@ -510,6 +481,55 @@ document.write(`
 <ul class="simple">
 <li><p>Mean within-host heterozygosity for each SNP, calculated from wiho_het.npy</p></li>
 </ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
+
+<span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">&#39;/content/drive&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mounted at /content/drive
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_path</span> <span class="o">=</span> <span class="s2">&quot;/content/drive/My Drive/Colab Data/Pf6/&quot;</span>
+
+<span class="o">!</span>ls<span class="w"> </span><span class="s2">&quot;/content/drive/My Drive/Colab Data/Pf6/&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>230113_wiho_het.npy	    230316_het_per_sample_WAF  230317_het_per_snp
+230316_het_per_sample_ESEA  230316_region
+230316_het_per_sample_SEA   230317_het_per_sample_ALL
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">statistics</span> <span class="k">as</span> <span class="nn">stat</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">selected_snps</span> <span class="o">=</span> <span class="mi">502221</span>
+<span class="n">selected_samples</span> <span class="o">=</span> <span class="mi">5970</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="create-snp-filter-to-filter-out-possible-hyperhets">
 <h2>Create <code class="docutils literal notranslate"><span class="pre">snp_filter</span></code> to filter out possible hyperhets<a class="headerlink" href="#create-snp-filter-to-filter-out-possible-hyperhets" title="Permalink to this heading">#</a></h2>
@@ -559,7 +579,7 @@ document.write(`
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">selected_samples</span><span class="p">):</span>
     
-    <span class="k">if</span> <span class="n">region</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">False</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">region</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;CAF&quot;</span> <span class="ow">or</span> <span class="n">region</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;EAF&quot;</span><span class="p">:</span>
         
         <span class="n">sample_filter</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
         
@@ -574,7 +594,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This includes 5970 samples
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This includes 1083 samples
 </pre></div>
 </div>
 </div>
@@ -585,6 +605,8 @@ document.write(`
 <ul class="simple">
 <li><p>Creates a list of het values, one for each selected &amp; filtered sample</p></li>
 <li><p>This is the mean het for selected &amp; filtered SNPs and not for all nucleotide positions</p></li>
+<li><p>This will take approximately 40 minutes??</p></li>
+<li><p>Save the output for future use</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -612,15 +634,13 @@ document.write(`
         
         <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
         
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s2">&quot;230317_het_per_sample_ALL&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filepath</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s2">&quot;230317_het_per_sample_CAF_EAF&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filepath</span><span class="p">:</span>
     <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">het_per_sample</span><span class="p">,</span> <span class="n">filepath</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
-1000
-2000
 </pre></div>
 </div>
 </div>
