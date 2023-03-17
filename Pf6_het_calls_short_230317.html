@@ -634,7 +634,7 @@ document.write(`
         
         <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
         
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s2">&quot;230317_het_per_sample_CAF_EAF&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filepath</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s2">&quot;230317_het_per_sample_ALL&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filepath</span><span class="p">:</span>
     <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">het_per_sample</span><span class="p">,</span> <span class="n">filepath</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -652,7 +652,7 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># All regions - only SNPs with maf &lt; 0.01</span>
 
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s2">&quot;230116_het_per_sample_02&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filepath</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s2">&quot;230116_het_per_sample_ALL&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filepath</span><span class="p">:</span>
     <span class="n">het_per_sample</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
     
 <span class="n">selected_snps</span> <span class="o">=</span> <span class="mi">494829</span> <span class="c1"># this is &lt;0.01 maf, total is 502221</span>
