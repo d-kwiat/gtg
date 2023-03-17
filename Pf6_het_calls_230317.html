@@ -416,10 +416,11 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Pf6 heterozygous calls</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#run">Run</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#copy-list-of-samples-into-numpy-array">Copy list of samples into numpy array</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#copy-variant-properties-into-a-set-of-numpy-arrays">Copy variant properties into a set of numpy arrays</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-mask-of-high-quality-biallelic-coding-snps-called-select">Create a mask of high-quality biallelic coding SNPs called <code class="docutils literal notranslate"><span class="pre">select</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-allele-depths-for-selected-snps-in-allele-depth-1-npy">Save allele depths for selected SNPs in <code class="docutils literal notranslate"><span class="pre">allele_depth_1.npy</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#copy-samples-and-variant-properties-into-arrays">Copy samples and variant properties into arrays</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#select-high-quality-biallelic-coding-snps">Select high-quality biallelic coding SNPs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#save-allele-depths-for-selected-snps-in-allele-depth-1-npy">Save allele depths for selected SNPs in <code class="docutils literal notranslate"><span class="pre">allele_depth_1.npy</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Run</a><ul class="visible nav section-nav flex-column">
@@ -503,20 +504,15 @@ document.write(`
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="run">
 <h1>Run<a class="headerlink" href="#run" title="Permalink to this heading">#</a></h1>
-<section id="copy-list-of-samples-into-numpy-array">
-<h2>Copy list of samples into numpy array<a class="headerlink" href="#copy-list-of-samples-into-numpy-array" title="Permalink to this heading">#</a></h2>
+<section id="copy-samples-and-variant-properties-into-arrays">
+<h2>Copy samples and variant properties into arrays<a class="headerlink" href="#copy-samples-and-variant-properties-into-arrays" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>7,113 samples</p></li>
+<li><p>6,051,696 variants</p></li>
 </ul>
 </section>
-<section id="copy-variant-properties-into-a-set-of-numpy-arrays">
-<h2>Copy variant properties into a set of numpy arrays<a class="headerlink" href="#copy-variant-properties-into-a-set-of-numpy-arrays" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p>each array has data for 6,051,696 variants</p></li>
-</ul>
-</section>
-<section id="create-a-mask-of-high-quality-biallelic-coding-snps-called-select">
-<h2>Create a mask of high-quality biallelic coding SNPs called <code class="docutils literal notranslate"><span class="pre">select</span></code><a class="headerlink" href="#create-a-mask-of-high-quality-biallelic-coding-snps-called-select" title="Permalink to this heading">#</a></h2>
+<section id="select-high-quality-biallelic-coding-snps">
+<h2>Select high-quality biallelic coding SNPs<a class="headerlink" href="#select-high-quality-biallelic-coding-snps" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>high quality means ‘filter_pass == True’ &amp; ‘vqslod &gt; 3’</p></li>
 <li><p>502,221 variants meet criteria</p></li>
@@ -533,7 +529,7 @@ document.write(`
 <span class="n">numalt</span> <span class="o">=</span> <span class="n">callset</span><span class="p">[</span><span class="s1">&#39;variants/numalt&#39;</span><span class="p">][:]</span>
 <span class="n">effect</span> <span class="o">=</span> <span class="n">callset</span><span class="p">[</span><span class="s1">&#39;variants/SNPEFF_EFFECT&#39;</span><span class="p">][:]</span>
 
-<span class="c1"># select biallelic synonymous coding SNPs</span>
+<span class="c1"># select biallelic synonymous coding SNPs and create a mask</span>
 <span class="n">select</span> <span class="o">=</span> <span class="p">(</span><span class="n">filter_pass</span> <span class="o">==</span> <span class="kc">True</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">snp</span> <span class="o">==</span> <span class="kc">True</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">numalt</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">coding</span> <span class="o">==</span> <span class="kc">True</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">vqslod</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">)</span>
 
 <span class="c1"># &amp; (effect == &#39;SYNONYMOUS_CODING&#39;) </span>
@@ -554,9 +550,8 @@ document.write(`
 </div>
 </div>
 </div>
-</section>
 <section id="save-allele-depths-for-selected-snps-in-allele-depth-1-npy">
-<h2>Save allele depths for selected SNPs in <code class="docutils literal notranslate"><span class="pre">allele_depth_1.npy</span></code><a class="headerlink" href="#save-allele-depths-for-selected-snps-in-allele-depth-1-npy" title="Permalink to this heading">#</a></h2>
+<h3>Save allele depths for selected SNPs in <code class="docutils literal notranslate"><span class="pre">allele_depth_1.npy</span></code><a class="headerlink" href="#save-allele-depths-for-selected-snps-in-allele-depth-1-npy" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Use the <code class="docutils literal notranslate"><span class="pre">select</span></code> mask created above to pull out selected SNPs</p></li>
 <li><p>Copy allele depths for selected SNPs from ‘calldata/AD’ into <code class="docutils literal notranslate"><span class="pre">selected_gt_1</span></code></p>
@@ -636,6 +631,7 @@ document.write(`
 </div>
 </div>
 </div>
+</section>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="id1">
@@ -6077,10 +6073,11 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Pf6 heterozygous calls</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#run">Run</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#copy-list-of-samples-into-numpy-array">Copy list of samples into numpy array</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#copy-variant-properties-into-a-set-of-numpy-arrays">Copy variant properties into a set of numpy arrays</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-mask-of-high-quality-biallelic-coding-snps-called-select">Create a mask of high-quality biallelic coding SNPs called <code class="docutils literal notranslate"><span class="pre">select</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-allele-depths-for-selected-snps-in-allele-depth-1-npy">Save allele depths for selected SNPs in <code class="docutils literal notranslate"><span class="pre">allele_depth_1.npy</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#copy-samples-and-variant-properties-into-arrays">Copy samples and variant properties into arrays</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#select-high-quality-biallelic-coding-snps">Select high-quality biallelic coding SNPs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#save-allele-depths-for-selected-snps-in-allele-depth-1-npy">Save allele depths for selected SNPs in <code class="docutils literal notranslate"><span class="pre">allele_depth_1.npy</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Run</a><ul class="visible nav section-nav flex-column">
