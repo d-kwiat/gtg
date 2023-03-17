@@ -24,7 +24,6 @@ Thus the genomic transmission graph allows for superinfection and recombination 
 
 Our challenge is to define the essential parameters of the genomic transmission graph and to understand how they are related to genetic variation.  To understand the scientific concepts you could work through the sections of this book in the following order:
 
-1. [Underlying concepts](underlying-concepts.md)
 1. [The basic model](basic-model.md)
    * [Time to coalescence](coalescence-time-basic.ipynb)
    * [Nucleotide diversity](nucleotide-diversity.ipynb)

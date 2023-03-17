@@ -23,6 +23,10 @@
 - [Migration and Fst](migration_Fst.ipynb)
 - [Migration time series](migration_time_series.ipynb)
 
+## Estimating the quantum of transmission
+
+- [Histogram of within-host nucleotide diversity](Pf6_het_calls_230317.ipynb)
+
 ## Fws methods
 
 - [Hw versus Hs](hw_vs_hs.ipynb)
