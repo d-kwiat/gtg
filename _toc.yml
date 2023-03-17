@@ -18,6 +18,7 @@ chapters:
       - file: migration-simple
   - file: within-host
     sections:
+      - file: within-host-pi
       - file: hw-hs
       - file: fws-compare-methods
   - file: coalestr-features
