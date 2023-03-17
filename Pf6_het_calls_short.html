@@ -63,7 +63,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Pf6_het_calls_short_230317';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Pf6_het_calls_short';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -244,7 +244,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://colab.research.google.com/github/d-kwiat/gtg/blob/main/Pf6_het_calls_short_230317.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/d-kwiat/gtg/blob/main/Pf6_het_calls_short.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -292,7 +292,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/d-kwiat/gtg/issues/new?title=Issue%20on%20page%20%2FPf6_het_calls_short_230317.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/d-kwiat/gtg/issues/new?title=Issue%20on%20page%20%2FPf6_het_calls_short.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -322,7 +322,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="_sources/Pf6_het_calls_short_230317.ipynb" target="_blank"
+      <li><a href="_sources/Pf6_het_calls_short.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -414,8 +414,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prior-to-this-notebook">Prior to this notebook</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#in-this-notebook">In this notebook</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#source-of-the-data">Source of the data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#we-will-use-these-files">We will use these files</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-snp-filter-to-filter-out-possible-hyperhets">Create <code class="docutils literal notranslate"><span class="pre">snp_filter</span></code> to filter out possible hyperhets</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-sample-filter-to-select-a-particular-geographical-region">Create <code class="docutils literal notranslate"><span class="pre">sample_filter</span></code> to select a particular geographical region</a></li>
@@ -434,46 +433,36 @@ document.write(`
                   
   <section id="pf6-within-host-nucleotide-diversity">
 <h1>Pf6 within-host nucleotide diversity<a class="headerlink" href="#pf6-within-host-nucleotide-diversity" title="Permalink to this heading">#</a></h1>
-<p>This code examines the frequency distribution of within-host nucleotide diversity <span class="math notranslate nohighlight">\(\pi_W\)</span> in the <a class="reference external" href="https://www.malariagen.net/sites/default/files/File8_Pf_6_README_20191010_0.txt">Pf6 dataset</a>.  If you scroll to the bottom of this page you will see that <span class="math notranslate nohighlight">\(\pi_W\)</span> has a strikingly bimodal distribution.  We postulate that one of the peaks (with high <span class="math notranslate nohighlight">\(\pi_W\)</span>) represents hosts that have been superinfected, or who lie on a transmission chain where there is cotransmission following a recent episode of superinfection.  We postulate that the other peak (with low <span class="math notranslate nohighlight">\(\pi_w\)</span>) represents transmission chains where there has been no recent superinfection of cotransmission.  We can use the latter peak to estimate the quantum of transmission with the formula <span class="math notranslate nohighlight">\(Q = \pi_W / 2 \mu\)</span>.</p>
-<section id="prior-to-this-notebook">
-<h2>Prior to this notebook<a class="headerlink" href="#prior-to-this-notebook" title="Permalink to this heading">#</a></h2>
+<p>This code examines the frequency distribution of within-host nucleotide diversity <span class="math notranslate nohighlight">\(\pi_W\)</span> in samples taken from malaria-infected individuals around the world.</p>
 <ul class="simple">
-<li><p>Zarr data and sample metadata were downloaded to  ThinkPad_2022 in ‘C:\Users\dkwia\Data\Pf6'.</p></li>
-<li><p>Following steps were performed using \Github\gtg\Pf6_het_calls_230317.ipynb</p></li>
-<li><p>extract lists of samples (n = 7,113) and variant properties (n = 6,051,696) as arrays</p></li>
-<li><p>select variants that are high-quality biallelic coding SNPs (n = 502,221). High quality means ‘filter_pass == True’ &amp; ‘vqslod &gt; 3’</p></li>
-<li><p>extract allele depth for high-quality SNPs from Zarr into <code class="docutils literal notranslate"><span class="pre">allele_depth_1.npy</span></code>.  We do this in chunks of 10,000 variants at a time to avoid memory problems</p></li>
-<li><p>extract sample metadata from samples.txt into a dataframe, then read info about sample QC into an array</p></li>
-<li><p>select samples that passed QC (n = 5,970) and record their geographic region in a list called ‘region’.</p></li>
-<li><p>extract allele depth for high-quality SNPs and high-quality samples (n = 5,970) into <code class="docutils literal notranslate"><span class="pre">allele_depth_2.npy</span></code></p></li>
-<li><p>calculate within-host heterozygosity for each SNP in each sample and save to <code class="docutils literal notranslate"><span class="pre">wiho_het.npy</span></code></p></li>
-<li><p>calculate mean within-host heterozygosity for each SNP across all samples and save to a list called ‘wiho_het_per_snp’</p></li>
+<li><p>If you scroll to the bottom of this page you will see that <span class="math notranslate nohighlight">\(\pi_W\)</span> has a strikingly bimodal distribution.</p></li>
+<li><p>We postulate that one of the peaks (with high <span class="math notranslate nohighlight">\(\pi_W\)</span>) represents hosts that have been superinfected, or who lie on a transmission chain where there is cotransmission following a recent episode of superinfection.</p></li>
+<li><p>We postulate that the other peak (with low <span class="math notranslate nohighlight">\(\pi_w\)</span>) represents transmission chains where there has been no recent superinfection of cotransmission.</p></li>
+<li><p>We can use the low <span class="math notranslate nohighlight">\(\pi_W\)</span> peak to estimate the quantum of transmission with the formula <span class="math notranslate nohighlight">\(Q = \pi_W / 2 \mu\)</span>.</p></li>
 </ul>
-</section>
-<section id="in-this-notebook">
-<h2>In this notebook<a class="headerlink" href="#in-this-notebook" title="Permalink to this heading">#</a></h2>
+<section id="source-of-the-data">
+<h2>Source of the data<a class="headerlink" href="#source-of-the-data" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>using wiho_het_per_snp, create <code class="docutils literal notranslate"><span class="pre">snp_filter</span></code> to filter out potential hyperhet SNPs</p></li>
-<li><p>create <code class="docutils literal notranslate"><span class="pre">sample_filter</span></code> to select samples from a particular geographical region</p></li>
-<li><p>calculate <span class="math notranslate nohighlight">\(\pi_W\)</span> for each sample, using mean within-host heterozygosity per sample, and allowing for the number of SNPs ascertained and the size of coding regions</p></li>
-<li><p>plot a histogram of nucleotide diversity per sample</p></li>
-<li><p>view the histogram for different filter cutoffs for hyperhet SNPs and for different regions e.g. West Africa vs Southeast Asia</p></li>
+<li><p>Data are from the <a class="reference external" href="https://www.malariagen.net/resource/26">MalariaGEN dataset</a> which has data on 6,051,696 variants in 7,113 samples from 30 countries.</p></li>
+<li><p>We select variants that are high-quality biallelic coding SNPs (n = 502,221). High quality means ‘filter_pass == True’ &amp; ‘vqslod &gt; 3’</p></li>
+<li><p>We select samples that passed QC (n = 5,970)</p></li>
+<li><p>We use the data on allele depth for reference and non-reference forms of these biallelic SNPs in individual samples, and from this we calculate within-host heterozygosity for each SNP in each sample.</p></li>
 </ul>
 </section>
 <section id="we-will-use-these-files">
 <h2>We will use these files<a class="headerlink" href="#we-will-use-these-files" title="Permalink to this heading">#</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">230113_wiho_het.npy</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">wiho_het.npy</span></code></p>
 <ul class="simple">
-<li><p>Gives within-host heterozygosity for each SNP (n = 502,221) and each sample (n = 5,970).</p></li>
-<li><p>As we have selected biallelic SNPs this is easy to calculate.  If ref_allele + alt_allele == 0 then we write het = 0.</p></li>
-<li><p>This file is 23.5GB because dtype=float</p></li>
+<li><p>Gives within-host heterozygosity for each SNP (n = 502,221) in each sample (n = 5,970).</p></li>
+<li><p>As we have selected biallelic SNPs this is easy to calculate.</p></li>
+<li><p>This is a large file - 23.5GB - so it takes a while to process</p></li>
 </ul>
-<p><code class="docutils literal notranslate"><span class="pre">230316_region</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">region</span></code></p>
 <ul class="simple">
 <li><p>A list of geographical regions for 5,970 selected samples</p></li>
 <li><p>‘SAM’=South America, ‘WAF’=West Africa, ‘CAF’=Central Africa, ‘EAF’=East African, ‘SAS’=South Asia, ‘WSEA’=Western SE Asia, ‘ESEA’=Eastern SE Asia, ‘OCE’=Oceania</p></li>
 </ul>
-<p><code class="docutils literal notranslate"><span class="pre">230317_het_per_snp</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">het_per_snp</span></code></p>
 <ul class="simple">
 <li><p>Mean within-host heterozygosity for each SNP, calculated from wiho_het.npy</p></li>
 </ul>
@@ -531,7 +520,7 @@ document.write(`
 <section id="create-snp-filter-to-filter-out-possible-hyperhets">
 <h2>Create <code class="docutils literal notranslate"><span class="pre">snp_filter</span></code> to filter out possible hyperhets<a class="headerlink" href="#create-snp-filter-to-filter-out-possible-hyperhets" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Here we use het &gt;= 0.02 as our criterion for exclusion</p></li>
+<li><p>Here we use het &lt; 0.02 as our criterion for inclusion</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -839,8 +828,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prior-to-this-notebook">Prior to this notebook</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#in-this-notebook">In this notebook</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#source-of-the-data">Source of the data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#we-will-use-these-files">We will use these files</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-snp-filter-to-filter-out-possible-hyperhets">Create <code class="docutils literal notranslate"><span class="pre">snp_filter</span></code> to filter out possible hyperhets</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-sample-filter-to-select-a-particular-geographical-region">Create <code class="docutils literal notranslate"><span class="pre">sample_filter</span></code> to select a particular geographical region</a></li>
