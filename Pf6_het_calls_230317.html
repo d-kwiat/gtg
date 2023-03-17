@@ -419,12 +419,12 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#copy-list-of-samples-into-numpy-array">Copy list of samples into numpy array</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#copy-variant-properties-into-a-set-of-numpy-arrays">Copy variant properties into a set of numpy arrays</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-mask-of-high-quality-biallelic-coding-snps-called-select">Create a mask of high-quality biallelic coding SNPs called <code class="docutils literal notranslate"><span class="pre">select</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-allele-depths-for-selected-snps-in-selected-gt-1-npy">Save allele depths for selected SNPs in <code class="docutils literal notranslate"><span class="pre">selected_gt_1.npy</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-allele-depths-for-selected-snps-in-allele-depth-1-npy">Save allele depths for selected SNPs in <code class="docutils literal notranslate"><span class="pre">allele_depth_1.npy</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Run</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#select-samples-and-list-region-of-each-selected-sample">Select samples and list region of each selected sample</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#copy-allele-depth-for-qc-pass-samples-from-selected-gt-1-into-selected-gt-2">Copy allele depth for QC pass samples from <code class="docutils literal notranslate"><span class="pre">selected_gt_1</span></code> into <code class="docutils literal notranslate"><span class="pre">selected_gt_2</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#copy-allele-depth-for-qc-pass-samples-from-allele-depth-1-into-allele-depth-2">Copy allele depth for QC pass samples from <code class="docutils literal notranslate"><span class="pre">allele_depth_1</span></code> into <code class="docutils literal notranslate"><span class="pre">allele_depth_2</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-within-host-heterozygosity-for-each-snp-and-save-as-wiho-het-npy">Calculate within-host heterozygosity for each SNP and save as <code class="docutils literal notranslate"><span class="pre">wiho_het.npy</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-mean-within-host-heterozygosity-for-each-snp">Calculate mean within-host heterozygosity for each SNP</a></li>
 </ul>
@@ -461,10 +461,10 @@ document.write(`
 <ul class="simple">
 <li><p>extract lists of samples (n = 7,113) and variant properties (n = 6,051,696) as numpy arrays</p></li>
 <li><p>select variants that are high-quality biallelic coding SNPs (n = 502,221)</p></li>
-<li><p>extract allele depth for high-quality SNPs from Zarr into <code class="docutils literal notranslate"><span class="pre">selected_gt_1.npy</span></code>.  We do this in chunks of 10,000 variants at a time to avoid memory problems</p></li>
+<li><p>extract allele depth for high-quality SNPs from Zarr into <code class="docutils literal notranslate"><span class="pre">allele_depth_1.npy</span></code>.  We do this in chunks of 10,000 variants at a time to avoid memory problems</p></li>
 <li><p>extract sample metadata from samples.txt into a dataframe</p></li>
 <li><p>read info about sample QC into an array</p></li>
-<li><p>extract allele depth for high-quality SNPs and high-quality samples (n = 5,970) into <code class="docutils literal notranslate"><span class="pre">selected_gt_2.npy</span></code></p></li>
+<li><p>extract allele depth for high-quality SNPs and high-quality samples (n = 5,970) into <code class="docutils literal notranslate"><span class="pre">allele_depth_2.npy</span></code></p></li>
 <li><p>calculate within-host heterozygosity for each SNP in each sample and save to <code class="docutils literal notranslate"><span class="pre">wiho_het.npy</span></code></p></li>
 <li><p>calculate mean within-host heterozygosity for each SNP across all samples and save to a list called wiho_het_per_snp</p></li>
 <li><p>using wiho_het_per_snp, create <code class="docutils literal notranslate"><span class="pre">snp_filter</span></code> to filter out potential hyperhet SNPs</p></li>
@@ -555,8 +555,8 @@ document.write(`
 </div>
 </div>
 </section>
-<section id="save-allele-depths-for-selected-snps-in-selected-gt-1-npy">
-<h2>Save allele depths for selected SNPs in <code class="docutils literal notranslate"><span class="pre">selected_gt_1.npy</span></code><a class="headerlink" href="#save-allele-depths-for-selected-snps-in-selected-gt-1-npy" title="Permalink to this heading">#</a></h2>
+<section id="save-allele-depths-for-selected-snps-in-allele-depth-1-npy">
+<h2>Save allele depths for selected SNPs in <code class="docutils literal notranslate"><span class="pre">allele_depth_1.npy</span></code><a class="headerlink" href="#save-allele-depths-for-selected-snps-in-allele-depth-1-npy" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Use the <code class="docutils literal notranslate"><span class="pre">select</span></code> mask created above to pull out selected SNPs</p></li>
 <li><p>Copy allele depths for selected SNPs from ‘calldata/AD’ into <code class="docutils literal notranslate"><span class="pre">selected_gt_1</span></code></p>
@@ -575,7 +575,7 @@ document.write(`
 
 <span class="n">ad</span> <span class="o">=</span> <span class="n">callset</span><span class="p">[</span><span class="s1">&#39;calldata/AD&#39;</span><span class="p">]</span>
 
-<span class="n">selected_gt_1</span> <span class="o">=</span> <span class="mi">9</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">selected_snps</span><span class="p">,</span> <span class="n">total_samples</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>
+<span class="n">allele_depth_1</span> <span class="o">=</span> <span class="mi">9</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">selected_snps</span><span class="p">,</span> <span class="n">total_samples</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>
 
 <span class="n">selected_snp_id</span> <span class="o">=</span> <span class="mi">0</span>
 
@@ -595,7 +595,7 @@ document.write(`
     
         <span class="k">if</span> <span class="n">select</span><span class="p">[</span><span class="n">variant_id</span><span class="p">]</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
             
-            <span class="n">selected_gt_1</span><span class="p">[</span><span class="n">selected_snp_id</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">chunk</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+            <span class="n">allele_depth_1</span><span class="p">[</span><span class="n">selected_snp_id</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">chunk</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
             
             <span class="n">selected_snp_id</span> <span class="o">+=</span> <span class="mi">1</span>
             
@@ -616,7 +616,7 @@ document.write(`
     
     <span class="k">if</span> <span class="n">select</span><span class="p">[(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">chunk_size</span> <span class="o">+</span> <span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
             
-        <span class="n">selected_gt_1</span><span class="p">[</span><span class="n">selected_snp_id</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">chunk</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+        <span class="n">allele_depth_1</span><span class="p">[</span><span class="n">selected_snp_id</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">chunk</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
         
         <span class="n">selected_snp_id</span> <span class="o">+=</span> <span class="mi">1</span>
             
@@ -631,7 +631,7 @@ document.write(`
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;total of </span><span class="si">{0:d}</span><span class="s1"> selected snps&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">total_snps</span><span class="p">))</span>
 
-<span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;221221_selected_gt_1&#39;</span><span class="p">,</span> <span class="n">selected_gt_1</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;221221_selected_gt_1&#39;</span><span class="p">,</span> <span class="n">allele_depth_1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -675,25 +675,25 @@ document.write(`
 </div>
 </div>
 </section>
-<section id="copy-allele-depth-for-qc-pass-samples-from-selected-gt-1-into-selected-gt-2">
-<h2>Copy allele depth for QC pass samples from <code class="docutils literal notranslate"><span class="pre">selected_gt_1</span></code> into <code class="docutils literal notranslate"><span class="pre">selected_gt_2</span></code><a class="headerlink" href="#copy-allele-depth-for-qc-pass-samples-from-selected-gt-1-into-selected-gt-2" title="Permalink to this heading">#</a></h2>
+<section id="copy-allele-depth-for-qc-pass-samples-from-allele-depth-1-into-allele-depth-2">
+<h2>Copy allele depth for QC pass samples from <code class="docutils literal notranslate"><span class="pre">allele_depth_1</span></code> into <code class="docutils literal notranslate"><span class="pre">allele_depth_2</span></code><a class="headerlink" href="#copy-allele-depth-for-qc-pass-samples-from-allele-depth-1-into-allele-depth-2" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>‘QC pass’ field in samples.txt gives True/False</p></li>
 <li><p>Save as .npy file (~11.7GB) so that this step only has to be run once</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">selected_gt_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;221221_selected_gt_1.npy&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">allele_depth_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;221221_selected_gt_1.npy&#39;</span><span class="p">)</span>
 
-<span class="n">selected_gt_2</span> <span class="o">=</span> <span class="mi">9</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">selected_snps</span><span class="p">,</span> <span class="n">selected_samples</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>
+<span class="n">allele_depth_2</span> <span class="o">=</span> <span class="mi">9</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">selected_snps</span><span class="p">,</span> <span class="n">selected_samples</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">total_samples</span><span class="p">):</span>
     
     <span class="k">if</span> <span class="n">select_sample</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
         
-        <span class="n">selected_gt_2</span><span class="p">[:,</span> <span class="n">selected_sample_id</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">selected_gt_1</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="p">:]</span>
+        <span class="n">allele_depth_2</span><span class="p">[:,</span> <span class="n">selected_sample_id</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">allele_depth_1</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="p">:]</span>
         
-<span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;221221_selected_gt_2&#39;</span><span class="p">,</span> <span class="n">selected_gt_2</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;221221_selected_gt_2&#39;</span><span class="p">,</span> <span class="n">allele_depth_2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -712,17 +712,17 @@ document.write(`
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">selected_gt_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;221221_selected_gt_2.npy&#39;</span><span class="p">)</span> <span class="c1">#, mmap_mode = &#39;r&#39;)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">allele_depth_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;221221_selected_gt_2.npy&#39;</span><span class="p">)</span> <span class="c1">#, mmap_mode = &#39;r&#39;)</span>
 
-<span class="n">selected_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">selected_gt_2</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">selected_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">allele_depth_2</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">])</span>
 
 <span class="n">wiho_het</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">selected_snps</span><span class="p">,</span> <span class="n">selected_samples</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">selected_snps</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">selected_samples</span><span class="p">):</span>
         
-        <span class="n">ref_allele</span> <span class="o">=</span> <span class="n">selected_gt_2</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
-        <span class="n">alt_allele</span> <span class="o">=</span> <span class="n">selected_gt_2</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">ref_allele</span> <span class="o">=</span> <span class="n">allele_depth_2</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="n">alt_allele</span> <span class="o">=</span> <span class="n">allele_depth_2</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
         <span class="n">denominator</span> <span class="o">=</span> <span class="n">ref_allele</span> <span class="o">+</span> <span class="n">alt_allele</span>
         <span class="k">if</span> <span class="n">denominator</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">allele_freq</span> <span class="o">=</span> <span class="n">alt_allele</span> <span class="o">/</span> <span class="n">denominator</span>
@@ -6080,12 +6080,12 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#copy-list-of-samples-into-numpy-array">Copy list of samples into numpy array</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#copy-variant-properties-into-a-set-of-numpy-arrays">Copy variant properties into a set of numpy arrays</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-mask-of-high-quality-biallelic-coding-snps-called-select">Create a mask of high-quality biallelic coding SNPs called <code class="docutils literal notranslate"><span class="pre">select</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-allele-depths-for-selected-snps-in-selected-gt-1-npy">Save allele depths for selected SNPs in <code class="docutils literal notranslate"><span class="pre">selected_gt_1.npy</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-allele-depths-for-selected-snps-in-allele-depth-1-npy">Save allele depths for selected SNPs in <code class="docutils literal notranslate"><span class="pre">allele_depth_1.npy</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Run</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#select-samples-and-list-region-of-each-selected-sample">Select samples and list region of each selected sample</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#copy-allele-depth-for-qc-pass-samples-from-selected-gt-1-into-selected-gt-2">Copy allele depth for QC pass samples from <code class="docutils literal notranslate"><span class="pre">selected_gt_1</span></code> into <code class="docutils literal notranslate"><span class="pre">selected_gt_2</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#copy-allele-depth-for-qc-pass-samples-from-allele-depth-1-into-allele-depth-2">Copy allele depth for QC pass samples from <code class="docutils literal notranslate"><span class="pre">allele_depth_1</span></code> into <code class="docutils literal notranslate"><span class="pre">allele_depth_2</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-within-host-heterozygosity-for-each-snp-and-save-as-wiho-het-npy">Calculate within-host heterozygosity for each SNP and save as <code class="docutils literal notranslate"><span class="pre">wiho_het.npy</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-mean-within-host-heterozygosity-for-each-snp">Calculate mean within-host heterozygosity for each SNP</a></li>
 </ul>
