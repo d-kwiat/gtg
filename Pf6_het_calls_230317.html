@@ -416,11 +416,9 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Pf6 heterozygous calls</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#run">Run</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#copy-samples-and-variant-properties-into-arrays">Copy samples and variant properties into arrays</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#select-high-quality-biallelic-coding-snps">Select high-quality biallelic coding SNPs</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#save-allele-depths-for-selected-snps-in-allele-depth-1-npy">Save allele depths for selected SNPs in <code class="docutils literal notranslate"><span class="pre">allele_depth_1.npy</span></code></a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extract-lists-of-samples-and-variant-properties-as-arrays">Extract lists of samples and variant properties as arrays</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#select-high-quality-biallelic-coding-snps">Select high-quality biallelic coding SNPs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-allele-depths-for-selected-snps-in-allele-depth-1-npy">Save allele depths for selected SNPs in <code class="docutils literal notranslate"><span class="pre">allele_depth_1.npy</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Run</a><ul class="visible nav section-nav flex-column">
@@ -460,7 +458,7 @@ document.write(`
 <p>My Drive/GitHub/gtg/Pf6_het_calls_230317.ipynb</p>
 <p>This code examines the frequency distribution of heterozgous genotype calls in the <a class="reference external" href="https://www.malariagen.net/sites/default/files/File8_Pf_6_README_20191010_0.txt">Pf6 dataset</a>.  It uses downloaded Zarr data and sample metadata that are stored locally on ThinkPad_2022 in ‘C:\Users\dkwia\Data\Pf6'.</p>
 <ul class="simple">
-<li><p>extract lists of samples (n = 7,113) and variant properties (n = 6,051,696) as numpy arrays</p></li>
+<li><p>extract lists of samples (n = 7,113) and variant properties (n = 6,051,696) as arrays</p></li>
 <li><p>select variants that are high-quality biallelic coding SNPs (n = 502,221)</p></li>
 <li><p>extract allele depth for high-quality SNPs from Zarr into <code class="docutils literal notranslate"><span class="pre">allele_depth_1.npy</span></code>.  We do this in chunks of 10,000 variants at a time to avoid memory problems</p></li>
 <li><p>extract sample metadata from samples.txt into a dataframe</p></li>
@@ -470,7 +468,7 @@ document.write(`
 <li><p>calculate mean within-host heterozygosity for each SNP across all samples and save to a list called wiho_het_per_snp</p></li>
 <li><p>using wiho_het_per_snp, create <code class="docutils literal notranslate"><span class="pre">snp_filter</span></code> to filter out potential hyperhet SNPs</p></li>
 <li><p>create <code class="docutils literal notranslate"><span class="pre">sample_filter</span></code> to select samples from a particular geographical region</p></li>
-<li><p>translate mean within-host heterozygosity per sample into <span class="math notranslate nohighlight">\(\pi_W\)</span> for each sample, allowing for the number of SNPs ascertained and the size of coding regions</p></li>
+<li><p>calculate <span class="math notranslate nohighlight">\(\pi_W\)</span> for each sample, using mean within-host heterozygosity per sample, and allowing for the number of SNPs ascertained and the size of coding regions</p></li>
 <li><p>plot a histogram of nucleotide diversity per sample</p></li>
 <li><p>view the histogram for different filter cutoffs for hyperhet SNPs and for different regions e.g. West Africa vs Southeast Asia</p></li>
 </ul>
@@ -504,8 +502,8 @@ document.write(`
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="run">
 <h1>Run<a class="headerlink" href="#run" title="Permalink to this heading">#</a></h1>
-<section id="copy-samples-and-variant-properties-into-arrays">
-<h2>Copy samples and variant properties into arrays<a class="headerlink" href="#copy-samples-and-variant-properties-into-arrays" title="Permalink to this heading">#</a></h2>
+<section id="extract-lists-of-samples-and-variant-properties-as-arrays">
+<h2>Extract lists of samples and variant properties as arrays<a class="headerlink" href="#extract-lists-of-samples-and-variant-properties-as-arrays" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>7,113 samples</p></li>
 <li><p>6,051,696 variants</p></li>
@@ -550,8 +548,9 @@ document.write(`
 </div>
 </div>
 </div>
+</section>
 <section id="save-allele-depths-for-selected-snps-in-allele-depth-1-npy">
-<h3>Save allele depths for selected SNPs in <code class="docutils literal notranslate"><span class="pre">allele_depth_1.npy</span></code><a class="headerlink" href="#save-allele-depths-for-selected-snps-in-allele-depth-1-npy" title="Permalink to this heading">#</a></h3>
+<h2>Save allele depths for selected SNPs in <code class="docutils literal notranslate"><span class="pre">allele_depth_1.npy</span></code><a class="headerlink" href="#save-allele-depths-for-selected-snps-in-allele-depth-1-npy" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Use the <code class="docutils literal notranslate"><span class="pre">select</span></code> mask created above to pull out selected SNPs</p></li>
 <li><p>Copy allele depths for selected SNPs from ‘calldata/AD’ into <code class="docutils literal notranslate"><span class="pre">selected_gt_1</span></code></p>
@@ -631,7 +630,6 @@ document.write(`
 </div>
 </div>
 </div>
-</section>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="id1">
@@ -6073,11 +6071,9 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Pf6 heterozygous calls</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#run">Run</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#copy-samples-and-variant-properties-into-arrays">Copy samples and variant properties into arrays</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#select-high-quality-biallelic-coding-snps">Select high-quality biallelic coding SNPs</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#save-allele-depths-for-selected-snps-in-allele-depth-1-npy">Save allele depths for selected SNPs in <code class="docutils literal notranslate"><span class="pre">allele_depth_1.npy</span></code></a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extract-lists-of-samples-and-variant-properties-as-arrays">Extract lists of samples and variant properties as arrays</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#select-high-quality-biallelic-coding-snps">Select high-quality biallelic coding SNPs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-allele-depths-for-selected-snps-in-allele-depth-1-npy">Save allele depths for selected SNPs in <code class="docutils literal notranslate"><span class="pre">allele_depth_1.npy</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Run</a><ul class="visible nav section-nav flex-column">
