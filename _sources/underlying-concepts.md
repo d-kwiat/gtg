@@ -31,7 +31,7 @@ Our challenge is to define the essential parameters of the genomic transmission 
    * [Identity by descent](ibd.ipynb)
 1. [Migration and population structure](migration-simple.ipynb)
 1. [Within-host diversity](within-host.ipynb)
-   * Estimating the quantum of transmission
+   * [Using $\pi_W$ to estimate the quantum of transmission $Q$](within-host-pi.ipynb)
    * [*Hw - Hs* relationship](hw-hs.ipynb)
-   * [Estimating the rate of superinfection](fws-compare-methods.ipynb)
+   * [Using $F_WS$ to estimate the rate of superinfection $\chi$](fws-compare-methods.ipynb)
 1. [Epidemiological scenarios](epidemiological-scenarios.md)
