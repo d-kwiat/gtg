@@ -33,5 +33,5 @@ Our challenge is to define the essential parameters of the genomic transmission 
 1. [Within-host diversity](within-host.ipynb)
    * [Using $\pi_W$ to estimate the quantum of transmission $Q$](within-host-pi.ipynb)
    * [*Hw - Hs* relationship](hw-hs.ipynb)
-   * [Using $F_WS$ to estimate the rate of superinfection $\chi$](fws-compare-methods.ipynb)
+   * [Using $F_{WS}$ to estimate the rate of superinfection $\chi$](fws-compare-methods.ipynb)
 1. [Epidemiological scenarios](epidemiological-scenarios.md)
