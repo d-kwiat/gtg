@@ -415,35 +415,18 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Pv4 heterozygous calls</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#run">Run</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extract-lists-of-samples-and-variant-properties-as-arrays">Extract lists of samples and variant properties as arrays</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#select-high-quality-biallelic-snps">Select high-quality biallelic SNPs</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-allele-depths-for-selected-snps-in-allele-depth-1-npy">Save allele depths for selected SNPs in <code class="docutils literal notranslate"><span class="pre">allele_depth_1.npy</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Run</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#select-samples-and-list-region-of-each-selected-sample">Select samples and list region of each selected sample</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#copy-allele-depth-for-qc-pass-samples-from-allele-depth-1-into-allele-depth-2">Copy allele depth for QC pass samples from <code class="docutils literal notranslate"><span class="pre">allele_depth_1</span></code> into <code class="docutils literal notranslate"><span class="pre">allele_depth_2</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-within-host-heterozygosity-for-each-snp-and-save-as-wiho-het-npy">Calculate within-host heterozygosity for each SNP and save as <code class="docutils literal notranslate"><span class="pre">wiho_het.npy</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-mean-within-host-heterozygosity-for-each-snp">Calculate mean within-host heterozygosity for each SNP</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Run</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-snp-filter-to-filter-out-possible-hyperhets">Create <code class="docutils literal notranslate"><span class="pre">snp_filter</span></code> to filter out possible hyperhets</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Run</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-sample-filter-to-select-a-particular-geographical-region">Create <code class="docutils literal notranslate"><span class="pre">sample_filter</span></code> to select a particular geographical region</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Run</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-mean-heterozygosity-per-sample-after-filtering-samples-and-snps">Calculate mean heterozygosity per sample after filtering samples and SNPs</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-histogram-of-within-host-nucleotide-diversity">Plot histogram of within-host nucleotide diversity</a></li>
 </ul>
-</li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -503,6 +486,19 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;G:</span><span class="se">\\</span><span class="s1">My Drive</span><span class="se">\\</span><span class="s1">Colab Data</span><span class="se">\\</span><span class="s1">Pv4</span><span class="se">\\</span><span class="s1">&#39;</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">statistics</span> <span class="k">as</span> <span class="nn">stat</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">callset</span> <span class="o">=</span> <span class="n">zarr</span><span class="o">.</span><span class="n">open_group</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;Pv_4.zarr&#39;</span><span class="p">,</span> <span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
 <span class="c1"># callset.tree()</span>
 </pre></div>
@@ -511,9 +507,6 @@ document.write(`
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">{"model_id": "9f52de55022f4a108612dcfc7df6d9ad", "version_major": 2, "version_minor": 0}</script></div>
 </div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="run">
-<h1>Run<a class="headerlink" href="#run" title="Permalink to this heading">#</a></h1>
 <section id="extract-lists-of-samples-and-variant-properties-as-arrays">
 <h2>Extract lists of samples and variant properties as arrays<a class="headerlink" href="#extract-lists-of-samples-and-variant-properties-as-arrays" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
@@ -643,9 +636,6 @@ document.write(`
 </div>
 </div>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>Run<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <section id="select-samples-and-list-region-of-each-selected-sample">
 <h2>Select samples and list region of each selected sample<a class="headerlink" href="#select-samples-and-list-region-of-each-selected-sample" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
@@ -772,9 +762,6 @@ document.write(`
 </div>
 </div>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="id2">
-<h1>Run<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h1>
 <section id="create-snp-filter-to-filter-out-possible-hyperhets">
 <h2>Create <code class="docutils literal notranslate"><span class="pre">snp_filter</span></code> to filter out possible hyperhets<a class="headerlink" href="#create-snp-filter-to-filter-out-possible-hyperhets" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
@@ -809,9 +796,6 @@ document.write(`
 </div>
 </div>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="id3">
-<h1>Run<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h1>
 <section id="create-sample-filter-to-select-a-particular-geographical-region">
 <h2>Create <code class="docutils literal notranslate"><span class="pre">sample_filter</span></code> to select a particular geographical region<a class="headerlink" href="#create-sample-filter-to-select-a-particular-geographical-region" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
@@ -847,9 +831,6 @@ document.write(`
 </div>
 </div>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="id4">
-<h1>Run<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h1>
 <section id="calculate-mean-heterozygosity-per-sample-after-filtering-samples-and-snps">
 <h2>Calculate mean heterozygosity per sample after filtering samples and SNPs<a class="headerlink" href="#calculate-mean-heterozygosity-per-sample-after-filtering-samples-and-snps" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
@@ -924,7 +905,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/04254cf8ae8bb5815e32797e86e640b648e3556b73da32f7b1dfb0eddb9ee77c.png" src="_images/04254cf8ae8bb5815e32797e86e640b648e3556b73da32f7b1dfb0eddb9ee77c.png" />
+<img alt="_images/fd1b07f1fc5577afa2bcb06d48e769f8b91a41bc16c017bce2a09dc67a22d9be.png" src="_images/fd1b07f1fc5577afa2bcb06d48e769f8b91a41bc16c017bce2a09dc67a22d9be.png" />
 </div>
 </div>
 </section>
@@ -973,35 +954,18 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Pv4 heterozygous calls</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#run">Run</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extract-lists-of-samples-and-variant-properties-as-arrays">Extract lists of samples and variant properties as arrays</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#select-high-quality-biallelic-snps">Select high-quality biallelic SNPs</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-allele-depths-for-selected-snps-in-allele-depth-1-npy">Save allele depths for selected SNPs in <code class="docutils literal notranslate"><span class="pre">allele_depth_1.npy</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Run</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#select-samples-and-list-region-of-each-selected-sample">Select samples and list region of each selected sample</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#copy-allele-depth-for-qc-pass-samples-from-allele-depth-1-into-allele-depth-2">Copy allele depth for QC pass samples from <code class="docutils literal notranslate"><span class="pre">allele_depth_1</span></code> into <code class="docutils literal notranslate"><span class="pre">allele_depth_2</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-within-host-heterozygosity-for-each-snp-and-save-as-wiho-het-npy">Calculate within-host heterozygosity for each SNP and save as <code class="docutils literal notranslate"><span class="pre">wiho_het.npy</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-mean-within-host-heterozygosity-for-each-snp">Calculate mean within-host heterozygosity for each SNP</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Run</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-snp-filter-to-filter-out-possible-hyperhets">Create <code class="docutils literal notranslate"><span class="pre">snp_filter</span></code> to filter out possible hyperhets</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Run</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-sample-filter-to-select-a-particular-geographical-region">Create <code class="docutils literal notranslate"><span class="pre">sample_filter</span></code> to select a particular geographical region</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Run</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-mean-heterozygosity-per-sample-after-filtering-samples-and-snps">Calculate mean heterozygosity per sample after filtering samples and SNPs</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-histogram-of-within-host-nucleotide-diversity">Plot histogram of within-host nucleotide diversity</a></li>
 </ul>
-</li>
-</ul>
-
   </nav></div>
 
 </div></div>
