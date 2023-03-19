@@ -418,7 +418,7 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Pv4 heterozygous calls</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#run">Run</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extract-lists-of-samples-and-variant-properties-as-arrays">Extract lists of samples and variant properties as arrays</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#select-high-quality-biallelic-coding-snps">Select high-quality biallelic coding SNPs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#select-high-quality-biallelic-snps">Select high-quality biallelic SNPs</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-allele-depths-for-selected-snps-in-allele-depth-1-npy">Save allele depths for selected SNPs in <code class="docutils literal notranslate"><span class="pre">allele_depth_1.npy</span></code></a></li>
 </ul>
 </li>
@@ -457,14 +457,14 @@ document.write(`
   <section id="pv4-heterozygous-calls">
 <h1>Pv4 heterozygous calls<a class="headerlink" href="#pv4-heterozygous-calls" title="Permalink to this heading">#</a></h1>
 <p>My Drive/GitHub/gtg/Pf4_het_calls_230318.ipynb</p>
-<p>This code examines the frequency distribution of heterozgous genotype calls in the <a class="reference external" href="https://www.malariagen.net/sites/default/files/File8_Pf_6_README_20191010_0.txt">Pv4 dataset</a>.  It uses downloaded Zarr data and sample metadata that are stored on Google Drive\My Drive\Colab Data\Pv4 in ‘C:\Users\dkwia\Data\Pf6'.</p>
+<p>This code examines the frequency distribution of heterozgous genotype calls in the <a class="reference external" href="https://www.malariagen.net/sites/default/files/File8_Pf_6_README_20191010_0.txt">Pv4 dataset</a>.  It uses downloaded Zarr data and sample metadata that are stored on Google Drive\My Drive\Colab Data\Pv4.</p>
 <ul class="simple">
-<li><p>extract lists of samples (n = 7,113) and variant properties (n = 6,051,696) as arrays</p></li>
-<li><p>select variants that are high-quality biallelic coding SNPs (n = 502,221)</p></li>
+<li><p>extract lists of samples (n = 1,895) and variant properties (n = 4,571,056) as arrays</p></li>
+<li><p>select variants that are high-quality biallelic coding SNPs (n = 429,612)</p></li>
 <li><p>extract allele depth for high-quality SNPs from Zarr into <code class="docutils literal notranslate"><span class="pre">allele_depth_1.npy</span></code>.  We do this in chunks of 10,000 variants at a time to avoid memory problems</p></li>
 <li><p>extract sample metadata from samples.txt into a dataframe</p></li>
 <li><p>read info about sample QC into an array</p></li>
-<li><p>extract allele depth for high-quality SNPs and high-quality samples (n = 5,970) into <code class="docutils literal notranslate"><span class="pre">allele_depth_2.npy</span></code></p></li>
+<li><p>extract allele depth for high-quality SNPs and high-quality samples (n = 1,072) into <code class="docutils literal notranslate"><span class="pre">allele_depth_2.npy</span></code></p></li>
 <li><p>calculate within-host heterozygosity for each SNP in each sample and save to <code class="docutils literal notranslate"><span class="pre">wiho_het.npy</span></code></p></li>
 <li><p>calculate mean within-host heterozygosity for each SNP across all samples and save to a list called wiho_het_per_snp</p></li>
 <li><p>using wiho_het_per_snp, create <code class="docutils literal notranslate"><span class="pre">snp_filter</span></code> to filter out potential hyperhet SNPs</p></li>
@@ -486,7 +486,10 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">zarr</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>zarr
+
+<span class="kn">import</span> <span class="nn">zarr</span>
+<span class="kn">import</span> <span class="nn">numcodecs</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">json</span>
@@ -501,7 +504,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">callset</span> <span class="o">=</span> <span class="n">zarr</span><span class="o">.</span><span class="n">open_group</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;Pv_4.zarr&#39;</span><span class="p">,</span> <span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
-<span class="n">callset</span><span class="o">.</span><span class="n">tree</span><span class="p">()</span>
+<span class="c1"># callset.tree()</span>
 </pre></div>
 </div>
 </div>
@@ -514,16 +517,16 @@ document.write(`
 <section id="extract-lists-of-samples-and-variant-properties-as-arrays">
 <h2>Extract lists of samples and variant properties as arrays<a class="headerlink" href="#extract-lists-of-samples-and-variant-properties-as-arrays" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>7,113 samples</p></li>
-<li><p>6,051,696 variants</p></li>
+<li><p>1,895 samples</p></li>
+<li><p>4,571,056 variants</p></li>
 </ul>
 </section>
-<section id="select-high-quality-biallelic-coding-snps">
-<h2>Select high-quality biallelic coding SNPs<a class="headerlink" href="#select-high-quality-biallelic-coding-snps" title="Permalink to this heading">#</a></h2>
+<section id="select-high-quality-biallelic-snps">
+<h2>Select high-quality biallelic SNPs<a class="headerlink" href="#select-high-quality-biallelic-snps" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>high quality means ‘filter_pass == True’ &amp; ‘vqslod &gt; 3’</p></li>
-<li><p>502,221 variants meet criteria</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">select</span></code> is a mask for an array of 6,051,696 variants</p></li>
+<li><p>429,612 variants meet criteria</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">select</span></code> is a mask for an array of 4,571,056 variants</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -537,9 +540,9 @@ document.write(`
 <span class="n">effect</span> <span class="o">=</span> <span class="n">callset</span><span class="p">[</span><span class="s1">&#39;variants/SNPEFF_EFFECT&#39;</span><span class="p">][:]</span>
 
 <span class="c1"># select biallelic synonymous coding SNPs and create a mask</span>
-<span class="n">select</span> <span class="o">=</span> <span class="p">(</span><span class="n">filter_pass</span> <span class="o">==</span> <span class="kc">True</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">snp</span> <span class="o">==</span> <span class="kc">True</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">numalt</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">coding</span> <span class="o">==</span> <span class="kc">True</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">vqslod</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">select</span> <span class="o">=</span> <span class="p">(</span><span class="n">filter_pass</span> <span class="o">==</span> <span class="kc">True</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">snp</span> <span class="o">==</span> <span class="kc">True</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">numalt</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">vqslod</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">)</span>
 
-<span class="c1"># &amp; (effect == &#39;SYNONYMOUS_CODING&#39;) </span>
+<span class="c1"># &amp; (coding == True) &amp; (effect == &#39;SYNONYMOUS_CODING&#39;) </span>
 
 <span class="n">selected_snps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">select</span> <span class="o">==</span> <span class="kc">True</span><span class="p">)</span>
 
@@ -568,7 +571,7 @@ document.write(`
 <li><p>Since we focus on biallelic SNPs we include only the first two alleles from calldata/AD</p></li>
 </ul>
 </li>
-<li><p>This file is 14GB</p></li>
+<li><p>This file is 3.2GB</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -634,7 +637,7 @@ document.write(`
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;total of </span><span class="si">{0:d}</span><span class="s1"> selected snps&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">total_snps</span><span class="p">))</span>
 
-<span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;221221_selected_gt_1&#39;</span><span class="p">,</span> <span class="n">allele_depth_1</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;220318_allele_depth_1&#39;</span><span class="p">,</span> <span class="n">allele_depth_1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -646,7 +649,7 @@ document.write(`
 <section id="select-samples-and-list-region-of-each-selected-sample">
 <h2>Select samples and list region of each selected sample<a class="headerlink" href="#select-samples-and-list-region-of-each-selected-sample" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>‘Population’ in Pf6_samples.txt gives: ‘SAM’=South America, ‘WAF’=West Africa, ‘CAF’=Central Africa, ‘EAF’=East African, ‘SAS’=South Asia, ‘WSEA’=Western SE Asia, ‘ESEA’=Eastern SE Asia, ‘OCE’=Oceania</p></li>
+<li><p>‘Population’ in Pv4_samples.txt gives: LAM=Latin America, AF=Africa, WAS=Western Asia, WSEA=Western SE Asia, ESEA=Eastern SE Asia, MSEA=Maritime SE Asia, OCE=Oceania, unassigned</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -666,7 +669,7 @@ document.write(`
         
         <span class="n">region</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Population&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
         
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s2">&quot;230316_region&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s2">&quot;230318_region&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
     <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">region</span><span class="p">,</span> <span class="n">fp</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -686,9 +689,11 @@ document.write(`
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">allele_depth_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;221221_selected_gt_1.npy&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">allele_depth_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;230318_allele_depth_1.npy&#39;</span><span class="p">)</span>
 
 <span class="n">allele_depth_2</span> <span class="o">=</span> <span class="mi">9</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">selected_snps</span><span class="p">,</span> <span class="n">selected_samples</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>
+
+<span class="n">selected_sample_id</span> <span class="o">=</span> <span class="mi">0</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">total_samples</span><span class="p">):</span>
     
@@ -696,7 +701,9 @@ document.write(`
         
         <span class="n">allele_depth_2</span><span class="p">[:,</span> <span class="n">selected_sample_id</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">allele_depth_1</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="p">:]</span>
         
-<span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;221221_selected_gt_2&#39;</span><span class="p">,</span> <span class="n">allele_depth_2</span><span class="p">)</span>
+        <span class="n">selected_sample_id</span> <span class="o">+=</span> <span class="mi">1</span>
+        
+<span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;230318_allele_depth_2&#39;</span><span class="p">,</span> <span class="n">allele_depth_2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -711,11 +718,11 @@ document.write(`
 <h2>Calculate within-host heterozygosity for each SNP and save as <code class="docutils literal notranslate"><span class="pre">wiho_het.npy</span></code><a class="headerlink" href="#calculate-within-host-heterozygosity-for-each-snp-and-save-as-wiho-het-npy" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>if ref_allele + alt_allele == 1 then write het = 0.</p></li>
-<li><p>this file is 23.5GB because dtype=float</p></li>
+<li><p>this file is 3.6GB because dtype=float</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">allele_depth_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;221221_selected_gt_2.npy&#39;</span><span class="p">)</span> <span class="c1">#, mmap_mode = &#39;r&#39;)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">allele_depth_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;230318_allele_depth_2.npy&#39;</span><span class="p">)</span> <span class="c1">#, mmap_mode = &#39;r&#39;)</span>
 
 <span class="n">selected_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">allele_depth_2</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">])</span>
 
@@ -738,7 +745,7 @@ document.write(`
     <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
         
-<span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;230113_wiho_het.npy&#39;</span><span class="p">,</span> <span class="n">wiho_het</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;230318_wiho_het.npy&#39;</span><span class="p">,</span> <span class="n">wiho_het</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -748,7 +755,7 @@ document.write(`
 <h2>Calculate mean within-host heterozygosity for each SNP<a class="headerlink" href="#calculate-mean-within-host-heterozygosity-for-each-snp" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wiho_het</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;230113_wiho_het.npy&#39;</span><span class="p">,</span> <span class="n">mmap_mode</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wiho_het</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;230318_wiho_het.npy&#39;</span><span class="p">,</span> <span class="n">mmap_mode</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
 
 <span class="n">het_per_snp</span> <span class="o">=</span> <span class="p">[]</span>
 
@@ -758,7 +765,7 @@ document.write(`
     
     <span class="n">het_per_snp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
     
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s2">&quot;230317_het_per_snp&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filepath</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s2">&quot;230318_het_per_snp&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filepath</span><span class="p">:</span>
     <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">het_per_snp</span><span class="p">,</span> <span class="n">filepath</span><span class="p">)</span>        
 </pre></div>
 </div>
@@ -775,7 +782,7 @@ document.write(`
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s2">&quot;230317_het_per_snp&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s2">&quot;230318_het_per_snp&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
     <span class="n">het_per_snp</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
 
 <span class="n">snp_filter</span> <span class="o">=</span> <span class="p">[]</span>
@@ -808,11 +815,11 @@ document.write(`
 <section id="create-sample-filter-to-select-a-particular-geographical-region">
 <h2>Create <code class="docutils literal notranslate"><span class="pre">sample_filter</span></code> to select a particular geographical region<a class="headerlink" href="#create-sample-filter-to-select-a-particular-geographical-region" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>‘SAM’=South America, ‘WAF’=West Africa, ‘CAF’=Central Africa, ‘EAF’=East African, ‘SAS’=South Asia, ‘WSEA’=Western SE Asia, ‘ESEA’=Eastern SE Asia, ‘OCE’=Oceania</p></li>
+<li><p>LAM=Latin America, AF=Africa, WAS=Western Asia, WSEA=Western SE Asia, ESEA=Eastern SE Asia, MSEA=Maritime SE Asia, OCE=Oceania, unassigned</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s2">&quot;230316_region&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s2">&quot;230318_region&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
     <span class="n">region</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
 
 <span class="n">sample_filter</span> <span class="o">=</span> <span class="p">[]</span>
@@ -851,7 +858,7 @@ document.write(`
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wiho_het</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;230113_wiho_het.npy&#39;</span><span class="p">,</span> <span class="n">mmap_mode</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wiho_het</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;230318_wiho_het.npy&#39;</span><span class="p">,</span> <span class="n">mmap_mode</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
 
 <span class="n">het_per_sample</span> <span class="o">=</span> <span class="p">[]</span>
 
@@ -875,7 +882,7 @@ document.write(`
         
         <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
         
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s2">&quot;230317_het_per_sample_ALL&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filepath</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s2">&quot;230318_het_per_sample_ALL&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filepath</span><span class="p">:</span>
     <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">het_per_sample</span><span class="p">,</span> <span class="n">filepath</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -898,7 +905,7 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># All regions - only SNPs with maf &lt; 0.01</span>
 
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s2">&quot;230317_het_per_sample_ALL&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filepath</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s2">&quot;230318_het_per_sample_ALL&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filepath</span><span class="p">:</span>
     <span class="n">het_per_sample</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
     
 <span class="n">selected_snps</span> <span class="o">=</span> <span class="mi">494829</span> <span class="c1"># this is &lt;0.01 maf, total is 502221</span>
@@ -918,81 +925,6 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/04254cf8ae8bb5815e32797e86e640b648e3556b73da32f7b1dfb0eddb9ee77c.png" src="_images/04254cf8ae8bb5815e32797e86e640b648e3556b73da32f7b1dfb0eddb9ee77c.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Southeast Asia - only SNPs with maf &lt; 0.01 </span>
-
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s2">&quot;230316_het_per_sample_SEA&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filepath</span><span class="p">:</span>
-    <span class="n">het_per_sample</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
-    
-<span class="n">coding_positions</span> <span class="o">=</span> <span class="mi">12028350</span> <span class="c1"># from Gardner et al 2002</span>
-
-<span class="n">convert_het_to_pi</span> <span class="o">=</span> <span class="n">filtered_snps</span> <span class="o">/</span> <span class="n">coding_positions</span>
-
-<span class="n">het_per_sample_nonzero</span> <span class="o">=</span> <span class="p">[</span><span class="n">convert_het_to_pi</span> <span class="o">*</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">het_per_sample</span> <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>
-<span class="n">log_het_per_sample</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">het_per_sample_nonzero</span><span class="p">]</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">log_het_per_sample</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Within-host nucleotide diversity </span><span class="se">\u03C0</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number of samples&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/0fa3fa668871de0c68c459c0999dfd4b95fbf45462da23b06db873f82a5353ed.png" src="_images/0fa3fa668871de0c68c459c0999dfd4b95fbf45462da23b06db873f82a5353ed.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Eastern Southeast Asia - only SNPs with maf &lt; 0.01 </span>
-
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s2">&quot;230316_het_per_sample_ESEA&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filepath</span><span class="p">:</span>
-    <span class="n">het_per_sample</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
-    
-<span class="n">coding_positions</span> <span class="o">=</span> <span class="mi">12028350</span> <span class="c1"># from Gardner et al 2002</span>
-
-<span class="n">convert_het_to_pi</span> <span class="o">=</span> <span class="n">filtered_snps</span> <span class="o">/</span> <span class="n">coding_positions</span>
-
-<span class="n">het_per_sample_nonzero</span> <span class="o">=</span> <span class="p">[</span><span class="n">convert_het_to_pi</span> <span class="o">*</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">het_per_sample</span> <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>
-<span class="n">log_het_per_sample</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">het_per_sample_nonzero</span><span class="p">]</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">log_het_per_sample</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Within-host nucleotide diversity </span><span class="se">\u03C0</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number of samples&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/f8437fafd72b70a583fd996f0cbbbcb9b0076f8d6d1286b780a535ddedefa3d5.png" src="_images/f8437fafd72b70a583fd996f0cbbbcb9b0076f8d6d1286b780a535ddedefa3d5.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># West Africa - only SNPs with maf &lt; 0.01 </span>
-
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s2">&quot;230316_het_per_sample_WAF&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filepath</span><span class="p">:</span>
-    <span class="n">het_per_sample</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
-    
-<span class="n">coding_positions</span> <span class="o">=</span> <span class="mi">12028350</span> <span class="c1"># from Gardner et al 2002</span>
-
-<span class="n">convert_het_to_pi</span> <span class="o">=</span> <span class="n">filtered_snps</span> <span class="o">/</span> <span class="n">coding_positions</span>
-
-<span class="n">het_per_sample_nonzero</span> <span class="o">=</span> <span class="p">[</span><span class="n">convert_het_to_pi</span> <span class="o">*</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">het_per_sample</span> <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>
-<span class="n">log_het_per_sample</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">het_per_sample_nonzero</span><span class="p">]</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">log_het_per_sample</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Within-host nucleotide diversity </span><span class="se">\u03C0</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number of samples&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/e2de77ee7b20fb83eebba8f8a46259c42d845b023fec696d3225fa10c9fba06e.png" src="_images/e2de77ee7b20fb83eebba8f8a46259c42d845b023fec696d3225fa10c9fba06e.png" />
 </div>
 </div>
 </section>
@@ -1044,7 +976,7 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Pv4 heterozygous calls</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#run">Run</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extract-lists-of-samples-and-variant-properties-as-arrays">Extract lists of samples and variant properties as arrays</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#select-high-quality-biallelic-coding-snps">Select high-quality biallelic coding SNPs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#select-high-quality-biallelic-snps">Select high-quality biallelic SNPs</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-allele-depths-for-selected-snps-in-allele-depth-1-npy">Save allele depths for selected SNPs in <code class="docutils literal notranslate"><span class="pre">allele_depth_1.npy</span></code></a></li>
 </ul>
 </li>
