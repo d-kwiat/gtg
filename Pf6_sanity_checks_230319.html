@@ -418,6 +418,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prior-to-this-notebooks-we-have-been-through-these-steps">Prior to this notebooks we have been through these steps:</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-files-used-for-this-notebook">Data files used for this notebook</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#list-of-regions">List of regions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-the-difference-between-high-het-and-low-het-samples">Understanding the difference between high het and low het samples</a></li>
 </ul>
             </nav>
         </div>
@@ -543,6 +544,239 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">snp_mean</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">snp_count</span><span class="p">):</span>
+    
+    <span class="n">mean_snp_het</span> <span class="o">=</span> <span class="n">stat</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">wiho_het</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:])</span> 
+    <span class="n">snp_mean</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean_snp_het</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># All SNPs - their mean het in the full dataset</span>
+
+<span class="c1"># First we check for SNPs with mean het = 0</span>
+<span class="c1"># These could be the result of .. </span>
+<span class="c1"># .. removing low QC samples</span>
+<span class="c1"># .. and alt alleles that are non-polymorphic</span>
+<span class="c1"># .. and SNPs that never have het calls</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;There are&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">snp_mean</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span> <span class="s1">&#39;SNPs with mean het = 0&#39;</span><span class="p">)</span>
+
+<span class="n">log_het_per_snp</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">snp_mean</span> <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">log_het_per_snp</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Mean SNP het&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number of SNPs&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>There are 162397 SNPs with mean het = 0
+</pre></div>
+</div>
+<img alt="_images/a364d9b5f2628b2791b47b1ddd3e3632e79a7d81feab306e7118d77e96a1e74d.png" src="_images/a364d9b5f2628b2791b47b1ddd3e3632e79a7d81feab306e7118d77e96a1e74d.png" />
+</div>
+</div>
+</section>
+<section id="understanding-the-difference-between-high-het-and-low-het-samples">
+<h2>Understanding the difference between high het and low het samples<a class="headerlink" href="#understanding-the-difference-between-high-het-and-low-het-samples" title="Permalink to this heading">#</a></h2>
+<p>Look at frequency in low het samples of SNPs that are present in</p>
+<ul class="simple">
+<li><p>low het samples</p></li>
+<li><p>low het and high het samples</p></li>
+<li><p>low het and not high het samples</p></li>
+</ul>
+<p>Look at frequency in high het samples of SNPs that are present in</p>
+<ul class="simple">
+<li><p>high het samples</p></li>
+<li><p>high het and low het samples</p></li>
+<li><p>high het and not low het samples</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SNPs present in low het samples</span>
+<span class="c1"># looking at their het in low het samples</span>
+
+<span class="n">log_het_per_snp</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">snp_lo_lo</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">log_het_per_snp</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Mean SNP het&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number of SNPs&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/1a3ef07d3fe012a9671459ee0a458a99dd1bed301e90e4ca06c3f9c845957288.png" src="_images/1a3ef07d3fe012a9671459ee0a458a99dd1bed301e90e4ca06c3f9c845957288.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SNPs present in both high and low het samples</span>
+<span class="c1"># looking at their het in low het samples</span>
+
+<span class="n">log_het_per_snp</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">snp_hi_and_lo_in_lo</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">log_het_per_snp</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Mean SNP het&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number of SNPs&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/f251036ee866c758d3e1afedbb975093be2110d5b314a89d0e8d12b8e7461d30.png" src="_images/f251036ee866c758d3e1afedbb975093be2110d5b314a89d0e8d12b8e7461d30.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SNPs present in low not high het samples</span>
+<span class="c1"># looking at their het in low het samples</span>
+
+<span class="n">log_het_per_snp</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">snp_lo_not_hi_in_lo</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">log_het_per_snp</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Mean SNP het&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number of SNPs&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/09f9788a194ebc116b9bab0d43f055dd079332ee5bf51af9a1cb5d87aedf61be.png" src="_images/09f9788a194ebc116b9bab0d43f055dd079332ee5bf51af9a1cb5d87aedf61be.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SNPs present in high and low het samples</span>
+<span class="c1"># looking at their het in high het samples</span>
+
+<span class="n">log_het_per_snp</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">snp_hi_and_lo_in_hi</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">log_het_per_snp</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Mean SNP het&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number of SNPs&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/f05d0df694ad5bea5e05106b183f7224109866f610b5a5f4ae29bf5618ecbdba.png" src="_images/f05d0df694ad5bea5e05106b183f7224109866f610b5a5f4ae29bf5618ecbdba.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SNPs present in high not low het samples</span>
+<span class="c1"># looking at their het in high het samples</span>
+
+<span class="n">log_het_per_snp</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">snp_hi_not_lo_in_hi</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">log_het_per_snp</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Mean SNP het&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number of SNPs&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/50c8efcf3b275a0b447bf36c3b0a765693edb555569c2bbb61be3075fada7369.png" src="_images/50c8efcf3b275a0b447bf36c3b0a765693edb555569c2bbb61be3075fada7369.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SNPs present in high het samples</span>
+<span class="c1"># looking at their het in high het samples</span>
+
+<span class="n">log_het_per_snp</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">snp_hi_hi</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">log_het_per_snp</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Mean SNP het&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number of SNPs&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_16672</span>\<span class="mf">2007388796.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="c1"># looking at their het in high het samples</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> 
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">log_het_per_snp</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">snp_hi_hi</span><span class="p">]</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">log_het_per_snp</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Mean SNP het&#39;</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;snp_hi_hi&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">snp_hi_not_lo_in_hi</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">snp_lo_not_hi_in_lo</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">snp_count</span><span class="p">):</span>
+    
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">wiho_het</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:][</span><span class="n">hi_het</span><span class="p">])</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">wiho_het</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:][</span><span class="n">lo_het</span><span class="p">]):</span>
+        
+        <span class="n">mean_snp_het</span> <span class="o">=</span> <span class="n">stat</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">wiho_het</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:][</span><span class="n">hi_het</span><span class="p">])</span> 
+        <span class="n">snp_hi_not_lo_in_hi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean_snp_het</span><span class="p">)</span>
+        
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">wiho_het</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:][</span><span class="n">lo_het</span><span class="p">])</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">wiho_het</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:][</span><span class="n">hi_het</span><span class="p">]):</span>
+        
+        <span class="n">mean_snp_het</span> <span class="o">=</span> <span class="n">stat</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">wiho_het</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:][</span><span class="n">lo_het</span><span class="p">])</span> 
+        <span class="n">snp_lo_not_hi_in_lo</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean_snp_het</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">snp_hi_and_lo_in_hi</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">snp_hi_and_lo_in_lo</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">snp_count</span><span class="p">):</span>
+    
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">wiho_het</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:][</span><span class="n">hi_het</span><span class="p">])</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">wiho_het</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:][</span><span class="n">lo_het</span><span class="p">]):</span>
+        
+        <span class="n">mean_snp_het</span> <span class="o">=</span> <span class="n">stat</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">wiho_het</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:][</span><span class="n">hi_het</span><span class="p">])</span> 
+        <span class="n">snp_hi_and_lo_in_hi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean_snp_het</span><span class="p">)</span>
+        
+        <span class="n">mean_snp_het</span> <span class="o">=</span> <span class="n">stat</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">wiho_het</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:][</span><span class="n">lo_het</span><span class="p">])</span> 
+        <span class="n">snp_hi_and_lo_in_lo</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean_snp_het</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">snp_hi_not_lo_hi</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">snp_lo_not_hi_lo</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">snp_count</span><span class="p">):</span>
+    
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">wiho_het</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:][</span><span class="n">hi_het</span><span class="p">])</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">wiho_het</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:][</span><span class="n">lo_het</span><span class="p">]):</span>
+        
+        <span class="n">mean_snp_het</span> <span class="o">=</span> <span class="n">stat</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">wiho_het</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:][</span><span class="n">hi_het</span><span class="p">])</span> 
+        <span class="n">snp_hi_not_lo</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean_snp_het</span><span class="p">)</span>
+        
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">wiho_het</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:][</span><span class="n">lo_het</span><span class="p">])</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">wiho_het</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:][</span><span class="n">hi_het</span><span class="p">]):</span>
+        
+        <span class="n">mean_snp_het</span> <span class="o">=</span> <span class="n">stat</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">wiho_het</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:][</span><span class="n">lo_het</span><span class="p">])</span> 
+        <span class="n">snp_lo_not_hi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean_snp_het</span><span class="p">)</span>        
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">snp_lo</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">snp_hi</span> <span class="o">=</span> <span class="p">[]</span>
 
@@ -563,24 +797,6 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SNPs present in low het samples</span>
-<span class="c1"># .. what is their het in the full dataset</span>
-
-<span class="n">log_het_per_snp</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">snp_lo</span><span class="p">]</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">log_het_per_snp</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Mean SNP het&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number of SNPs&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/950876480104130e8be6c4ceb222ee175e14c98fd1f6aefa04f86f046e472ab5.png" src="_images/950876480104130e8be6c4ceb222ee175e14c98fd1f6aefa04f86f046e472ab5.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SNPs present in high het samples</span>
 <span class="c1"># .. what is their het in the full dataset</span>
 
@@ -595,26 +811,6 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/bb98144cfa7f990412ea9fd6b573d19eadbdc418c7fb317296938d128e0a58d0.png" src="_images/bb98144cfa7f990412ea9fd6b573d19eadbdc418c7fb317296938d128e0a58d0.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">snp_hi_not_lo</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">snp_lo_not_hi</span> <span class="o">=</span> <span class="p">[]</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">snp_count</span><span class="p">):</span>
-    
-    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">wiho_het</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:][</span><span class="n">hi_het</span><span class="p">])</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">wiho_het</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:][</span><span class="n">lo_het</span><span class="p">]):</span>
-        
-        <span class="n">mean_snp_het</span> <span class="o">=</span> <span class="n">stat</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">wiho_het</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:])</span> 
-        <span class="n">snp_hi_not_lo</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean_snp_het</span><span class="p">)</span>
-        
-    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">wiho_het</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:][</span><span class="n">lo_het</span><span class="p">])</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">wiho_het</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:][</span><span class="n">hi_het</span><span class="p">]):</span>
-        
-        <span class="n">mean_snp_het</span> <span class="o">=</span> <span class="n">stat</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">wiho_het</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:])</span> 
-        <span class="n">snp_lo_not_hi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean_snp_het</span><span class="p">)</span>        
-</pre></div>
-</div>
 </div>
 </div>
 <div class="cell docutils container">
@@ -723,24 +919,6 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/f05d0df694ad5bea5e05106b183f7224109866f610b5a5f4ae29bf5618ecbdba.png" src="_images/f05d0df694ad5bea5e05106b183f7224109866f610b5a5f4ae29bf5618ecbdba.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SNPs present in low het samples</span>
-<span class="c1"># looking at their het in low het samples</span>
-
-<span class="n">log_het_per_snp</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">snp_lo_lo</span><span class="p">]</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">log_het_per_snp</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Mean SNP het&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number of SNPs&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/1a3ef07d3fe012a9671459ee0a458a99dd1bed301e90e4ca06c3f9c845957288.png" src="_images/1a3ef07d3fe012a9671459ee0a458a99dd1bed301e90e4ca06c3f9c845957288.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -867,6 +1045,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prior-to-this-notebooks-we-have-been-through-these-steps">Prior to this notebooks we have been through these steps:</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-files-used-for-this-notebook">Data files used for this notebook</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#list-of-regions">List of regions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-the-difference-between-high-het-and-low-het-samples">Understanding the difference between high het and low het samples</a></li>
 </ul>
   </nav></div>
 
