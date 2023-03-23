@@ -27,7 +27,7 @@
 
 - [Histogram of within-host nucleotide diversity (full version)](Pf6_het_calls_230317.ipynb)
 - [Histogram of within-host nucleotide diversity (short version](within-host-pi.ipynb)
-- [Pf sanity checks](Pf6_sanity_checks_230319.ipynb)
+- [Pf sanity checks](pi_w_checks_230323.ipynb)
 - [Pv within-host nucleotide diversity](Pv4_het_calls_230318.ipynb)
 - [Pv sanity checks](Pv4_sanity_checks_230319.ipynb)
 
