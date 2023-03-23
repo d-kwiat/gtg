@@ -434,7 +434,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="within-host-pi-w">
+  <section class="tex2jax_ignore mathjax_ignore" id="within-host-pi-w">
 <h1>Within-host <span class="math notranslate nohighlight">\(\pi_W\)</span><a class="headerlink" href="#within-host-pi-w" title="Permalink to this heading">#</a></h1>
 <p>This code examines the frequency distribution of within-host nucleotide diversity <span class="math notranslate nohighlight">\(\pi_W\)</span> in samples taken from malaria-infected individuals around the world.</p>
 <ul class="simple">
@@ -458,16 +458,30 @@ document.write(`
 <ul class="simple">
 <li><p>Gives within-host heterozygosity for each SNP (n = 502,221) in each sample (n = 5,970).</p></li>
 <li><p>As we have selected biallelic SNPs this is easy to calculate from allele depth data.</p></li>
+<li><p>Filename: <code class="docutils literal notranslate"><span class="pre">230318_wiho_het.npy</span></code></p></li>
 <li><p>This is a large file - 11.7GB - so it takes a while to process</p></li>
 </ul>
 <p><code class="docutils literal notranslate"><span class="pre">region</span></code></p>
 <ul class="simple">
 <li><p>A list of geographical regions for 5,970 selected samples</p></li>
 <li><p>‘SAM’=South America, ‘WAF’=West Africa, ‘CAF’=Central Africa, ‘EAF’=East African, ‘SAS’=South Asia, ‘WSEA’=Western SE Asia, ‘ESEA’=Eastern SE Asia, ‘OCE’=Oceania</p></li>
+<li><p>Filename: <code class="docutils literal notranslate"><span class="pre">230316_region</span></code></p></li>
 </ul>
 <p><code class="docutils literal notranslate"><span class="pre">het_per_snp</span></code></p>
 <ul class="simple">
 <li><p>Mean within-host heterozygosity for each SNP, calculated from <code class="docutils literal notranslate"><span class="pre">wiho_het.npy</span></code></p></li>
+<li><p>Filename: <code class="docutils literal notranslate"><span class="pre">230317_het_per_snp</span></code></p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">het_per_sample</span></code></p>
+<ul class="simple">
+<li><p>Mean within-host heterozygosity for each sample after filtering by SNP heterozygosity (typically &lt;0.02) and by geographical region.</p></li>
+<li><p>Filenames:</p>
+<ul>
+<li><p>All regions (5970 samples): <code class="docutils literal notranslate"><span class="pre">230317_het_per_sample_ALL</span></code></p></li>
+<li><p>Southeast Asia: <code class="docutils literal notranslate"><span class="pre">230316_het_per_sample_SEA</span></code></p></li>
+<li><p>Africa (3314 samples): <code class="docutils literal notranslate"><span class="pre">230317_het_per_sample_Africa</span></code></p></li>
+</ul>
+</li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -579,7 +593,7 @@ document.write(`
 <ul class="simple">
 <li><p>Creates a list of het values, one for each selected &amp; filtered sample</p></li>
 <li><p>This is the mean het for selected &amp; filtered SNPs and not for all nucleotide positions</p></li>
-<li><p>With GPU this takes approximately 15 minutes depending on the selection of regions</p></li>
+<li><p>On Colab this should take approximately 15 minutes depending on the selection of regions</p></li>
 <li><p>Save the output for future use</p></li>
 </ul>
 <div class="cell docutils container">
@@ -619,7 +633,7 @@ document.write(`
 <h2>Plot histogram of within-host nucleotide diversity<a class="headerlink" href="#plot-histogram-of-within-host-nucleotide-diversity" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># All regions - only SNPs with maf &lt; 0.01</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># All regions - only SNPs with het &lt; 0.02</span>
 
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s2">&quot;230317_het_per_sample_ALL&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filepath</span><span class="p">:</span>
     <span class="n">het_per_sample</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
@@ -645,7 +659,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Africa - only SNPs with maf &lt; 0.01</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Africa - only SNPs with het &lt; 0.02</span>
 
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s2">&quot;230317_het_per_sample_Africa&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filepath</span><span class="p">:</span>
     <span class="n">het_per_sample</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
@@ -671,7 +685,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Southeast Asia - only SNPs with maf &lt; 0.01 </span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Southeast Asia - only SNPs with het &lt; 0.02</span>
 
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s2">&quot;230316_het_per_sample_SEA&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filepath</span><span class="p">:</span>
     <span class="n">het_per_sample</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
@@ -692,82 +706,6 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/c6269f1f7029407a5eba23a7a2d49c4f509c05e85add098e70792842af6cfe7b.png" src="_images/c6269f1f7029407a5eba23a7a2d49c4f509c05e85add098e70792842af6cfe7b.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Central and East Africa - only SNPs with maf &lt; 0.01</span>
-
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s2">&quot;230317_het_per_sample_CAF_EAF&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filepath</span><span class="p">:</span>
-    <span class="n">het_per_sample</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
-    
-<span class="n">selected_snps</span> <span class="o">=</span> <span class="mi">494829</span> <span class="c1"># this is &lt;0.01 maf, total is 502221</span>
-<span class="n">coding_positions</span> <span class="o">=</span> <span class="mi">12028350</span> <span class="c1"># from Gardner et al 2002</span>
-
-<span class="n">convert_het_to_pi</span> <span class="o">=</span> <span class="n">selected_snps</span> <span class="o">/</span> <span class="n">coding_positions</span>
-
-<span class="n">het_per_sample_nonzero</span> <span class="o">=</span> <span class="p">[</span><span class="n">convert_het_to_pi</span> <span class="o">*</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">het_per_sample</span> <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>
-<span class="n">log_het_per_sample</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">het_per_sample_nonzero</span><span class="p">]</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">log_het_per_sample</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Within-host nucleotide diversity </span><span class="se">\u03C0</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number of samples&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/166ee646379c845b06493458bbe69540ef09b2442cfc8ea560e71c0ae1c37dec.png" src="_images/166ee646379c845b06493458bbe69540ef09b2442cfc8ea560e71c0ae1c37dec.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Eastern Southeast Asia - only SNPs with maf &lt; 0.01 </span>
-
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s2">&quot;230316_het_per_sample_ESEA&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filepath</span><span class="p">:</span>
-    <span class="n">het_per_sample</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
-    
-<span class="n">coding_positions</span> <span class="o">=</span> <span class="mi">12028350</span> <span class="c1"># from Gardner et al 2002</span>
-
-<span class="n">convert_het_to_pi</span> <span class="o">=</span> <span class="n">filtered_snps</span> <span class="o">/</span> <span class="n">coding_positions</span>
-
-<span class="n">het_per_sample_nonzero</span> <span class="o">=</span> <span class="p">[</span><span class="n">convert_het_to_pi</span> <span class="o">*</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">het_per_sample</span> <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>
-<span class="n">log_het_per_sample</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">het_per_sample_nonzero</span><span class="p">]</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">log_het_per_sample</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Within-host nucleotide diversity </span><span class="se">\u03C0</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number of samples&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/f8437fafd72b70a583fd996f0cbbbcb9b0076f8d6d1286b780a535ddedefa3d5.png" src="_images/f8437fafd72b70a583fd996f0cbbbcb9b0076f8d6d1286b780a535ddedefa3d5.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># West Africa - only SNPs with maf &lt; 0.01 </span>
-
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s2">&quot;230316_het_per_sample_WAF&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filepath</span><span class="p">:</span>
-    <span class="n">het_per_sample</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
-    
-<span class="n">coding_positions</span> <span class="o">=</span> <span class="mi">12028350</span> <span class="c1"># from Gardner et al 2002</span>
-
-<span class="n">convert_het_to_pi</span> <span class="o">=</span> <span class="n">filtered_snps</span> <span class="o">/</span> <span class="n">coding_positions</span>
-
-<span class="n">het_per_sample_nonzero</span> <span class="o">=</span> <span class="p">[</span><span class="n">convert_het_to_pi</span> <span class="o">*</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">het_per_sample</span> <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>
-<span class="n">log_het_per_sample</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">het_per_sample_nonzero</span><span class="p">]</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">log_het_per_sample</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Within-host nucleotide diversity </span><span class="se">\u03C0</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number of samples&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/e2de77ee7b20fb83eebba8f8a46259c42d845b023fec696d3225fa10c9fba06e.png" src="_images/e2de77ee7b20fb83eebba8f8a46259c42d845b023fec696d3225fa10c9fba06e.png" />
 </div>
 </div>
 </section>
