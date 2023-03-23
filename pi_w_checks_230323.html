@@ -433,7 +433,7 @@ document.write(`
 <h1>Within-host <span class="math notranslate nohighlight">\(\pi_W\)</span> sanity checks<a class="headerlink" href="#within-host-pi-w-sanity-checks" title="Permalink to this heading">#</a></h1>
 <p>On this page we perform sanity checks on our <a class="reference external" href="https://d-kwiat.github.io/gtg/within-host-pi.html">estimates of within-host nucleotide diversity <span class="math notranslate nohighlight">\(\pi_W\)</span> from deep genome sequencing data</a>.  We observe that <span class="math notranslate nohighlight">\(\pi_W\)</span> has a strikingly bimodal distribution, with a high-<span class="math notranslate nohighlight">\(\pi_W\)</span> peak and a low-<span class="math notranslate nohighlight">\(\pi_W\)</span> peak.</p>
 <p>We postulate that the low-<span class="math notranslate nohighlight">\(\pi_W\)</span> peak represents transmission chains where there has been no recent superinfection or cotransmission.  We are particularly interested in this value because we can use it to estimate the quantum of transmission <span class="math notranslate nohighlight">\(Q\)</span>.</p>
-<p>We would like to be sure that the low-<span class="math notranslate nohighlight">\(\pi_W\)</span> peak is not an artefact of genotyping errors, which could potentially arise either during genome sequencing or in the subsequent data pipeline.  Ideally we would like to see replicated data but since these are not currently available, here we perform some basic analyses to reassure ourselves that there is no obvious systematic artefact in our low-<span class="math notranslate nohighlight">\(\pi_W\)</span> estimates.</p>
+<p>We would like to be sure that the low-<span class="math notranslate nohighlight">\(\pi_W\)</span> peak is not an artefact of genotyping errors, which could potentially arise either during genome sequencing or in the subsequent data pipeline.  Ideally we would like to see data from replicated experiments but these are not currently available.  Here we perform some basic analyses to reassure ourselves that there is no obvious systematic artefact in our low-<span class="math notranslate nohighlight">\(\pi_W\)</span> estimates.</p>
 <section id="source-of-the-data">
 <h2>Source of the data<a class="headerlink" href="#source-of-the-data" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
@@ -525,13 +525,21 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># All regions - only SNPs with het &lt; 0.02</span>
-
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s2">&quot;230317_het_per_sample_ALL&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filepath</span><span class="p">:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s2">&quot;230317_het_per_sample_ALL&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filepath</span><span class="p">:</span>
     <span class="n">het_per_sample</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
     
-<span class="n">het_per_sample_nonzero</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">het_per_sample</span> <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>
-<span class="n">log_het_per_sample</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">het_per_sample_nonzero</span><span class="p">]</span>
+<span class="n">wiho_het</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;230318_wiho_het.npy&#39;</span><span class="p">,</span> <span class="n">mmap_mode</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+
+<span class="n">allele_depth</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;221221_selected_gt_2.npy&#39;</span><span class="p">,</span> <span class="n">mmap_mode</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># All regions - only SNPs with het &lt; 0.02</span>
+
+<span class="n">log_het_per_sample</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">het_per_sample</span><span class="p">]</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">log_het_per_sample</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Het per sample&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number of samples&#39;</span><span class="p">)</span>
@@ -546,8 +554,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wiho_het</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;230318_wiho_het.npy&#39;</span><span class="p">,</span> <span class="n">mmap_mode</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
-<span class="n">snp_count</span> <span class="o">=</span> <span class="n">wiho_het</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">snp_count</span> <span class="o">=</span> <span class="n">wiho_het</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">sample_count</span> <span class="o">=</span> <span class="n">wiho_het</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
 <span class="n">sample_het</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">het_per_sample</span><span class="p">)</span>
@@ -561,8 +568,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">allele_depth</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;221221_selected_gt_2.npy&#39;</span><span class="p">,</span> <span class="n">mmap_mode</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
-<span class="n">allele_depth_lo</span> <span class="o">=</span> <span class="p">[]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">allele_depth_lo</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">allele_depth_hi</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sample_count</span><span class="p">):</span>
@@ -712,6 +718,9 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="_images/09f9788a194ebc116b9bab0d43f055dd079332ee5bf51af9a1cb5d87aedf61be.png" src="_images/09f9788a194ebc116b9bab0d43f055dd079332ee5bf51af9a1cb5d87aedf61be.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -725,6 +734,9 @@ document.write(`
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/f251036ee866c758d3e1afedbb975093be2110d5b314a89d0e8d12b8e7461d30.png" src="_images/f251036ee866c758d3e1afedbb975093be2110d5b314a89d0e8d12b8e7461d30.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -740,20 +752,23 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="_images/f05d0df694ad5bea5e05106b183f7224109866f610b5a5f4ae29bf5618ecbdba.png" src="_images/f05d0df694ad5bea5e05106b183f7224109866f610b5a5f4ae29bf5618ecbdba.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">maf</span> <span class="o">=</span> <span class="p">[]</span>
 
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
 
     <span class="k">if</span> <span class="n">lo_het</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
     
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">snp_count</span><span class="p">):</span>
         
-            <span class="n">x</span> <span class="o">=</span> <span class="n">allele_depth_2</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">allele_depth</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
             
-            <span class="n">y</span> <span class="o">=</span> <span class="n">allele_depth_2</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">allele_depth</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
             
             <span class="n">z</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
             
@@ -770,10 +785,14 @@ document.write(`
 <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">maf</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Minor allele frequency&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number of SNPs&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/d0d03918426dd567600c4753ebceec7f529ea3e26c4cd89226ee44ce37c4cc69.png" src="_images/d0d03918426dd567600c4753ebceec7f529ea3e26c4cd89226ee44ce37c4cc69.png" />
 </div>
 </div>
 </section>
