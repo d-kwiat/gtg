@@ -678,7 +678,7 @@ document.write(`
 <section id="calculate-within-host-heterozygosity-for-each-snp-and-save-as-wiho-het-npy">
 <h2>Calculate within-host heterozygosity for each SNP and save as <code class="docutils literal notranslate"><span class="pre">wiho_het.npy</span></code><a class="headerlink" href="#calculate-within-host-heterozygosity-for-each-snp-and-save-as-wiho-het-npy" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>if ref_allele + alt_allele == 1 then write het = 0.</p></li>
+<li><p>if ref_allele + alt_allele == 0 then write het = 0.</p></li>
 <li><p>this file is 23.5GB because dtype=float</p></li>
 </ul>
 <div class="cell docutils container">
