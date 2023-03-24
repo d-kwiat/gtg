@@ -14,7 +14,7 @@ The sections aren't strictly ordered but this is a logical sequence to work thro
    * [Identity by descent](ibd.ipynb)
 1. [Migration and population structure](migration-simple.ipynb)
 1. [Within-host diversity](within-host.ipynb)
-   * Estimating the quantum of transmission
+   * [Estimating the quantum of transmission](within-host-pi.ipynb)
    * [*Hw - Hs* relationship](hw-hs.ipynb)
    * [Estimating the rate of superinfection](fws-compare-methods.ipynb)
 1. [Epidemiological scenarios](epidemiological-scenarios.md)
