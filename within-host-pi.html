@@ -642,7 +642,7 @@ document.write(`
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s2">&quot;230317_het_per_sample_ALL&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filepath</span><span class="p">:</span>
     <span class="n">het_per_sample</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
     
-<span class="n">selected_snps</span> <span class="o">=</span> <span class="mi">494829</span> <span class="c1"># this is &lt;0.01 maf, total is 502221</span>
+<span class="n">selected_snps</span> <span class="o">=</span> <span class="mi">496459</span> <span class="c1"># this is &lt;0.02 het, total SNPs is 502221</span>
 <span class="n">coding_positions</span> <span class="o">=</span> <span class="mi">12028350</span> <span class="c1"># from Gardner et al 2002</span>
 
 <span class="n">convert_het_to_pi</span> <span class="o">=</span> <span class="n">selected_snps</span> <span class="o">/</span> <span class="n">coding_positions</span>
@@ -668,7 +668,7 @@ document.write(`
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s2">&quot;230317_het_per_sample_Africa&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filepath</span><span class="p">:</span>
     <span class="n">het_per_sample</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
     
-<span class="n">selected_snps</span> <span class="o">=</span> <span class="mi">494829</span> <span class="c1"># this is &lt;0.01 maf, total is 502221</span>
+<span class="n">selected_snps</span> <span class="o">=</span> <span class="mi">496459</span> <span class="c1"># this is &lt;0.02 het, total SNPs is 502221</span>
 <span class="n">coding_positions</span> <span class="o">=</span> <span class="mi">12028350</span> <span class="c1"># from Gardner et al 2002</span>
 
 <span class="n">convert_het_to_pi</span> <span class="o">=</span> <span class="n">selected_snps</span> <span class="o">/</span> <span class="n">coding_positions</span>
@@ -694,9 +694,10 @@ document.write(`
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="s2">&quot;230316_het_per_sample_SEA&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filepath</span><span class="p">:</span>
     <span class="n">het_per_sample</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
     
+<span class="n">selected_snps</span> <span class="o">=</span> <span class="mi">496459</span> <span class="c1"># this is &lt;0.02 het, total SNPs is 502221</span>
 <span class="n">coding_positions</span> <span class="o">=</span> <span class="mi">12028350</span> <span class="c1"># from Gardner et al 2002</span>
 
-<span class="n">convert_het_to_pi</span> <span class="o">=</span> <span class="n">filtered_snps</span> <span class="o">/</span> <span class="n">coding_positions</span>
+<span class="n">convert_het_to_pi</span> <span class="o">=</span> <span class="n">selected_snps</span> <span class="o">/</span> <span class="n">coding_positions</span>
 
 <span class="n">het_per_sample_nonzero</span> <span class="o">=</span> <span class="p">[</span><span class="n">convert_het_to_pi</span> <span class="o">*</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">het_per_sample</span> <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>
 <span class="n">log_het_per_sample</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">het_per_sample_nonzero</span><span class="p">]</span>
