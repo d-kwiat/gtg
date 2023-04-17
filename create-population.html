@@ -429,7 +429,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="creating-a-population">
 <h1>Creating a <code class="docutils literal notranslate"><span class="pre">Population</span></code><a class="headerlink" href="#creating-a-population" title="Permalink to this heading">#</a></h1>
-<p>The first step in using <code class="docutils literal notranslate"><span class="pre">coalestr</span></code> to simulate a parasite population is to specify its history of transmission parameters. The simplest way to format the transmission history is as a list of lists like this:</p>
+<p>The first step in using <code class="docutils literal notranslate"><span class="pre">coalestr</span></code> is to specify the history of transmission parameters of the parasite population that we want to simulate. The simplest way to format the transmission history is as a list of lists like this:</p>
 <p><code class="docutils literal notranslate"><span class="pre">my_history</span> <span class="pre">=</span> <span class="pre">[[duration,</span> <span class="pre">N,</span> <span class="pre">Q,</span> <span class="pre">X,</span> <span class="pre">M],</span> <span class="pre">[duration,</span> <span class="pre">N,</span> <span class="pre">Q,</span> <span class="pre">X,</span> <span class="pre">M]]</span></code></p>
 <p>Each inner list gives the transmission parameters for a period of population history.  The first inner list describes the first period, the second inner list describes the second period, and so on. Any number of periods are allowed, from 1 upwards.</p>
 <p>Each period of population history is described by five variables:</p>
@@ -491,7 +491,6 @@ Successfully installed coalestr-0.2.10
 </div>
 </div>
 </div>
-<p><strong>Migration rate</strong>. For a simple population <code class="docutils literal notranslate"><span class="pre">M</span></code> is zero.  It is non-zero only if this is a subpopulation within a larger metapopulation. <code class="docutils literal notranslate"><span class="pre">M</span></code> gives the number of hosts per generation that enter the subpopulation from the metapopulation, which must be less than or equal to <code class="docutils literal notranslate"><span class="pre">N</span></code>.</p>
 <section id="methods-and-attributes-that-are-automatically-generated-when-we-create-a-population">
 <h2>Methods and attributes that are automatically generated when we create a population<a class="headerlink" href="#methods-and-attributes-that-are-automatically-generated-when-we-create-a-population" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
@@ -699,6 +698,7 @@ minimum_length 2
 </div>
 </div>
 </div>
+<p><strong>Migration rate</strong>. For a simple population <code class="docutils literal notranslate"><span class="pre">M</span></code> is zero.  It is non-zero only if this is a subpopulation within a larger metapopulation. <code class="docutils literal notranslate"><span class="pre">M</span></code> gives the number of hosts per generation that enter the subpopulation from the metapopulation, which must be less than or equal to <code class="docutils literal notranslate"><span class="pre">N</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">history_2</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
