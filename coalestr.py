@@ -955,28 +955,28 @@ class Population(object):
                 ax[i].plot(time_axis, self.parameters[:, 0], marker='', color='blue', linewidth=2, label="Nh")
                 ax[i].legend(title="Nh", frameon=True, fontsize = 12) 
                 ax[i].set_ylabel("Nh", fontsize=12)
-                ax[i].grid(b=True, which='both', color='0.65', linestyle='-')
+                ax[i].grid(visible=True, which='both', color='0.65', linestyle='-')
                      
             elif metrics[i] == "Q":
             
                 ax[i].plot(time_axis, self.parameters[:, 1], marker='', color='blue', linewidth=2, label="Q")
                 ax[i].legend(title="Q", frameon=True, fontsize = 12) 
                 ax[i].set_ylabel("Q", fontsize=12)
-                ax[i].grid(b=True, which='both', color='0.65', linestyle='-')         
+                ax[i].grid(visible=True, which='both', color='0.65', linestyle='-')         
             
             elif metrics[i] == "X" or metrics[i] == "chi":
             
                 ax[i].plot(time_axis, self.parameters[:, 2], marker='', color='blue', linewidth=2, label="\u03C7")
                 ax[i].legend(title="\u03C7", frameon=True, fontsize = 12) 
                 ax[i].set_ylabel("\u03C7", fontsize=12)
-                ax[i].grid(b=True, which='both', color='0.65', linestyle='-')
+                ax[i].grid(visible=True, which='both', color='0.65', linestyle='-')
                      
 #            elif metrics[i] == "M":
             
 #                ax[i].plot(time_axis, paramtr_ft[:, 3], marker='', color='blue', linewidth=2, label="M")
 #                ax[i].legend(title="M", frameon=True, fontsize = 12) 
 #                ax[i].set_ylabel("M", fontsize=12)
-#                ax[i].grid(b=True, which='both', color='0.65', linestyle='-')                      
+#                ax[i].grid(visible=True, which='both', color='0.65', linestyle='-')                      
                 
             else:
                 
