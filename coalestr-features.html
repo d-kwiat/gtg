@@ -388,13 +388,13 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="how-to-use-coalestr">
 <h1>How to use <code class="docutils literal notranslate"><span class="pre">coalestr</span></code><a class="headerlink" href="#how-to-use-coalestr" title="Permalink to this heading">#</a></h1>
-<p>Have sections about</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="population-class.html"><span class="doc std std-doc">Creating a <code class="docutils literal notranslate"><span class="pre">Population</span></code></span></a></p></li>
-<li><p><a class="reference internal" href="get-coalescent.html"><span class="doc std std-doc">Running <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code></span></a></p></li>
-<li><p><a class="reference internal" href="get-diversity.html"><span class="doc std std-doc">Running <code class="docutils literal notranslate"><span class="pre">get_diversity</span></code></span></a></p></li>
-<li><p><a class="reference internal" href="time-series.html"><span class="doc std std-doc">Analysing a time series</span></a></p></li>
-</ul>
+<p>We can use <code class="docutils literal notranslate"><span class="pre">coalestr</span></code> to obtain the genetic diversity of a parasite population by Markov chain simulation of coalescence times.  There are three stages to this process:</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="population-class.html"><span class="doc std std-doc">Creating a <code class="docutils literal notranslate"><span class="pre">Population</span></code></span></a> by specifying its history of transmission parameters.</p></li>
+<li><p><a class="reference internal" href="get-coalescent.html"><span class="doc std std-doc">Running <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code></span></a> to perform a simulation of coalescence times in our population.</p></li>
+<li><p><a class="reference internal" href="get-diversity.html"><span class="doc std std-doc">Running <code class="docutils literal notranslate"><span class="pre">get_diversity</span></code></span></a> to estimate nucleotide diversity and haplotype homozygosity using our simulated coalescence times.</p></li>
+</ol>
+<p>We can also <a class="reference internal" href="time-series.html"><span class="doc std std-doc">analyse a time series</span></a> by specifying a set of observation times.  At each observation time we sample two alleles from the population and perform a simulation of their times to coalescence.</p>
 <p>You can view the <a class="reference external" href="https://github.com/d-kwiat/gtg/blob/main/coalestr.py">Python code for the <code class="docutils literal notranslate"><span class="pre">coalestr</span></code> module</a>.</p>
 <div class="toctree-wrapper compound">
 </div>
