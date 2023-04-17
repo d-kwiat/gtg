@@ -2,7 +2,7 @@
 
 We can use `coalestr` to obtain the genetic diversity of a parasite population by Markov chain simulation of coalescence times.  There are three stages to this process: 
 
-1. [Creating a `Population`](population-class.ipynb) by specifying its history of transmission parameters.
+1. [Creating a `Population`](create-population.ipynb) by specifying its history of transmission parameters.
 2. [Running `get_coalescent`](get-coalescent.ipynb) to perform a simulation of coalescence times in our population.
 3. [Running `get_diversity`](get-diversity.ipynb) to estimate nucleotide diversity and haplotype homozygosity using our simulated coalescence times.
 
