@@ -183,6 +183,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Running <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code></a></li>
+
 <li class="toctree-l2"><a class="reference internal" href="get-diversity.html">Running <code class="docutils literal notranslate"><span class="pre">get_diversity</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="time-series.html">Analysing a time series</a></li>
 </ul>
@@ -395,7 +396,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -411,6 +414,16 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Running <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-produced-by-get-coalescent">Data produced by <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code></a></li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -422,18 +435,11 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="running-get-coalescent">
 <h1>Running <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code><a class="headerlink" href="#running-get-coalescent" title="Permalink to this heading">#</a></h1>
-<p>Once we have <a class="reference internal" href="create-population.html"><span class="doc std std-doc">created a population by specifying its transmission history</span></a>, it is very simple to perform a <a class="reference internal" href="coalescence-time-basic.html"><span class="doc std std-doc">Markov chain simulation of coalescence times</span></a> by invoking <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code>.</p>
+<p>Once we have <a class="reference internal" href="create-population.html"><span class="doc std std-doc">created a population by specifying its transmission history</span></a>, it is very simple to perform a <a class="reference internal" href="coalescence-time-basic.html"><span class="doc std std-doc">Markov chain simulation of coalescence times</span></a> by invoking the population method <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>coalestr
 <span class="kn">from</span> <span class="nn">coalestr</span> <span class="kn">import</span> <span class="n">cs</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">coalestr</span> <span class="k">as</span> <span class="nn">cs</span>
 </pre></div>
 </div>
 </div>
@@ -486,41 +492,152 @@ document.write(`
 </div>
 <p>Here we appear to have shorter coalescence times but the results are unreliable because we are capturing only 68.6% of coalescent events for the between-host simulation and 77.2% of coalescent events for the within-host simulation.</p>
 <p><strong>Observation times</strong></p>
-<p>In the above examples we made a single observation of the population at time = 0.</p>
-<p>This generates the following arrays that can be retrieved as population attributes.</p>
-<p><code class="docutils literal notranslate"><span class="pre">beho_lineage</span></code> - this describes variation over time in the state of <strong>two lineages sampled from different hosts</strong> which will allow us to estimate between-host levels of genetic diversity.</p>
-<ul class="simple">
-<li><p>axis 0: bt (backwards time)</p></li>
-<li><p>axis 1: state of two lineages sampled from different hosts
-0:’probability that lineages are in subpopulation and separated’,
-1:’probability that lineages are in subpopulation and cotransmitted’,
-2:’probability that lineages are in subpopulation and coalesced’,
-3:’blank’,
-4:’blank’,
-5:’probability of coalescent event at bt’,
-6:’summation series for expectation of coalescence time’ }</p></li>
-</ul>
-<p>. This is very simple to do using the <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code> methods.Here we do</p>
+<p>In the above examples we made a single observation of the population at observation time = 0.  This means that we sampled two alleles at time = 0 and followed their lineages back in time until they coalesced.  Since we are proceeding back in time, observation time 0 means the present, or the most recent generation in the population history.</p>
+<p>If we want to see how the genetic diversity of the population changes over time, then we need to make observations at multiple time points.  For example, we might make observations every 500 generations. We can do this by providing <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code> with a list of observation times, always remembering that we are counting in backwards time, so observation time = 500 means 500 generations before the present.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b_separated</span> <span class="o">=</span> <span class="n">my_village</span><span class="o">.</span><span class="n">beho_lineage</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
-<span class="n">b_cotransmitted</span> <span class="o">=</span> <span class="n">my_village</span><span class="o">.</span><span class="n">beho_lineage</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
-<span class="n">b_coalesced</span> <span class="o">=</span> <span class="n">my_village</span><span class="o">.</span><span class="n">beho_lineage</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_history</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
 
-<span class="n">w_separated</span> <span class="o">=</span> <span class="n">my_village</span><span class="o">.</span><span class="n">wiho_lineage</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
-<span class="n">w_cotransmitted</span> <span class="o">=</span> <span class="n">my_village</span><span class="o">.</span><span class="n">wiho_lineage</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
-<span class="n">w_coalesced</span> <span class="o">=</span> <span class="n">my_village</span><span class="o">.</span><span class="n">wiho_lineage</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">my_observations</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1500</span><span class="p">]</span>
+
+<span class="n">my_population</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">Population</span><span class="p">(</span><span class="n">my_history</span><span class="p">)</span>
+
+<span class="n">my_population</span><span class="o">.</span><span class="n">get_coalescent</span><span class="p">(</span><span class="n">observe</span> <span class="o">=</span> <span class="n">my_observations</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    Events captured.   Mean coalescence time
+                      beho      wiho        beho     wiho
+        0             100.0     100.0        25.1     18.9
+      500             100.0     100.0        25.1     18.9
+     1000             100.0     100.0        39.0     10.0
+     1500             100.0     100.0        39.0     10.0
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># in this figure the time axis has a log scale</span>
-<span class="c1"># .. which requires that we offset the axis by 1</span>
-<span class="c1"># .. so we pretend that alleles are sampled at bt = 1</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We can also give the observation times as a range like this</span>
 
-<span class="n">timescale</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">my_village</span><span class="o">.</span><span class="n">t_his</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">my_observations</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+
+<span class="n">my_population</span><span class="o">.</span><span class="n">get_coalescent</span><span class="p">(</span><span class="n">observe</span> <span class="o">=</span> <span class="n">my_observations</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    Events captured.   Mean coalescence time
+                      beho      wiho        beho     wiho
+        0             100.0     100.0        25.1     18.9
+      500             100.0     100.0        25.1     18.9
+     1000             100.0     100.0        39.0     10.0
+     1500             100.0     100.0        39.0     10.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We can retrieve a list of observation times as a population attribute</span>
+
+<span class="n">my_population</span><span class="o">.</span><span class="n">observation_times</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0, 500, 1000, 1500]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="data-produced-by-get-coalescent">
+<h1>Data produced by <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code><a class="headerlink" href="#data-produced-by-get-coalescent" title="Permalink to this heading">#</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code> generates various data arrays that can be retrieved as population attributes, including:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">report</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">beho_lineage</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">wiho_lineage</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">coalescent</span></code></p></li>
+</ul>
+<p>The population attribute <code class="docutils literal notranslate"><span class="pre">report</span></code> gives a summary of coalescence events for different observation times.</p>
+<ul class="simple">
+<li><p>axis 0 : observation_times[i]</p></li>
+<li><p>axis 1 : summary of coalescence events</p>
+<ul>
+<li><p>0: observation time</p></li>
+<li><p>1: beho: percentage of coalescent events captured</p></li>
+<li><p>2: wiho: percentage of coalescent events captured</p></li>
+<li><p>3: beho: expectation of coalescence time</p></li>
+<li><p>4: wiho: expectation of coalescence_time</p></li>
+<li><p>5: eco setpoint: proportion of coalescences to capture</p></li>
+<li><p>6: break time</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">my_population</span><span class="o">.</span><span class="n">observation_times</span><span class="p">)):</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;At observation time </span><span class="si">{0:1.0f}</span><span class="s2"> the mean time to coalescence was</span><span class="se">\</span>
+<span class="s2">    </span><span class="se">\n</span><span class="s2">   </span><span class="si">{1:1.1f}</span><span class="s2"> for a between-host sample</span><span class="se">\</span>
+<span class="s2">    </span><span class="se">\n</span><span class="s2">   </span><span class="si">{2:1.1f}</span><span class="s2"> for a within-host sample&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">my_population</span><span class="o">.</span><span class="n">report</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+        <span class="n">my_population</span><span class="o">.</span><span class="n">report</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+        <span class="n">my_population</span><span class="o">.</span><span class="n">report</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">4</span><span class="p">]))</span>
+            
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At observation time 0 the mean time to coalescence was    
+   25.1 for a between-host sample    
+   18.9 for a within-host sample
+At observation time 500 the mean time to coalescence was    
+   25.1 for a between-host sample    
+   18.9 for a within-host sample
+At observation time 1000 the mean time to coalescence was    
+   39.0 for a between-host sample    
+   10.0 for a within-host sample
+At observation time 1500 the mean time to coalescence was    
+   39.0 for a between-host sample    
+   10.0 for a within-host sample
+</pre></div>
+</div>
+</div>
+</div>
+<p>The population attribute <code class="docutils literal notranslate"><span class="pre">beho_lineage</span></code> describes variation over time in the <strong>state of two lineages sampled from different hosts</strong> at observation time 0.  This will allow us to estimate between-host levels of genetic diversity.</p>
+<p>The population attribute <code class="docutils literal notranslate"><span class="pre">wiho_lineage</span></code> describes variation over time in the <strong>state of two lineages sampled from the same host</strong> at observation time 0.  This will allow us to estimate within-host levels of genetic diversity.</p>
+<ul class="simple">
+<li><p>axis 0: backwards time</p></li>
+<li><p>axis 1:</p>
+<ul>
+<li><p>0: probability that lineages are separated</p></li>
+<li><p>1: probability that lineages are cotransmitted</p></li>
+<li><p>2: probability that lineages are coalesced</p></li>
+<li><p>3: blank</p></li>
+<li><p>4: blank</p></li>
+<li><p>5: probability of coalescence occuring at this timepoint</p></li>
+<li><p>6: summation series for expectation of coalescence time</p></li>
+</ul>
+</li>
+</ul>
+<p>Let us see how <code class="docutils literal notranslate"><span class="pre">beho_lineage</span></code> and <code class="docutils literal notranslate"><span class="pre">wiho_lineage</span></code> can be used to plot the state of two lineages going back in time for <code class="docutils literal notranslate"><span class="pre">my_population</span></code> created above.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">b_separated</span> <span class="o">=</span> <span class="n">my_population</span><span class="o">.</span><span class="n">beho_lineage</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">b_cotransmitted</span> <span class="o">=</span> <span class="n">my_population</span><span class="o">.</span><span class="n">beho_lineage</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">b_coalesced</span> <span class="o">=</span> <span class="n">my_population</span><span class="o">.</span><span class="n">beho_lineage</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span>
+
+<span class="n">w_separated</span> <span class="o">=</span> <span class="n">my_population</span><span class="o">.</span><span class="n">wiho_lineage</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">w_cotransmitted</span> <span class="o">=</span> <span class="n">my_population</span><span class="o">.</span><span class="n">wiho_lineage</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">w_coalesced</span> <span class="o">=</span> <span class="n">my_population</span><span class="o">.</span><span class="n">wiho_lineage</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span>
+
+<span class="n">timescale</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">my_population</span><span class="o">.</span><span class="n">t_his</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="n">sharex</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 
@@ -538,7 +655,7 @@ document.write(`
 <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Generations before sample (offset +1)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Probability&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">,</span><span class="n">base</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">my_village</span><span class="o">.</span><span class="n">t_his</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">my_population</span><span class="o">.</span><span class="n">t_his</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">visible</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;0.65&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">visible</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;0.65&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
 
@@ -547,53 +664,29 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/0af109c105e1a9777b9b1c8a570525f3b29e6e547dad7e5fae4898c6e4a0d7c9.png" src="_images/0af109c105e1a9777b9b1c8a570525f3b29e6e547dad7e5fae4898c6e4a0d7c9.png" />
+<img alt="_images/a4b6bddad102b61b6e083b79e7fca88962f721e200696aedac7ca92a64e76a43.png" src="_images/a4b6bddad102b61b6e083b79e7fca88962f721e200696aedac7ca92a64e76a43.png" />
 </div>
 </div>
+<p>The population attribute <code class="docutils literal notranslate"><span class="pre">coalescent</span></code> describes the probability distribution of time to coalescence at different observation times.  Recall that the population attribute <code class="docutils literal notranslate"><span class="pre">observation_times</span></code> is a list of observation times.</p>
+<ul class="simple">
+<li><p>axis 0 : observation_times[i]</p></li>
+<li><p>axis 1 : backwards time</p></li>
+<li><p>axis 2 : probability distribution of time to coalescence</p>
+<ul>
+<li><p>0: beho: probability of coalescence occurring at this timepoint</p></li>
+<li><p>1: wiho: probability of coalescence occurring at this timepoint</p></li>
+</ul>
+</li>
+</ul>
+<p>Let us see how this can be used to plot the probability distribution of coalescence times for observation time = 0.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">history_1</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
-<span class="n">village_1</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">Population</span><span class="p">(</span><span class="n">history_1</span><span class="p">)</span>
-<span class="n">village_1</span><span class="o">.</span><span class="n">get_coalescent</span><span class="p">(</span><span class="n">show</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_population</span><span class="o">.</span><span class="n">observation_times</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    Events captured.   Mean coalescence time
-                      beho      wiho        beho     wiho
-        0             100.0     100.0       100.0      1.0
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">history_2</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
-<span class="n">village_2</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">Population</span><span class="p">(</span><span class="n">history_2</span><span class="p">)</span>
-<span class="n">village_2</span><span class="o">.</span><span class="n">get_coalescent</span><span class="p">(</span><span class="n">show</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    Events captured.   Mean coalescence time
-                      beho      wiho        beho     wiho
-        0             100.0     100.0       134.3     68.7
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">history_3</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
-<span class="n">village_3</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">Population</span><span class="p">(</span><span class="n">history_3</span><span class="p">)</span>
-<span class="n">village_3</span><span class="o">.</span><span class="n">get_coalescent</span><span class="p">(</span><span class="n">show</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    Events captured.   Mean coalescence time
-                      beho      wiho        beho     wiho
-        0             100.0     100.0       582.7    536.3
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0, 500, 1000, 1500]
 </pre></div>
 </div>
 </div>
@@ -602,21 +695,13 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="n">sharex</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 
-<span class="k">for</span> <span class="n">example</span> <span class="ow">in</span> <span class="p">[</span><span class="n">village_1</span><span class="p">,</span> <span class="n">village_2</span><span class="p">,</span> <span class="n">village_3</span><span class="p">]:</span>
-    
-    <span class="n">N</span> <span class="o">=</span> <span class="n">example</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">Q</span> <span class="o">=</span> <span class="n">example</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">X</span> <span class="o">=</span> <span class="n">example</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
-    
-    <span class="n">timescale</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">example</span><span class="o">.</span><span class="n">t_his</span><span class="p">)</span>
-    <span class="n">beho_coalescent</span> <span class="o">=</span> <span class="n">example</span><span class="o">.</span><span class="n">coalescent</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
-    <span class="n">wiho_coalescent</span> <span class="o">=</span> <span class="n">example</span><span class="o">.</span><span class="n">coalescent</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">timescale</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">my_population</span><span class="o">.</span><span class="n">t_his</span><span class="p">)</span>
+<span class="n">beho_coalescent</span> <span class="o">=</span> <span class="n">my_population</span><span class="o">.</span><span class="n">coalescent</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">wiho_coalescent</span> <span class="o">=</span> <span class="n">my_population</span><span class="o">.</span><span class="n">coalescent</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:,</span> <span class="mi">1</span><span class="p">]</span>
 
-    <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">timescale</span><span class="p">,</span> <span class="n">beho_coalescent</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span>
-        <span class="s2">&quot;N </span><span class="si">{0:.0f}</span><span class="s2">, Q </span><span class="si">{1:.0f}</span><span class="s2">, </span><span class="se">\u03C7</span><span class="s2"> </span><span class="si">{2:.1f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">X</span><span class="p">))</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">timescale</span><span class="p">,</span> <span class="n">beho_coalescent</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
     
-    <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">timescale</span><span class="p">,</span> <span class="n">wiho_coalescent</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span>
-        <span class="s2">&quot;N </span><span class="si">{0:.0f}</span><span class="s2">, Q </span><span class="si">{1:.0f}</span><span class="s2">, </span><span class="se">\u03C7</span><span class="s2"> </span><span class="si">{2:.1f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">X</span><span class="p">))</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">timescale</span><span class="p">,</span> <span class="n">wiho_coalescent</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
     
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Between-host&quot;</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Within-host&quot;</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
@@ -624,85 +709,13 @@ document.write(`
 <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Time to coalescence&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Probability&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">,</span><span class="n">base</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1ec3e2a17b7c3ab91fe9ecd791b3314e78548e5dee00f9e8080c8ef411ac05e6.png" src="_images/1ec3e2a17b7c3ab91fe9ecd791b3314e78548e5dee00f9e8080c8ef411ac05e6.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">view_past_generations</span> <span class="o">=</span> <span class="mi">5</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sample two alleles from different hosts</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Generations    -------Probability distribution------&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;back in time   Separated   Cotransmitted   Coalesced&quot;</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">view_past_generations</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-    <span class="n">separated</span> <span class="o">=</span> <span class="n">my_village</span><span class="o">.</span><span class="n">beho_lineage</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">cotransmitted</span> <span class="o">=</span> <span class="n">my_village</span><span class="o">.</span><span class="n">beho_lineage</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">coalesced</span> <span class="o">=</span> <span class="n">my_village</span><span class="o">.</span><span class="n">beho_lineage</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
-    
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{0:6d}{1:16.2f}{2:13.2f}{3:14.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-        <span class="n">i</span><span class="p">,</span>
-        <span class="n">separated</span><span class="p">,</span>
-        <span class="n">cotransmitted</span><span class="p">,</span>
-        <span class="n">coalesced</span> <span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sample two alleles from different hosts
-
-Generations    -------Probability distribution------
-back in time   Separated   Cotransmitted   Coalesced
-     0            1.00         0.00          0.00
-     1            1.00         0.00          0.00
-     2            0.99         0.00          0.00
-     3            0.99         0.01          0.00
-     4            0.99         0.01          0.00
-     5            0.99         0.01          0.01
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sample two alleles from the same host</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Generations    -------Probability distribution------&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;back in time   Separated   Cotransmitted   Coalesced&quot;</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">view_past_generations</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-    <span class="n">separated</span> <span class="o">=</span> <span class="n">my_village</span><span class="o">.</span><span class="n">wiho_lineage</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">cotransmitted</span> <span class="o">=</span> <span class="n">my_village</span><span class="o">.</span><span class="n">wiho_lineage</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">coalesced</span> <span class="o">=</span> <span class="n">my_village</span><span class="o">.</span><span class="n">wiho_lineage</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
-    
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{0:6d}{1:16.2f}{2:13.2f}{3:14.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-        <span class="n">i</span><span class="p">,</span>
-        <span class="n">separated</span><span class="p">,</span>
-        <span class="n">cotransmitted</span><span class="p">,</span>
-        <span class="n">coalesced</span> <span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sample two alleles from the same host
-
-Generations    -------Probability distribution------
-back in time   Separated   Cotransmitted   Coalesced
-     0            0.00         1.00          0.00
-     1            0.28         0.58          0.14
-     2            0.44         0.33          0.23
-     3            0.53         0.19          0.28
-     4            0.58         0.11          0.31
-     5            0.61         0.07          0.32
-</pre></div>
-</div>
+<img alt="_images/e4dcc9f581e5c1ed258c9788ee3b8b4accc9318128877939b1bf1e07e2a3ff52.png" src="_images/e4dcc9f581e5c1ed258c9788ee3b8b4accc9318128877939b1bf1e07e2a3ff52.png" />
 </div>
 </div>
 </section>
@@ -765,6 +778,22 @@ back in time   Separated   Cotransmitted   Coalesced
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Running <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-produced-by-get-coalescent">Data produced by <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code></a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
               
             
           </div>

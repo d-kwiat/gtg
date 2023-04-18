@@ -185,6 +185,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 <li class="toctree-l2"><a class="reference internal" href="get-coalescent.html">Running <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code></a></li>
+
 <li class="toctree-l2"><a class="reference internal" href="get-diversity.html">Running <code class="docutils literal notranslate"><span class="pre">get_diversity</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="time-series.html">Analysing a time series</a></li>
 </ul>
@@ -463,6 +464,13 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">coalestr</span> <span class="k">as</span> <span class="nn">cs</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We specify the transmission history as a list of lists</span>
 <span class="c1"># Each inner list corresponds to a period of history ..</span>
 <span class="c1"># .. and has the format [duration, N, Q, X, M]</span>
@@ -495,7 +503,22 @@ document.write(`
 <li><p>locus_kb = 27 (length of haplotype locus in kb)</p></li>
 <li><p>phi_seed = 0.2 (initialise effective recombination parameter <span class="math notranslate nohighlight">\(\phi\)</span>)</p></li>
 </ul>
+<p><code class="docutils literal notranslate"><span class="pre">t_his</span></code> is the total duration of the population history.</p>
 <p>A population also acquires attributes after it is created, such as rates of coalescence and levels of genetic diversity. These are generated when we invoke the <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code> and <code class="docutils literal notranslate"><span class="pre">get_diversity</span></code> methods, as described later.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># What is the total duration of the population history?</span>
+
+<span class="n">my_population</span><span class="o">.</span><span class="n">t_his</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3000
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># What is the single nucleotide substition rate of my_population?</span>
