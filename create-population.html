@@ -415,8 +415,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#population-attributes-and-methods">Population attributes and methods</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Creating a <code class="docutils literal notranslate"><span class="pre">Population</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#population-attributes-and-methods">Population attributes and methods</a></li>
 </ul>
+
             </nav>
         </div>
     </div>
@@ -438,8 +440,9 @@ document.write(`
 <li><p><code class="docutils literal notranslate"><span class="pre">N</span></code> - effective number of hosts <span class="math notranslate nohighlight">\(N_h\)</span></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Q</span></code> - quantum of transmission <span class="math notranslate nohighlight">\(Q\)</span></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">X</span></code> - crossing rate of transmission chains <span class="math notranslate nohighlight">\(\chi\)</span></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">M</span></code> - migration rate from a metapopulation <span class="math notranslate nohighlight">\(N_m\)</span> (see below)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">M</span></code> - migration rate from a metapopulation <span class="math notranslate nohighlight">\(N_m\)</span>.</p></li>
 </ul>
+<p>For a simple population <code class="docutils literal notranslate"><span class="pre">M</span></code> is zero. It is non-zero only if this is a subpopulation within a larger metapopulation <span class="xref myst">as described elsewhere</span>. <code class="docutils literal notranslate"><span class="pre">M</span></code> gives the number of hosts per generation that enter the subpopulation from the metapopulation, which must be less than or equal to <code class="docutils literal notranslate"><span class="pre">N</span></code>.</p>
 <p>We create a population like this:</p>
 <p><code class="docutils literal notranslate"><span class="pre">my_population</span> <span class="pre">=</span> <span class="pre">coalestr.Population(my_history)</span></code></p>
 <p>This creates an instance of the <code class="docutils literal notranslate"><span class="pre">Population</span></code> class called <code class="docutils literal notranslate"><span class="pre">my_population</span></code> with the given set of transmission parameters.</p>
@@ -458,23 +461,6 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting coalestr
-  Downloading coalestr-0.2.10-py3-none-any.whl (21 kB)
-Installing collected packages: coalestr
-Successfully installed coalestr-0.2.10
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_7516</span>\<span class="mf">604297072.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;pip install coalestr&#39;</span><span class="p">)</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">coalestr</span> <span class="kn">import</span> <span class="n">cs</span>
-
-<span class="ne">ImportError</span>: cannot import name &#39;cs&#39; from &#39;coalestr&#39; (C:\Users\dkwia\Google Drive\My Drive\GitHub\gtg\coalestr.py)
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -487,15 +473,18 @@ Successfully installed coalestr-0.2.10
 <span class="c1"># We use the history to create an instance of the Population class:</span>
 
 <span class="n">my_population</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">Population</span><span class="p">(</span><span class="n">my_history</span><span class="p">)</span>
+
+<span class="o">*</span> <span class="n">Rates</span> <span class="n">of</span> <span class="n">mutation</span> <span class="ow">and</span> <span class="n">recombination</span>
 </pre></div>
 </div>
 </div>
 </div>
-<section id="population-attributes-and-methods">
-<h2>Population attributes and methods<a class="headerlink" href="#population-attributes-and-methods" title="Permalink to this heading">#</a></h2>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="population-attributes-and-methods">
+<h1>Population attributes and methods<a class="headerlink" href="#population-attributes-and-methods" title="Permalink to this heading">#</a></h1>
 <ul class="simple">
-<li><p>Rates of mutation and recombination</p></li>
 <li><p>Visualising the transmission history</p></li>
+<li><p>Rates of mutation and recombination</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -509,7 +498,7 @@ Successfully installed coalestr-0.2.10
 <img alt="_images/bfc6f8774d1bd95d1aecdf468acda44113656ef7ea56c32a1fd78f7eb6e4ae4f.png" src="_images/bfc6f8774d1bd95d1aecdf468acda44113656ef7ea56c32a1fd78f7eb6e4ae4f.png" />
 </div>
 </div>
-<p>Each population has a set of attributes such as rates of mutation and recombination.  These are given default values when creating a population but they can be modified at any stage.</p>
+<p>Each population has a set of attributes such as rates of mutation and recombination.  These are given the following default values when creating a population but they can be modified at any stage.</p>
 <ul class="simple">
 <li><p>mu = 1.1e-8 (single nucleotide substitution rate)</p></li>
 <li><p>r = 7.4e-4 (locus scaled recombination rate per kb)</p></li>
@@ -554,7 +543,7 @@ Successfully installed coalestr-0.2.10
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mu 5.000e-07, 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mu 1.100e-08, 
 r 7.400e-04, 
 v 9.000e-05, 
 locus_kb 27.00
@@ -625,13 +614,6 @@ minimum_length 2
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    Events captured.   Mean coalescence time
-                      beho      wiho        beho     wiho
-        0             100.0     100.0       637.3    421.7
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -678,9 +660,6 @@ minimum_length 2
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/0af109c105e1a9777b9b1c8a570525f3b29e6e547dad7e5fae4898c6e4a0d7c9.png" src="_images/0af109c105e1a9777b9b1c8a570525f3b29e6e547dad7e5fae4898c6e4a0d7c9.png" />
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -690,27 +669,12 @@ minimum_length 2
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    Events captured.   Mean coalescence time
-                      beho      wiho        beho     wiho
-        0             100.0     100.0       100.0      1.0
-</pre></div>
 </div>
-</div>
-</div>
-<p><strong>Migration rate</strong>. For a simple population <code class="docutils literal notranslate"><span class="pre">M</span></code> is zero.  It is non-zero only if this is a subpopulation within a larger metapopulation. <code class="docutils literal notranslate"><span class="pre">M</span></code> gives the number of hosts per generation that enter the subpopulation from the metapopulation, which must be less than or equal to <code class="docutils literal notranslate"><span class="pre">N</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">history_2</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
 <span class="n">village_2</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">Population</span><span class="p">(</span><span class="n">history_2</span><span class="p">)</span>
 <span class="n">village_2</span><span class="o">.</span><span class="n">get_coalescent</span><span class="p">(</span><span class="n">show</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    Events captured.   Mean coalescence time
-                      beho      wiho        beho     wiho
-        0             100.0     100.0       134.3     68.7
 </pre></div>
 </div>
 </div>
@@ -720,13 +684,6 @@ minimum_length 2
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">history_3</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
 <span class="n">village_3</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">Population</span><span class="p">(</span><span class="n">history_3</span><span class="p">)</span>
 <span class="n">village_3</span><span class="o">.</span><span class="n">get_coalescent</span><span class="p">(</span><span class="n">show</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    Events captured.   Mean coalescence time
-                      beho      wiho        beho     wiho
-        0             100.0     100.0       582.7    536.3
 </pre></div>
 </div>
 </div>
@@ -764,9 +721,6 @@ minimum_length 2
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/1ec3e2a17b7c3ab91fe9ecd791b3314e78548e5dee00f9e8080c8ef411ac05e6.png" src="_images/1ec3e2a17b7c3ab91fe9ecd791b3314e78548e5dee00f9e8080c8ef411ac05e6.png" />
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -786,20 +740,6 @@ minimum_length 2
         <span class="n">separated</span><span class="p">,</span>
         <span class="n">cotransmitted</span><span class="p">,</span>
         <span class="n">coalesced</span> <span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sample two alleles from different hosts
-
-Generations    -------Probability distribution------
-back in time   Separated   Cotransmitted   Coalesced
-     0            1.00         0.00          0.00
-     1            1.00         0.00          0.00
-     2            0.99         0.00          0.00
-     3            0.99         0.01          0.00
-     4            0.99         0.01          0.00
-     5            0.99         0.01          0.01
 </pre></div>
 </div>
 </div>
@@ -823,22 +763,7 @@ back in time   Separated   Cotransmitted   Coalesced
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sample two alleles from the same host
-
-Generations    -------Probability distribution------
-back in time   Separated   Cotransmitted   Coalesced
-     0            0.00         1.00          0.00
-     1            0.28         0.58          0.14
-     2            0.44         0.33          0.23
-     3            0.53         0.19          0.28
-     4            0.58         0.11          0.31
-     5            0.61         0.07          0.32
-</pre></div>
 </div>
-</div>
-</div>
-</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -890,8 +815,10 @@ back in time   Separated   Cotransmitted   Coalesced
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#population-attributes-and-methods">Population attributes and methods</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Creating a <code class="docutils literal notranslate"><span class="pre">Population</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#population-attributes-and-methods">Population attributes and methods</a></li>
 </ul>
+
   </nav></div>
 
 </div></div>
