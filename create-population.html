@@ -487,7 +487,7 @@ document.write(`
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="population-attributes">
 <h1>Population attributes<a class="headerlink" href="#population-attributes" title="Permalink to this heading">#</a></h1>
-<p>Each population has a set of attributes such as rates of mutation and recombination.  These are given the following default values when creating a population but they can be modified at any stage.</p>
+<p>Each population has a set of attributes when it is first created, such as rates of mutation and recombination.  These are assigned the default values listed below, but they can be modified at any stage.</p>
 <ul class="simple">
 <li><p>mu = 1.1e-8 (single nucleotide substitution rate)</p></li>
 <li><p>r = 7.4e-4 (locus scaled recombination rate per kb)</p></li>
@@ -495,6 +495,7 @@ document.write(`
 <li><p>locus_kb = 27 (length of haplotype locus in kb)</p></li>
 <li><p>phi_seed = 0.2 (initialise effective recombination parameter <span class="math notranslate nohighlight">\(\phi\)</span>)</p></li>
 </ul>
+<p>A population also acquires attributes after it is created, such as rates of coalescence and levels of genetic diversity. These are generated when we invoke the <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code> and <code class="docutils literal notranslate"><span class="pre">get_diversity</span></code> methods, as described later.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># What is the single nucleotide substition rate of my_population?</span>
@@ -598,7 +599,7 @@ minimum_length 2
 <li><p>to <a class="reference internal" href="get-coalescent.html"><span class="doc std std-doc">perform a coalescent simulation</span></a> using <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code></p></li>
 <li><p>to <a class="reference internal" href="get-diversity.html"><span class="doc std std-doc">obtain nucleotide diversity and haplotype homozygosity</span></a> using <code class="docutils literal notranslate"><span class="pre">get_diversity</span></code></p></li>
 </ol>
-<p>Follow the above links to learn about these population methods. When we invoke <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code> and <code class="docutils literal notranslate"><span class="pre">get_diversity</span></code> we generate data arrays that become attributes of our population, e.g. describing time series of coalescence and genetic diversity</p>
+<p>When we invoke <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code> and <code class="docutils literal notranslate"><span class="pre">get_diversity</span></code> we generate data arrays that become attributes of our population, e.g. describing how rates of coalescence and genetic diversity vary over time.  We discuss these <a class="reference internal" href="coalestr-features.html"><span class="doc std std-doc">elsewhere</span></a>.</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="complex-transmission-histories">
 <h1>Complex transmission histories<a class="headerlink" href="#complex-transmission-histories" title="Permalink to this heading">#</a></h1>
