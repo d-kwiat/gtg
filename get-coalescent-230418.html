@@ -61,11 +61,9 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'get-coalescent';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'get-coalescent-230418';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Running get_diversity" href="get-diversity.html" />
-    <link rel="prev" title="Creating a Population" href="create-population.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -156,7 +154,7 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
+        <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="how-to-use-this-book.html">How to use this book</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="using-google-colab.html">Using Google Colab</a></li>
 <li class="toctree-l2"><a class="reference internal" href="glossary.html">Glossary</a></li>
@@ -177,12 +175,12 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="fws-compare-methods.html">Rate of superinfection</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="coalestr-features.html">How to use <code class="docutils literal notranslate"><span class="pre">coalestr</span></code></a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="coalestr-features.html">How to use <code class="docutils literal notranslate"><span class="pre">coalestr</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="create-population.html">Creating a <code class="docutils literal notranslate"><span class="pre">Population</span></code></a></li>
 
 
 
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Running <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="get-coalescent.html">Running <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="get-diversity.html">Running <code class="docutils literal notranslate"><span class="pre">get_diversity</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="time-series.html">Analysing a time series</a></li>
 </ul>
@@ -248,7 +246,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://colab.research.google.com/github/d-kwiat/gtg/blob/main/get-coalescent.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/d-kwiat/gtg/blob/main/get-coalescent-230418.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -296,7 +294,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/d-kwiat/gtg/issues/new?title=Issue%20on%20page%20%2Fget-coalescent.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/d-kwiat/gtg/issues/new?title=Issue%20on%20page%20%2Fget-coalescent-230418.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -326,7 +324,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="_sources/get-coalescent.ipynb" target="_blank"
+      <li><a href="_sources/get-coalescent-230418.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -422,11 +420,17 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="running-get-coalescent">
 <h1>Running <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code><a class="headerlink" href="#running-get-coalescent" title="Permalink to this heading">#</a></h1>
-<p>Once we have <a class="reference internal" href="create-population.html"><span class="doc std std-doc">created a population by specifying its transmission history</span></a>, it is very simple to perform a <a class="reference internal" href="coalescence-time-basic.html"><span class="doc std std-doc">Markov chain simulation of coalescence times</span></a> by invoking <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code>.</p>
+<p>Once we have <a class="reference internal" href="create-population.html"><span class="doc std std-doc">created a population by specifying its transmission history</span></a> we can evaluate its probability distribution of coalescence times by Markov chain simulation. My Drive/GitHub/transmission_ms/coalescence_time.ipynb</p>
+<ul class="simple">
+<li><p>Checked in working order 6 Nov 2022</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>coalestr
-<span class="kn">from</span> <span class="nn">coalestr</span> <span class="kn">import</span> <span class="n">cs</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a path to \\GitHub\\transmission_ms</span>
+<span class="c1"># .. which contains the definitive version of coalestr.py</span>
+<span class="c1"># .. this is not necessary when working within \\GitHub\\transmission_ms</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;C:</span><span class="se">\\</span><span class="s1">Users</span><span class="se">\\</span><span class="s1">dominic</span><span class="se">\\</span><span class="s1">H_Drive</span><span class="se">\\</span><span class="s1">My Drive</span><span class="se">\\</span><span class="s1">GitHub</span><span class="se">\\</span><span class="s1">transmission_ms&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -434,73 +438,32 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">coalestr</span> <span class="k">as</span> <span class="nn">cs</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Specify the transmission history of a population</span>
-<span class="c1"># Each inner list gives [duration, N, Q, X, M] for a period of history</span>
-<span class="n">my_history</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">300</span>       <span class="c1"># Effective number of hosts</span>
+<span class="n">Q</span> <span class="o">=</span> <span class="mi">5</span>        <span class="c1"># Quantum of transmission</span>
+<span class="n">X</span> <span class="o">=</span> <span class="mf">0.5</span>      <span class="c1"># Crossing rate of transmission chains</span>
+<span class="n">duration</span> <span class="o">=</span> <span class="mi">50000</span>
 
-<span class="c1"># Create the population</span>
-<span class="n">my_population</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">Population</span><span class="p">(</span><span class="n">my_history</span><span class="p">)</span>
-
-<span class="c1"># Obtain coalescence times</span>
-<span class="n">my_population</span><span class="o">.</span><span class="n">get_coalescent</span><span class="p">()</span>
+<span class="n">history</span> <span class="o">=</span> <span class="p">[[</span><span class="n">duration</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
+<span class="n">my_village</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">Population</span><span class="p">(</span><span class="n">history</span><span class="p">)</span>
+<span class="n">my_village</span><span class="o">.</span><span class="n">get_coalescent</span><span class="p">(</span><span class="n">show</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    Events captured.   Mean coalescence time
                       beho      wiho        beho     wiho
-        0             100.0     100.0        25.1     18.9
+        0             100.0     100.0       637.3    421.7
 </pre></div>
 </div>
 </div>
 </div>
-<p><strong>Mean coalescence time</strong></p>
-<p>The ‘beho’ or <strong>between-host</strong> column on the right tells us that two alleles sampled from different hosts have a mean coalescence time of 25.1 generations.</p>
-<p>The ‘wiho’ or <strong>within-host</strong> column on the right tells us that two alleles sampled from the same host have a mean coalescence time of 18.9 generations.</p>
-<p><strong>Events captured</strong></p>
-<p>The ‘events captured’ columns tell us that 100% of coalescent events are captured for both the between-host and the within-host simulation. This is an important QC check because we want to be sure that our simulation runs for long enough to capture the vast majority of coalescent events.</p>
-<p>Let us see what happens if we drastically reduce the duration of our population history.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_history</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
-
-<span class="n">my_population</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">Population</span><span class="p">(</span><span class="n">my_history</span><span class="p">)</span>
-
-<span class="n">my_population</span><span class="o">.</span><span class="n">get_coalescent</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    Events captured.   Mean coalescence time
-                      beho      wiho        beho     wiho
-        0              68.6      77.2        10.7      8.4
-</pre></div>
-</div>
-</div>
-</div>
-<p>Here we appear to have shorter coalescence times but the results are unreliable because we are capturing only 68.6% of coalescent events for the between-host simulation and 77.2% of coalescent events for the within-host simulation.</p>
-<p><strong>Observation times</strong></p>
-<p>In the above examples we made a single observation of the population at time = 0.</p>
-<p>This generates the following arrays that can be retrieved as population attributes.</p>
-<p><code class="docutils literal notranslate"><span class="pre">beho_lineage</span></code> - this describes variation over time in the state of <strong>two lineages sampled from different hosts</strong> which will allow us to estimate between-host levels of genetic diversity.</p>
-<ul class="simple">
-<li><p>axis 0: bt (backwards time)</p></li>
-<li><p>axis 1: state of two lineages sampled from different hosts
-0:’probability that lineages are in subpopulation and separated’,
-1:’probability that lineages are in subpopulation and cotransmitted’,
-2:’probability that lineages are in subpopulation and coalesced’,
-3:’blank’,
-4:’blank’,
-5:’probability of coalescent event at bt’,
-6:’summation series for expectation of coalescence time’ }</p></li>
-</ul>
-<p>. This is very simple to do using the <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code> methods.Here we do</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b_separated</span> <span class="o">=</span> <span class="n">my_village</span><span class="o">.</span><span class="n">beho_lineage</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
@@ -738,24 +701,6 @@ back in time   Separated   Cotransmitted   Coalesced
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="create-population.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Creating a <code class="docutils literal notranslate"><span class="pre">Population</span></code></p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="get-diversity.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Running <code class="docutils literal notranslate"><span class="pre">get_diversity</span></code></p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div></div>
   
 </div>
