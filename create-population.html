@@ -438,7 +438,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="creating-a-population">
 <h1>Creating a <code class="docutils literal notranslate"><span class="pre">Population</span></code><a class="headerlink" href="#creating-a-population" title="Permalink to this heading">#</a></h1>
-<p>The first step in using <code class="docutils literal notranslate"><span class="pre">coalestr</span></code> is to specify the history of transmission parameters of the parasite population that we want to simulate. The simplest way to format the transmission history is as a list of lists:</p>
+<p>The first step in using <code class="docutils literal notranslate"><span class="pre">coalestr</span></code> is to specify the <strong>transmission history of the parasite population</strong> that we want to simulate. The simplest way to format this is as a list of lists:</p>
 <p><code class="docutils literal notranslate"><span class="pre">my_history</span> <span class="pre">=</span> <span class="pre">[[D,</span> <span class="pre">N,</span> <span class="pre">Q,</span> <span class="pre">X,</span> <span class="pre">M],</span> <span class="pre">[D,</span> <span class="pre">N,</span> <span class="pre">Q,</span> <span class="pre">X,</span> <span class="pre">M],</span> <span class="pre">[D,</span> <span class="pre">N,</span> <span class="pre">Q,</span> <span class="pre">X,</span> <span class="pre">M]]</span></code></p>
 <p>Each inner list gives the transmission parameters for a period of population history.  The first inner list describes the transmission parameters for the first period, the second inner list describes the second period, and so on. In this example there are three periods of population history, but we can expand this to as many periods as we like.</p>
 <p>Each period of population history is described by five variables:</p>
@@ -592,13 +592,13 @@ minimum_length 2
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="population-methods">
 <h1>Population methods<a class="headerlink" href="#population-methods" title="Permalink to this heading">#</a></h1>
-<p>There are various methods that can be performed on a Population object such as <code class="docutils literal notranslate"><span class="pre">my_population</span></code>.  These include simple descriptors of the population such as <code class="docutils literal notranslate"><span class="pre">plot_history</span></code> and <code class="docutils literal notranslate"><span class="pre">show_settings</span></code> as demonstrated above.</p>
-<p>As described elsewhere there are also methods:</p>
-<ul class="simple">
+<p>Once we have created a population (like <code class="docutils literal notranslate"><span class="pre">my_population</span></code>) we can invoke various methods to do useful things with it.  These include simple descriptors of the population such as <code class="docutils literal notranslate"><span class="pre">plot_history</span></code> and <code class="docutils literal notranslate"><span class="pre">show_settings</span></code> as demonstrated above.</p>
+<p>Most importantly there are methods:</p>
+<ol class="arabic simple">
 <li><p>to <a class="reference internal" href="get-coalescent.html"><span class="doc std std-doc">perform a coalescent simulation</span></a> using <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code></p></li>
 <li><p>to <a class="reference internal" href="get-diversity.html"><span class="doc std std-doc">obtain nucleotide diversity and haplotype homozygosity</span></a> using <code class="docutils literal notranslate"><span class="pre">get_diversity</span></code></p></li>
-</ul>
-<p>The <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code> and <code class="docutils literal notranslate"><span class="pre">get_diversity</span></code> methods generate data arrays that become attributes of <code class="docutils literal notranslate"><span class="pre">my_population</span></code>, e.g. describing time series of coalescence and genetic diversity</p>
+</ol>
+<p>Follow the above links to learn about these population methods. When we invoke <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code> and <code class="docutils literal notranslate"><span class="pre">get_diversity</span></code> we generate data arrays that become attributes of our population, e.g. describing time series of coalescence and genetic diversity</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="complex-transmission-histories">
 <h1>Complex transmission histories<a class="headerlink" href="#complex-transmission-histories" title="Permalink to this heading">#</a></h1>
