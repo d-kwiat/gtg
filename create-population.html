@@ -432,9 +432,9 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="creating-a-population">
 <h1>Creating a <code class="docutils literal notranslate"><span class="pre">Population</span></code><a class="headerlink" href="#creating-a-population" title="Permalink to this heading">#</a></h1>
-<p>The first step in using <code class="docutils literal notranslate"><span class="pre">coalestr</span></code> is to specify the history of transmission parameters of the parasite population that we want to simulate. The simplest way to format the transmission history is as a list of lists like this:</p>
+<p>The first step in using <code class="docutils literal notranslate"><span class="pre">coalestr</span></code> is to specify the history of transmission parameters of the parasite population that we want to simulate. The simplest way to format the transmission history is as a list of lists:</p>
 <p><code class="docutils literal notranslate"><span class="pre">my_history</span> <span class="pre">=</span> <span class="pre">[[duration,</span> <span class="pre">N,</span> <span class="pre">Q,</span> <span class="pre">X,</span> <span class="pre">M],</span> <span class="pre">[duration,</span> <span class="pre">N,</span> <span class="pre">Q,</span> <span class="pre">X,</span> <span class="pre">M]]</span></code></p>
-<p>Each inner list gives the transmission parameters for a period of population history.  The first inner list describes the first period, the second inner list describes the second period, and so on. You can have as many periods of history as you like, from 1 upwards.</p>
+<p>Each inner list gives the transmission parameters for a period of population history.  The first inner list describes the transmission parameters for the first period, the second inner list describes the second period, and so on. In this example there are only two periods of population history, but we can expand this to as many periods as we like.</p>
 <p>Each period of population history is described by five variables:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">duration</span></code> - duration in generations</p></li>
@@ -447,6 +447,13 @@ document.write(`
 <p>We create a simple population without migration like this:</p>
 <p><code class="docutils literal notranslate"><span class="pre">my_population</span> <span class="pre">=</span> <span class="pre">coalestr.Population(my_history)</span></code></p>
 <p>This creates an instance of the <code class="docutils literal notranslate"><span class="pre">Population</span></code> class called <code class="docutils literal notranslate"><span class="pre">my_population</span></code> with the given set of transmission parameters.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">coalestr</span> <span class="k">as</span> <span class="nn">cs</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>coalestr
@@ -604,23 +611,24 @@ minimum_length 2
 <span class="c1"># .. where axis 0 represents forward time</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span> <span class="nn">math</span>
 
-<span class="n">duration_of_simulation</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">duration_of_simulation</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="n">my_history</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">duration_of_simulation</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 
-<span class="n">N</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">Q</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">X</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">100</span> <span class="c1"># Nh baseline</span>
+<span class="n">Q</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># Q baseline</span>
+<span class="n">X</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="c1"># chi baseline</span>
 <span class="n">M</span> <span class="o">=</span> <span class="mi">0</span>
 
 <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">duration_of_simulation</span><span class="p">):</span>
     
-    <span class="n">my_history</span><span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">N</span>
-    <span class="n">my_history</span><span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">Q</span>
-    <span class="n">my_history</span><span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span>
+    <span class="n">my_history</span><span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">N</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">0.2</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+    <span class="n">my_history</span><span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">Q</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mf">0.3</span> <span class="o">*</span> <span class="n">t</span><span class="p">))</span>
+    <span class="n">my_history</span><span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mf">0.8</span> <span class="o">*</span> <span class="n">t</span><span class="p">))</span>
     <span class="n">my_history</span><span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">M</span>
     
-    <span class="n">N</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">N</span> <span class="o">+=</span> <span class="mi">20</span>
     
 <span class="c1"># We create a population with this transmission history</span>
     
@@ -633,7 +641,7 @@ minimum_length 2
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/0bcedf8e6063d22e61e04f3983a936563f082a348ae40a2640f60c5337d51600.png" src="_images/0bcedf8e6063d22e61e04f3983a936563f082a348ae40a2640f60c5337d51600.png" />
+<img alt="_images/9fe5b7c333d46097177e83c6fc498d277fafda95f42be63c754ae2ecf35e2363.png" src="_images/9fe5b7c333d46097177e83c6fc498d277fafda95f42be63c754ae2ecf35e2363.png" />
 </div>
 </div>
 </section>
