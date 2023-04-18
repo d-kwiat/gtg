@@ -23,7 +23,7 @@ chapters:
       - file: fws-compare-methods
   - file: coalestr-features
     sections:
-      - file: population-class
+      - file: create_population
       - file: get-coalescent
       - file: get-diversity
       - file: time-series
