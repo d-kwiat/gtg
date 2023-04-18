@@ -435,7 +435,7 @@ document.write(`
 <h1>Creating a <code class="docutils literal notranslate"><span class="pre">Population</span></code><a class="headerlink" href="#creating-a-population" title="Permalink to this heading">#</a></h1>
 <p>The first step in using <code class="docutils literal notranslate"><span class="pre">coalestr</span></code> is to specify the history of transmission parameters of the parasite population that we want to simulate. The simplest way to format the transmission history is as a list of lists like this:</p>
 <p><code class="docutils literal notranslate"><span class="pre">my_history</span> <span class="pre">=</span> <span class="pre">[[duration,</span> <span class="pre">N,</span> <span class="pre">Q,</span> <span class="pre">X,</span> <span class="pre">M],</span> <span class="pre">[duration,</span> <span class="pre">N,</span> <span class="pre">Q,</span> <span class="pre">X,</span> <span class="pre">M]]</span></code></p>
-<p>Each inner list gives the transmission parameters for a period of population history.  The first inner list describes the first period, the second inner list describes the second period, and so on. Any number of periods are allowed, from 1 upwards.</p>
+<p>Each inner list gives the transmission parameters for a period of population history.  The first inner list describes the first period, the second inner list describes the second period, and so on. You can have as many periods of history as you like, from 1 upwards.</p>
 <p>Each period of population history is described by five variables:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">duration</span></code> - duration in generations</p></li>
