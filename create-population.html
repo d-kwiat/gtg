@@ -498,11 +498,11 @@ document.write(`
 <h1>Population attributes<a class="headerlink" href="#population-attributes" title="Permalink to this heading">#</a></h1>
 <p>Each population has a set of attributes when it is first created, such as rates of mutation and recombination.  These are assigned the default values listed below, but they can be modified at any stage.</p>
 <ul class="simple">
-<li><p>mu = 1.1e-8 (single nucleotide substitution rate)</p></li>
-<li><p>r = 7.4e-4 (locus scaled recombination rate per kb)</p></li>
-<li><p>v = 9e-5 (locus scaled mutation rate per kb)</p></li>
-<li><p>locus_kb = 27 (length of haplotype locus in kb)</p></li>
-<li><p>phi_seed = 0.2 (initialise effective recombination parameter <span class="math notranslate nohighlight">\(\phi\)</span>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mu</span></code> = 1.1e-8 (single nucleotide substitution rate)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">r</span></code> = 7.4e-4 (locus scaled recombination rate per kb)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">v</span></code> = 9e-5 (locus scaled mutation rate per kb)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">locus_kb</span></code> = 27 (length of haplotype locus in kb)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">phi_seed</span></code> = 0.2 (initialise effective recombination parameter <span class="math notranslate nohighlight">\(\phi\)</span>)</p></li>
 </ul>
 <p><code class="docutils literal notranslate"><span class="pre">t_his</span></code> is the total duration of the population history.</p>
 <p>A population also acquires attributes after it is created, such as rates of coalescence and levels of genetic diversity. These are generated when we invoke the <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code> and <code class="docutils literal notranslate"><span class="pre">get_diversity</span></code> methods, as described later.</p>
