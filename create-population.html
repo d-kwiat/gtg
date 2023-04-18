@@ -439,11 +439,11 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="creating-a-population">
 <h1>Creating a <code class="docutils literal notranslate"><span class="pre">Population</span></code><a class="headerlink" href="#creating-a-population" title="Permalink to this heading">#</a></h1>
 <p>The first step in using <code class="docutils literal notranslate"><span class="pre">coalestr</span></code> is to specify the history of transmission parameters of the parasite population that we want to simulate. The simplest way to format the transmission history is as a list of lists:</p>
-<p><code class="docutils literal notranslate"><span class="pre">my_history</span> <span class="pre">=</span> <span class="pre">[[duration,</span> <span class="pre">N,</span> <span class="pre">Q,</span> <span class="pre">X,</span> <span class="pre">M],</span> <span class="pre">[duration,</span> <span class="pre">N,</span> <span class="pre">Q,</span> <span class="pre">X,</span> <span class="pre">M]]</span></code></p>
-<p>Each inner list gives the transmission parameters for a period of population history.  The first inner list describes the transmission parameters for the first period, the second inner list describes the second period, and so on. In this example there are only two periods of population history, but we can expand this to as many periods as we like.</p>
+<p><code class="docutils literal notranslate"><span class="pre">my_history</span> <span class="pre">=</span> <span class="pre">[[D,</span> <span class="pre">N,</span> <span class="pre">Q,</span> <span class="pre">X,</span> <span class="pre">M],</span> <span class="pre">[D,</span> <span class="pre">N,</span> <span class="pre">Q,</span> <span class="pre">X,</span> <span class="pre">M],</span> <span class="pre">[D,</span> <span class="pre">N,</span> <span class="pre">Q,</span> <span class="pre">X,</span> <span class="pre">M]]</span></code></p>
+<p>Each inner list gives the transmission parameters for a period of population history.  The first inner list describes the transmission parameters for the first period, the second inner list describes the second period, and so on. In this example there are three periods of population history, but we can expand this to as many periods as we like.</p>
 <p>Each period of population history is described by five variables:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">duration</span></code> - duration in generations</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">D</span></code> - duration of the period in generations</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">N</span></code> - effective number of hosts <span class="math notranslate nohighlight">\(N_h\)</span></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Q</span></code> - quantum of transmission <span class="math notranslate nohighlight">\(Q\)</span></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">X</span></code> - crossing rate of transmission chains <span class="math notranslate nohighlight">\(\chi\)</span></p></li>
@@ -453,13 +453,6 @@ document.write(`
 <p>We create a simple population without migration like this:</p>
 <p><code class="docutils literal notranslate"><span class="pre">my_population</span> <span class="pre">=</span> <span class="pre">coalestr.Population(my_history)</span></code></p>
 <p>This creates an instance of the <code class="docutils literal notranslate"><span class="pre">Population</span></code> class called <code class="docutils literal notranslate"><span class="pre">my_population</span></code> with the given set of transmission parameters.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">coalestr</span> <span class="k">as</span> <span class="nn">cs</span>
-</pre></div>
-</div>
-</div>
-</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>coalestr
@@ -473,9 +466,9 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We specify the transmission history as a list of lists</span>
 <span class="c1"># Each inner list corresponds to a period of history ..</span>
 <span class="c1"># .. and has the format [duration, N, Q, X, M]</span>
-<span class="c1"># In this case there are two periods each of 1000 generations</span>
+<span class="c1"># In this case there are three periods each of 1000 generations</span>
 
-<span class="n">my_history</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
+<span class="n">my_history</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
 
 <span class="c1"># We use the history to create an instance of the Population class:</span>
 
@@ -488,7 +481,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/bfc6f8774d1bd95d1aecdf468acda44113656ef7ea56c32a1fd78f7eb6e4ae4f.png" src="_images/bfc6f8774d1bd95d1aecdf468acda44113656ef7ea56c32a1fd78f7eb6e4ae4f.png" />
+<img alt="_images/f747f6165735c8e7d402dc29efe3e0d03e4d96add1ababfe85da1011ef5ac6a2.png" src="_images/f747f6165735c8e7d402dc29efe3e0d03e4d96add1ababfe85da1011ef5ac6a2.png" />
 </div>
 </div>
 </section>
