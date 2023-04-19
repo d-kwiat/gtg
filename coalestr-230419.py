@@ -1,5 +1,6 @@
-#   coalestr version 0.2.14
-#   19 Apr 2023
+#   coalestr version 0.2.71
+#   1 Nov 2022
+#   With minor changes from version of 11 October 2021
 
 '''
 Population class methods
@@ -7,7 +8,9 @@ Population class methods
     get_coalescent()
     without_migration()
     with_migration()
+    with_migration_alternative()
     get_diversity()
+    get_segments()
     good_to_go()
     show_settings()
     restore_settings()
@@ -33,7 +36,13 @@ class Population(object):
     locus_kb = 27              # length of haplotype locus in kb
     phi_seed = 0.2             # initialise phi for haplotype locus
     phi_bias = 1
-   
+    
+    # Default values for analysis of shared haplotype segments
+    
+    unit_length = 13.5         # unit length in kb 
+    chromosome_length = 100    # chromosome length in units 
+    minimum_length = 2         # minimum segment length in units
+    
     # default QC metrics
     
     eco = False
@@ -96,6 +105,9 @@ class Population(object):
         self.locus_kb = Population.locus_kb
         self.phi_seed = Population.phi_seed
         self.phi_bias = Population.phi_bias
+        self.unit_length = Population.unit_length
+        self.chromosome_length = Population.chromosome_length
+        self.minimum_length = Population.minimum_length
         self.eco = Population.eco
         
         self.settings = {
@@ -105,6 +117,9 @@ class Population(object):
             'locus_kb': self.locus_kb,
             'phi_seed': self.phi_seed,
             'phi_bias': self.phi_bias,
+            'unit_length': self.unit_length,
+            'chromosome_length': self.chromosome_length,
+            'minimum_length': self.minimum_length,
             'eco': self.eco }
  
         '''Set variable used by goodToGo function'''
@@ -426,6 +441,147 @@ class Population(object):
     
 ##########################################################
 
+    def with_migration_alternative(self, t_obs):
+
+        '''Run a Markov chain simulation with migration from a metapopulation'''
+        # Here we assume metapopulation has constant population size ...
+        # .. and that all lineages entering the metapopulation do so at bt = 0 
+            
+        b_lineage = np.zeros((self.t_sim, 10))
+        w_lineage = np.zeros((self.t_sim, 10))
+            
+        self.lineage_index = {
+            'axis 0':'bt',
+            'axis 2':'state of two lineages',
+             0: 'probability that lineages are in subpopulation and separated',
+             1: 'probability that lineages are in subpopulation and cotransmitted',
+             2: 'probability that lineages are in subpopulation and coalesced',
+             3: 'probability that lineages are in metapopulation',
+             4: 'blank',
+             5: 'probability of coalescent event at bt',
+             6: 'summation series for expectation of coalescence time',            
+             7: 'probability of coalescent event in subpopulation at bt',
+             8: 'probability of lineages entering metapopulation at bt',
+             9: 'probability of coalescent event in metapopulation at bt' }
+            
+        # sample two alleles from two different hosts (beho)
+        b_lineage[t_obs, 0:4] = [1, 0, 0, 0]
+     
+        # sample two alleles from the same host (wiho)
+        w_lineage[t_obs, 0:4] = [0, 1, 0, 0]
+    
+        meta = self.metapopulation
+        b_count = 0
+        w_count = 0
+        t_brk = self.t_his - 1
+            
+        '''Run a Markov chain simulation'''
+            
+        for bt in range(t_obs + 1, self.t_his):
+ 
+            N = self.parameters[bt, 0]
+            Q = self.parameters[bt, 1]
+            X = self.parameters[bt, 2]
+            Nm = self.parameters[bt, 3]
+                
+            M = Nm / N
+        
+            # create a matrix of transition probabilities
+      
+            transition_matrix = np.ones((4,4)) 
+           
+            transition_matrix[0,:] = [
+                ((N - 1) * (1 - M) ** 2) / N,
+                (Q - 1) * (1 - M) / (N * Q),
+                1 / (N * Q),
+                (M * (Q - 1) + Q * (N - 1) * (2 * M - M ** 2)) / (N * Q) ]
+               
+            transition_matrix[1,:] = [
+                (Q * X * (1 - M) ** 2) / (2 * Q - 1),
+                (Q - 1) * (1 - M) * (2 * Q - Q * X - 1) / (Q * (2 * Q - 1)),
+                (2 * Q - Q * X - 1) / (Q * (2 * Q - 1)),
+                (Q * M * (2 * Q + Q * X + X - Q * X * M - 3) + M) / (Q * (2 * Q - 1)) ]
+
+            transition_matrix[2,:] = [
+                0,
+                0,
+                1,
+                0 ]
+
+            transition_matrix[3,:] = [
+                0,
+                0,
+                0,
+                1 ]
+        
+            # perform matrix multiplication
+        
+            b_lineage[bt, 0:4] = np.matmul(b_lineage[bt - 1, 0:4], transition_matrix[:, :])
+            b_lineage[bt, 7] = b_lineage[bt, 2] - b_lineage[bt - 1, 2] # prob of coalescent event in subpop at bt
+            b_lineage[bt, 8] = b_lineage[bt, 3] - b_lineage[bt - 1, 3] # prob of entering metapop at bt
+                
+            w_lineage[bt, 0:4] = np.matmul(w_lineage[bt - 1, 0:4], transition_matrix[:,:])
+            w_lineage[bt, 7] = w_lineage[bt, 2] - w_lineage[bt - 1, 2] # prob of coalescent event in subpop at bt
+            w_lineage[bt, 8] = w_lineage[bt, 3] - w_lineage[bt - 1, 3] # prob of entering metapop at bt
+            
+            if self.eco != False and (w_lineage[bt, 2] + w_lineage[bt, 3]) > self.eco and b_count == 0:
+                b_count = 1
+                    
+            if self.eco != False and (b_lineage[bt, 2] + b_lineage[bt, 3]) > self.eco and w_count == 0:
+                w_count = 1
+                    
+            if b_count == 1 and w_count == 1:
+                t_brk = bt
+                break
+
+######### THIS IS THE SECTION THAT IS DIFFERENT
+        # We iterate over lineage[i, 8] instead of using the cumulative sum at lineage[i, 3]
+
+        for i in range(t_obs, meta.t_brk):
+            
+            b_meta = b_lineage[i, 8]
+            w_meta = w_lineage[i, 8]
+            
+            b_lineage[i:self.t_sim, 9] += b_meta * meta.coalescent[0, 0: self.t_sim - i, 0]
+            w_lineage[i:self.t_sim, 9] += w_meta * meta.coalescent[0, 0: self.t_sim - i, 0] 
+                
+########
+        
+        # overall probability of coalescent event at bt
+        
+        b_lineage[t_obs:self.t_sim, 5] = b_lineage[t_obs:self.t_sim, 7] + b_lineage[t_obs:self.t_sim, 9]
+        w_lineage[t_obs:self.t_sim, 5] = w_lineage[t_obs:self.t_sim, 7] + w_lineage[t_obs:self.t_sim, 9]
+                
+        for bt in range(t_obs + 1, self.t_sim):
+            b_lineage[bt, 6] = b_lineage[bt, 5] * (bt - t_obs)
+            w_lineage[bt, 6] = w_lineage[bt, 5] * (bt - t_obs)
+                
+        # Percentage of coalescent events captured
+           
+        b_events_captured = sum(b_lineage[t_obs:self.t_sim, 5]) * 100
+        w_events_captured = sum(w_lineage[t_obs:self.t_sim, 5]) * 100   
+        
+        # Expectation of coalescence time
+            
+        b_coalescence_time = sum(b_lineage[t_obs:self.t_sim, 6])
+        w_coalescence_time = sum(w_lineage[t_obs:self.t_sim, 6])
+    
+        # Write to output array
+        
+        summary = np.zeros((7))        
+            
+        summary[0] = t_obs
+        summary[1] = b_events_captured         
+        summary[2] = w_events_captured
+        summary[3] = b_coalescence_time         
+        summary[4] = w_coalescence_time
+        summary[5] = self.eco
+        summary[6] = t_brk
+            
+        return summary, b_lineage, w_lineage     
+
+##########################################################
+
     def get_diversity(self, show = True):
         
         if self.metapopulation !=False and not hasattr(self.metapopulation, 'diversity'):
@@ -502,6 +658,10 @@ class Population(object):
                 if haplotype_decay < 0:
                     haplotype_decay = 0
 
+                # summate[bt, 3] = haplotype_decay ** (2 * (bt - t_obs))
+                # summate[bt, 4] = self.coalescent[i, bt, 0] * summate[bt, 3]
+                # summate[bt, 5] = self.coalescent[i, bt, 1] * summate[bt, 3]
+                
                 summate[bt, 3] = haplotype_decay ** 2
                 
                 haplotype_decay_product = haplotype_decay_product * (haplotype_decay ** 2)
@@ -509,6 +669,11 @@ class Population(object):
                 summate[bt, 4] = self.coalescent[i, bt, 0] * haplotype_decay_product
                 summate[bt, 5] = self.coalescent[i, bt, 1] * haplotype_decay_product
                     
+                #summate[bt, 4] = self.coalescent[i, bt, 0] * np.prod(summate[t_obs + 1: bt + 1, 3])
+                #summate[bt, 5] = self.coalescent[i, bt, 1] * np.prod(summate[t_obs + 1: bt + 1, 3])
+                
+                # check that the above two methods give roughly the same results
+
             beho_snp_het = sum(summate[t_obs+1:,1])
             wiho_snp_het = sum(summate[t_obs+1:,2])
             beho_hap_hom = sum(summate[t_obs+1:,4])
@@ -544,6 +709,181 @@ class Population(object):
                     t_obs,
                     beho_snp_het,
                     wiho_snp_het ))                
+                
+##########################################################
+                
+    def get_segments(self, show = True):
+        
+        self.shared_segments = np.zeros((len(self.observation_times), 7))
+        
+        self.shared_segments_index = {
+            'axis 0':'observation_times[i]',
+            'axis 1':'shared segment analysis',
+             0:'t_obs',
+             1:'b_omega',
+             2:'b_sigma',
+             3:'b_segment_length',
+             4:'w_omega',
+             5:'w_sigma',
+             6:'w_segment_length'}
+        
+        if show != False:
+
+            print("Shared haplotype segments of {0:d} units or more, in a chromosome of length {1:d} units".format(
+                self.minimum_length,
+                self.chromosome_length))
+            
+            print("where one unit is {0:.2f} kilobases".format(
+                self.unit_length))
+            
+            print("\nObservation time         Between host                   Within host")
+            print("                       omega  sigma   mean kb         omega  sigma   mean kb")
+
+        phi_list = self.phi_seed * np.ones(self.chromosome_length + 1)
+        
+        for j in reversed(range(len(self.observation_times))):
+        
+            t_obs = self.observation_times[j]
+
+            segments = np.zeros((self.chromosome_length + 1, 16))
+        
+            self.segments_index = {
+                'axis 0':'i in range(chromosome_length + 1)',
+                'axis 1':'shared segment analysis',
+                 0:'t_obs',
+                 1:'haplotype_units',
+                 2:'haplotype_kb',
+                 3:'beho_haphom',
+                 4:'wiho_haphom',
+                 5:'beho_gi',
+                 6:'wiho_gi',
+                 7:'nzi',
+                 8:'i * beho_gi * nzi',
+                 9:'i * wiho_gi * nzi',
+                 10:'chromosome_length * beho_gi * nzi',
+                 11:'chromosome_length * wiho_gi * nzi',
+                 12:'beho_gi * nzi',
+                 13:'wiho_gi * nzi',
+                 14:'beho_prob_L',
+                 15:'wiho_prob_L' }
+            
+            for i in range(self.chromosome_length):
+                
+                haplotype_kb = i * self.unit_length
+                
+                haplotype_decay_product = 1
+                
+                shs_sums = np.zeros((self.t_sim, 2)) 
+                # [bt, 0] beho: summation series for expectation of haplotype homozygosity
+                # [bt, 1] wiho: summation series for expectation of haplotype homozygosity
+                
+                for bt in range(t_obs + 1, self.t_sim):
+    
+                    phi = phi_list[i]
+                    
+                    haplotype_decay = 1 - (phi * self.r * haplotype_kb) - (self.v * haplotype_kb)
+        
+                    if haplotype_decay < 0:
+                        haplotype_decay = 0
+                    
+                    haplotype_decay_product *= haplotype_decay ** 2
+        
+                    shs_sums[bt, 0] = self.coalescent[j, bt, 0] * haplotype_decay_product
+                    shs_sums[bt, 1] = self.coalescent[j, bt, 1] * haplotype_decay_product        
+
+                nzi = self.chromosome_length - i
+                
+                if i != self.chromosome_length:
+                    
+                    beho_hap_hom = sum(shs_sums[t_obs + 1:, 0])
+                    wiho_hap_hom = sum(shs_sums[t_obs + 1:, 1])
+                    
+                    segments[i, 3] = beho_hap_hom
+                    segments[i, 4] = wiho_hap_hom
+                
+                if i == 0:
+
+                    beho_gi = 1 - beho_hap_hom
+                    wiho_gi = 1 - wiho_hap_hom
+        
+                else:
+
+                    beho_gi = segments[i - 1, 3] - beho_hap_hom
+                    wiho_gi = segments[i - 1, 4] - wiho_hap_hom
+        
+                segments[i, 0] = t_obs 
+                segments[i, 1] = i 
+                segments[i, 2] = haplotype_kb    
+                segments[i, 5] = beho_gi
+                segments[i, 6] = wiho_gi
+                segments[i, 7] = nzi
+                segments[i, 8] = i * beho_gi * nzi 
+                segments[i, 9] = i * wiho_gi * nzi
+                segments[i, 10] = self.chromosome_length * beho_gi * nzi
+                segments[i, 11] = self.chromosome_length * wiho_gi * nzi
+                segments[i, 12] = beho_gi * nzi
+                segments[i, 13] = wiho_gi * nzi
+
+                phi_list[i] = 1 - wiho_hap_hom
+                
+            i = self.chromosome_length
+            
+            nzi = 1
+            beho_gi = segments[i - 1, 3]
+            wiho_gi = segments[i - 1, 4]
+            
+            segments[i, 0] = t_obs 
+            segments[i, 1] = i
+            segments[i, 2] = haplotype_kb    
+            segments[i, 5] = beho_gi
+            segments[i, 6] = wiho_gi
+            segments[i, 7] = nzi
+            segments[i, 8] = i * beho_gi * nzi 
+            segments[i, 9] = i * wiho_gi * nzi
+            segments[i, 10] = self.chromosome_length * beho_gi * nzi
+            segments[i, 11] = self.chromosome_length * wiho_gi * nzi
+            segments[i, 12] = beho_gi * nzi
+            segments[i, 13] = wiho_gi * nzi
+            
+            phi_list[i] = 1 - wiho_hap_hom
+        
+            beho_omega = np.sum(segments[self.minimum_length:,10]) / np.sum(segments[:,8])
+            wiho_omega = np.sum(segments[self.minimum_length:,11]) / np.sum(segments[:,9]) 
+    
+            beho_sigma = np.sum(segments[self.minimum_length:,8]) / np.sum(segments[:,8])
+            wiho_sigma = np.sum(segments[self.minimum_length:,9]) / np.sum(segments[:,9])
+
+            beho_segment_length = self.chromosome_length * self.unit_length * beho_sigma / beho_omega
+            wiho_segment_length = self.chromosome_length * self.unit_length * wiho_sigma / wiho_omega
+
+            segments[:,14] = segments[:,12] / np.sum(segments[:,12]) 
+            # Probability distribution of beho_L
+            
+            segments[:,15] = segments[:,13] / np.sum(segments[:,13])
+            # Probability distribution of wiho_L
+            
+            if t_obs == 0:
+                
+                self.segments = segments
+            
+            self.shared_segments[j,0] = t_obs
+            self.shared_segments[j,1] = beho_omega
+            self.shared_segments[j,2] = beho_sigma
+            self.shared_segments[j,3] = beho_segment_length
+            self.shared_segments[j,4] = wiho_omega
+            self.shared_segments[j,5] = wiho_sigma
+            self.shared_segments[j,6] = wiho_segment_length
+
+            if show != False:
+                
+                print("{0:9d}{1:19.2f}{2:7.2f}{3:10.2f}{4:14.2f}{5:7.2f}{6:10.2f}".format(
+                    t_obs,
+                    beho_omega,
+                    beho_sigma,
+                    beho_segment_length,
+                    wiho_omega,
+                    wiho_sigma,
+                    wiho_segment_length))
                 
 ##########################################################                
                 
