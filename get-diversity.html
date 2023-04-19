@@ -61,6 +61,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'get-diversity';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -186,6 +188,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Running <code class="docutils literal notranslate"><span class="pre">get_diversity</span></code></a></li>
+
 <li class="toctree-l2"><a class="reference internal" href="time-series.html">Analysing a time series</a></li>
 </ul>
 </li>
@@ -397,7 +400,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -413,6 +418,16 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Running <code class="docutils literal notranslate"><span class="pre">get_diversity</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-objects">Data objects</a></li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -477,12 +492,49 @@ document.write(`
 </div>
 </div>
 </div>
+<p>beho means a between-host sample and wiho means a within-host sample.</p>
+<p>This tells us that the local parasite population has nucleotide diversity of 5.52 x 10^-7 and haplotype homozygosity of 0.752.</p>
+<p>The mean within-host nucleotide diversity is 4.16 x 10^-7 and the mean within-host haplotype homozygosity is 0.812.</p>
+<p><strong>Haplotype homozygosity</strong> by default refers to a locus spanning 2 centimorgans. In the <em>Plasmodium falciparum</em> genome, one centimorgan is approximately 13.5kb, so this is equivalent to a 27kb haplotype locus.  We can alter these values as shown below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check the current length of a haplotype locus in kilobases</span>
+<span class="n">my_population</span><span class="o">.</span><span class="n">locus_kb</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Change the length of a haplotype locus to 135kb (~10 centimorgans)</span>
+<span class="n">my_population</span><span class="o">.</span><span class="n">locus_kb</span> <span class="o">=</span> <span class="mi">135</span>
+
+<span class="c1"># Re-estimate haplotype homozygosity for this larger locus</span>
+<span class="n">my_population</span><span class="o">.</span><span class="n">get_diversity</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.  Nucleotide diversity     Haplotype homozygosity
+                      beho       wiho           beho       wiho
+        0           5.52e-07   4.16e-07       3.57e-01   4.97e-01
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># If we specify multiple observation times for get_coalescent</span>
 <span class="c1"># .. these are automatically passed to get_diversity</span>
 
 <span class="n">my_observations</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1500</span><span class="p">]</span>
+
+<span class="n">my_population</span><span class="o">.</span><span class="n">locus_kb</span> <span class="o">=</span> <span class="mi">27</span>
 
 <span class="n">my_population</span><span class="o">.</span><span class="n">get_coalescent</span><span class="p">(</span><span class="n">observe</span> <span class="o">=</span> <span class="n">my_observations</span><span class="p">,</span> <span class="n">show</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 
@@ -497,6 +549,55 @@ document.write(`
      1000           8.58e-07   2.20e-07       7.17e-01   9.13e-01
       500           5.52e-07   4.16e-07       8.25e-01   8.68e-01
         0           5.52e-07   4.16e-07       7.94e-01   8.44e-01
+</pre></div>
+</div>
+</div>
+</div>
+<p>This simulation with multiple observation times gives the haplotype homozygosity of a 27kb locus as 0.794 (between-host) and 0.844 (within-host) at observation time 0.  This is slightly different from the values obtained earlier (0.752 and 0.812) when we ran the same simulation with a single observation time.</p>
+<p>The reason for this discrepancy is variation in the effective recombination parameter <span class="math notranslate nohighlight">\(\phi_t\)</span>. <span class="math notranslate nohighlight">\(\phi_t\)</span> is determined by haplotype heterozygosity and thus can vary during the course of a simulation.  At the outset of a simulation we do not know haplotype heterozygosity and so we make an initial guess at <span class="math notranslate nohighlight">\(\phi_t\)</span> - this is the population attribute <code class="docutils literal notranslate"><span class="pre">phi_seed</span></code> with a default value of 0.2.</p>
+<p>When we make multiple observations, <code class="docutils literal notranslate"><span class="pre">get_diversity</span></code> estimates the level of haplotype heterozygosity at each observation timepoint and adjusts the value of <span class="math notranslate nohighlight">\(\phi_t\)</span> accordingly. This means that our estimate of haplotype homozygosity at any given timepoint becomes increasingly accurate if we make multiple observations prior to that timepoint.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="data-objects">
+<h1>Data objects<a class="headerlink" href="#data-objects" title="Permalink to this heading">#</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">get_diversity</span></code> produces an array called <code class="docutils literal notranslate"><span class="pre">diversity</span></code> that gives nucleotide diversity, haplotype homozygosity and the inbreeding coefficient <span class="math notranslate nohighlight">\(F_{WS}\)</span> for different observation times.  If this is a subpopulation embedded within a larger metapopulation, it also gives the population structure metric <span class="math notranslate nohighlight">\(F_{ST}\)</span>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">diversity</span></code> is used for internal calculations and to generate figures and reports. For most purposes it can be ignored but the data can if necessary be retrieved as population attributes.The array is structured like this:</p>
+<ul class="simple">
+<li><p>axis 0: <code class="docutils literal notranslate"><span class="pre">observation</span> <span class="pre">time[i]</span></code></p></li>
+<li><p>axis 1: measures of diversity at different observation times</p>
+<ul>
+<li><p>0: observation time</p></li>
+<li><p>1: between-host nucleotide diversity</p></li>
+<li><p>2: within-host nucleotide diversity</p></li>
+<li><p>3: between-host haplotype homozygosity</p></li>
+<li><p>4: within-host haplotype homozygosity</p></li>
+<li><p>5: Fws</p></li>
+<li><p>6: Fst (if this is a subpopulation)</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example of accessing the diversity array</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean levels of genetic diversity in a within-host sample:&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">my_population</span><span class="o">.</span><span class="n">observation_times</span><span class="p">)):</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Obs time </span><span class="si">{0:1.0f}</span><span class="s2">: nucleotide diversity </span><span class="si">{1:.2e}</span><span class="s2">, haplotype homozygosity </span><span class="si">{2:.2f}</span><span class="s2">, Fws </span><span class="si">{3:.2f}</span><span class="s2">&quot;</span>
+        <span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">my_population</span><span class="o">.</span><span class="n">diversity</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+        <span class="n">my_population</span><span class="o">.</span><span class="n">diversity</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+        <span class="n">my_population</span><span class="o">.</span><span class="n">diversity</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+        <span class="n">my_population</span><span class="o">.</span><span class="n">diversity</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">5</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean levels of genetic diversity in a within-host sample:
+  Obs time 0: nucleotide diversity 4.16e-07, haplotype homozygosity 0.84, Fws 0.25
+  Obs time 500: nucleotide diversity 4.16e-07, haplotype homozygosity 0.87, Fws 0.25
+  Obs time 1000: nucleotide diversity 2.20e-07, haplotype homozygosity 0.91, Fws 0.74
+  Obs time 1500: nucleotide diversity 2.20e-07, haplotype homozygosity 0.89, Fws 0.74
 </pre></div>
 </div>
 </div>
@@ -561,6 +662,22 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Running <code class="docutils literal notranslate"><span class="pre">get_diversity</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-objects">Data objects</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
               
             
           </div>
