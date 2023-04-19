@@ -424,7 +424,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="running-get-diversity">
 <h1>Running <code class="docutils literal notranslate"><span class="pre">get_diversity</span></code><a class="headerlink" href="#running-get-diversity" title="Permalink to this heading">#</a></h1>
-<p>Once we have <a class="reference internal" href="create-population.html"><span class="doc std std-doc">created a population by specifying its transmission history</span></a> and performed a <a class="reference internal" href="coalescence-time-basic.html"><span class="doc std std-doc">Markov chain simulation of coalescence times</span></a> using <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code>, it is very simple to estimate levels of nucleotide diversity and haplotype homozygosity using <code class="docutils literal notranslate"><span class="pre">get_diversity</span></code>.</p>
+<p>Once we have <a class="reference internal" href="create-population.html"><span class="doc std std-doc">created a population by specifying its transmission history</span></a> and performed a <a class="reference internal" href="coalescence-time-basic.html"><span class="doc std std-doc">Markov chain simulation of coalescence times</span></a> using <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code>, we can estimate levels of nucleotide diversity and haplotype homozygosity using <code class="docutils literal notranslate"><span class="pre">get_diversity</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>coalestr
@@ -470,7 +470,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb locus
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.  Nucleotide diversity     Haplotype homozygosity
                       beho       wiho           beho       wiho
         0           5.52e-07   4.16e-07       7.52e-01   8.12e-01
 </pre></div>
@@ -479,102 +479,24 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">constant_population</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="mi">18764</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># If we specify multiple observation times for get_coalescent</span>
+<span class="c1"># .. these are automatically passed to get_diversity</span>
+
+<span class="n">my_observations</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1500</span><span class="p">]</span>
+
+<span class="n">my_population</span><span class="o">.</span><span class="n">get_coalescent</span><span class="p">(</span><span class="n">observe</span> <span class="o">=</span> <span class="n">my_observations</span><span class="p">,</span> <span class="n">show</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+
+<span class="n">my_population</span><span class="o">.</span><span class="n">get_diversity</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    Events captured.   Mean coalescence time
-                      beho      wiho        beho     wiho
-        0              99.5     100.0     18188.4      1.0
-Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb locus
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.  Nucleotide diversity     Haplotype homozygosity
                       beho       wiho           beho       wiho
-        0           4.00e-04   2.20e-08       4.09e-03   9.87e-01
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">constant_population</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="mi">18754</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    Events captured.   Mean coalescence time
-                      beho      wiho        beho     wiho
-        0              99.5     100.0     18188.8     10.0
-Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb locus
-                      beho       wiho           beho       wiho
-        0           4.00e-04   2.20e-07       3.67e-03   8.85e-01
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">constant_population</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="mi">18754</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    Events captured.   Mean coalescence time
-                      beho      wiho        beho     wiho
-        0              99.5      99.8     18180.0   9091.0
-Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb locus
-                      beho       wiho           beho       wiho
-        0           4.00e-04   2.00e-04       4.09e-03   4.96e-01
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">constant_population</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="mi">5568</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    Events captured.   Mean coalescence time
-                      beho      wiho        beho     wiho
-        0              99.5      99.6     18188.9  14213.0
-Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb locus
-                      beho       wiho           beho       wiho
-        0           4.00e-04   3.13e-04       3.99e-03   2.14e-01
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">constant_population</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="mi">18764</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    Events captured.   Mean coalescence time
-                      beho      wiho        beho     wiho
-        0              99.5      99.5     18188.4  18189.3
-Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb locus
-                      beho       wiho           beho       wiho
-        0           4.00e-04   4.00e-04       4.09e-03   4.04e-03
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">constant_population</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="mi">3269</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    Events captured.   Mean coalescence time
-                      beho      wiho        beho     wiho
-        0              99.5      99.6     18187.4  16687.4
-Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb locus
-                      beho       wiho           beho       wiho
-        0           4.00e-04   3.67e-04       4.05e-03   8.44e-02
+     1500           8.58e-07   2.20e-07       6.45e-01   8.85e-01
+     1000           8.58e-07   2.20e-07       7.17e-01   9.13e-01
+      500           5.52e-07   4.16e-07       8.25e-01   8.68e-01
+        0           5.52e-07   4.16e-07       7.94e-01   8.44e-01
 </pre></div>
 </div>
 </div>
