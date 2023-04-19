@@ -608,7 +608,7 @@ class Population(object):
         
         if show == True or show == "all":
             
-            print("Observation time.    SNP heterozygosity.   Haplotype homozygosity at {0:.1f} kb locus".format(self.locus_kb))
+            print("Observation time.  Nucleotide diversity     Haplotype homozygosity")
             print("                      beho       wiho           beho       wiho")
             
         if show == "snp":
