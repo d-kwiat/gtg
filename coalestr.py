@@ -1,4 +1,4 @@
-#   coalestr version 0.2.14
+#   coalestr version 0.2.15
 #   19 Apr 2023
 
 '''
@@ -581,13 +581,10 @@ class Population(object):
         self.v = Population.v
         self.locus_kb = Population.locus_kb
         self.phi_seed = Population.phi_seed
-        self.unit_length = Population.unit_length
-        self.chromosome_length = Population.chromosome_length
-        self.minimum_length = Population.minimum_length
         
 ##########################################################        
         
-    def plot_history(self, metrics = ("N", "Q", "X")):
+    def plot_history(self, metrics = ("N", "Q", "X", "M")):
         
         '''Plot transmission parameters as a forward time series'''
                      
@@ -631,12 +628,12 @@ class Population(object):
                 ax[i].set_ylabel("\u03C7", fontsize=12)
                 ax[i].grid(visible=True, which='both', color='0.65', linestyle='-')
                      
-#            elif metrics[i] == "M":
+            elif metrics[i] == "M":
             
-#                ax[i].plot(time_axis, paramtr_ft[:, 3], marker='', color='blue', linewidth=2, label="M")
-#                ax[i].legend(title="M", frameon=True, fontsize = 12) 
-#                ax[i].set_ylabel("M", fontsize=12)
-#                ax[i].grid(visible=True, which='both', color='0.65', linestyle='-')                      
+                ax[i].plot(time_axis, paramtr_ft[:, 3], marker='', color='blue', linewidth=2, label="M")
+                ax[i].legend(title="M", frameon=True, fontsize = 12) 
+                ax[i].set_ylabel("M", fontsize=12)
+                ax[i].grid(visible=True, which='both', color='0.65', linestyle='-')                      
                 
             else:
                 
@@ -681,7 +678,7 @@ class Population(object):
                 ax[i].plot(obs_times, self.diversity[:,2], marker='', color='red', linewidth=2, label="within-host")
                 ax[i].legend(title="Sample", frameon=False, fontsize = 12) 
                 ax[i].set_ylabel("Nucleotide diversity", fontsize=12)
-                ax[i].grid(b=True, which='both', color='0.65', linestyle='-')
+                ax[i].grid(visible=True, which='both', color='0.65', linestyle='-')
             
             elif metrics[i] == "hap_hom" or metrics[i] == "haphom":
             
@@ -689,63 +686,42 @@ class Population(object):
                 ax[i].plot(obs_times, self.diversity[:,4], marker='', color='red', linewidth=2, label="within-host")
                 ax[i].legend(title="Sample", frameon=False, fontsize = 12) 
                 ax[i].set_ylabel("Haplotype homozygosity", fontsize=12)
-                ax[i].grid(b=True, which='both', color='0.65', linestyle='-')
+                ax[i].grid(visible=True, which='both', color='0.65', linestyle='-')
             
             elif metrics[i] == "fws" or metrics[i] == "Fws":
             
                 ax[i].plot(obs_times, self.diversity[:,5], marker='', color='blue', linewidth=2)
                 ax[i].set_ylabel("Fws", fontsize=12)
                 # ax[i].set_ylim(0,1)
-                ax[i].grid(b=True, which='both', color='0.65', linestyle='-')
+                ax[i].grid(visible=True, which='both', color='0.65', linestyle='-')
             
             elif metrics[i] == "fst" or metrics[i] == "Fst":
             
                 ax[i].plot(obs_times, self.diversity[:,6], marker='', color='blue', linewidth=2)
                 ax[i].set_ylabel("Fst", fontsize=12)
                 # ax[i].set_ylim(0,1)
-                ax[i].grid(b=True, which='both', color='0.65', linestyle='-')
+                ax[i].grid(visible=True, which='both', color='0.65', linestyle='-')
                 
-            elif metrics[i] == "omega":
-            
-                ax[i].plot(obs_times, self.shared_segments[:, 1], marker='', color='blue', linewidth=2, label="between-host")
-                ax[i].plot(obs_times, self.shared_segments[:, 4], marker='', color='red', linewidth=2, label="within-host")
-                ax[i].set_ylabel("omega", fontsize=12)
-                ax[i].grid(b=True, which='both', color='0.65', linestyle='-')                
-                
-            elif metrics[i] == "sigma":
-            
-                ax[i].plot(obs_times, self.shared_segments[:, 2], marker='', color='blue', linewidth=2, label="between-host")
-                ax[i].plot(obs_times, self.shared_segments[:, 5], marker='', color='red', linewidth=2, label="within-host")
-                ax[i].set_ylabel("sigma", fontsize=12)
-                ax[i].grid(b=True, which='both', color='0.65', linestyle='-')             
-                
-            elif metrics[i] == "segment_length":
-            
-                ax[i].plot(obs_times, self.shared_segments[:, 3], marker='', color='blue', linewidth=2, label="between-host")
-                ax[i].plot(obs_times, self.shared_segments[:, 6], marker='', color='red', linewidth=2, label="within-host")
-                ax[i].set_ylabel("Fst", fontsize=12)
-                ax[i].grid(b=True, which='both', color='0.65', linestyle='-')              
-
             elif metrics[i] == "N" or metrics[i] == "Nh":
             
                 ax[i].plot(time_axis, self.parameters[:go_back_in_time, 0], marker='', color='blue', linewidth=2, label="Nh")
                 ax[i].legend(title="Nh", frameon=True, fontsize = 12) 
                 ax[i].set_ylabel("Nh", fontsize=12)
-                ax[i].grid(b=True, which='both', color='0.65', linestyle='-')
+                ax[i].grid(visible=True, which='both', color='0.65', linestyle='-')
                 
             elif metrics[i] == "Q":
             
                 ax[i].plot(time_axis, self.parameters[:go_back_in_time, 1], marker='', color='blue', linewidth=2, label="Nh")
                 ax[i].legend(title="Q", frameon=True, fontsize = 12) 
                 ax[i].set_ylabel("Q", fontsize=12)
-                ax[i].grid(b=True, which='both', color='0.65', linestyle='-')                
+                ax[i].grid(visible=True, which='both', color='0.65', linestyle='-')                
             
             elif metrics[i] == "X" or metrics[i] == "chi":
             
                 ax[i].plot(time_axis, self.parameters[:go_back_in_time, 2], marker='', color='blue', linewidth=2, label="\u03C7")
                 ax[i].legend(title="\u03C7", frameon=True, fontsize = 12) 
                 ax[i].set_ylabel("\u03C7", fontsize=12)
-                ax[i].grid(b=True, which='both', color='0.65', linestyle='-')
+                ax[i].grid(visible=True, which='both', color='0.65', linestyle='-')
                 
             else:
                 

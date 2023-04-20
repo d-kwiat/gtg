@@ -26,6 +26,7 @@ chapters:
       - file: create-population
       - file: get-coalescent
       - file: get-diversity
+      - file: create-subpopulation
       - file: time-series
   - file: epidemiological-scenarios
     sections:
