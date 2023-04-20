@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Running get_diversity &#8212; Genomic transmission graph</title>
+    <title>get_diversity &#8212; Genomic transmission graph</title>
   
   
   
@@ -66,8 +66,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'get-diversity';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Analysing a time series" href="time-series.html" />
-    <link rel="prev" title="Running get_coalescent" href="get-coalescent.html" />
+    <link rel="next" title="Create a subpopulation" href="create-subpopulation.html" />
+    <link rel="prev" title="get_coalescent" href="get-coalescent.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -180,15 +180,16 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="coalestr-features.html">How to use <code class="docutils literal notranslate"><span class="pre">coalestr</span></code></a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="create-population.html">Creating a <code class="docutils literal notranslate"><span class="pre">Population</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="create-population.html">Create a <code class="docutils literal notranslate"><span class="pre">Population</span></code></a></li>
 
 
 
-<li class="toctree-l2"><a class="reference internal" href="get-coalescent.html">Running <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="get-coalescent.html"><code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code></a></li>
 
 
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Running <code class="docutils literal notranslate"><span class="pre">get_diversity</span></code></a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">get_diversity</span></code></a></li>
 
+<li class="toctree-l2"><a class="reference internal" href="create-subpopulation.html">Create a subpopulation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="time-series.html">Analysing a time series</a></li>
 </ul>
 </li>
@@ -413,7 +414,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Running get_diversity</h1>
+    <h1>get_diversity</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -423,7 +424,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Running <code class="docutils literal notranslate"><span class="pre">get_diversity</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><code class="docutils literal notranslate"><span class="pre">get_diversity</span></code></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-objects">Data objects</a></li>
 </ul>
 
@@ -437,8 +438,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="running-get-diversity">
-<h1>Running <code class="docutils literal notranslate"><span class="pre">get_diversity</span></code><a class="headerlink" href="#running-get-diversity" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="get-diversity">
+<h1><code class="docutils literal notranslate"><span class="pre">get_diversity</span></code><a class="headerlink" href="#get-diversity" title="Permalink to this heading">#</a></h1>
 <p>Once we have <a class="reference internal" href="create-population.html"><span class="doc std std-doc">created a population by specifying its transmission history</span></a> and performed a <a class="reference internal" href="get-coalescent.html"><span class="doc std std-doc">simulation of coalescence times using <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code></span></a>, we can estimate levels of nucleotide diversity and haplotype homozygosity using <code class="docutils literal notranslate"><span class="pre">get_diversity</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -634,15 +635,15 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Running <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code></p>
+        <p class="prev-next-title"><code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code></p>
       </div>
     </a>
     <a class="right-next"
-       href="time-series.html"
+       href="create-subpopulation.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Analysing a time series</p>
+        <p class="prev-next-title">Create a subpopulation</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -664,7 +665,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Running <code class="docutils literal notranslate"><span class="pre">get_diversity</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><code class="docutils literal notranslate"><span class="pre">get_diversity</span></code></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-objects">Data objects</a></li>
 </ul>
 

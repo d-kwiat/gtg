@@ -178,15 +178,16 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="coalestr-features.html">How to use <code class="docutils literal notranslate"><span class="pre">coalestr</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="create-population.html">Creating a <code class="docutils literal notranslate"><span class="pre">Population</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="create-population.html">Create a <code class="docutils literal notranslate"><span class="pre">Population</span></code></a></li>
 
 
 
-<li class="toctree-l2"><a class="reference internal" href="get-coalescent.html">Running <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="get-coalescent.html"><code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code></a></li>
 
 
-<li class="toctree-l2"><a class="reference internal" href="get-diversity.html">Running <code class="docutils literal notranslate"><span class="pre">get_diversity</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="get-diversity.html"><code class="docutils literal notranslate"><span class="pre">get_diversity</span></code></a></li>
 
+<li class="toctree-l2"><a class="reference internal" href="create-subpopulation.html">Create a subpopulation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="time-series.html">Analysing a time series</a></li>
 </ul>
 </li>
@@ -450,7 +451,7 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    Events captured.   Mean coalescence time
                       beho      wiho        beho     wiho
         0             100.0     100.0     17588.1   5108.6
-Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb locus
+Observation time.  Nucleotide diversity     Haplotype homozygosity
                       beho       wiho           beho       wiho
         0           3.87e-04   1.12e-04       4.15e-03   6.89e-01
 </pre></div>
@@ -495,9 +496,6 @@ Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb loc
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/d56ab7c9cfbad74c0714bfc2423b99697eafded94af3d552f8873bdfc32340d3.png" src="_images/d56ab7c9cfbad74c0714bfc2423b99697eafded94af3d552f8873bdfc32340d3.png" />
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -515,9 +513,6 @@ Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb loc
 <span class="n">subpop</span><span class="o">.</span><span class="n">plot_observations</span><span class="p">(</span><span class="n">metrics</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;snp_het&quot;</span><span class="p">,</span> <span class="s2">&quot;hap_hom&quot;</span><span class="p">,</span> <span class="s2">&quot;Fst&quot;</span><span class="p">,</span> <span class="s2">&quot;Fws&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/d9499320b659a49e09a6a9453a1e4284d385f7a81e15828c4196c36567852853.png" src="_images/d9499320b659a49e09a6a9453a1e4284d385f7a81e15828c4196c36567852853.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -537,9 +532,6 @@ Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb loc
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/434129ff2d57c27e390f9c892c18e223b7974f3d5173f041471214e81e414b2f.png" src="_images/434129ff2d57c27e390f9c892c18e223b7974f3d5173f041471214e81e414b2f.png" />
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -558,9 +550,6 @@ Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb loc
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/6d774c4e4aa24ebbff689b488e0376d35aeb83e406e1bed7b8b036a3776b4f7c.png" src="_images/6d774c4e4aa24ebbff689b488e0376d35aeb83e406e1bed7b8b036a3776b4f7c.png" />
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -578,9 +567,6 @@ Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb loc
 <span class="n">subpop</span><span class="o">.</span><span class="n">plot_observations</span><span class="p">(</span><span class="n">metrics</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;N&quot;</span><span class="p">,</span> <span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="s2">&quot;snp_het&quot;</span><span class="p">,</span> <span class="s2">&quot;hap_hom&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/4b1f201c7ed767c85d25c224ca4e07fba12edc48721352213ebb82037c354704.png" src="_images/4b1f201c7ed767c85d25c224ca4e07fba12edc48721352213ebb82037c354704.png" />
 </div>
 </div>
 </section>

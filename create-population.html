@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Creating a Population &#8212; Genomic transmission graph</title>
+    <title>Create a Population &#8212; Genomic transmission graph</title>
   
   
   
@@ -66,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'create-population';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Running get_coalescent" href="get-coalescent.html" />
+    <link rel="next" title="get_coalescent" href="get-coalescent.html" />
     <link rel="prev" title="How to use coalestr" href="coalestr-features.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -180,15 +180,16 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="coalestr-features.html">How to use <code class="docutils literal notranslate"><span class="pre">coalestr</span></code></a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Creating a <code class="docutils literal notranslate"><span class="pre">Population</span></code></a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Create a <code class="docutils literal notranslate"><span class="pre">Population</span></code></a></li>
 
 
 
-<li class="toctree-l2"><a class="reference internal" href="get-coalescent.html">Running <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="get-coalescent.html"><code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code></a></li>
 
 
-<li class="toctree-l2"><a class="reference internal" href="get-diversity.html">Running <code class="docutils literal notranslate"><span class="pre">get_diversity</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="get-diversity.html"><code class="docutils literal notranslate"><span class="pre">get_diversity</span></code></a></li>
 
+<li class="toctree-l2"><a class="reference internal" href="create-subpopulation.html">Create a subpopulation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="time-series.html">Analysing a time series</a></li>
 </ul>
 </li>
@@ -413,7 +414,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Creating a Population</h1>
+    <h1>Create a Population</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -423,7 +424,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Creating a <code class="docutils literal notranslate"><span class="pre">Population</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Create a <code class="docutils literal notranslate"><span class="pre">Population</span></code></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#population-attributes">Population attributes</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#population-methods">Population methods</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#complex-transmission-histories">Complex transmission histories</a></li>
@@ -439,8 +440,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="creating-a-population">
-<h1>Creating a <code class="docutils literal notranslate"><span class="pre">Population</span></code><a class="headerlink" href="#creating-a-population" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="create-a-population">
+<h1>Create a <code class="docutils literal notranslate"><span class="pre">Population</span></code><a class="headerlink" href="#create-a-population" title="Permalink to this heading">#</a></h1>
 <p>The first step in using <code class="docutils literal notranslate"><span class="pre">coalestr</span></code> is to specify the <strong>transmission history of the parasite population</strong> that we want to simulate. The simplest way to format this is as a list of lists:</p>
 <p><code class="docutils literal notranslate"><span class="pre">my_history</span> <span class="pre">=</span> <span class="pre">[[D,</span> <span class="pre">N,</span> <span class="pre">Q,</span> <span class="pre">X,</span> <span class="pre">M],</span> <span class="pre">[D,</span> <span class="pre">N,</span> <span class="pre">Q,</span> <span class="pre">X,</span> <span class="pre">M],</span> <span class="pre">[D,</span> <span class="pre">N,</span> <span class="pre">Q,</span> <span class="pre">X,</span> <span class="pre">M]]</span></code></p>
 <p>Each inner list gives the transmission parameters for a period of population history.  The first inner list describes the transmission parameters for the first period, the second inner list describes the second period, and so on. In this example there are three periods of population history, but we can expand this to as many periods as we like.</p>
@@ -716,7 +717,7 @@ minimum_length 2
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Running <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code></p>
+        <p class="prev-next-title"><code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code></p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -738,7 +739,7 @@ minimum_length 2
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Creating a <code class="docutils literal notranslate"><span class="pre">Population</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Create a <code class="docutils literal notranslate"><span class="pre">Population</span></code></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#population-attributes">Population attributes</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#population-methods">Population methods</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#complex-transmission-histories">Complex transmission histories</a></li>
