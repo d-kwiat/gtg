@@ -427,15 +427,12 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="create-a-subpopulation">
 <h1>Create a subpopulation<a class="headerlink" href="#create-a-subpopulation" title="Permalink to this heading">#</a></h1>
 <p><code class="docutils literal notranslate"><span class="pre">coalestr</span></code> allows us to create subpopulations that are embedded within a larger metapopulation, and that receive migration from the metapopulation.</p>
-<p>The first step is to create the metapopulation, in just the same way as <a class="reference internal" href="create-population.html"><span class="doc std std-doc">creating a simple population</span></a>.  We then run <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code> on the metapopulation to generate coalescent data that will be utilised when we analyse the subpopulation.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">coalestr</span> <span class="k">as</span> <span class="nn">cs</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-</pre></div>
-</div>
-</div>
-</div>
+<ul class="simple">
+<li><p>First we create the metapopulation in just the same way as <a class="reference internal" href="create-population.html"><span class="doc std std-doc">creating a simple population</span></a>.</p></li>
+<li><p>When we create the subpopulation we specify its metapopulation.  When we construct the subpopulation’s history of transmission parameters, we specify the rate of migration from the metapopulation.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">M</span></code> gives the number of hosts per generation that enter the subpopulation from the metapopulation, which must be less than or equal to <code class="docutils literal notranslate"><span class="pre">N</span></code>.</p></li>
+</ul>
+<p>We must run <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code> on the metapopulation before running <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code> on the subpopulation.  This is because times to coalescence in the metapopulation are needed to calculate times to coalescence in the subpopulation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>coalestr
@@ -446,8 +443,11 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We specify a history of transmission parameters for the metapopulation</span>
-<span class="c1"># with the format [duration, N, Q, X, M]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39; CREATING THE METAPOPULATION</span>
+
+<span class="sd">This is done in the same way as creating a simple population</span>
+<span class="sd">by specifing the history of transmission parameters</span>
+<span class="sd">with the format [duration, N, Q, X, M] &#39;&#39;&#39;</span>
 
 <span class="n">my_metapop_history</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">20000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
 
@@ -465,14 +465,22 @@ document.write(`
 </div>
 </div>
 </div>
-<p>Now can create the subpopulation simply by naming its metapopulation, and by specifying the rate of migration from the metapopulation in its history of transmission parameters.  <code class="docutils literal notranslate"><span class="pre">M</span></code> gives the number of hosts per generation that enter the subpopulation from the metapopulation, which must be less than or equal to <code class="docutils literal notranslate"><span class="pre">N</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We specify a history of transmission parameters for the subpopulation</span>
-<span class="c1"># with the format [duration, N, Q, X, M]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39; CREATING THE SUBPOPULATION</span>
 
+<span class="sd">We specify the history of transmission parameters </span>
+<span class="sd">with the format [duration, N, Q, X, M]</span>
+<span class="sd">where M gives the number of hosts per generation</span>
+<span class="sd">that enter the subpopulation from the metapopulation</span>
+
+<span class="sd">When we create the subpopulation we use the keyword argument &#39;metapopulation&#39;</span>
+<span class="sd">to state the name of the metapopulation. &#39;&#39;&#39;</span>
+
+<span class="c1"># In this example M = 1. </span>
 <span class="n">my_subpop_history</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
 
+<span class="c1"># We state that my_population is the metapopulation.</span>
 <span class="n">my_subpopulation</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">Population</span><span class="p">(</span><span class="n">my_subpop_history</span><span class="p">,</span> <span class="n">metapopulation</span> <span class="o">=</span> <span class="n">my_metapopulation</span><span class="p">)</span>
 
 <span class="n">my_subpopulation</span><span class="o">.</span><span class="n">get_coalescent</span><span class="p">()</span>
