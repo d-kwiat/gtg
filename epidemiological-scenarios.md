@@ -11,8 +11,8 @@ In modelling epidemiological scenarios we are typically interested in events tha
 
 The problem is that local genetic diversity is greatly affected by migration from surrounding regions and global parasite dispersal.  Typical mean coalescence times in a local parasite subpopulation (based on measurements of nucleotide diversity) are around 4000-5000 years, so we cannot ignore the history of the global parasite metapopulation when we are analysing the current levels of genetic diversity in a local parasite population. 
 
-Thus before we can model a recent epidemiological scenario we need to consider the history of the global parasite metapopulation. The function `coalestr.species` builds a toy model based loosely on *Plasmodium falciparum*, with a small founder population emerging approximately 50,000 years ago and an exponential population expansion approximately 10,000-20,000 years ago.  
+Thus before we can model a recent epidemiological scenario we need to consider the history of the global parasite metapopulation. The function `coalestr.species` builds a toy model based loosely what is known about the emergence of *Plasmodium falciparum*, with a small founder population undergoing an exponential population expansion approximately 10,000 years ago.  
 
-- [Modelling the global parasite metapopulation](species_history.ipynb)
+- [Modelling the global parasite metapopulation](global-metapopulation.ipynb)
 - [Modelling transient changes in transmission parameters](scenario_1.ipynb)
 - [Modelling a local outbreak in a near-elimination setting](local_outbreak.ipynb)

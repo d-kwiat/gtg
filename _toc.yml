@@ -30,7 +30,7 @@ chapters:
       - file: time-series
   - file: epidemiological-scenarios
     sections:
-     - file: species_history
+     - file: global-metapopulation
      - file: scenario_1
      - file: local_outbreak
   - file: draft-ms
