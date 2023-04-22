@@ -17,7 +17,7 @@ The sections aren't strictly ordered but this is a logical sequence to work thro
    * [Estimating the quantum of transmission](within-host-pi.ipynb)
    * [*Hw - Hs* relationship](hw-hs.ipynb)
    * [Estimating the rate of superinfection](fws-compare-methods.ipynb)
-1. [Epidemiological scenarios](epidemiological-scenarios.md)
+1. [Modelling epidemiological scenarios](epidemiological-scenarios.md)
 
 Most of the worked examples use the Python package `coalestr` which works like this:
 
