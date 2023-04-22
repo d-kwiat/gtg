@@ -66,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'epidemiological-scenarios';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Create a metapopulation" href="species_history.html" />
+    <link rel="next" title="Create a metapopulation" href="global-metapopulation.html" />
     <link rel="prev" title="Analysing a time series" href="time-series.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -194,7 +194,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Epidemiological scenarios</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="species_history.html">Create a metapopulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="global-metapopulation.html">Create a metapopulation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="scenario_1.html">Migration time series</a></li>
 <li class="toctree-l2"><a class="reference internal" href="local_outbreak.html">Modelling a local outbreak</a></li>
 </ul>
@@ -406,9 +406,9 @@ document.write(`
 </ul>
 <p>In modelling epidemiological scenarios we are typically interested in events that are relatively <strong>local</strong> and <strong>recent</strong>, e.g. what is happening in a particular district of a malaria-endemic country at the present time, as opposed to events that have occurred in the global parasite population over the past thousand years.</p>
 <p>The problem is that local genetic diversity is greatly affected by migration from surrounding regions and global parasite dispersal.  Typical mean coalescence times in a local parasite subpopulation (based on measurements of nucleotide diversity) are around 4000-5000 years, so we cannot ignore the history of the global parasite metapopulation when we are analysing the current levels of genetic diversity in a local parasite population.</p>
-<p>Thus before we can model a recent epidemiological scenario we need to consider the history of the global parasite metapopulation. The function <code class="docutils literal notranslate"><span class="pre">coalestr.species</span></code> builds a toy model based loosely on <em>Plasmodium falciparum</em>, with a small founder population emerging approximately 50,000 years ago and an exponential population expansion approximately 10,000-20,000 years ago.</p>
+<p>Thus before we can model a recent epidemiological scenario we need to consider the history of the global parasite metapopulation. The function <code class="docutils literal notranslate"><span class="pre">coalestr.species</span></code> builds a toy model based loosely what is known about the emergence of <em>Plasmodium falciparum</em>, with a small founder population undergoing an exponential population expansion approximately 10,000 years ago.</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="species_history.html"><span class="doc std std-doc">Modelling the global parasite metapopulation</span></a></p></li>
+<li><p><a class="reference internal" href="global-metapopulation.html"><span class="doc std std-doc">Modelling the global parasite metapopulation</span></a></p></li>
 <li><p><a class="reference internal" href="scenario_1.html"><span class="doc std std-doc">Modelling transient changes in transmission parameters</span></a></p></li>
 <li><p><a class="reference internal" href="local_outbreak.html"><span class="doc std std-doc">Modelling a local outbreak in a near-elimination setting</span></a></p></li>
 </ul>
@@ -457,7 +457,7 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="species_history.html"
+       href="global-metapopulation.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
