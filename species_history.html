@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Species history &#8212; Genomic transmission graph</title>
+    <title>Create a metapopulation &#8212; Genomic transmission graph</title>
   
   
   
@@ -192,7 +192,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="epidemiological-scenarios.html">Epidemiological scenarios</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Species history</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Create a metapopulation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="scenario_1.html">Migration time series</a></li>
 <li class="toctree-l2"><a class="reference internal" href="local_outbreak.html">Modelling a local outbreak</a></li>
 </ul>
@@ -412,7 +412,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Species history</h1>
+    <h1>Create a metapopulation</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -434,8 +434,9 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="species-history">
-<h1>Species history<a class="headerlink" href="#species-history" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="create-a-metapopulation">
+<h1>Create a metapopulation<a class="headerlink" href="#create-a-metapopulation" title="Permalink to this heading">#</a></h1>
+<p>Before we model an epidemiological scenario, we must establish the underlying genetic diversity of</p>
 <ul class="simple">
 <li><p>My Drive/GitHub/transmission_ms/species_history_2.ipynb</p></li>
 <li><p>Checked in working order 25 Nov 2022</p></li>
@@ -466,28 +467,29 @@ plateau_X = 0.2 )
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plateau</span> <span class="o">=</span> <span class="mi">40000</span> <span class="c1"># duration of plateau phase</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_species</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">species</span><span class="p">()</span>
 
-<span class="n">my_species</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">species</span><span class="p">()</span>
+<span class="sd">&#39;&#39;&#39; Default settings that can be modified using these keyword arguments</span>
 
-<span class="c1"># This uses default kwargs which are:</span>
-<span class="c1"># founder_duration = 1000, </span>
-<span class="c1"># founder_N = 10,</span>
-<span class="c1"># founder_Q = 3,</span>
-<span class="c1"># founder_X = 0.2,</span>
-<span class="c1"># R0 = 1.0005,</span>
-<span class="c1"># expansion_Q = 3,</span>
-<span class="c1"># expansion_X = 0.2,</span>
-<span class="c1"># plateau_duration = plateau,</span>
-<span class="c1"># plateau_N = 14660,</span>
-<span class="c1"># plateau_Q = 3,</span>
-<span class="c1"># plateau_X = 0.2</span>
+<span class="sd">founder_duration = 1000, </span>
+<span class="sd">founder_N = 10,</span>
+<span class="sd">founder_Q = 3,</span>
+<span class="sd">founder_X = 0.2,</span>
+
+<span class="sd">R0 = 1.0005,</span>
+<span class="sd">expansion_Q = 3,</span>
+<span class="sd">expansion_X = 0.2,</span>
+
+<span class="sd">plateau_duration = 40000,</span>
+<span class="sd">plateau_N = 14660,</span>
+<span class="sd">plateau_Q = 3,</span>
+<span class="sd">plateau_X = 0.2 &#39;&#39;&#39;</span>
 
 <span class="n">history</span> <span class="o">=</span> <span class="n">my_species</span><span class="o">.</span><span class="n">t_his</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;History of my species goes back&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">history</span><span class="p">),</span> <span class="s2">&quot;generations&quot;</span><span class="p">)</span>
 
-<span class="n">observe</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">plateau</span><span class="p">,</span><span class="mi">5000</span><span class="p">)]</span> <span class="o">+</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">plateau</span><span class="p">,</span> <span class="n">history</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)]</span>
+<span class="n">observe</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">history</span><span class="p">,</span><span class="mi">5000</span><span class="p">)]</span>
 <span class="n">my_species</span><span class="o">.</span><span class="n">get_coalescent</span><span class="p">(</span><span class="n">observe</span><span class="p">,</span> <span class="n">show</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 <span class="n">my_species</span><span class="o">.</span><span class="n">get_diversity</span><span class="p">(</span><span class="n">show</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 <span class="n">my_species</span><span class="o">.</span><span class="n">plot_observations</span><span class="p">(</span><span class="n">metrics</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Nh&quot;</span><span class="p">,</span> <span class="s2">&quot;snp_het&quot;</span><span class="p">,))</span>
@@ -498,7 +500,7 @@ plateau_X = 0.2 )
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>History of my species goes back 74746 generations
 </pre></div>
 </div>
-<img alt="_images/56d0630ba340d809d6cb55b163655afdda97f5677224b1b3fd5c975660106159.png" src="_images/56d0630ba340d809d6cb55b163655afdda97f5677224b1b3fd5c975660106159.png" />
+<img alt="_images/d113f3d83c7e82ae855acaa95c9c7ae93a96a6207b842865c5da72ad4945a784.png" src="_images/d113f3d83c7e82ae855acaa95c9c7ae93a96a6207b842865c5da72ad4945a784.png" />
 </div>
 </div>
 <div class="cell docutils container">

@@ -194,7 +194,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="epidemiological-scenarios.html">Epidemiological scenarios</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="species_history.html">Species history</a></li>
+<li class="toctree-l2"><a class="reference internal" href="species_history.html">Create a metapopulation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="scenario_1.html">Migration time series</a></li>
 <li class="toctree-l2"><a class="reference internal" href="local_outbreak.html">Modelling a local outbreak</a></li>
 </ul>
@@ -433,7 +433,7 @@ document.write(`
 <p>where <strong>T</strong> is a random variable representing time to coalescence, <span class="math notranslate nohighlight">\(v\)</span> is the locus scaled mutation rate, <span class="math notranslate nohighlight">\(r\)</span> is the locus scaled recombination rate and <span class="math notranslate nohighlight">\(\phi_t\)</span> is the effective recombination parameter. From empirical observations we estimate that <span class="math notranslate nohighlight">\(r = 7.4 \times 10^{−4}\)</span> per kilobase per generation and <span class="math notranslate nohighlight">\(v = 9 \times 10^{−5}\)</span> per kilobase per generation.</p>
 <p>We evaluate the above expression by using <code class="docutils literal notranslate"><span class="pre">coalestr</span></code> as follows:</p>
 <ol class="arabic simple">
-<li><p>We <a class="reference external" href="https://d-kwiat.github.io/gtg/population-class.html">create a <code class="docutils literal notranslate"><span class="pre">Population</span></code></a> by specifying its transmission history.</p></li>
+<li><p>We <a class="reference external" href="https://d-kwiat.github.io/gtg/create-population.html">create a <code class="docutils literal notranslate"><span class="pre">Population</span></code></a> by specifying its transmission history.</p></li>
 <li><p>We obtain the probability distribution of <strong>T</strong> <a class="reference external" href="https://d-kwiat.github.io/gtg/get-coalescent.html">using <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code></a>.</p></li>
 <li><p>We evaluate the above summation series <a class="reference external" href="https://d-kwiat.github.io/gtg/get-diversity.html">using <code class="docutils literal notranslate"><span class="pre">get_diversity</span></code></a>.</p></li>
 </ol>

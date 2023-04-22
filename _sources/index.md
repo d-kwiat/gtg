@@ -24,4 +24,5 @@ Most of the worked examples use the Python package `coalestr` which works like t
 1. [First you create a `Population`](create-population.ipynb)
 1. [Then you run `get_coalescent`](get-coalescent.ipynb)
 1. [Then you run `get_diversity`](get-diversity.ipynb)
+1. [You can create a subpopulation with migration from a metapopulation](create-subpopulation.ipynb)
 1. [To analyse a time series you specify observation times](time-series.ipynb)
