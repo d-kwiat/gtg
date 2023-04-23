@@ -13,6 +13,7 @@ The problem is that local genetic diversity is greatly affected by migration fro
 
 Thus before we can model a recent epidemiological scenario we need to consider the history of the global parasite metapopulation. The function `coalestr.species` builds a toy model based loosely what is known about the emergence of *Plasmodium falciparum*, with a small founder population undergoing an exponential population expansion approximately 10,000 years ago.  
 
-- [Modelling the global parasite metapopulation](global-metapopulation.ipynb)
+- [Modelling the global parasite metapopulation](create-metapopulation.ipynb)
+- [Creating a local subpopulation](create-subpopulation.ipynb)
 - [Modelling transient changes in transmission parameters](scenario_1.ipynb)
 - [Modelling a local outbreak in a near-elimination setting](local_outbreak.ipynb)
