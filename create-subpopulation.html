@@ -433,7 +433,7 @@ document.write(`
 <li><p><code class="docutils literal notranslate"><span class="pre">M</span></code> gives the number of hosts per generation that enter the subpopulation from the metapopulation, which must be less than or equal to <code class="docutils literal notranslate"><span class="pre">N</span></code>.</p></li>
 </ul>
 <p>We must run <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code> on the metapopulation before running <code class="docutils literal notranslate"><span class="pre">get_coalescent</span></code> on the subpopulation.  This is because times to coalescence in the metapopulation are needed to calculate times to coalescence in the subpopulation.</p>
-<p>If we want to take account of historical patterns of global parasite dispersal a useful shortcut is to <a class="reference internal" href="create-metapopulation.html"><span class="doc std std-doc">use the <code class="docutils literal notranslate"><span class="pre">coalestr.species()</span></code> function</span></a> to construct a toy model of the emergence and expansion of <em>Plasmodium falciparum</em> as a species.</p>
+<p>If we want to create a global metapopulation that takes account of historical patterns of parasite dispersal, a useful shortcut is to <a class="reference internal" href="create-metapopulation.html"><span class="doc std std-doc">use the <code class="docutils literal notranslate"><span class="pre">coalestr.species()</span></code> function</span></a> to construct a toy model of the emergence and expansion of <em>Plasmodium falciparum</em> as a species.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>coalestr
@@ -444,15 +444,24 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39; CREATING THE METAPOPULATION</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">coalestr</span> <span class="k">as</span> <span class="nn">cs</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39; CREATING THE METAPOPULATION &#39;&#39;&#39;</span>
 
-<span class="sd">This is done in the same way as creating a simple population</span>
-<span class="sd">by specifing the history of transmission parameters</span>
-<span class="sd">with the format [duration, N, Q, X, M] &#39;&#39;&#39;</span>
+<span class="c1"># This is done in the same way as creating a simple population, e.g.</span>
 
 <span class="n">my_metapop_history</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">20000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
 
 <span class="n">my_metapopulation</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">Population</span><span class="p">(</span><span class="n">my_metapop_history</span><span class="p">)</span>
+
+<span class="c1"># A shortcut for creating a global metapopulation is to use coalestr.species</span>
+
+<span class="n">my_metapopulation</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">species</span><span class="p">()</span>
 
 <span class="n">my_metapopulation</span><span class="o">.</span><span class="n">get_coalescent</span><span class="p">()</span>
 </pre></div>
@@ -461,7 +470,7 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    Events captured.   Mean coalescence time
                       beho      wiho        beho     wiho
-        0             100.0     100.0      2113.4   1392.8
+        0             100.0     100.0     17961.7   6421.2
 </pre></div>
 </div>
 </div>
@@ -491,7 +500,7 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    Events captured.   Mean coalescence time
                       beho      wiho        beho     wiho
-        0             100.0     100.0      1833.9   1606.5
+        0             100.0     100.0     15572.7  13639.6
 </pre></div>
 </div>
 </div>
