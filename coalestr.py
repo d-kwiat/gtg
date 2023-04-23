@@ -738,16 +738,16 @@ def species(
     founder_duration = 1000,
     founder_N = 10,
     founder_Q = 3,
-    founder_X = 0.2,
+    founder_X = 0,
     
-    R0 = 1.0005,
-    expansion_Q = 3,
-    expansion_X = 0.2,
+    R0 = 1.0003,
+    expansion_Q = 10,
+    expansion_X = 0.1,
     
-    plateau_duration = 40000,
-    plateau_N = 14660,
-    plateau_Q = 3,
-    plateau_X = 0.2 ):
+    plateau_duration = 1000,
+    plateau_N = 15000,
+    plateau_Q = 10,
+    plateau_X = 0.1 ):
        
     expansion = []
     N = founder_N
@@ -758,7 +758,7 @@ def species(
         x = (plateau_N - N) / (plateau_N - founder_N)
         
         N = N * np.exp(x * ln_R0)
- 
+
         expansion.append(N)
         
     expansion_duration = len(expansion)
