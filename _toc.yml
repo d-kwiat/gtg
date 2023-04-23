@@ -26,11 +26,11 @@ chapters:
       - file: create-population
       - file: get-coalescent
       - file: get-diversity
-      - file: create-subpopulation
       - file: time-series
   - file: epidemiological-scenarios
     sections:
-     - file: global-metapopulation
+     - file: create-metapopulation
+     - file: create-subpopulation
      - file: scenario_1
      - file: local_outbreak
   - file: draft-ms
