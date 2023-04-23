@@ -432,32 +432,32 @@ document.write(`
 <ol class="arabic simple">
 <li><p>a small founder population emerging approximately 15,000 years ago</p></li>
 <li><p>an exponential growth phase beginning approximately 10,000 years ago</p></li>
-<li><p>approaching a plateau of <span class="math notranslate nohighlight">\(N_h\)</span> approximately 15,000 in the present</p></li>
+<li><p>reaching a plateau of <span class="math notranslate nohighlight">\(N_h \approx 15000\)</span></p></li>
 </ol>
 <p>This gives a contemporary parasite population with a mean coalescence time of ~18,000 generations (assuming a generation time of 3 months) and a nucleotide diversity of approximately <span class="math notranslate nohighlight">\(4 \times 10^{-4}\)</span>.</p>
-<p>The model has default parameter settings as listed below, which can be modified using these keyword arguments:</p>
+<p>The model has default parameter settings which can be modified using keyword arguments as shown below.</p>
 <ul class="simple">
 <li><p>Founder phase</p>
 <ul>
 <li><p>founder_duration = 1000 (duration of the founder phase)</p></li>
 <li><p>founder_N = 10</p></li>
 <li><p>founder_Q = 3</p></li>
-<li><p>founder_X = 0.2</p></li>
+<li><p>founder_X = 0</p></li>
 </ul>
 </li>
 <li><p>Exponential growth phase</p>
 <ul>
-<li><p>R0 = 1.0005</p></li>
-<li><p>expansion_Q = 3</p></li>
-<li><p>expansion_X = 0.2</p></li>
+<li><p>R0 = 1.0003</p></li>
+<li><p>expansion_Q = 10</p></li>
+<li><p>expansion_X = 0.1</p></li>
 </ul>
 </li>
 <li><p>Plateau phase</p>
 <ul>
-<li><p>plateau_duration = 40000 (duration of the plateau phase)</p></li>
-<li><p>plateau_N = 14660</p></li>
-<li><p>plateau_Q = 3</p></li>
-<li><p>plateau_X = 0.2</p></li>
+<li><p>plateau_duration = 1000 (duration of the plateau phase)</p></li>
+<li><p>plateau_N = 15000</p></li>
+<li><p>plateau_Q = 10</p></li>
+<li><p>plateau_X = 0.1</p></li>
 </ul>
 </li>
 </ul>
@@ -482,15 +482,15 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    Events captured.   Mean coalescence time
                       beho      wiho        beho     wiho
-        0             100.0     100.0     17588.1   5108.6
+        0             100.0     100.0     17961.7   6421.2
 Observation time.  Nucleotide diversity     Haplotype homozygosity
                       beho       wiho           beho       wiho
-        0           3.87e-04   1.12e-04       4.15e-03   6.89e-01
+        0           3.95e-04   1.41e-04       3.23e-03   5.92e-01
 </pre></div>
 </div>
 </div>
 </div>
-<p>Above we see that the default model gives a nucleotide diversity of 3.87e-4 in the current parasite population, and within-host nucleotide diversity of 1.12e-4.</p>
+<p>Above we see that the default model gives a nucleotide diversity of 3.95e-4 in the current parasite population, and within-host nucleotide diversity of 1.41e-4.</p>
 <p>Let us look at time series data showing how nucleotide diversity builds up in the global metapopulation over time.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -505,7 +505,7 @@ Observation time.  Nucleotide diversity     Haplotype homozygosity
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/d113f3d83c7e82ae855acaa95c9c7ae93a96a6207b842865c5da72ad4945a784.png" src="_images/d113f3d83c7e82ae855acaa95c9c7ae93a96a6207b842865c5da72ad4945a784.png" />
+<img alt="_images/200aaa87dc5fdb4572bbc4526fb28363fff92d7841af53d0ffabc4ace5130e14.png" src="_images/200aaa87dc5fdb4572bbc4526fb28363fff92d7841af53d0ffabc4ace5130e14.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -517,10 +517,10 @@ Observation time.  Nucleotide diversity     Haplotype homozygosity
     <span class="n">founder_N</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
     <span class="n">founder_Q</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
     <span class="n">founder_X</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="n">R0</span> <span class="o">=</span> <span class="mf">1.0002</span><span class="p">,</span>
+    <span class="n">R0</span> <span class="o">=</span> <span class="mf">1.0001</span><span class="p">,</span>
     <span class="n">expansion_Q</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
     <span class="n">expansion_X</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span>
-    <span class="n">plateau_duration</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="n">plateau_duration</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span>
     <span class="n">plateau_N</span> <span class="o">=</span> <span class="mi">16000</span><span class="p">,</span>
     <span class="n">plateau_Q</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
     <span class="n">plateau_X</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">)</span>
@@ -535,7 +535,7 @@ Observation time.  Nucleotide diversity     Haplotype homozygosity
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4d551d40c9b5821f0885ab3981fba98bf16ac8f478d399738b59da714163cbc5.png" src="_images/4d551d40c9b5821f0885ab3981fba98bf16ac8f478d399738b59da714163cbc5.png" />
+<img alt="_images/9d47b763ecb8af96fe1031e023bc21cf0f45cb67ddc0bf987e3420c61207a03c.png" src="_images/9d47b763ecb8af96fe1031e023bc21cf0f45cb67ddc0bf987e3420c61207a03c.png" />
 </div>
 </div>
 </section>
