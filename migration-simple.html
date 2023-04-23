@@ -433,20 +433,18 @@ document.write(`
 <p>We must modify our Markov chain simulation of coalescence times to account for migration.  Within <code class="docutils literal notranslate"><span class="pre">coalestr</span></code> this is split this into two components, with one <a class="reference external" href="https://d-kwiat.github.io/gtg/subpop-matrix.html">transmission probability matrix for the subpopulation</a> and another <a class="reference external" href="https://d-kwiat.github.io/gtg/transition-probability.html">transition probability matrix for the metapopulation</a>.</p>
 <p>In <code class="docutils literal notranslate"><span class="pre">coalestr</span></code> we can examine the effects of migration within a hierarchical population structure as follows:</p>
 <ol class="arabic simple">
-<li><p>We create a metapopulation and obtain its probability distribution of coalescence times and heterozygosity estimates.</p></li>
+<li><p>We <a class="reference internal" href="create-metapopulation.html"><span class="doc std std-doc">create a metapopulation</span></a> by specifying its transmission history</p></li>
 </ol>
 <ul class="simple">
-<li><p>specify a history of transmission parameters for the metapopulation</p></li>
 <li><p>pass this to <code class="docutils literal notranslate"><span class="pre">coalestr.Population()</span></code> and give the metapopulation a name</p></li>
 <li><p>run <code class="docutils literal notranslate"><span class="pre">get_coalescent()</span></code> for the metapopulation</p></li>
 <li><p>run <code class="docutils literal notranslate"><span class="pre">get_diversity</span></code> for the metapopulation</p></li>
 </ul>
 <ol class="arabic simple" start="2">
-<li><p>We create a subpopulation:</p></li>
+<li><p>We then <a class="reference internal" href="create-subpopulation.html"><span class="doc std std-doc">create a subpopulation</span></a> by specifying its transmission history and the number of migrant hosts per generation, <span class="math notranslate nohighlight">\(N_m\)</span>.</p></li>
 </ol>
 <ul class="simple">
-<li><p>specify the history of transmission parameters including the number of migrant hosts per generation, <span class="math notranslate nohighlight">\(N_m\)</span>.</p></li>
-<li><p>pass to <code class="docutils literal notranslate"><span class="pre">coalestr.Population()</span></code> both the history of transmission parameters and the name of the metapopulation</p></li>
+<li><p>pass to <code class="docutils literal notranslate"><span class="pre">coalestr.Population()</span></code> the transmission history and the name of the metapopulation</p></li>
 <li><p>run <code class="docutils literal notranslate"><span class="pre">get_coalescent()</span></code> for the subpopulation</p></li>
 <li><p>run <code class="docutils literal notranslate"><span class="pre">get_diversity</span></code> for the subpopulation</p></li>
 </ul>
