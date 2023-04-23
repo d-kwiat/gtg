@@ -479,6 +479,38 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    Events captured.   Mean coalescence time
+                      beho      wiho        beho     wiho
+        0              99.5     100.0     18188.4      1.0
+Observation time.  Nucleotide diversity     Haplotype homozygosity
+                      beho       wiho           beho       wiho
+        0           4.00e-04   2.20e-08       4.09e-03   9.87e-01
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the above example, <span class="math notranslate nohighlight">\(N_h = 18764\)</span>, <span class="math notranslate nohighlight">\(Q = 1\)</span> and <span class="math notranslate nohighlight">\(\chi = 0\)</span>.  The within-host parasite population has a mean coalescence time of 1 generation, giving nucleotide diversity <span class="math notranslate nohighlight">\(\pi_W = 2.2 \times 10^{-8}\)</span> and haplotype homozygosity <span class="math notranslate nohighlight">\(\gamma_W = 0.987\)</span>.</p>
+<p>In the example below <span class="math notranslate nohighlight">\(N_h = 18674\)</span>, <span class="math notranslate nohighlight">\(Q = 10\)</span> and <span class="math notranslate nohighlight">\(\chi = 1\)</span>.  The within-host parasite population has a mean coalescence time of 23517 generations, giving nucleotide diversity <span class="math notranslate nohighlight">\(\pi_W = 5.17 \times 10^{-4}\)</span> and haplotype homozygosity <span class="math notranslate nohighlight">\(\gamma_W = 0.0814\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_history</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">100000</span><span class="p">,</span> <span class="mi">18764</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
+<span class="n">my_population</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">Population</span><span class="p">(</span><span class="n">my_history</span><span class="p">)</span>
+<span class="n">my_population</span><span class="o">.</span><span class="n">get_coalescent</span><span class="p">()</span>
+<span class="n">my_population</span><span class="o">.</span><span class="n">get_diversity</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    Events captured.   Mean coalescence time
+                      beho      wiho        beho     wiho
+        0              60.5      63.8     25633.1  23517.1
+Observation time.  Nucleotide diversity     Haplotype homozygosity
+                      beho       wiho           beho       wiho
+        0           5.64e-04   5.17e-04       7.09e-04   8.14e-02
+</pre></div>
+</div>
+</div>
 </div>
 <div class="toctree-wrapper compound">
 </div>
