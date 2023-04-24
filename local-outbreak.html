@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Create a metapopulation &#8212; Genomic transmission graph</title>
+    <title>A local outbreak &#8212; Genomic transmission graph</title>
   
   
   
@@ -63,11 +63,9 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'create-metapopulation';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'local-outbreak';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Create a subpopulation" href="create-subpopulation.html" />
-    <link rel="prev" title="Epidemiological scenarios" href="epidemiological-scenarios.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -158,7 +156,7 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
+        <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="how-to-use-this-book.html">How to use this book</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="using-google-colab.html">Using Google Colab</a></li>
 <li class="toctree-l2"><a class="reference internal" href="glossary.html">Glossary</a></li>
@@ -192,8 +190,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="time-series.html">Analysing a time series</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="epidemiological-scenarios.html">Epidemiological scenarios</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Create a metapopulation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="epidemiological-scenarios.html">Epidemiological scenarios</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="create-metapopulation.html">Create a metapopulation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="create-subpopulation.html">Create a subpopulation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="transient-scenarios.html">Transient scenarios</a></li>
 </ul>
@@ -252,7 +250,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://colab.research.google.com/github/d-kwiat/gtg/blob/main/create-metapopulation.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/d-kwiat/gtg/blob/main/local-outbreak.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -300,7 +298,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/d-kwiat/gtg/issues/new?title=Issue%20on%20page%20%2Fcreate-metapopulation.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/d-kwiat/gtg/issues/new?title=Issue%20on%20page%20%2Flocal-outbreak.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -330,7 +328,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="_sources/create-metapopulation.ipynb" target="_blank"
+      <li><a href="_sources/local-outbreak.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -410,7 +408,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Create a metapopulation</h1>
+    <h1>A local outbreak</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -424,42 +422,12 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="create-a-metapopulation">
-<h1>Create a metapopulation<a class="headerlink" href="#create-a-metapopulation" title="Permalink to this heading">#</a></h1>
-<p>We create a metapopulation in just the same way as <a class="reference internal" href="create-population.html"><span class="doc std std-doc">creating a simple population</span></a> by specifying its transmission history and invoking <code class="docutils literal notranslate"><span class="pre">coalestr.Population()</span></code>. It becomes labelled as a metapopulation when we <a class="reference internal" href="create-subpopulation.html"><span class="doc std std-doc">create a subpopulation</span></a>.</p>
-<p>If we want to take account of historical patterns of parasite dispersal across the global metapopulation, a useful shortcut is to use the <code class="docutils literal notranslate"><span class="pre">coalestr.species()</span></code> function to construct a toy model of the emergence and expansion of <em>Plasmodium falciparum</em> as a species.  The model has three phases:</p>
-<ol class="arabic simple">
-<li><p>a small founder population emerging approximately 15,000 years ago</p></li>
-<li><p>an exponential growth phase beginning approximately 10,000 years ago</p></li>
-<li><p>reaching a plateau of <span class="math notranslate nohighlight">\(N_h \approx 15000\)</span></p></li>
-</ol>
-<p>This gives a contemporary parasite population with a mean coalescence time of ~18,000 generations (assuming a generation time of 3 months) and a nucleotide diversity of <span class="math notranslate nohighlight">\(\pi \approx 4 \times 10^{-4}\)</span>.</p>
-<p>The model has default parameter settings which can be modified using keyword arguments as shown below.</p>
-<ul class="simple">
-<li><p>Founder phase</p>
-<ul>
-<li><p>founder_duration = 1000 (duration of the founder phase)</p></li>
-<li><p>founder_N = 10</p></li>
-<li><p>founder_Q = 3</p></li>
-<li><p>founder_X = 0</p></li>
-</ul>
-</li>
-<li><p>Exponential growth phase</p>
-<ul>
-<li><p>R0 = 1.0003</p></li>
-<li><p>expansion_Q = 10</p></li>
-<li><p>expansion_X = 0.1</p></li>
-</ul>
-</li>
-<li><p>Plateau phase</p>
-<ul>
-<li><p>plateau_duration = 1000 (duration of the plateau phase)</p></li>
-<li><p>plateau_N = 15000</p></li>
-<li><p>plateau_Q = 10</p></li>
-<li><p>plateau_X = 0.1</p></li>
-</ul>
-</li>
-</ul>
+  <section class="tex2jax_ignore mathjax_ignore" id="a-local-outbreak">
+<h1>A local outbreak<a class="headerlink" href="#a-local-outbreak" title="Permalink to this heading">#</a></h1>
+<p>Here we model a local outbreak of malaria under a number of different scenarios.</p>
+<p>In the first scenario we start off with <span class="math notranslate nohighlight">\(N_h = 1\)</span> and <span class="math notranslate nohighlight">\(N_m = 1\)</span>, i.e. there is initially no local reservoir of infection and all malaria infections are imported from the global metapopulation.  The outbreak is characterised by an exponential increase in <span class="math notranslate nohighlight">\(N_h\)</span>.  Paradoxically this leads to a decrease in nucleotide diversity <span class="math notranslate nohighlight">\(\pi_S\)</span> and an increase in the inbreeding coefficient <span class="math notranslate nohighlight">\(F_{WS}\)</span>, because <span class="math notranslate nohighlight">\(N_m\)</span> is constant so the rise in <span class="math notranslate nohighlight">\(N_h\)</span> causes <span class="math notranslate nohighlight">\(m\)</span> to decline, and this reduction in the proportion of hosts that have migrated from the metapopulation acts to reduce local levels of diversity.</p>
+<p>In the second scenario there is an increase in <span class="math notranslate nohighlight">\(\chi\)</span>.  This causes an increase in within-host nucleotide diversity <span class="math notranslate nohighlight">\(\pi_W\)</span> and a reduction in the inbreeding coefficient <span class="math notranslate nohighlight">\(F_{WS}\)</span>.</p>
+<p>In the third scenario, there is an increase in both <span class="math notranslate nohighlight">\(N_h\)</span> and <span class="math notranslate nohighlight">\(\chi\)</span>.  In this example the effects of the increase in <span class="math notranslate nohighlight">\(N_h\)</span> dominate the genetic landscape.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>coalestr
@@ -470,71 +438,80 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_metapopulation</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">species</span><span class="p">()</span>
-
-<span class="n">my_metapopulation</span><span class="o">.</span><span class="n">get_coalescent</span><span class="p">()</span>
-
-<span class="n">my_metapopulation</span><span class="o">.</span><span class="n">get_diversity</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_species</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">species</span><span class="p">()</span>
+<span class="n">my_species</span><span class="o">.</span><span class="n">get_coalescent</span><span class="p">(</span><span class="n">show</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">my_species</span><span class="o">.</span><span class="n">get_diversity</span><span class="p">(</span><span class="n">show</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    Events captured.   Mean coalescence time
-                      beho      wiho        beho     wiho
-        0             100.0     100.0     17961.7   6421.2
-Observation time.  Nucleotide diversity     Haplotype homozygosity
-                      beho       wiho           beho       wiho
-        0           3.95e-04   1.41e-04       3.23e-03   5.92e-01
-</pre></div>
-</div>
-</div>
-</div>
-<p>Above we see that the default model gives a nucleotide diversity of 3.95e-4 in the current parasite population, and within-host nucleotide diversity of 1.41e-4.</p>
-<p>Let us look at time series data showing how nucleotide diversity builds up in the global metapopulation over time.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">history</span> <span class="o">=</span> <span class="n">my_metapopulation</span><span class="o">.</span><span class="n">t_his</span>
-
-<span class="n">observe</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">history</span><span class="p">,</span><span class="mi">5000</span><span class="p">)]</span>
-
-<span class="n">my_metapopulation</span><span class="o">.</span><span class="n">get_coalescent</span><span class="p">(</span><span class="n">observe</span><span class="p">,</span> <span class="n">show</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
-<span class="n">my_metapopulation</span><span class="o">.</span><span class="n">get_diversity</span><span class="p">(</span><span class="n">show</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
-<span class="n">my_metapopulation</span><span class="o">.</span><span class="n">plot_observations</span><span class="p">(</span><span class="n">metrics</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Nh&quot;</span><span class="p">,</span> <span class="s2">&quot;snp_het&quot;</span><span class="p">,))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/200aaa87dc5fdb4572bbc4526fb28363fff92d7841af53d0ffabc4ace5130e14.png" src="_images/200aaa87dc5fdb4572bbc4526fb28363fff92d7841af53d0ffabc4ace5130e14.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Here we modify some of the default parameters</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">history</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+           <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+           <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+           <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+           <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+           <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+           <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
 
-<span class="n">my_metapopulation</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">species</span><span class="p">(</span>
-    <span class="n">founder_duration</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> 
-    <span class="n">founder_N</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
-    <span class="n">founder_Q</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
-    <span class="n">founder_X</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="n">R0</span> <span class="o">=</span> <span class="mf">1.0001</span><span class="p">,</span>
-    <span class="n">expansion_Q</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
-    <span class="n">expansion_X</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span>
-    <span class="n">plateau_duration</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span>
-    <span class="n">plateau_N</span> <span class="o">=</span> <span class="mi">16000</span><span class="p">,</span>
-    <span class="n">plateau_Q</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
-    <span class="n">plateau_X</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">)</span>
+<span class="n">observe</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
 
-<span class="n">history</span> <span class="o">=</span> <span class="n">my_metapopulation</span><span class="o">.</span><span class="n">t_his</span>
-
-<span class="n">observe</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">history</span><span class="p">,</span><span class="mi">5000</span><span class="p">)]</span>
-<span class="n">my_metapopulation</span><span class="o">.</span><span class="n">get_coalescent</span><span class="p">(</span><span class="n">observe</span><span class="p">,</span> <span class="n">show</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
-<span class="n">my_metapopulation</span><span class="o">.</span><span class="n">get_diversity</span><span class="p">(</span><span class="n">show</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
-<span class="n">my_metapopulation</span><span class="o">.</span><span class="n">plot_observations</span><span class="p">(</span><span class="n">metrics</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Nh&quot;</span><span class="p">,</span> <span class="s2">&quot;snp_het&quot;</span><span class="p">,))</span>
+<span class="n">my_village</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">Population</span><span class="p">(</span><span class="n">history</span><span class="p">,</span> <span class="n">metapopulation</span> <span class="o">=</span> <span class="n">my_species</span><span class="p">)</span>
+<span class="n">my_village</span><span class="o">.</span><span class="n">get_coalescent</span><span class="p">(</span><span class="n">observe</span><span class="p">,</span> <span class="n">show</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">my_village</span><span class="o">.</span><span class="n">get_diversity</span><span class="p">(</span><span class="n">show</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">my_village</span><span class="o">.</span><span class="n">plot_observations</span><span class="p">(</span><span class="n">metrics</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Nh&quot;</span><span class="p">,</span> <span class="s2">&quot;snp_het&quot;</span><span class="p">,</span> <span class="s2">&quot;hap_hom&quot;</span><span class="p">,</span> <span class="s2">&quot;Fst&quot;</span><span class="p">,</span> <span class="s2">&quot;Fws&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/9d47b763ecb8af96fe1031e023bc21cf0f45cb67ddc0bf987e3420c61207a03c.png" src="_images/9d47b763ecb8af96fe1031e023bc21cf0f45cb67ddc0bf987e3420c61207a03c.png" />
+<img alt="_images/58e8548f4cd70407a65534d6e5fa83e2a56ec71b27da9dd3f6229432125ecef9.png" src="_images/58e8548f4cd70407a65534d6e5fa83e2a56ec71b27da9dd3f6229432125ecef9.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">history</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+           <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+           <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+           <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+           <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+           <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+           <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+
+<span class="n">observe</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
+
+<span class="n">my_village</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">Population</span><span class="p">(</span><span class="n">history</span><span class="p">,</span> <span class="n">metapopulation</span> <span class="o">=</span> <span class="n">my_species</span><span class="p">)</span>
+<span class="n">my_village</span><span class="o">.</span><span class="n">get_coalescent</span><span class="p">(</span><span class="n">observe</span><span class="p">,</span> <span class="n">show</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">my_village</span><span class="o">.</span><span class="n">get_diversity</span><span class="p">(</span><span class="n">show</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">my_village</span><span class="o">.</span><span class="n">plot_observations</span><span class="p">(</span><span class="n">metrics</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;chi&quot;</span><span class="p">,</span> <span class="s2">&quot;snp_het&quot;</span><span class="p">,</span> <span class="s2">&quot;hap_hom&quot;</span><span class="p">,</span> <span class="s2">&quot;Fst&quot;</span><span class="p">,</span> <span class="s2">&quot;Fws&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/9705cef16561bd37560bbe58facb29638c90052b666204cf1abefd112c143821.png" src="_images/9705cef16561bd37560bbe58facb29638c90052b666204cf1abefd112c143821.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">history</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+           <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+           <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+           <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+           <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+           <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+           <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+
+<span class="n">observe</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
+
+<span class="n">my_village</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">Population</span><span class="p">(</span><span class="n">history</span><span class="p">,</span> <span class="n">metapopulation</span> <span class="o">=</span> <span class="n">my_species</span><span class="p">)</span>
+<span class="n">my_village</span><span class="o">.</span><span class="n">get_coalescent</span><span class="p">(</span><span class="n">observe</span><span class="p">,</span> <span class="n">show</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">my_village</span><span class="o">.</span><span class="n">get_diversity</span><span class="p">(</span><span class="n">show</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">my_village</span><span class="o">.</span><span class="n">plot_observations</span><span class="p">(</span><span class="n">metrics</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Nh&quot;</span><span class="p">,</span> <span class="s2">&quot;chi&quot;</span><span class="p">,</span> <span class="s2">&quot;snp_het&quot;</span><span class="p">,</span> <span class="s2">&quot;hap_hom&quot;</span><span class="p">,</span> <span class="s2">&quot;Fst&quot;</span><span class="p">,</span> <span class="s2">&quot;Fws&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/8842887dadcf09195a918d28c77a9d34e48565ebb2c10617546d2e40e28e224c.png" src="_images/8842887dadcf09195a918d28c77a9d34e48565ebb2c10617546d2e40e28e224c.png" />
 </div>
 </div>
 </section>
@@ -570,24 +547,6 @@ Observation time.  Nucleotide diversity     Haplotype homozygosity
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="epidemiological-scenarios.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Epidemiological scenarios</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="create-subpopulation.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Create a subpopulation</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div></div>
   
 </div>
