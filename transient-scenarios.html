@@ -67,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="A local outbreak" href="local-outbreak.html" />
-    <link rel="prev" title="Create a subpopulation" href="create-subpopulation.html" />
+    <link rel="prev" title="Analysing a time series" href="time-series.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -170,7 +170,6 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="nucleotide-diversity.html">Nucleotide diversity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="haplotype-homozygosity.html">Haplotype homozygosity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ibd.html">Identity by descent</a></li>
-<li class="toctree-l2"><a class="reference internal" href="migration-simple.html">Effects of migration</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="within-host.html">Within-host diversity</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -189,12 +188,15 @@ const thebe_selector_output = ".output, .cell_output"
 
 <li class="toctree-l2"><a class="reference internal" href="get-diversity.html"><code class="docutils literal notranslate"><span class="pre">get_diversity</span></code></a></li>
 
-<li class="toctree-l2"><a class="reference internal" href="time-series.html">Analysing a time series</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="epidemiological-scenarios.html">Epidemiological scenarios</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="migration-simple.html">Migration and population structure</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="create-metapopulation.html">Create a metapopulation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="create-subpopulation.html">Create a subpopulation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="epidemiological-scenarios.html">Epidemiological scenarios</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="time-series.html">Analysing a time series</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Transient scenarios</a></li>
 <li class="toctree-l2"><a class="reference internal" href="local-outbreak.html">A local outbreak</a></li>
 </ul>
@@ -427,8 +429,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="transient-scenarios">
 <h1>Transient scenarios<a class="headerlink" href="#transient-scenarios" title="Permalink to this heading">#</a></h1>
-<p>Here we model transient epidemiological scenarios occuring in a local subpopulation of parasites.</p>
-<p>We construct a local subpopulation that in steady state has <span class="math notranslate nohighlight">\(N_h = 10\)</span>, <span class="math notranslate nohighlight">\(Q = 5\)</span>, <span class="math notranslate nohighlight">\(\chi = 0\)</span>.  Despite its small size, the local subpopulation maintains a fairly high level of nucleotide diversity <span class="math notranslate nohighlight">\(\pi_S \approx 3 \times 10^{-4}\)</span> due to a constant rate of migration <span class="math notranslate nohighlight">\(N_m = 1\)</span> from the global metapopulation.  We construct a toy model of the global metapopulation <a class="reference internal" href="create-metapopulation.html"><span class="doc std std-doc">using the <code class="docutils literal notranslate"><span class="pre">coalestr.species</span></code> function</span></a>.</p>
+<p>Here we model a local subpopulation of parasites that in steady state has <span class="math notranslate nohighlight">\(N_h = 10\)</span>, <span class="math notranslate nohighlight">\(Q = 5\)</span>, <span class="math notranslate nohighlight">\(\chi = 0\)</span>.  Despite its small size, the local subpopulation maintains a fairly high level of nucleotide diversity <span class="math notranslate nohighlight">\(\pi_S \approx 3 \times 10^{-4}\)</span> due to a constant rate of migration <span class="math notranslate nohighlight">\(N_m = 1\)</span> from the global metapopulation.  We construct a toy model of the global metapopulation <a class="reference internal" href="create-metapopulation.html"><span class="doc std std-doc">using the <code class="docutils literal notranslate"><span class="pre">coalestr.species</span></code> function</span></a>.</p>
 <p>We simulate a step change in transmission parameters that starts 60 generations (15 years) before the present and lasts 20 generations (5 years).  We examine the effects on nucleotide diversity of the subpopulation <span class="math notranslate nohighlight">\(\pi_S\)</span>, mean within-host nucleotide diversity <span class="math notranslate nohighlight">\(\pi_W\)</span>, haplotype homozygosity of the subpopulation at a 2cM locus <span class="math notranslate nohighlight">\(\gamma_S\)</span>, mean within-host haplotype homozygosity at a 2cM locus <span class="math notranslate nohighlight">\(\gamma_W\)</span>, the fixation index <span class="math notranslate nohighlight">\(F_{ST}\)</span> and the inbreeding index <span class="math notranslate nohighlight">\(F_{WS}\)</span>.</p>
 <ol class="arabic simple">
 <li><p>In the first scenario, the level of <span class="math notranslate nohighlight">\(\chi\)</span> in the subpopulation transiently increases from 0 to 1. The result is a sharp rise in <span class="math notranslate nohighlight">\(\pi_W\)</span> and a sharp fall in <span class="math notranslate nohighlight">\(\gamma_W\)</span>, <span class="math notranslate nohighlight">\(F_{ST}\)</span> and <span class="math notranslate nohighlight">\(F_{WS}\)</span>. There is also a modest rise in <span class="math notranslate nohighlight">\(\pi_S\)</span> and a modest fall in <span class="math notranslate nohighlight">\(\gamma_S\)</span>.</p></li>
@@ -641,12 +642,12 @@ Observation time.  Nucleotide diversity     Haplotype homozygosity
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="create-subpopulation.html"
+       href="time-series.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Create a subpopulation</p>
+        <p class="prev-next-title">Analysing a time series</p>
       </div>
     </a>
     <a class="right-next"

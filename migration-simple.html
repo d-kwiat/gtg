@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Effects of migration &#8212; Genomic transmission graph</title>
+    <title>Migration and population structure &#8212; Genomic transmission graph</title>
   
   
   
@@ -66,8 +66,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'migration-simple';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Within-host diversity" href="within-host.html" />
-    <link rel="prev" title="Identity by descent" href="ibd.html" />
+    <link rel="next" title="Create a metapopulation" href="create-metapopulation.html" />
+    <link rel="prev" title="get_diversity" href="get-diversity.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -164,13 +164,12 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="glossary.html">Glossary</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="underlying-concepts.html">Underlying concepts</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="underlying-concepts.html">Underlying concepts</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="basic-model.html">The basic model</a></li>
 <li class="toctree-l2"><a class="reference internal" href="coalescence-time-basic.html">Time to coalescence</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nucleotide-diversity.html">Nucleotide diversity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="haplotype-homozygosity.html">Haplotype homozygosity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ibd.html">Identity by descent</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Effects of migration</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="within-host.html">Within-host diversity</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -189,12 +188,15 @@ const thebe_selector_output = ".output, .cell_output"
 
 <li class="toctree-l2"><a class="reference internal" href="get-diversity.html"><code class="docutils literal notranslate"><span class="pre">get_diversity</span></code></a></li>
 
-<li class="toctree-l2"><a class="reference internal" href="time-series.html">Analysing a time series</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="epidemiological-scenarios.html">Epidemiological scenarios</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Migration and population structure</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="create-metapopulation.html">Create a metapopulation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="create-subpopulation.html">Create a subpopulation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="epidemiological-scenarios.html">Epidemiological scenarios</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="time-series.html">Analysing a time series</a></li>
 <li class="toctree-l2"><a class="reference internal" href="transient-scenarios.html">Transient scenarios</a></li>
 <li class="toctree-l2"><a class="reference internal" href="local-outbreak.html">A local outbreak</a></li>
 </ul>
@@ -411,7 +413,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Effects of migration</h1>
+    <h1>Migration and population structure</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -425,8 +427,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="effects-of-migration">
-<h1>Effects of migration<a class="headerlink" href="#effects-of-migration" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="migration-and-population-structure">
+<h1>Migration and population structure<a class="headerlink" href="#migration-and-population-structure" title="Permalink to this heading">#</a></h1>
 <p>The genomic transmission graph can be broken down into many local subpopulations that together make up a metapopulation.  Here we examine a local subpopulation that is embedded within a much larger metapopulation.</p>
 <p><span class="math notranslate nohighlight">\(m\)</span> is the probability that a host within the local subpopulation acquired their infection from the metapopulation, and the number of such hosts per generation is <span class="math notranslate nohighlight">\(N_m\)</span> = <span class="math notranslate nohighlight">\(mN_h\)</span>. These could be immigrants from the metapopulation or local residents who have been travelling outside the local area.</p>
 <p>We must modify our Markov chain simulation of coalescence times to account for migration.  Within <code class="docutils literal notranslate"><span class="pre">coalestr</span></code> this is split this into two components, with one <a class="reference external" href="https://d-kwiat.github.io/gtg/subpop-matrix.html">transmission probability matrix for the subpopulation</a> and another <a class="reference external" href="https://d-kwiat.github.io/gtg/transition-probability.html">transition probability matrix for the metapopulation</a>.</p>
@@ -459,6 +461,13 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">coalestr</span> <span class="k">as</span> <span class="nn">cs</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define the metapopulation</span>
 
 <span class="n">metapop_history</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">100000</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
@@ -472,7 +481,7 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation time.    Events captured.   Mean coalescence time
                       beho      wiho        beho     wiho
         0              99.7      99.7     16867.3  15476.3
-Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb locus
+Observation time.  Nucleotide diversity     Haplotype homozygosity
                       beho       wiho           beho       wiho
         0           3.71e-04   3.40e-04       4.41e-03   8.47e-02
 </pre></div>
@@ -499,7 +508,7 @@ Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb loc
     <span class="n">beho_nuc_div</span> <span class="o">=</span> <span class="n">subpop</span><span class="o">.</span><span class="n">diversity</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">beho_hap_hom</span> <span class="o">=</span> <span class="n">subpop</span><span class="o">.</span><span class="n">diversity</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
     <span class="n">fst</span> <span class="o">=</span> <span class="n">subpop</span><span class="o">.</span><span class="n">diversity</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Nm = </span><span class="si">{0:4.2f}</span><span class="s2">: nucleotide diversity = </span><span class="si">{1:.2e}</span><span class="s2">, haplotype homozygosity = </span><span class="si">{2:4.2f}</span><span class="s2">, Fst = </span><span class="si">{3:4.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Nm = </span><span class="si">{0:4.2f}</span><span class="s2">: nuc div = </span><span class="si">{1:.2e}</span><span class="s2">, hap hom = </span><span class="si">{2:4.2f}</span><span class="s2">, Fst = </span><span class="si">{3:4.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
         <span class="n">Nm</span><span class="p">,</span>
         <span class="n">beho_nuc_div</span><span class="p">,</span>
         <span class="n">beho_hap_hom</span><span class="p">,</span>
@@ -508,11 +517,11 @@ Observation time.    SNP heterozygosity.   Haplotype homozygosity at 27.0 kb loc
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>For Nm = 0.00: SNP het = 2.42e-06, hap hom = 0.41, Fst = 0.99
-For Nm = 0.10: SNP het = 1.54e-04, hap hom = 0.32, Fst = 0.59
-For Nm = 1.00: SNP het = 3.26e-04, hap hom = 0.10, Fst = 0.12
-For Nm = 10.00: SNP het = 3.67e-04, hap hom = 0.01, Fst = 0.01
-For Nm = 30.00: SNP het = 3.70e-04, hap hom = 0.01, Fst = 0.00
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nm = 0.00: nuc div = 2.42e-06, hap hom = 0.41, Fst = 0.99
+Nm = 0.10: nuc div = 1.54e-04, hap hom = 0.32, Fst = 0.59
+Nm = 1.00: nuc div = 3.26e-04, hap hom = 0.10, Fst = 0.12
+Nm = 10.00: nuc div = 3.67e-04, hap hom = 0.01, Fst = 0.01
+Nm = 30.00: nuc div = 3.70e-04, hap hom = 0.01, Fst = 0.00
 </pre></div>
 </div>
 </div>
@@ -565,6 +574,8 @@ For Nm = 30.00: SNP het = 3.70e-04, hap hom = 0.01, Fst = 0.00
 <img alt="_images/c5dd411a125211ed6071a82909bcda72ac91f6bde7b6f099b987fc72adfa3c80.png" src="_images/c5dd411a125211ed6071a82909bcda72ac91f6bde7b6f099b987fc72adfa3c80.png" />
 </div>
 </div>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -599,20 +610,20 @@ For Nm = 30.00: SNP het = 3.70e-04, hap hom = 0.01, Fst = 0.00
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="ibd.html"
+       href="get-diversity.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Identity by descent</p>
+        <p class="prev-next-title"><code class="docutils literal notranslate"><span class="pre">get_diversity</span></code></p>
       </div>
     </a>
     <a class="right-next"
-       href="within-host.html"
+       href="create-metapopulation.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Within-host diversity</p>
+        <p class="prev-next-title">Create a metapopulation</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
