@@ -711,7 +711,7 @@ class Population(object):
                 
             elif metrics[i] == "Q":
             
-                ax[i].plot(time_axis, self.parameters[:go_back_in_time, 1], marker='', color='blue', linewidth=2, label="Nh")
+                ax[i].plot(time_axis, self.parameters[:go_back_in_time, 1], marker='', color='blue', linewidth=2, label="Q")
                 ax[i].legend(title="Q", frameon=True, fontsize = 12) 
                 ax[i].set_ylabel("Q", fontsize=12)
                 ax[i].grid(visible=True, which='both', color='0.65', linestyle='-')                
@@ -723,6 +723,13 @@ class Population(object):
                 ax[i].set_ylabel("\u03C7", fontsize=12)
                 ax[i].grid(visible=True, which='both', color='0.65', linestyle='-')
                 
+            elif metrics[i] == "M" or metrics[i] == "Nm":
+            
+                ax[i].plot(time_axis, self.parameters[:go_back_in_time, 3], marker='', color='blue', linewidth=2, label="Nm")
+                ax[i].legend(title="Nm", frameon=True, fontsize = 12) 
+                ax[i].set_ylabel("Nm", fontsize=12)
+                ax[i].grid(visible=True, which='both', color='0.65', linestyle='-')         
+            
             else:
                 
                 print('Sorry,' + ' "' + metrics[i] + '" ' + 'is not recognised as a metric by this plot.') 

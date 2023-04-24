@@ -15,5 +15,5 @@ Thus before we can model a recent epidemiological scenario we need to consider t
 
 - [Modelling the global parasite metapopulation](create-metapopulation.ipynb)
 - [Creating a local subpopulation](create-subpopulation.ipynb)
-- [Modelling transient changes in transmission parameters](scenario_1.ipynb)
-- [Modelling a local outbreak in a near-elimination setting](local_outbreak.ipynb)
+- [Modelling transient changes in transmission parameters](transient-scenarios.ipynb)
+- [Modelling a local outbreak](local-outbreak.ipynb)

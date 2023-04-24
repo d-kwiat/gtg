@@ -31,6 +31,5 @@ chapters:
     sections:
      - file: create-metapopulation
      - file: create-subpopulation
-     - file: scenario_1
+     - file: transient-scenarios
      - file: local_outbreak
-  - file: draft-ms
