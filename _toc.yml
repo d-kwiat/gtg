@@ -15,16 +15,16 @@ chapters:
       - file: nucleotide-diversity
       - file: haplotype-homozygosity
       - file: ibd
-  - file: within-host
-    sections:
-      - file: within-host-pi
-      - file: hw-hs
-      - file: fws-compare-methods
   - file: coalestr-features
     sections:
       - file: create-population
       - file: get-coalescent
       - file: get-diversity
+  - file: within-host
+    sections:
+      - file: within-host-pi
+      - file: hw-hs
+      - file: fws-compare-methods
   - file: migration-simple
     sections:
      - file: create-metapopulation
