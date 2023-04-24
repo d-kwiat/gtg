@@ -15,7 +15,6 @@ chapters:
       - file: nucleotide-diversity
       - file: haplotype-homozygosity
       - file: ibd
-      - file: migration-simple
   - file: within-host
     sections:
       - file: within-host-pi
@@ -26,10 +25,12 @@ chapters:
       - file: create-population
       - file: get-coalescent
       - file: get-diversity
-      - file: time-series
-  - file: epidemiological-scenarios
+  - file: migration-simple
     sections:
      - file: create-metapopulation
      - file: create-subpopulation
+  - file: epidemiological-scenarios
+    sections:
+     - file: time-series
      - file: transient-scenarios
      - file: local-outbreak
