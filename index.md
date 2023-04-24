@@ -18,6 +18,10 @@ The sections aren't strictly ordered but this is a logical sequence to work thro
    * [*Hw - Hs* relationship](hw-hs.ipynb)
    * [Estimating the rate of superinfection](fws-compare-methods.ipynb)
 1. [Modelling epidemiological scenarios](epidemiological-scenarios.md)
+   * [Creating a metapopulation](create-metapopulation.ipynb)
+   * [Creating a subpopulation](create-subpopulation.ipynb)
+   * [Transient scenarios](transient-scenarios.ipynb)
+   * [Local outbreak](local-outbreak.ipynb)
 
 Most of the worked examples use the Python package `coalestr` which works like this:
 

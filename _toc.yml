@@ -32,4 +32,4 @@ chapters:
      - file: create-metapopulation
      - file: create-subpopulation
      - file: transient-scenarios
-     - file: local_outbreak
+     - file: local-outbreak
