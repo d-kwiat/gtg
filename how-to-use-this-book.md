@@ -1,6 +1,6 @@
 # How to use this book
 
-You can browse this book just like any other website.  Sometimes we use population genetic terminology in a very specific way that differs from common usage - so it may help to start by [looking through the glossary](glossary.md).
+You can browse this book just like any other website.  For an explanation of the population genetic terminology it may help to start by [looking through the glossary](glossary.md).
 
 Many of the pages are Jupyter notebooks containing Python code plus some explanatory text.  You can run the code yourself using the interactive cloud computing service provided by Google Colab. Follow this link to learn [how to use Google Colab](using-google-colab.md) - it is remarkably easy.
 
