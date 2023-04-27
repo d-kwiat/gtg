@@ -1,5 +1,5 @@
-#   coalestr version 0.2.15
-#   19 Apr 2023
+#   coalestr version 0.2.17
+#   27 Apr 2023
 
 '''
 Population class methods
@@ -566,11 +566,6 @@ class Population(object):
             self.r,
             self.v,
             self.locus_kb))
-        
-        print("unit_length {0:.2f}, \nchromosome_length {1:d}, \nminimum_length {2:d}".format(
-            self.unit_length,
-            self.chromosome_length,
-            self.minimum_length))
         
 ##########################################################   
         
