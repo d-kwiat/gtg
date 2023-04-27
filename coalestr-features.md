@@ -10,4 +10,4 @@ We can [create a subpopulation](create-subpopulation.ipynb) by specifying the me
 
 We can [analyse a time series](time-series.ipynb) by specifying a set of observation times.  At each observation time we sample two alleles from the population and perform a simulation of their times to coalescence.
 
-You can view the [Python code for the `coalestr` module](https://github.com/d-kwiat/gtg/blob/main/coalestr.py).
+You can view the [Python code for the `coalestr` module](https://github.com/d-kwiat/coalestr-python/blob/main/coalestr/cs.py).
