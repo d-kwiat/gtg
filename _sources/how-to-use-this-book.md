@@ -9,5 +9,5 @@ Even if you're new to Python you can try out small modifications to the code, e.
 If you want to be more adventurous you can 
 [learn how to use `coalestr`](coalestr-features.md), a Python module that underpins most the worked examples on this website.  This will allow you to [simulate your own epidemiological scenarios](epidemiological-scenarios.md).
 
-If you want to use `coalestr` for your own applications outside this website, you can [install it from PyPI](https://pypi.org/project/coalestr/) or [view the source code on GitHub](https://github.com/d-kwiat/gtg/blob/main/coalestr.py).
+If you want to use `coalestr` for your own applications outside this website, you can [install it from PyPI](https://pypi.org/project/coalestr/) or [view the source code on GitHub](https://github.com/d-kwiat/coalestr-python/blob/main/coalestr/cs.py).
 
